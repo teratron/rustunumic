@@ -24,6 +24,6 @@ keywords = [
 #links = "git2"
 exclude = ["/ci", "images/", ".*"]
 include = ["/src", "COPYRIGHT", "/examples", "!/examples/big_example"]
-publish = false  #["some-registry-name"]
+#publish = false  #["some-registry-name"]
 
 [dependencies]
