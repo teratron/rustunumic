@@ -27,3 +27,9 @@ include = ["/src", "COPYRIGHT", "/examples", "!/examples/big_example"]
 publish = false  #["some-registry-name"]
 
 [dependencies]
+
+[dev-dependencies]
+
+[build-dependencies]
+
+[badges]
