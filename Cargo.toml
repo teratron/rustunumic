@@ -7,6 +7,7 @@ description = "Simple neural network library for Rust"
 rust-version = "1.68"
 readme = "README.md"
 license = "MIT"
+#license-file = "LICENSE"
 homepage = "https://zigenzoog.github.io/rustunumic"
 documentation = "https://zigenzoog.github.io/rustunumic"
 repository = "https://github.com/zigenzoog/rustunumic"
@@ -17,7 +18,12 @@ keywords = [
     "learning",
     "library"
 ]
+#categories = ["command-line-utilities", "development-tools::cargo-plugins"]
+#workspace = "/src" #"src/rustunumic"
+#build = false  #"build.rs"
+#links = "git2"
 exclude = ["/ci", "images/", ".*"]
 include = ["/src", "COPYRIGHT", "/examples", "!/examples/big_example"]
+#publish = false  #["some-registry-name"]
 
 [dependencies]
