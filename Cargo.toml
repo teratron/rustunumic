@@ -19,7 +19,7 @@ keywords = [
 ]
 # categories = ["command-line-utilities", "development-tools::cargo-plugins"]
 # workspace = "/src" #"src/rustunumic"
-build = "build.rs"  #false
+build = "build.rs"  # false
 # links = "git2"
 exclude = ["/ci", "images/", ".*"]
 include = ["/src", "COPYRIGHT", "/examples", "!/examples/big_example"]
