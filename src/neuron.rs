@@ -21,3 +21,24 @@
 //
 //     Synapser
 // }
+
+enum CellKind {
+    Input,
+    BackfedInput,
+    NoisyInput,
+
+    Hidden,
+    ProbabilisticHidden,
+    SpikingHidden,
+    Capsule,
+
+    Output,
+    MatchInputOutput,
+
+    Recurrent,
+    Memory,
+    GatedMemory,
+
+    Kernel,
+    Convolution, // or Pool
+}
