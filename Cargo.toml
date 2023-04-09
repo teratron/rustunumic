@@ -31,17 +31,17 @@ include = [
 ]
 publish = false  #["some-registry-name"]
 
-#[workspace]
-#members = [
-#    "src/*",
-#    "examples/*"
-#]
 [lib]
 #crate-type = ["cdylib"]
 name = "rustunumic"
 path = "src/lib.rs"
 test = false
 doctest = false
+
+[workspace]
+members = [
+    "examples/*"
+]
 
 [dependencies]
 
