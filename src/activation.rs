@@ -1,28 +1,27 @@
-// mod activation;
+use enum_iterator::{all, Sequence};
 
 // Activation Mode.
 #[repr(u8)]
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, PartialEq, Sequence)]
 pub enum Activation {
-    // LINEAR -- Linear/identity (0).
+    // LINEAR - Linear/identity (0).
     LINEAR = 0,
 
-    // RELU -- ReLu (rectified linear unit) (1).
-    RELU = 1,
+    // RELU - ReLu (rectified linear unit) (1).
+    RELU,
 
-    // LEAKY_RELU -- Leaky ReLu (leaky rectified linear unit) (2).
-    LEAKYRELU = 2,
+    // LEAKY_RELU - Leaky ReLu (leaky rectified linear unit) (2).
+    LEAKYRELU,
 
-    // SIGMOID -- Logistic, a.k.a. sigmoid or soft step (3).
-    SIGMOID = 3,
+    // SIGMOID - Logistic, a.k.a. sigmoid or soft step (3).
+    SIGMOID,
 
-    // TANH -- TanH (hyperbolic tangent) (4).
-    TANH = 4,
-
-    //DEFAULT = Self::SIGMOID
+    // TANH - TanH (hyperbolic tangent) (4).
+    TANH,
+    //DEFAULT = Activation::SIGMOID,
 }
 
-impl Activation {
+/*impl Activation {
     fn init(&self) {}
 
     fn check_activation_mode(&self, value: u8) -> u8 {
@@ -43,62 +42,70 @@ impl Activation {
     // return get_derivative(value, self._activation_mode)
 }
 
+enum FloatEnum {
+    F32(f32),
+    F64(f64),
+}*/
+
 // Activation function.
-pub fn get_activation(value: f32, mode: Activation) -> f32 {
+//pub fn get_activation<T>(value: T, mode: Activation) -> T {
+pub fn get_activation(mut value: f32, mode: Activation) -> f32 {
     match mode {
         Activation::LINEAR => value,
         Activation::RELU => {
             if value < 0.0 {
-                return 0.0
+                return 0.0;
             }
             value
         }
         Activation::LEAKYRELU => {
             if value < 0.0 {
-                return 0.01 * value
+                return 0.01 * value;
             }
             value
         }
-        // case Activation.TANH:
-        // value = math.exp(2 * value)
-        // value = (value - 1) / (value + 1)
-        // if math.isnan(value): # TODO:
-        // raise ValueError(f"act {__name__}: loss not-a-number value")
-        // if math.isinf(value): # TODO:
-        // raise ValueError(f"act {__name__}: loss is infinity")
-        // return value
-        // # value = math.exp(2 * value)
-        // # return (value - 1) / (value + 1)
-        // case Activation.SIGMOID | _:
-        // value = 1 / (1 + math.exp( - value))
-        // if math.isnan(value): # TODO:
-        // raise ValueError(f"act {__name__}: loss not-a-number value")
-        // if math.isinf(value):  # TODO:
-        // raise ValueError(f"act {__name__}: loss is infinity")
-        // return value
-        // # return 1 / (1 + math.exp( - value))
-        _ => println!("Error {mode}"),
+        Activation::TANH => {
+            value = (2.0 * value).exp();
+            (value - 1.0) / (value + 1.0)
+        }
+        Activation::SIGMOID => 1.0 / (1.0 + -value.exp()),
+        //_ => get_activation(value, Activation::SIGMOID),
     }
 }
 
-pub fn get_derivative(value: f32, mode: u8) -> f32 {
-    //"""Derivative activation function."""
-    match mode:
-        case
-    Activation.LINEAR:
-    return 1
-    case
-    Activation.RELU:
-    return 0
-    if value < 0 else 1
-    case
-    Activation.LEAKY_RELU:
-    return 0.01
-    if value < 0 else 1
-    case
-    Activation.TANH:
-    return 1 - value * *2
-    case
-    Activation.SIGMOID | _:
-    return value * (1 - value)
+// Derivative activation function.
+pub fn get_derivative(value: f32, mode: Activation) -> f32 {
+    match mode {
+        Activation::LINEAR => 1.0,
+        Activation::RELU => {
+            if value < 0.0 {
+                return 0.0;
+            }
+            1.0
+        }
+        Activation::LEAKYRELU => {
+            if value < 0.0 {
+                return 0.01;
+            }
+            1.0
+        }
+        Activation::TANH => 1.0 - value.powf(2.0),
+        Activation::SIGMOID => value * (1.0 - value),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_activation() {
+        for mode in all::<Activation>().collect::<Vec<_>>() {
+            println!("{:?}", mode as u8);
+            let result = get_activation(0.1, mode);
+            assert_eq!(result, 0.1, "failed test");
+        }
+        //let result = get_activation(0.1, Activation::RELU);
+        //assert_eq!(result, 0.10, "failed test");
+    }
 }

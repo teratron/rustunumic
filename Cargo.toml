@@ -17,13 +17,11 @@ keywords = [
     "learning",
     "library"
 ]
-#categories = ["command-line-utilities", "development-tools::cargo-plugins"]
-#workspace = "/src" #"src/rustunumic"
-#build = "build.rs"  #false
-#links = "git2"
+categories = ["command-line-utilities", "development-tools::cargo-plugins"]
+build = false  #false "build.rs"
 exclude = ["/ci", "images/", ".*"]
 include = [
-    "/src",
+    #"/src",
     #"/examples",
     "!/examples/*.md",
     "COPYRIGHT",
@@ -40,12 +38,13 @@ doctest = false
 
 [workspace]
 members = [
-    #"examples"
+    "examples/*"
 ]
 
 [dependencies]
 
 [dev-dependencies]
+enum-iterator = "^1.4.0"
 
 [build-dependencies]
 

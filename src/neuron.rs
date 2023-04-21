@@ -3,7 +3,7 @@
 // impl<T> Neuroner for Neuron<T> {}
 //
 
-struct Neuron<T> {
+/*struct Neuron<T> {
     value: T,
     // Neuron value
     axon: [T], // All incoming axons
@@ -32,4 +32,4 @@ enum CellKind {
 
     Kernel,
     Convolution, // or Pool
-}
+}*/

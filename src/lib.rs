@@ -3,16 +3,13 @@
     rust_2021_compatibility,
     future_incompatible,
     nonstandard_style,
-    unused,
     clippy::all,
     clippy::doc_markdown,
     missing_docs,
     missing_copy_implementations,
     missing_debug_implementations
-)]
+)] //unused,
 
-//! https://github.com/Eddort/learn-rust-ru
-//!
 //! Simple neural network library for Rust.
 //!
 //! This is the neural network library.
