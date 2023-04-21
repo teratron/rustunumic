@@ -1,3 +1,29 @@
+#![crate_name = "rustunumic"]
+#![deny(
+    rust_2021_compatibility,
+    future_incompatible,
+    nonstandard_style,
+    unused,
+    clippy::all,
+    clippy::doc_markdown,
+    missing_docs,
+    missing_copy_implementations,
+    missing_debug_implementations
+)]
+
+//! https://github.com/Eddort/learn-rust-ru
+//!
+//! Simple neural network library for Rust.
+//!
+//! This is the neural network library.
+//!
+//! For examples, see [examples](https://github.com/zigenzoog/rustunumic/examples).
+
+// Reexported crates.
+// pub use event_loop::{self, *};
+// pub use input::{self, *};
+// pub use window::{self, *};
+
 mod activation;
 mod axon;
 mod neuron;

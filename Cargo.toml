@@ -1,6 +1,6 @@
 [package]
 name = "rustunumic"
-version = "0.1.0"
+version = "0.0.1"
 edition = "2021"
 authors = ["Oleg Alexandrov <alexandrovoleg.ru@gmail.com>"]
 description = "Simple neural network library for Rust"
@@ -24,7 +24,7 @@ keywords = [
 exclude = ["/ci", "images/", ".*"]
 include = [
     "/src",
-    "/examples",
+    #"/examples",
     "!/examples/*.md",
     "COPYRIGHT",
     "LICENSE"
@@ -40,7 +40,7 @@ doctest = false
 
 [workspace]
 members = [
-    "examples/*"
+    #"examples"
 ]
 
 [dependencies]
