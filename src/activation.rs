@@ -10,7 +10,7 @@ pub enum Activation {
     // RELU - ReLu (rectified linear unit) (1).
     RELU,
 
-    // LEAKY_RELU - Leaky ReLu (leaky rectified linear unit) (2).
+    // LEAKYRELU - Leaky ReLu (leaky rectified linear unit) (2).
     LEAKYRELU,
 
     // SIGMOID - Logistic, a.k.a. sigmoid or soft step (3).
