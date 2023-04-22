@@ -23,7 +23,7 @@ exclude = ["/ci", "images/", ".*"]
 include = [
     #"/src",
     #"/examples",
-    "!/examples/*.md",
+    #"!/examples/*.md",
     "COPYRIGHT",
     "LICENSE"
 ]
@@ -38,13 +38,12 @@ doctest = false
 
 [workspace]
 members = [
-    "examples/*"
+    #"examples/*"
 ]
 
 [dependencies]
 
 [dev-dependencies]
-enum-iterator = "^1.4.0"
 
 [build-dependencies]
 
