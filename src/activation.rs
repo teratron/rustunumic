@@ -116,7 +116,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_get_activation() {
+    fn test_activation() {
         let data: [(f32, Activation, f32); 7] = [
             (0.1, Activation::LINEAR, 0.1),
             (0.1, Activation::RELU, 0.1),
@@ -132,7 +132,7 @@ mod tests {
     }
 
     #[test]
-    fn test_get_derivative() {
+    fn test_derivative() {
         let data: [(f32, Activation, f32); 7] = [
             (0.1, Activation::LINEAR, 1.0),
             (0.1, Activation::RELU, 1.0),
