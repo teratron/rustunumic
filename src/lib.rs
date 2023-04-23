@@ -1,5 +1,5 @@
 #![crate_name = "rustunumic"]
-#![deny(
+/*#![deny(
     rust_2021_compatibility,
     future_incompatible,
     nonstandard_style,
@@ -9,7 +9,7 @@
     missing_copy_implementations,
     missing_debug_implementations
 )] //unused,
-
+*/
 //! Simple neural network library for Rust.
 //!
 //! This is the neural network library.
@@ -21,10 +21,11 @@
 // pub use input::{self, *};
 // pub use window::{self, *};
 
-mod activation;
+pub mod activation;
+
 mod axon;
 mod neuron;
-
+/*
 pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
@@ -38,4 +39,4 @@ mod tests {
         let result = add(2, 2);
         assert_eq!(result, 4, "failed test");
     }
-}
+}*/
