@@ -62,20 +62,23 @@ impl U8<u8> {
 
 // Activation function.
 //pub fn get_activation<T>(value: T, mode: Activation) -> T {
-pub fn get_activation<'a>(mut value: &f32, mode: &Activation) -> &'a f32 {
+//pub fn activation<'a>(&mut'a value: f32, mode: &Activation) -> &'a f32 {
+pub fn activation(mut value: f32, mode: &Activation) -> f32 {
     match mode {
         Activation::LINEAR => value,
         Activation::RELU => {
-            if *value < 0.0 {
-                return &0.0;
+            if value < 0.0 {
+                0.0
+            } else {
+                value
             }
-            value
         }
         Activation::LEAKYRELU => {
             if value < 0.0 {
-                return 0.01 * value;
+                0.01 * value
+            } else {
+                value
             }
-            value
         }
         Activation::TANH => {
             value = (2.0 * value).exp();
@@ -86,20 +89,22 @@ pub fn get_activation<'a>(mut value: &f32, mode: &Activation) -> &'a f32 {
 }
 
 // Derivative activation function.
-pub fn get_derivative(value: f32, mode: &Activation) -> f32 {
+pub fn derivative(value: f32, mode: &Activation) -> f32 {
     match mode {
         Activation::LINEAR => 1.0,
         Activation::RELU => {
             if value < 0.0 {
-                return 0.0;
+                0.0
+            } else {
+                1.0
             }
-            1.0
         }
         Activation::LEAKYRELU => {
             if value < 0.0 {
-                return 0.01;
+                0.01
+            } else {
+                1.0
             }
-            1.0
         }
         Activation::TANH => 1.0 - value.powf(2.0),
         Activation::SIGMOID => value * (1.0 - value),
@@ -122,12 +127,7 @@ mod tests {
             (0.1, Activation::TANH, 0.099668),
         ];
         for (value, mode, result) in data {
-            assert_eq!(
-                get_activation(&value, &mode),
-                result,
-                "{:?} failed test",
-                mode
-            );
+            assert_eq!(activation(value, &mode), result, "{:?} failed test", mode);
         }
     }
 
@@ -143,12 +143,7 @@ mod tests {
             (0.1, Activation::TANH, 0.99),
         ];
         for (value, mode, result) in data {
-            assert_eq!(
-                get_derivative(value, &mode),
-                result,
-                "{:?} failed test",
-                mode
-            );
+            assert_eq!(derivative(value, &mode), result, "{:?} failed test", mode);
         }
     }
 }
