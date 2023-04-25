@@ -10,7 +10,8 @@
     missing_debug_implementations
 )] //unused,
 */
-//! Simple neural network library for Rust.
+
+//! # Simple neural network library for Rust.
 //!
 //! This is the neural network library.
 //!
@@ -22,11 +23,38 @@
 // pub use window::{self, *};
 
 pub mod activation;
-
 mod axon;
 mod neuron;
 
-pub fn add(left: usize, right: usize) -> usize {
+use activation::Activation;
+
+#[derive(Debug)]
+pub struct Rustunumic {
+    //activation: Activation,
+}
+
+impl Rustunumic {
+    /// Creat new
+    pub fn new() -> Self {
+        Rustunumic {
+            //activation: Activation::SIGMOID,
+        }
+    }
+
+    // pub fn sigmoid(&self) -> Activation {
+    //     Activation::SIGMOID
+    // }
+
+    pub const SIGMOID: Activation = Activation::SIGMOID;
+}
+
+trait Traiter {}
+
+impl Traiter for Rustunumic {}
+
+impl Traiter for Activation {}
+
+/*pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
 
@@ -40,3 +68,9 @@ mod tests {
         assert_eq!(result, 4, "failed test");
     }
 }
+
+fn main() {
+    let a = 6;
+    let b = 8;
+    println!("{}", add(a, b))
+}*/

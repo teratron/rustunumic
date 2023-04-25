@@ -1,7 +1,8 @@
-use rustunumic::add;
+use rustunumic::Rustunumic;
 
 fn main() {
-    let a = 6;
-    let b = 8;
-    println!("{}", add(a, b))
+    //
+    let rn = Rustunumic::new();
+
+    println!("{:#?} {:#?}", rn, Rustunumic::SIGMOID)
 }

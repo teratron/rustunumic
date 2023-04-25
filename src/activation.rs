@@ -1,20 +1,32 @@
-// Activation Mode.
+//! # Activation
+//!
+//!
+
+/// Activation mode.
+///
+/// # List of mode:
+///
+/// * LINEAR - Linear/identity (0);
+/// * RELU - ReLu (rectified linear unit) (1);
+/// * LEAKYRELU - Leaky ReLu (leaky rectified linear unit) (2);
+/// * SIGMOID - Logistic, a.k.a. sigmoid or soft step (3);
+/// * TANH - TanH (hyperbolic tangent) (4).
 #[repr(u8)]
 #[derive(Debug)]
 pub enum Activation {
-    // LINEAR - Linear/identity (0).
+    /// LINEAR - Linear/identity (0).
     LINEAR = 0,
 
-    // RELU - ReLu (rectified linear unit) (1).
+    /// RELU - ReLu (rectified linear unit) (1).
     RELU,
 
-    // LEAKYRELU - Leaky ReLu (leaky rectified linear unit) (2).
+    /// LEAKYRELU - Leaky ReLu (leaky rectified linear unit) (2).
     LEAKYRELU,
 
-    // SIGMOID - Logistic, a.k.a. sigmoid or soft step (3).
+    /// SIGMOID - Logistic, a.k.a. sigmoid or soft step (3).
     SIGMOID,
 
-    // TANH - TanH (hyperbolic tangent) (4).
+    /// TANH - TanH (hyperbolic tangent) (4).
     TANH,
 }
 
@@ -60,9 +72,17 @@ impl U8<u8> {
     }
 }*/
 
-// Activation function.
 //pub fn get_activation<T>(value: T, mode: Activation) -> T {
 //pub fn activation<'a>(&mut'a value: f32, mode: &Activation) -> &'a f32 {
+/// Activation function.
+///
+/// # Examples
+///
+/// ```rust
+/// let activation = Rustunumic::activation(-0.1, Activation::LEAKYRELU);
+///
+/// assert_eq!(-0.001, activation);
+/// ```
 pub fn activation(mut value: f32, mode: &Activation) -> f32 {
     match mode {
         Activation::LINEAR => value,
@@ -88,7 +108,7 @@ pub fn activation(mut value: f32, mode: &Activation) -> f32 {
     }
 }
 
-// Derivative activation function.
+/// Derivative activation function.
 pub fn derivative(value: f32, mode: &Activation) -> f32 {
     match mode {
         Activation::LINEAR => 1.0,
