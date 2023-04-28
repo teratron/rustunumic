@@ -108,8 +108,36 @@ pub fn activation(mut value: f32, mode: &Activation) -> f32 {
     }
 }
 
+//mod foo {
+trait MyTrait {}
+impl MyTrait for f32 {}
+impl MyTrait for f64 {}
+
+//pub fn f<T: MyTrait>(x: T) {}
+//}
+
+/*pub fn main() {
+    foo::f(3f32);
+    foo::f(3f64);
+    foo::f(3u64);  // doesn't work as u64 doesn't implement MyTrait
+}*/
+
+// mod internal {
+//     pub trait Real {}
+// }
+// use internal::Real;
+//
+// pub struct Quat<T>([T; 4]) where T: Real;
+//
+// impl Real for f32 {}
+// impl Real for f64 {}
+//
+// #[test]
+// fn test_thing() {}
+
 /// Derivative activation function.
-pub fn derivative(value: f32, mode: &Activation) -> f32 {
+//pub fn derivative(value: f32, mode: &Activation) -> f32 {
+pub fn derivative<T: MyTrait>(value: T, mode: &Activation) -> T {
     match mode {
         Activation::LINEAR => 1.0,
         Activation::RELU => {
