@@ -109,9 +109,9 @@ pub fn activation(mut value: f32, mode: &Activation) -> f32 {
 }
 
 //mod foo {
-trait MyTrait {}
-impl MyTrait for f32 {}
-impl MyTrait for f64 {}
+// trait MyTrait {}
+// impl MyTrait for f32 {}
+// impl MyTrait for f64 {}
 
 //pub fn f<T: MyTrait>(x: T) {}
 //}
@@ -135,9 +135,14 @@ impl MyTrait for f64 {}
 // #[test]
 // fn test_thing() {}
 
+union FloatUnion {
+    float32: f32,
+    float64: f64,
+}
+
 /// Derivative activation function.
-//pub fn derivative(value: f32, mode: &Activation) -> f32 {
-pub fn derivative<T: MyTrait>(value: T, mode: &Activation) -> T {
+pub fn derivative(value: f32, mode: &Activation) -> f32 {
+    //pub fn derivative<T: FloatUnion>(value: T, mode: &Activation) -> T {
     match mode {
         Activation::LINEAR => 1.0,
         Activation::RELU => {
