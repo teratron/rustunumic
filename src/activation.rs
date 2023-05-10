@@ -15,7 +15,7 @@
 #[derive(Debug)]
 pub enum Activation {
     /// LINEAR - Linear/identity (0).
-    LINEAR = 0,
+    LINEAR,
 
     /// RELU - ReLu (rectified linear unit) (1).
     RELU,
@@ -135,10 +135,10 @@ pub fn activation(mut value: f32, mode: &Activation) -> f32 {
 // #[test]
 // fn test_thing() {}
 
-union FloatUnion {
-    float32: f32,
-    float64: f64,
-}
+// union FloatUnion {
+//     float32: f32,
+//     float64: f64,
+// }
 
 /// Derivative activation function.
 pub fn derivative(value: f32, mode: &Activation) -> f32 {

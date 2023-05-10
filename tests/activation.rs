@@ -1,4 +1,3 @@
-//#[cfg(test)]
 use rustunumic::activation::*;
 
 #[test]
