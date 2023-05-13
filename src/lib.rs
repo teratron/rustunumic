@@ -1,3 +1,4 @@
+#![crate_type = "lib"]
 #![crate_name = "rustunumic"]
 /*#![deny(
     rust_2021_compatibility,
