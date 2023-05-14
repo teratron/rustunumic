@@ -140,9 +140,26 @@ pub fn activation(mut value: f32, mode: &Activation) -> f32 {
 //     float64: f64,
 // }
 
+trait Real<T> {
+    fn to_real(self) -> T;
+}
+
+impl Real<f32> for f32 {
+    fn to_real(self) -> f32 {
+        self as f32
+    }
+}
+
+impl Real<f64> for f64 {
+    fn to_real(self) -> f64 {
+        self as f64
+    }
+}
+
 /// Derivative activation function.
-pub fn derivative(value: f32, mode: &Activation) -> f32 {
-    //pub fn derivative<T: FloatUnion>(value: T, mode: &Activation) -> T {
+//pub fn derivative(value: f32, mode: &Activation) -> f32 {
+//pub fn derivative<T: Real<T>>(value: T, mode: &Activation) -> T {
+pub fn derivative<T>(value: T, mode: &Activation) -> T {
     match mode {
         Activation::LINEAR => 1.0,
         Activation::RELU => {
