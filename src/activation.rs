@@ -140,21 +140,27 @@ pub fn activation(mut value: f32, mode: &Activation) -> f32 {
 //     float64: f64,
 // }
 
-trait Real<T> {
-    fn to_real(self) -> T;
+trait Real {
+    fn to_real(self) -> Self;
 }
 
-impl Real<f32> for f32 {
-    fn to_real(self) -> f32 {
-        self as f32
+impl<T> Real for T {
+    fn to_real(self) -> T {
+        self
     }
 }
 
-impl Real<f64> for f64 {
-    fn to_real(self) -> f64 {
-        self as f64
-    }
-}
+// impl Real for f32 {
+//     fn to_real(self) -> f32 {
+//         self
+//     }
+// }
+//
+// impl Real for f64 {
+//     fn to_real(self) -> f64 {
+//         self
+//     }
+// }
 
 /// Derivative activation function.
 //pub fn derivative(value: f32, mode: &Activation) -> f32 {
