@@ -141,38 +141,54 @@ pub fn activation(mut value: f32, mode: &Activation) -> f32 {
 // }
 
 trait Real {
-    fn to_real(self) -> Self;
+    type T;
+
+    fn to_real(self) -> Self::T;
+    fn to_primitive(self: Self) -> Self::T;
 }
 
-impl<T> Real for T {
-    fn to_real(self) -> T {
+// impl<T> Real for T {
+//     fn to_real(self) -> T {
+//         self
+//     }
+// }
+
+impl Real for f32 {
+    type T = f32;
+
+    fn to_real(self) -> Self::T {
         self
+    }
+
+    fn to_primitive(self: Self::T) -> f32 {
+        self as f32
     }
 }
 
-// impl Real for f32 {
-//     fn to_real(self) -> f32 {
-//         self
-//     }
-// }
-//
-// impl Real for f64 {
-//     fn to_real(self) -> f64 {
-//         self
-//     }
-// }
+impl Real for f64 {
+    type T = f64;
+
+    fn to_real(self) -> Self::T {
+        self
+    }
+
+    fn to_primitive(self: Self::T) -> f64 {
+        self as f64
+    }
+}
 
 /// Derivative activation function.
 //pub fn derivative(value: f32, mode: &Activation) -> f32 {
 //pub fn derivative<T: Real<T>>(value: T, mode: &Activation) -> T {
-pub fn derivative<T>(value: T, mode: &Activation) -> T {
+pub fn derivative<T: Real>(value: T, mode: &Activation) -> T {
+    let val = value.to_primitive();
     match mode {
-        Activation::LINEAR => 1.0,
+        Activation::LINEAR => 1.0.to_real(),
         Activation::RELU => {
-            if value < 0.0 {
-                0.0
+            if val < 0.0 {
+                0.0.to_real()
             } else {
-                1.0
+                1.0.to_real()
             }
         }
         Activation::LEAKYRELU => {
