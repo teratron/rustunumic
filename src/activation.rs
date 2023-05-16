@@ -83,26 +83,26 @@ impl U8<u8> {
 ///
 /// assert_eq!(-0.001, activation);
 /// ```
-pub fn activation(mut value: f32, mode: &Activation) -> f32 {
+pub fn activation(value: &f32, mode: &Activation) -> f32 {
     match mode {
-        Activation::LINEAR => value,
+        Activation::LINEAR => *value,
         Activation::RELU => {
-            if value < 0.0 {
+            if *value < 0.0 {
                 0.0
             } else {
-                value
+                *value
             }
         }
         Activation::LEAKYRELU => {
-            if value < 0.0 {
+            if *value < 0.0 {
                 0.01 * value
             } else {
-                value
+                *value
             }
         }
         Activation::TANH => {
-            value = (2.0 * value).exp();
-            (value - 1.0) / (value + 1.0)
+            let val = (2.0 * value).exp();
+            (val - 1.0) / (val + 1.0)
         }
         Activation::SIGMOID => 1.0 / (1.0 + (-value).exp()),
     }
@@ -122,23 +122,23 @@ pub fn activation(mut value: f32, mode: &Activation) -> f32 {
     foo::f(3u64);  // doesn't work as u64 doesn't implement MyTrait
 }*/
 
-// mod internal {
-//     pub trait Real {}
-// }
-// use internal::Real;
-//
-// pub struct Quat<T>([T; 4]) where T: Real;
-//
-// impl Real for f32 {}
-// impl Real for f64 {}
-//
-// #[test]
-// fn test_thing() {}
+/*mod internal {
+    pub trait Real {}
+}
+use internal::Real;
 
-// union FloatUnion {
-//     float32: f32,
-//     float64: f64,
-// }
+pub struct Quat<T>([T; 4]) where T: Real;
+
+impl Real for f32 {}
+impl Real for f64 {}
+
+#[test]
+fn test_thing() {}
+
+union FloatUnion {
+    float32: f32,
+    float64: f64,
+}*/
 
 trait Real {
     type T;
@@ -159,7 +159,6 @@ impl Real for f32 {
     fn to_real(self) -> Self::T {
         self
     }
-
     fn to_primitive(self: Self::T) -> f32 {
         self as f32
     }
@@ -171,28 +170,27 @@ impl Real for f64 {
     fn to_real(self) -> Self::T {
         self
     }
-
     fn to_primitive(self: Self::T) -> f64 {
         self as f64
     }
 }
 
 /// Derivative activation function.
-//pub fn derivative(value: f32, mode: &Activation) -> f32 {
-//pub fn derivative<T: Real<T>>(value: T, mode: &Activation) -> T {
-pub fn derivative<T: Real>(value: T, mode: &Activation) -> T {
-    let val = value.to_primitive();
+pub fn derivative(value: &f32, mode: &Activation) -> f32 {
+    //pub fn derivative<T: Real<T>>(value: T, mode: &Activation) -> T {
+    //pub fn derivative<T>(value: &T, mode: &Activation) -> T {
+    //let val = value.to_primitive();
     match mode {
-        Activation::LINEAR => 1.0.to_real(),
+        Activation::LINEAR => 1.0, //.to_real(),
         Activation::RELU => {
-            if val < 0.0 {
-                0.0.to_real()
+            if *value < 0.0 {
+                0.0 //.to_real()
             } else {
-                1.0.to_real()
+                1.0 //.to_real()
             }
         }
         Activation::LEAKYRELU => {
-            if value < 0.0 {
+            if *value < 0.0 {
                 0.01
             } else {
                 1.0

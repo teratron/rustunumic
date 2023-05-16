@@ -12,7 +12,7 @@ fn test_activation() {
         (0.1, Activation::TANH, 0.099668),
     ];
     for (value, mode, result) in data {
-        assert_eq!(activation(value, &mode), result, "{:?} failed test", mode);
+        assert_eq!(activation(&value, &mode), result, "{:?} failed test", mode);
     }
 }
 
@@ -28,6 +28,6 @@ fn test_derivative() {
         (0.1, Activation::TANH, 0.99),
     ];
     for (value, mode, result) in data {
-        assert_eq!(derivative(value, &mode), result, "{:?} failed test", mode);
+        assert_eq!(derivative(&value, &mode), result, "{:?} failed test", mode);
     }
 }
