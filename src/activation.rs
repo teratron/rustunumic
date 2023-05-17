@@ -147,11 +147,11 @@ trait Real {
     fn to_primitive(self: Self) -> Self::T;
 }
 
-// impl<T> Real for T {
-//     fn to_real(self) -> T {
-//         self
-//     }
-// }
+/*impl<T> Real for T {
+    fn to_real(self) -> T {
+        self
+    }
+}*/
 
 impl Real for f32 {
     type T = f32;
