@@ -1,0 +1,3 @@
+{
+  "rust-analyzer.linkedProjects": [".\\examples\\perceptron\\Cargo.toml"]
+}
