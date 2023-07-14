@@ -49,11 +49,11 @@ impl Rustunumic {
     pub const SIGMOID: Activation = Activation::SIGMOID;
 }
 
-trait Traiter {}
+/*trait Traiter {}
 
 impl Traiter for Rustunumic {}
 
-impl Traiter for Activation {}
+impl Traiter for Activation {}*/
 
 /*pub fn add(left: usize, right: usize) -> usize {
     left + right

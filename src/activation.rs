@@ -2,9 +2,9 @@
 //!
 //!
 
-/// Activation mode.
+/// ## Activation mode
 ///
-/// # List of mode:
+/// ### List of mode:
 ///
 /// * LINEAR - Linear/identity (0);
 /// * RELU - ReLu (rectified linear unit) (1);
@@ -160,7 +160,7 @@ impl Real for f32 {
         self
     }
     fn to_primitive(self: Self::T) -> f32 {
-        self as f32
+        self
     }
 }
 
@@ -171,7 +171,7 @@ impl Real for f64 {
         self
     }
     fn to_primitive(self: Self::T) -> f64 {
-        self as f64
+        self
     }
 }
 
