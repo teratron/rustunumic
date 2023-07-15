@@ -3,16 +3,19 @@
 // impl<T> Neuroner for Neuron<T> {}
 //
 
-/*struct Neuron<T> {
-    value: T,
+struct Neuron<T> {
     // Neuron value
-    axon: [T], // All incoming axons
+    value: T,
 
-               //specific: Neuroner,  // Specific option of neuron: miss (error) or other
-               //Synapser
+    // All incoming axons
+    axon: [T],
+    // Specific option of neuron: miss (error) or other
+    //specific: Neuroner,
+
+    //Synapser
 }
 
-enum CellKind {
+pub(crate) enum CellKind {
     Input,
     BackfedInput,
     NoisyInput,
@@ -32,4 +35,4 @@ enum CellKind {
 
     Kernel,
     Convolution, // or Pool
-}*/
+}

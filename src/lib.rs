@@ -42,36 +42,19 @@ impl Rustunumic {
         }
     }
 
-    // pub fn sigmoid(&self) -> Activation {
-    //     Activation::SIGMOID
-    // }
+    /*pub fn sigmoid(&self) -> Activation {
+        Activation::SIGMOID
+    }*/
 
     pub const SIGMOID: Activation = Activation::SIGMOID;
 }
 
-/*trait Traiter {}
-
-impl Traiter for Rustunumic {}
-
-impl Traiter for Activation {}*/
-
-/*pub fn add(left: usize, right: usize) -> usize {
-    left + right
+trait Interface {
+    fn train() -> (f64, usize);
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4, "failed test");
+impl Interface for Rustunumic {
+    fn train() -> (f64, usize) {
+        (0.0, 0) // TODO:
     }
 }
-
-fn main() {
-    let a = 6;
-    let b = 8;
-    println!("{}", add(a, b))
-}*/
