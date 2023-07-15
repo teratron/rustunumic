@@ -37,6 +37,7 @@ pub struct Rustunumic {
 impl Rustunumic {
     /// Creat new
     pub fn new() -> Self {
+        let _v = vec![0, 2, 4, 6];
         Rustunumic {
             //activation: Activation::SIGMOID,
         }
@@ -49,12 +50,22 @@ impl Rustunumic {
     pub const SIGMOID: Activation = Activation::SIGMOID;
 }
 
-trait Interface {
-    fn train() -> (f64, usize);
+pub trait Interface {
+    fn verify(&self, input: Vec<f64>, target: Vec<f64>) -> f64;
+    fn query(&self, input: Vec<f64>) -> Vec<f64>;
+    fn train(&self, input: Vec<f64>, target: Vec<f64>) -> (f64, usize);
 }
 
 impl Interface for Rustunumic {
-    fn train() -> (f64, usize) {
-        (0.0, 0) // TODO:
+    fn verify(&self, _input: Vec<f64>, _target: Vec<f64>) -> f64 {
+        0. // TODO:
+    }
+
+    fn query(&self, _input: Vec<f64>) -> Vec<f64> {
+        vec![1., 2., 3.] // TODO:
+    }
+
+    fn train(&self, _input: Vec<f64>, _target: Vec<f64>) -> (f64, usize) {
+        (0.5, 42) // TODO:
     }
 }
