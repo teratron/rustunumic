@@ -45,28 +45,46 @@ impl Rustunumic {
         }
     }
 
-    /*pub fn sigmoid(&self) -> Activation {
-        Activation::SIGMOID
-    }*/
-
-    /*pub fn activation() -> Activation {
-        Activation
-    }*/
-
-    //pub const active: Activation  =  Activation::(..);
-
     pub const SIGMOID: Activation = Activation::SIGMOID;
-    //const activation: Activation = Activation{};
-    //static act: Activation {} = Activation::{};
 }
 
-pub trait Interface<T> {
+//use std::fmt::Display;
+
+pub trait Float /*: Display*/ {
+    /*fn print(&self) {
+        println!("i am {}", self);
+    }*/
+}
+
+impl Float for f32 {}
+impl Float for f64 {}
+
+// fn main() {
+//     1.5_f32.print(); // prints "i am 1.5"
+//     1.5_f64.print(); // prints "i am 1.5"
+// }
+
+pub trait Interface<T: Float> {
     //type Float;
 
     fn verify(&self, input: Vec<T>, target: Vec<T>) -> T;
     fn query(&self, input: Vec<T>) -> Vec<T>;
     fn train(&self, _input: Vec<T>, _target: Vec<T>) -> (usize, T);
 }
+
+/*impl<T: Trait> Interface<T> for Rustunumic {
+    //type Float = f64;
+
+    fn verify(&self, _input: Vec<T>, _target: Vec<T>) -> T {
+        0. // TODO:
+    }
+    fn query(&self, _input: Vec<T>) -> Vec<T> {
+        vec![1., 2., 3.] // TODO:
+    }
+    fn train(&self, _input: Vec<T>, _target: Vec<T>) -> (usize, T) {
+        (42, 0.5) // TODO:
+    }
+}*/
 
 impl Interface<f64> for Rustunumic {
     //type Float = f64;
@@ -83,8 +101,6 @@ impl Interface<f64> for Rustunumic {
 }
 
 impl Interface<f32> for Rustunumic {
-    //type Float = f64;
-
     fn verify(&self, _input: Vec<f32>, _target: Vec<f32>) -> f32 {
         0. // TODO:
     }
