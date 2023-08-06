@@ -1,4 +1,4 @@
-use rustunumic::{Interface, Rustunumic};
+use rustunumic::{Rustunumic, *};
 
 fn main() {
     // Creat instance.

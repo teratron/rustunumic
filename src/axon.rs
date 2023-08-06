@@ -2,7 +2,7 @@ use crate::neuron::CellKind;
 
 struct Axon<T> {
     weight: T,
-    synapses: CellKind, //crate::neuron::CellKind
+    synapses: CellKind<T>, //crate::neuron::CellKind
 }
 
 /*

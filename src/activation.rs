@@ -108,13 +108,13 @@ pub fn activation(value: &f32, mode: &Activation) -> f32 {
     }
 }
 
-//mod foo {
-// trait MyTrait {}
-// impl MyTrait for f32 {}
-// impl MyTrait for f64 {}
+/*mod foo {
+trait MyTrait {}
+impl MyTrait for f32 {}
+impl MyTrait for f64 {}
 
-//pub fn f<T: MyTrait>(x: T) {}
-//}
+pub fn f<T: MyTrait>(x: T) {}
+}*/
 
 /*pub fn main() {
     foo::f(3f32);
