@@ -29,42 +29,40 @@ mod neuron;
 
 use activation::Activation;
 
+// Float
+pub trait Float {}
+impl Float for f32 {}
+impl Float for f64 {}
+
 #[derive(Debug)]
-pub struct Rustunumic {
+pub struct Rustunumic<T>
+where
+    T: Float,
+{
     pub activation: Activation,
-    //neuron: Vec<T>,
+    neuron: Vec<T>,
 }
 
-impl Rustunumic {
+impl<T> Rustunumic<T>
+where
+    T: Float,
+{
     /// Creat new
     pub fn new() -> Self {
         let _v = vec![0., 2., 4., 6.];
         Rustunumic {
             activation: Activation::SIGMOID,
-            //neuron: Vec::new()
+            neuron: Vec::new(),
         }
     }
 
     pub const SIGMOID: Activation = Activation::SIGMOID;
 }
 
-//use std::fmt::Display;
-
-pub trait Float /*: Display*/ {
-    /*fn print(&self) {
-        println!("i am {}", self);
-    }*/
-}
-
-impl Float for f32 {}
-impl Float for f64 {}
-
-// fn main() {
-//     1.5_f32.print(); // prints "i am 1.5"
-//     1.5_f64.print(); // prints "i am 1.5"
-// }
-
-pub trait Interface<T: Float> {
+pub trait Interface<T>
+where
+    T: Float,
+{
     //type Float;
 
     fn verify(&self, input: Vec<T>, target: Vec<T>) -> T;
@@ -72,42 +70,49 @@ pub trait Interface<T: Float> {
     fn train(&self, _input: Vec<T>, _target: Vec<T>) -> (usize, T);
 }
 
-/*impl<T: Trait> Interface<T> for Rustunumic {
+impl<T> Interface<T> for Rustunumic<T>
+where
+    T: Float,
+{
     //type Float = f64;
 
     fn verify(&self, _input: Vec<T>, _target: Vec<T>) -> T {
-        0. // TODO:
+        let loss: T = todo!();
+        loss
     }
     fn query(&self, _input: Vec<T>) -> Vec<T> {
-        vec![1., 2., 3.] // TODO:
+        let output: Vec<T> = todo!();
+        output
     }
     fn train(&self, _input: Vec<T>, _target: Vec<T>) -> (usize, T) {
-        (42, 0.5) // TODO:
+        let count: usize = 0;
+        let loss: T = todo!();
+        (count, loss)
     }
-}*/
+}
 
-impl Interface<f64> for Rustunumic {
+/* impl Interface<f64> for Rustunumic<f64> {
     //type Float = f64;
 
     fn verify(&self, _input: Vec<f64>, _target: Vec<f64>) -> f64 {
-        0. // TODO:
+        0.
     }
     fn query(&self, _input: Vec<f64>) -> Vec<f64> {
-        vec![1., 2., 3.] // TODO:
+        vec![1., 2., 3.]
     }
     fn train(&self, _input: Vec<f64>, _target: Vec<f64>) -> (usize, f64) {
-        (42, 0.5) // TODO:
+        (42, 0.5)
     }
 }
 
-impl Interface<f32> for Rustunumic {
+impl Interface<f32> for Rustunumic<f32> {
     fn verify(&self, _input: Vec<f32>, _target: Vec<f32>) -> f32 {
-        0. // TODO:
+        0.
     }
     fn query(&self, _input: Vec<f32>) -> Vec<f32> {
-        vec![1., 2., 3.] // TODO:
+        vec![1., 2., 3.]
     }
     fn train(&self, _input: Vec<f32>, _target: Vec<f32>) -> (usize, f32) {
-        (42, 0.5) // TODO:
+        (42, 0.5)
     }
-}
+} */
