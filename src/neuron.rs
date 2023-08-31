@@ -1,18 +1,25 @@
 use crate::activation::Activation;
+use crate::axon::Axon;
 
 #[derive(Debug)]
-pub(super) struct Neuron<T> {
+pub(super) struct Neuron<'a, T> {
     /// Neuron value
     value: T,
+
     /// Neuron error
     miss: T,
+
     /// All incoming axons
-    //axon: Vec<T>,
+    incoming: Vec<Axon<'a, T>>,
+
+    /// All outcoming axons
+    outcoming: Vec<Axon<'a, T>>,
+
     /// Specific option of neuron: miss (error) or other
     //specific: Neuroner,
-
     //Synapser
 
+    /// Function activation
     activation: Activation,
 }
 
@@ -26,9 +33,9 @@ pub(crate) enum CellKind<T> {
     ProbabilisticHidden,
     SpikingHidden,
     Capsule,
-    Bias,
+    Bias(bool),
 
-    Output,
+    Output(T),
     MatchInputOutput,
 
     Recurrent,

@@ -24,11 +24,11 @@
 // pub use window::{self, *};
 
 mod activation;
-mod neuron;
 mod axon;
+mod neuron;
 
-use neuron::Neuron;
 use axon::Axon;
+use neuron::Neuron;
 
 // Float
 pub trait Float {}
@@ -36,15 +36,15 @@ impl Float for f32 {}
 impl Float for f64 {}
 
 #[derive(Debug)]
-pub struct Rustunumic<T>
+pub struct Rustunumic<'a, T>
 where
     T: Float,
 {
-    neurons: Vec<Neuron<T>>,
-    axons: Vec<Axon<T>>,
+    neurons: Vec<Neuron<'a, T>>,
+    //axons: Vec<Axon<T>>,
 }
 
-impl<T> Rustunumic<T>
+impl<'a, T> Rustunumic<'a, T>
 where
     T: Float,
 {
@@ -53,7 +53,7 @@ where
         let _v = vec![0., 2., 4., 6.];
         Rustunumic {
             neurons: Vec::new(),
-            axons: Vec::new(),
+            //axons: Vec::new(),
         }
     }
 }

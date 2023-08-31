@@ -1,9 +1,14 @@
-use crate::neuron::CellKind;
+use crate::neuron::Neuron;
 
 #[derive(Debug)]
-pub(crate) struct Axon<T> {
+pub(super) struct Axon<'a, T> {
     weight: T,
-    synapses: CellKind<T>, //crate::neuron::CellKind
+
+    /// Synapses
+    incoming: &'a Neuron<'a, T>,
+    outcoming: &'a Neuron<'a, T>,
+
+    bias: bool,
 }
 
 /*
