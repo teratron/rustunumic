@@ -25,15 +25,14 @@
 
 mod activation;
 mod axon;
+mod float;
+mod interface;
 mod neuron;
 
-use axon::Axon;
+// use axon::Axon;
+use float::Float;
+use interface::Interface;
 use neuron::Neuron;
-
-// Float
-pub trait Float {}
-impl Float for f32 {}
-impl Float for f64 {}
 
 #[derive(Debug)]
 pub struct Rustunumic<'a, T>
@@ -55,5 +54,24 @@ where
             neurons: Vec::new(),
             //axons: Vec::new(),
         }
+    }
+}
+
+impl<'a, T> Interface<T> for Rustunumic<'a, T>
+where
+    T: Float,
+{
+    fn verify(&self, _input: Vec<T>, _target: Vec<T>) -> T {
+        let loss: T = todo!();
+        loss
+    }
+    fn query(&self, _input: Vec<T>) -> Vec<T> {
+        let output: Vec<T> = todo!();
+        output
+    }
+    fn train(&self, _input: Vec<T>, _target: Vec<T>) -> (usize, T) {
+        let count: usize = 0;
+        let loss: T = todo!();
+        (count, loss)
     }
 }

@@ -1,29 +1,7 @@
-pub trait Interface<T>
-    // where
-    //     T: Float,
-{
+pub trait Interface<T> {
     fn verify(&self, input: Vec<T>, target: Vec<T>) -> T;
     fn query(&self, input: Vec<T>) -> Vec<T>;
     fn train(&self, _input: Vec<T>, _target: Vec<T>) -> (usize, T);
-}
-
-impl<T> Interface<T> for Rustunumic<T>
-    // where
-    //     T: Float,
-{
-    fn verify(&self, _input: Vec<T>, _target: Vec<T>) -> T {
-        let loss: T = todo!();
-        loss
-    }
-    fn query(&self, _input: Vec<T>) -> Vec<T> {
-        let output: Vec<T> = todo!();
-        output
-    }
-    fn train(&self, _input: Vec<T>, _target: Vec<T>) -> (usize, T) {
-        let count: usize = 0;
-        let loss: T = todo!();
-        (count, loss)
-    }
 }
 
 /* impl Interface<f64> for Rustunumic<f64> {

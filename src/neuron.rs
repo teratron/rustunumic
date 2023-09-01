@@ -2,7 +2,7 @@ use crate::activation::Activation;
 use crate::axon::Axon;
 
 #[derive(Debug)]
-pub(super) struct Neuron<'a, T> {
+pub struct Neuron<'a, T> {
     /// Neuron value
     value: T,
 
@@ -24,7 +24,7 @@ pub(super) struct Neuron<'a, T> {
 }
 
 #[derive(Debug)]
-pub(crate) enum CellKind<T> {
+pub enum CellKind<T> {
     Input(T),
     BackfedInput,
     NoisyInput,
