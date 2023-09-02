@@ -1,7 +1,11 @@
-
-fn calc_neuron() -> Option<> {
-
+pub impl Neuron<'a, T> {
+    fn calc_neurons(&self) -> Option {
+        //for i in &self.
+        Option(_)
+    }
 }
+
+fn calc_neuron() -> Option {}
 
 /*
 func (p *perceptron) calcNeuron(input []float64) {

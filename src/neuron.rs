@@ -10,14 +10,10 @@ pub struct Neuron<'a, T> {
     miss: T,
 
     /// All incoming axons
-    incoming: Vec<Axon<'a, T>>,
+    incoming: Vec<&'a Axon<'a, T>>,
 
     /// All outcoming axons
-    outcoming: Vec<Axon<'a, T>>,
-
-    /// Specific option of neuron: miss (error) or other
-    //specific: Neuroner,
-    //Synapser
+    outcoming: Vec<&'a Axon<'a, T>>,
 
     /// Function activation
     activation: Activation,

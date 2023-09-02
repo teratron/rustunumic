@@ -10,24 +10,18 @@ license = "MIT"
 homepage = "https://zigenzoog.github.io/rustunumic"
 documentation = "https://zigenzoog.github.io/rustunumic"
 repository = "https://github.com/zigenzoog/rustunumic"
-keywords = [
-    "neural",
-    "network",
-    "machine",
-    "learning",
-    "library"
-]
+keywords = ["neural", "network", "machine", "learning", "library"]
 categories = ["command-line-utilities", "development-tools::cargo-plugins"]
-build = false  #false "build.rs"
+build = false #"build.rs"
 exclude = ["/ci", "images/", ".*"]
 include = [
     #"/src",
     #"/examples",
     #"!/examples/*.md",
     "COPYRIGHT",
-    "LICENSE"
+    "LICENSE",
 ]
-publish = false  #["some-registry-name"]
+publish = false #["some-registry-name"]
 
 [lib]
 #crate-type = ["cdylib"]
@@ -37,9 +31,7 @@ test = false
 doctest = false
 
 [workspace]
-members = [
-    #"examples/*"
-]
+members = ["examples/*"]
 
 [dependencies]
 
@@ -54,7 +46,7 @@ members = [
 [profile.dev]
 opt-level = 0
 debug = true
-split-debuginfo = "..."  # Platform-specific.
+split-debuginfo = "..." # Platform-specific.
 debug-assertions = true
 overflow-checks = true
 lto = false

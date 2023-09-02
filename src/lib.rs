@@ -23,13 +23,14 @@
 // pub use input::{self, *};
 // pub use window::{self, *};
 
-mod activation;
+pub mod activation;
 mod axon;
 mod float;
 mod interface;
 mod neuron;
 
 // use axon::Axon;
+use activation::Activation;
 use float::Float;
 use interface::Interface;
 use neuron::Neuron;
@@ -39,25 +40,32 @@ pub struct Rustunumic<'a, T>
 where
     T: Float,
 {
-    neurons: Vec<Neuron<'a, T>>,
-    //axons: Vec<Axon<T>>,
+    neurons: Vec<&'a Neuron<'a, T>>,
+    activation: Option<Activation>,
+    rate: T,
 }
 
 impl<'a, T> Rustunumic<'a, T>
 where
-    T: Float,
+    T: Float + std::fmt::Debug,
 {
     /// Creat new
     pub fn new() -> Self {
-        let _v = vec![0., 2., 4., 6.];
         Rustunumic {
             neurons: Vec::new(),
-            //axons: Vec::new(),
+            activation: None,
+            rate: (0.3).to_real(),
+        }
+    }
+
+    pub fn calc_neurons(&self) {
+        for i in &self.neurons {
+            print!("{:?}", i)
         }
     }
 }
 
-impl<'a, T> Interface<T> for Rustunumic<'a, T>
+impl<T> Interface<T> for Rustunumic<'_, T>
 where
     T: Float,
 {
@@ -65,10 +73,12 @@ where
         let loss: T = todo!();
         loss
     }
+
     fn query(&self, _input: Vec<T>) -> Vec<T> {
         let output: Vec<T> = todo!();
         output
     }
+
     fn train(&self, _input: Vec<T>, _target: Vec<T>) -> (usize, T) {
         let count: usize = 0;
         let loss: T = todo!();
