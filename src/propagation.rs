@@ -1,5 +1,5 @@
-pub impl Neuron<'a, T> {
-    fn calc_neurons(&self) -> Option {
+impl Neuron<T> {
+    fn calc_neurons(&self) -> Option<T> {
         //for i in &self.
         Option(_)
     }

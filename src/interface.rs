@@ -1,6 +1,11 @@
 pub trait Interface<T> {
+    /// verify
     fn verify(&self, input: Vec<T>, target: Vec<T>) -> T;
+
+    /// query
     fn query(&self, input: Vec<T>) -> Vec<T>;
+
+    /// train
     fn train(&self, _input: Vec<T>, _target: Vec<T>) -> (usize, T);
 }
 

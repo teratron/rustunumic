@@ -1,15 +1,15 @@
 use crate::neuron::Neuron;
 
 #[derive(Debug)]
-pub struct Axon<'b, T> {
+pub struct Axon<'a, T> {
     /// Axon weight
     weight: T,
 
     /// Incoming synapse
-    incoming: &'b Neuron<'b, T>,
+    incoming: &'a Neuron<'a, T>,
 
-    /// Outcoming synapse
-    outcoming: &'b Neuron<'b, T>,
+    /// Outgoing synapse
+    outgoing: &'a Neuron<'a, T>,
 
     /// Bias
     bias: bool,

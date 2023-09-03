@@ -23,51 +23,52 @@
 // pub use input::{self, *};
 // pub use window::{self, *};
 
+// use axon::Axon;
+use activation::Activation;
+use float::FloatingPoint;
+use interface::Interface;
+use neuron::Neuron;
+
 pub mod activation;
 mod axon;
 mod float;
 mod interface;
 mod neuron;
 
-// use axon::Axon;
-use activation::Activation;
-use float::Float;
-use interface::Interface;
-use neuron::Neuron;
-
 #[derive(Debug)]
-pub struct Rustunumic<'a, T>
-where
-    T: Float,
-{
+pub struct Rustunumic<'a, T: FloatingPoint> {
     neurons: Vec<&'a Neuron<'a, T>>,
+    rate: <f64 as FloatingPoint>::Float,
+
     activation: Option<Activation>,
-    rate: T,
 }
 
-impl<'a, T> Rustunumic<'a, T>
-where
-    T: Float + std::fmt::Debug,
+impl<'a, T: FloatingPoint + std::fmt::Debug> Rustunumic<'a, T>
+// where
+//     T: Float + std::fmt::Debug //,
 {
     /// Creat new
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Rustunumic {
             neurons: Vec::new(),
+            rate: 0.3,
+
             activation: None,
-            rate: (0.3).to_real(),
         }
     }
 
-    pub fn calc_neurons(&self) {
-        for i in &self.neurons {
-            print!("{:?}", i)
+    pub fn calc_neurons(self) {
+        println!("+++++++++++++++++++++++");
+        for (i, neuron) in self.neurons.iter().enumerate() {
+            println!("- {:#?} {:#?}", i, neuron);
         }
+        println!("-----------------------");
     }
 }
 
-impl<T> Interface<T> for Rustunumic<'_, T>
-where
-    T: Float,
+impl<T: FloatingPoint> Interface<T> for Rustunumic<'_, T>
+// where
+//     T: Float,
 {
     fn verify(&self, _input: Vec<T>, _target: Vec<T>) -> T {
         let loss: T = todo!();

@@ -23,6 +23,9 @@ include = [
 ]
 publish = false #["some-registry-name"]
 
+[package.metadata.scripts]
+perceptron = "cargo run --color=always --package perceptron --bin perceptron"
+
 [lib]
 #crate-type = ["cdylib"]
 name = "rustunumic"
@@ -31,7 +34,7 @@ test = false
 doctest = false
 
 [workspace]
-members = ["examples/*"]
+members = ["examples/perceptron"]
 
 [dependencies]
 

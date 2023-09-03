@@ -12,8 +12,8 @@ pub struct Neuron<'a, T> {
     /// All incoming axons
     incoming: Vec<&'a Axon<'a, T>>,
 
-    /// All outcoming axons
-    outcoming: Vec<&'a Axon<'a, T>>,
+    /// All outgoing axons
+    outgoing: Vec<&'a Axon<'a, T>>,
 
     /// Function activation
     activation: Activation,
