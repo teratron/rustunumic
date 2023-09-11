@@ -9,10 +9,10 @@ pub trait FloatingPoint {
     }*/
 }
 
-enum Real<T> {
+/*enum Real<T> {
     F32(T),
     F64(T),
-}
+}*/
 
 impl FloatingPoint for f32 {
     type Float = f32;
