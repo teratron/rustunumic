@@ -43,14 +43,14 @@ pub struct Rustunumic<'a, T: FloatingPoint> {
     activation: Option<Activation>,
 }
 
-impl<'a, T: FloatingPoint + std::fmt::Debug> Rustunumic<'a, T> {
+impl<'a, T: FloatingPoint> Rustunumic<'a, T> {
+    //+ std::fmt::Debug
     /// Creat new
     pub const fn new() -> Self {
         Rustunumic {
             neurons: Vec::new(),
             rate: 0.3,
             //rate: match T {  },
-
             activation: None,
         }
     }

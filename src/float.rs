@@ -1,5 +1,7 @@
+use std::fmt::Debug;
+
 /// Float
-pub trait FloatingPoint {
+pub trait FloatingPoint: Debug {
     type Float;
 
     fn type_name(&self) -> &'static str;
@@ -7,6 +9,9 @@ pub trait FloatingPoint {
     /*fn to_real(&self) -> &Self {
         self
     }*/
+    /* fn to_float(&self) -> Self::Float {
+        self::<Self as FloatingPoint>::Float
+    } */
 }
 
 /*enum Real<T> {
@@ -26,6 +31,9 @@ impl FloatingPoint for f32 {
     fn to_real(self) -> f32 {
         self
     }
+    // fn to_float(self) -> Self::Float {
+    //     self as f32
+    // }
 }
 
 impl FloatingPoint for f64 {
@@ -40,4 +48,7 @@ impl FloatingPoint for f64 {
     fn to_real(self) -> f64 {
         self
     }
+    // fn to_float(self: <f64>) -> Self::Float {
+    //     self as f64
+    // }
 }
