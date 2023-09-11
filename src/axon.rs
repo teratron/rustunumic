@@ -1,4 +1,4 @@
-use crate::neuron::Neuron;
+use crate::neuron::{CellKind, Neuron};
 
 #[derive(Debug)]
 pub struct Axon<'a, T> {
@@ -12,7 +12,7 @@ pub struct Axon<'a, T> {
     outgoing: &'a Neuron<'a, T>,
 
     /// Bias
-    bias: bool,
+    bias: bool //CellKind<T>, // ::Bias(bool)
 }
 
 /*

@@ -38,26 +38,24 @@ mod neuron;
 #[derive(Debug)]
 pub struct Rustunumic<'a, T: FloatingPoint> {
     neurons: Vec<&'a Neuron<'a, T>>,
-    rate: <f64 as FloatingPoint>::Float,
+    rate: T, //<f64 as FloatingPoint>::Float,
 
     activation: Option<Activation>,
 }
 
-impl<'a, T: FloatingPoint + std::fmt::Debug> Rustunumic<'a, T>
-// where
-//     T: Float + std::fmt::Debug //,
-{
+impl<'a, T: FloatingPoint + std::fmt::Debug> Rustunumic<'a, T> {
     /// Creat new
     pub const fn new() -> Self {
         Rustunumic {
             neurons: Vec::new(),
             rate: 0.3,
+            //rate: match T {  },
 
             activation: None,
         }
     }
 
-    pub fn calc_neurons(self) {
+    pub fn calculate_neurons(self) {
         println!("+++++++++++++++++++++++");
         for (i, neuron) in self.neurons.iter().enumerate() {
             println!("- {:#?} {:#?}", i, neuron);
@@ -66,10 +64,7 @@ impl<'a, T: FloatingPoint + std::fmt::Debug> Rustunumic<'a, T>
     }
 }
 
-impl<T: FloatingPoint> Interface<T> for Rustunumic<'_, T>
-// where
-//     T: Float,
-{
+impl<T: FloatingPoint> Interface<T> for Rustunumic<'_, T> {
     fn verify(&self, _input: Vec<T>, _target: Vec<T>) -> T {
         let loss: T = todo!();
         loss

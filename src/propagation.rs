@@ -1,11 +1,11 @@
 impl Neuron<T> {
-    fn calc_neurons(&self) -> Option<T> {
+    fn calculate_neurons(&self) -> Option<T> {
         //for i in &self.
-        Option(_)
+        None
     }
 }
 
-fn calc_neuron() -> Option {}
+//fn calc_neuron() -> Option {}
 
 /*
 func (p *perceptron) calcNeuron(input []float64) {
