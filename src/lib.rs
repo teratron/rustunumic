@@ -44,6 +44,7 @@ pub struct Rustunumic<'a, T: FloatingPoint> {
 }
 
 impl<'a, T: FloatingPoint> Rustunumic<'a, T> {
+    //impl<'a> Rustunumic<'a, f64> {
     //+ std::fmt::Debug
     /// Creat new
     pub const fn new() -> Self {
