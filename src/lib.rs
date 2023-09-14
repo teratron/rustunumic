@@ -31,19 +31,19 @@ use neuron::Neuron;
 
 pub mod activation;
 mod axon;
-mod float;
+pub mod float;
 mod interface;
 mod neuron;
 
 #[derive(Debug)]
 pub struct Rustunumic<'a, T: FloatingPoint> {
     neurons: Vec<&'a Neuron<'a, T>>,
-    rate: T, //<f64 as FloatingPoint>::Float,
+    pub rate: T,
 
     activation: Option<Activation>,
 }
 
-impl<'a, T: FloatingPoint> Rustunumic<'a, T> {
+/*impl<'a, T: FloatingPoint> Rustunumic<'a, T> {
     //impl<'a> Rustunumic<'a, f64> {
     //+ std::fmt::Debug
     /// Creat new
@@ -62,6 +62,28 @@ impl<'a, T: FloatingPoint> Rustunumic<'a, T> {
             println!("- {:#?} {:#?}", i, neuron);
         }
         println!("-----------------------");
+    }
+}*/
+
+impl<'a> Rustunumic<'a, f32> {
+    /// Creat new
+    pub const fn new() -> Self {
+        Rustunumic {
+            neurons: Vec::new(),
+            rate: 0.3,
+            activation: None,
+        }
+    }
+}
+
+impl<'a> Rustunumic<'a, f64> {
+    /// Creat new
+    pub const fn new() -> Self {
+        Rustunumic {
+            neurons: Vec::new(),
+            rate: 0.3,
+            activation: None,
+        }
     }
 }
 
