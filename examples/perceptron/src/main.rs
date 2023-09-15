@@ -1,4 +1,4 @@
-use rustunumic::{Rustunumic, float::*};
+use rustunumic::{float::*, Rustunumic};
 //use rustunumic::Rustunumic;
 //use rustunumic::float::FloatingPoint;
 

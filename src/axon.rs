@@ -12,7 +12,7 @@ pub struct Axon<'a, T> {
     outgoing: &'a Neuron<'a, T>,
 
     /// Bias
-    bias: bool //CellKind<T>, // ::Bias(bool)
+    bias: bool, //CellKind<T>, // ::Bias(bool)
 }
 
 /*

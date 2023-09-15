@@ -5,10 +5,12 @@ pub trait FloatingPoint: Debug {
     type Float;
 
     fn type_name(&self) -> &'static str;
-    //fn to_real(self) -> Self;
-    fn to_real(&self) -> &Self {
+    // fn to_real(v: f64) -> Self::Float {
+    //     v as Float
+    // }
+    /*fn to_real(&self: Float) -> &Self::Float {
         self
-    }
+    }*/
 }
 
 /*enum Real<T> {
@@ -28,7 +30,7 @@ impl FloatingPoint for f32 {
     // fn to_real(&self) -> &Self {
     //     self
     // }
-    // fn to_float(self) -> Self::Float {
+    // fn to_real(v: f64) -> Self::Float {
     //     self as f32
     // }
 }
@@ -45,7 +47,7 @@ impl FloatingPoint for f64 {
     // fn to_real(self) -> Self {
     //     self
     // }
-    // fn to_float(self: <f64>) -> Self::Float {
+    // fn to_real(self) -> Self::Float {
     //     self as f64
     // }
 }

@@ -43,48 +43,59 @@ pub struct Rustunumic<'a, T: FloatingPoint> {
     activation: Option<Activation>,
 }
 
-/*impl<'a, T: FloatingPoint> Rustunumic<'a, T> {
-    //impl<'a> Rustunumic<'a, f64> {
-    //+ std::fmt::Debug
+impl<'a, T: FloatingPoint> Rustunumic<'a, T> {
     /// Creat new
     pub const fn new() -> Self {
-        Rustunumic {
-            neurons: Vec::new(),
-            rate: 0.3,
-            //rate: match T {  },
-            activation: None,
-        }
+        Rustunumic::news()
+        // Self {
+        //     neurons: Vec::new(),
+        //     rate: to_float(0.3), //.to_real(),
+        //     activation: None,
+        // }
     }
 
-    pub fn calculate_neurons(self) {
+    // fn to_float(v: f64) -> T {
+    //     v as FloatingPoint::<T>
+    // }
+    /*pub fn calculate_neurons(self) {
         println!("+++++++++++++++++++++++");
         for (i, neuron) in self.neurons.iter().enumerate() {
             println!("- {:#?} {:#?}", i, neuron);
         }
         println!("-----------------------");
-    }
-}*/
+    }*/
+}
+
+// fn to_float(v: f64) -> impl FloatingPoint {
+//     v as f32::<FloatingPoint>
+// }
 
 impl<'a> Rustunumic<'a, f32> {
-    /// Creat new
-    pub const fn new() -> Self {
+    //// Creat new
+    pub const fn news() -> Self {
         Rustunumic {
             neurons: Vec::new(),
             rate: 0.3,
             activation: None,
         }
     }
+    // fn to_float(v: f64) -> f32 {
+    //     v as f32
+    // }
 }
 
 impl<'a> Rustunumic<'a, f64> {
-    /// Creat new
-    pub const fn new() -> Self {
+    //// Creat new
+    pub const fn news() -> Self {
         Rustunumic {
             neurons: Vec::new(),
             rate: 0.3,
             activation: None,
         }
     }
+    // fn to_float(v: f64) -> f64 {
+    //     v
+    // }
 }
 
 impl<T: FloatingPoint> Interface<T> for Rustunumic<'_, T> {
