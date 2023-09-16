@@ -1,26 +1,24 @@
-mod float_trait {
+mod float_struct {
+    // Интерфейс для ограничения по типу floating point
     pub trait Float {}
     impl Float for f32 {}
     impl Float for f64 {}
-}
-
-mod float_struct {
-    use crate::float_trait::Float;
 
     #[derive(Debug)]
     // Есть какая-то структура с определёнными полями
     pub struct FloatStruct<T: Float> {
-        _a: i8,
-        _b: String,
-        pub c: T,
+        _i: i8,
+        _s: String,
+        pub f: T,
     }
 
+    // Часть кода выводящего ошибку
     /*impl<T: Float> FloatStruct<T> {
         pub fn new() -> Self {
             Self {
-                _a: 2,
-                _b: String::from("hi"),
-                c: 0.3,  // error[E0308]: mismatched types
+                _i: 2,
+                _s: String::from("hi"),
+                f: 0.3,  // error[E0308]: mismatched types
             }
         }
     }*/
@@ -28,9 +26,9 @@ mod float_struct {
     impl FloatStruct<f32> {
         pub fn new() -> Self {
             Self {
-                _a: 2,
-                _b: String::from("hi"),
-                c: 0.3,
+                _i: 2,
+                _s: String::from("hi"),
+                f: 0.3,
             }
         }
     }
@@ -38,9 +36,9 @@ mod float_struct {
     impl FloatStruct<f64> {
         pub fn new() -> Self {
             Self {
-                _a: 2,
-                _b: String::from("hi"),
-                c: 0.3,
+                _i: 2,
+                _s: String::from("hi"),
+                f: 0.3,
             }
         }
     }
@@ -52,5 +50,5 @@ fn main() {
     let fs_32 = float_struct::FloatStruct::<f32>::new();
     // или f64
     let fs_64 = float_struct::FloatStruct::<f64>::new();
-    println!("{:#?} {:#?}", fs_32.c, fs_64.c)
+    println!("{:#?} {:#?}", fs_32.f, fs_64.f)
 }
