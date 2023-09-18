@@ -1,53 +1,41 @@
 use std::fmt::Debug;
 
 /// Float
-pub trait FloatingPoint: Debug {
-    type Float;
+pub trait Float: Debug {
+    type FloatType;
 
     fn type_name(&self) -> &'static str;
-    // fn to_real(v: f64) -> Self::Float {
-    //     v as Float
-    // }
+    //fn to_real(self) -> Self;
     /*fn to_real(&self: Float) -> &Self::Float {
         self
     }*/
 }
 
-/*enum Real<T> {
-    F32(T),
-    F64(T),
-}*/
+impl Float for f32 {
+    type FloatType = f32;
 
-impl FloatingPoint for f32 {
-    type Float = f32;
-
-    /*fn to_real(&self) -> &Self::Float {
-        self
-    }*/
     fn type_name(&self) -> &'static str {
         "f32"
-    }
-    // fn to_real(&self) -> &Self {
-    //     self
-    // }
-    // fn to_real(v: f64) -> Self::Float {
-    //     self as f32
-    // }
-}
-
-impl FloatingPoint for f64 {
-    type Float = f64;
-
-    /*fn to_real(&self) -> &Self::Float {
-        self
-    }*/
-    fn type_name(&self) -> &'static str {
-        "f64"
     }
     // fn to_real(self) -> Self {
     //     self
     // }
-    // fn to_real(self) -> Self::Float {
-    //     self as f64
+}
+
+impl Float for f64 {
+    type FloatType = f32;
+
+    fn type_name(&self) -> &'static str {
+        "f64"
+    }
+    // fn to_real(self) -> Self::FloatType {
+    //     let v = self as f32;
+    //     v
     // }
 }
+
+// impl Into<T> for f64 {
+//     fn into(self) -> T {
+//         0.6
+//     }
+// }

@@ -1,41 +1,33 @@
 mod float_struct {
+    use std::marker::PhantomData;
+
     // Интерфейс для ограничения по типу floating point
-    pub trait Float {}
-    impl Float for f32 {}
-    impl Float for f64 {}
+    pub trait Float {
+        type FloatType;
+    }
+
+    impl Float for f32 {
+        type FloatType = f32;
+    }
+
+    impl Float for f64 {
+        type FloatType = f64;
+    }
 
     #[derive(Debug)]
     // Есть какая-то структура с определёнными полями
     pub struct FloatStruct<T: Float> {
+        phantom: PhantomData<T>,
         _i: i8,
         _s: String,
-        pub f: T,
+        pub f: <f64 as Float>::FloatType,
     }
 
     // Часть кода выводящего ошибку
-    /*impl<T: Float> FloatStruct<T> {
+    impl<T: Float> FloatStruct<T> {
         pub fn new() -> Self {
             Self {
-                _i: 2,
-                _s: String::from("hi"),
-                f: 0.3,  // error[E0308]: mismatched types
-            }
-        }
-    }*/
-
-    impl FloatStruct<f32> {
-        pub fn new() -> Self {
-            Self {
-                _i: 2,
-                _s: String::from("hi"),
-                f: 0.3,
-            }
-        }
-    }
-
-    impl FloatStruct<f64> {
-        pub fn new() -> Self {
-            Self {
+                phantom: PhantomData,
                 _i: 2,
                 _s: String::from("hi"),
                 f: 0.3,
