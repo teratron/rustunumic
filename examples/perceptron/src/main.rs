@@ -4,10 +4,10 @@ use rustunumic::{float::*, Rustunumic};
 
 fn main() {
     // Creat instance
-    let rn = Rustunumic::<f32>::new();
+    let mut rn = Rustunumic::<f32>::new();
     println!("{}", rn.rate.type_name());
 
-    let rs = Rustunumic::<f64>::new();
+    let mut rs = Rustunumic::<f64>::new();
     println!("{}", rs.rate.type_name());
 
     //rn.calculate_neurons();

@@ -39,20 +39,19 @@ mod neuron;
 //struct Rate<T: Float>(T);
 
 #[derive(Debug)]
-pub struct Rustunumic<'a, T: Float> {
+pub struct Rustunumic<'a, T: Float<T>> {
     neurons: Vec<&'a Neuron<'a, T>>,
-    pub rate: T, // <f64 as FloatingPoint>::FloatType,
+    pub rate: T,
+    // <f64 as Float>::FloatType,
     activation: Option<Activation>,
 }
 
-impl<'a, T: Float> Rustunumic<'a, T> {
+impl<'a, T: Float<T>> Rustunumic<'a, T> {
     /// Creat new
     pub const fn new() -> Self {
-        //Self.neurons = Vec::new();
-        //let mut rn = Rustunumic { neurons: val, rate: val, activation: val };
         Self {
             neurons: Vec::new(),
-            rate: 0.3, //.to_real(),
+            rate: <T as Float<T>>::FloatType::to_real(0.3), //default(0.3), //,
             activation: None,
         }
     }
@@ -68,6 +67,10 @@ impl<'a, T: Float> Rustunumic<'a, T> {
         println!("-----------------------");
     }*/
 }
+
+// fn default<T: Float>(v: f64) -> T {
+//     T::from(v)
+// }
 
 // fn to_float(v: f64) -> impl FloatingPoint {
 //     v as f32::<FloatingPoint>
@@ -95,7 +98,7 @@ impl<'a, T: Float> Rustunumic<'a, T> {
     }
 }*/
 
-impl<T: Float> Interface<T> for Rustunumic<'_, T> {
+impl<T: Float<T>> Interface<T> for Rustunumic<'_, T> {
     fn verify(&self, _input: Vec<T>, _target: Vec<T>) -> T {
         let loss: T = todo!();
         loss

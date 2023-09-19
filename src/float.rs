@@ -1,7 +1,7 @@
 use std::fmt::Debug;
 
 /// Float
-pub trait Float: Debug {
+pub trait Float<T>: Debug {
     type FloatType;
 
     fn type_name(&self) -> &'static str;
@@ -9,9 +9,12 @@ pub trait Float: Debug {
     /*fn to_real(&self: Float) -> &Self::Float {
         self
     }*/
+    fn to_real(&self) -> &Self {
+        &Self::from(self)
+    }
 }
 
-impl Float for f32 {
+impl<T> Float<T> for f32 {
     type FloatType = f32;
 
     fn type_name(&self) -> &'static str {
@@ -22,15 +25,14 @@ impl Float for f32 {
     // }
 }
 
-impl Float for f64 {
-    type FloatType = f32;
+impl<T> Float<T> for f64 {
+    type FloatType = f64;
 
     fn type_name(&self) -> &'static str {
         "f64"
     }
-    // fn to_real(self) -> Self::FloatType {
-    //     let v = self as f32;
-    //     v
+    // fn to_real(self) -> Self {
+    //     f64::from(self)
     // }
 }
 
