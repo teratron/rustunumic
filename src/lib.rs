@@ -23,6 +23,7 @@
 // pub use input::{self, *};
 // pub use window::{self, *};
 
+use std::any::Any;
 // use std::marker::PhantomData;
 // use axon::Axon;
 use activation::Activation;
@@ -47,11 +48,12 @@ pub struct Rustunumic<'a, T: Float> {
 }
 
 impl<'a, T: Float> Rustunumic<'a, T> {
+    //const DEFAULT_RATE: T::Float = 0.3;
     /// Creat new
     pub const fn new() -> Self {
         Self {
             neurons: Vec::new(),
-            rate: <T as Float>::FloatType::to_real(0.3), //default(0.3), //,
+            rate: T::INITIAL_VALUE,//<T as Float>::FloatType::to_real(0.3), //default(0.3), //,
             activation: None,
         }
     }
@@ -77,6 +79,7 @@ impl<'a, T: Float> Rustunumic<'a, T> {
 // }
 
 /*impl<'a> Rustunumic<'a, f32> {
+    //const DEFAULT_RATE: f32 = 0.3;
     //// Creat new
     pub const fn new() -> Self {
         Rustunumic {

@@ -5,6 +5,7 @@ use rustunumic::{float::*, Rustunumic};
 fn main() {
     // Creat instance
     let mut rn = Rustunumic::<f32>::new();
+    rn.rate = 0.5;
     println!("{}", rn.rate.type_name());
 
     let mut rs = Rustunumic::<f64>::new();
