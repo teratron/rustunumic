@@ -3,10 +3,9 @@ use std::fmt::Debug;
 /// Float
 pub trait Float: Debug {
     type FloatType;
-    const INITIAL_VALUE: Self;
+    //const INITIAL_VALUE: Self;
 
     fn type_name(&self) -> &'static str;
-    //fn mul(self, v: f64) -> Self::FloatType;
     //fn to_real(self) -> Self;
     /*fn to_real(&self: Float) -> &Self::Float {
         self
@@ -18,18 +17,12 @@ pub trait Float: Debug {
 
 impl Float for f32 {
     type FloatType = f32;
-    const INITIAL_VALUE: Self = 1.0;
+    //const INITIAL_VALUE: Self = 1.0;
 
     fn type_name(&self) -> &'static str {
         "f32"
     }
-    /*fn mul(self, v: f64) -> Self::FloatType {
-        let vv: Self::FloatType = v.into();
-        vv * self//Float::INITIAL_VALUE
-    }*/
-    /*fn mul(self) -> Self::FloatType {
-        INITIAL_VALUE * self
-    }*/
+
     // fn to_real(self) -> Self {
     //     self
     // }
@@ -43,7 +36,7 @@ impl Float for f32 {
 
 impl Float for f64 {
     type FloatType = f64;
-    const INITIAL_VALUE: Self = 1.0;
+    //const INITIAL_VALUE: Self = 1.0;
 
     fn type_name(&self) -> &'static str {
         "f64"
