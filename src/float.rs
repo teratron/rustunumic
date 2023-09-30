@@ -6,6 +6,9 @@ pub trait Float: Debug {
     //const INITIAL_VALUE: Self;
 
     fn type_name(&self) -> &'static str;
+    fn as_float(v: f64) -> Self::FloatType; /*{
+        v as Self::FloatType
+    }*/
     //fn to_real(self) -> Self;
     /*fn to_real(&self: Float) -> &Self::Float {
         self
@@ -23,16 +26,13 @@ impl Float for f32 {
         "f32"
     }
 
+    fn as_float(v: f64) -> Self::FloatType {
+        v as f32
+    }
     // fn to_real(self) -> Self {
     //     self
     // }
 }
-
-/*impl<U: Float> Into<U> for f32 {
-    fn into(self) -> U {
-        self as Float::FloatType
-    }
-}*/
 
 impl Float for f64 {
     type FloatType = f64;
@@ -41,11 +41,19 @@ impl Float for f64 {
     fn type_name(&self) -> &'static str {
         "f64"
     }
+
+    fn as_float(v: f64) -> Self::FloatType {
+        v
+    }
     // fn to_real(self) -> Self {
     //     f64::from(self)
     // }
 }
-
+/*impl<U: Float> Into<U> for f32 {
+    fn into(self) -> U {
+        self as Float::FloatType
+    }
+}*/
 // impl Into<T> for f64 {
 //     fn into(self) -> T {
 //         0.6
