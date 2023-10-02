@@ -40,7 +40,7 @@ mod neuron;
 #[derive(Debug)]
 pub struct Rustunumic<'a, T: Float> {
     neurons: Vec<&'a Neuron<'a, T>>,
-    pub rate: <T as Float>::FloatType,
+    pub rate: T, //<T as Float>::FloatType,
     activation: Option<Activation>,
 }
 
@@ -50,7 +50,7 @@ impl<'a, T: Float + Debug> Rustunumic<'a, T> {
     pub const fn new() -> Self {
         Self {
             neurons: Vec::new(),
-            rate: T::as_float(0.3),// 0.3.into(),//T::from(0.3),//T::INITIAL_VALUE,//<T as Float>::FloatType::to_real(0.3), //default(0.3), //,
+            rate: 0.3,//T::as_float(0.3),// 0.3.into(),//T::from(0.3),//T::INITIAL_VALUE,//<T as Float>::FloatType::to_real(0.3), //default(0.3), //,
             activation: None,
         }
     }
