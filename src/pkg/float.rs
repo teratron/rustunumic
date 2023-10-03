@@ -7,8 +7,8 @@ pub trait Float: Debug {
 
     fn type_name(&self) -> &'static str;
     fn as_float(v: f64) -> Self::FloatType; /*{
-        v as Self::FloatType
-    }*/
+                                                v as Self::FloatType
+                                            }*/
     //fn to_real(self) -> Self;
     /*fn to_real(&self: Float) -> &Self::Float {
         self

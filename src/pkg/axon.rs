@@ -1,4 +1,4 @@
-use crate::neuron::{CellKind, Neuron};
+use crate::neuron::Neuron;
 
 #[derive(Debug)]
 pub struct Axon<'a, T> {
