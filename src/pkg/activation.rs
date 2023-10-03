@@ -6,27 +6,29 @@
 ///
 /// ### List of mode:
 ///
-/// * LINEAR - Linear/identity (0);
-/// * RELU - ReLu (rectified linear unit) (1);
-/// * LEAKYRELU - Leaky ReLu (leaky rectified linear unit) (2);
-/// * SIGMOID - Logistic, a.k.a. sigmoid or soft step (3);
-/// * TANH - TanH (hyperbolic tangent) (4).
+/// | Code | Activation | Description                              |
+/// |------|------------|------------------------------------------|
+/// | 0    | Linear     | Linear/identity                          |
+/// | 1    | RELU       | ReLu (rectified linear unit)             |
+/// | 2    | LeakyRELU  | Leaky ReLu (leaky rectified linear unit) |
+/// | 3    | Sigmoid    | Logistic, a.k.a. sigmoid or soft step    |
+/// | 4    | TANH       | TanH (hyperbolic tangent)                |
 #[repr(u8)]
 #[derive(Debug)]
 pub enum Activation {
-    /// LINEAR - Linear/identity (0).
-    LINEAR,
+    /// LINEAR - Linear/identity.
+    Linear,
 
-    /// RELU - ReLu (rectified linear unit) (1).
+    /// RELU - ReLu (rectified linear unit).
     RELU,
 
-    /// LEAKYRELU - Leaky ReLu (leaky rectified linear unit) (2).
-    LEAKYRELU,
+    /// LEAKY_RELU - Leaky ReLu (leaky rectified linear unit).
+    LeakyRELU,
 
-    /// SIGMOID - Logistic, a.k.a. sigmoid or soft step (3).
-    SIGMOID,
+    /// SIGMOID - Logistic, a.k.a. sigmoid or soft step.
+    Sigmoid,
 
-    /// TANH - TanH (hyperbolic tangent) (4).
+    /// TANH - TanH (hyperbolic tangent).
     TANH,
 }
 
@@ -93,7 +95,7 @@ pub fn activation(value: &f32, mode: &Activation) -> f32 {
                 *value
             }
         }
-        Activation::LEAKYRELU => {
+        Activation::LEAKY_RELU => {
             if *value < 0.0 {
                 0.01 * value
             } else {
@@ -189,7 +191,7 @@ pub fn derivative(value: &f32, mode: &Activation) -> f32 {
                 1.0 //.to_real()
             }
         }
-        Activation::LEAKYRELU => {
+        Activation::LEAKY_RELU => {
             if *value < 0.0 {
                 0.01
             } else {

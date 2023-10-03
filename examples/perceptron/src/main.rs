@@ -1,6 +1,16 @@
+use rustunumic::activation::Activation;
 use rustunumic::{float::*, Rustunumic};
+
 //use rustunumic::Rustunumic;
 //use rustunumic::float::FloatingPoint;
+
+struct Perceptron<T> {
+    bias: bool,
+    rate: T,
+    hidden_layers: Vec<usize>,
+    activation: Activation,
+    loss: T,
+}
 
 fn main() {
     // Creat instance

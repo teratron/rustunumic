@@ -24,6 +24,7 @@
 // pub use window::{self, *};
 
 use std::fmt::Debug;
+
 // use std::marker::PhantomData;
 // use axon::Axon;
 use activation::Activation;
@@ -35,6 +36,7 @@ pub mod activation;
 mod axon;
 pub mod float;
 mod interface;
+pub mod loss;
 mod neuron;
 
 #[derive(Debug)]
@@ -50,7 +52,7 @@ impl<'a, T: Float + Debug> Rustunumic<'a, T> {
     pub const fn new() -> Self {
         Self {
             neurons: Vec::new(),
-            rate: 0.3,//T::as_float(0.3),// 0.3.into(),//T::from(0.3),//T::INITIAL_VALUE,//<T as Float>::FloatType::to_real(0.3), //default(0.3), //,
+            rate: 0.3, //T::as_float(0.3),// 0.3.into(),//T::from(0.3),//T::INITIAL_VALUE,//<T as Float>::FloatType::to_real(0.3), //default(0.3), //,
             activation: None,
         }
     }

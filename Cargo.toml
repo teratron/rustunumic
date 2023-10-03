@@ -29,7 +29,7 @@ perceptron = "cargo run --color=always --package perceptron --bin perceptron"
 [lib]
 #crate-type = ["cdylib"]
 name = "rustunumic"
-path = "src/lib.rs"
+path = "src/pkg/lib.rs"
 test = false
 doctest = false
 
