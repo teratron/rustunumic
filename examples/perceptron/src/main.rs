@@ -1,18 +1,35 @@
-use rustunumic::activation::Activation;
-use rustunumic::{float::*, Rustunumic};
-
-//use rustunumic::Rustunumic;
-//use rustunumic::float::FloatingPoint;
+use rustunumic::{activation::Activation, float::Float, loss::Loss, Rustunumic};
 
 struct Perceptron<T> {
     bias: bool,
     rate: T,
     hidden_layers: Vec<usize>,
     activation: Activation,
-    loss: T,
+    loss: Loss,
 }
 
+/*impl Perceptron<f32> {
+    fn new() -> Self {
+        Self {
+            bias: true,
+            rate: 0.3,
+            hidden_layers: Vec::new(),
+            activation: Activation::TANH,
+            loss: Loss::MSE,
+        }
+    }
+
+}*/
+
 fn main() {
+    let perceptron = Perceptron::<f32> {
+        bias: true,
+        rate: 0.3,
+        hidden_layers: vec![3, 2], //Vec::new(),
+        activation: Activation::TanH,
+        loss: Loss::MSE,
+    };
+
     // Creat instance
     let mut rn = Rustunumic::<f32>::new();
     rn.rate = 0.5;

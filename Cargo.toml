@@ -1,6 +1,6 @@
 [package]
 name = "rustunumic"
-version = "0.0.1"
+version = "0.1.0"
 edition = "2021"
 authors = ["Oleg Alexandrov <alexandrovoleg.ru@gmail.com>"]
 description = "Simple neural network library for Rust"
@@ -25,16 +25,23 @@ publish = false #["some-registry-name"]
 
 [package.metadata.scripts]
 perceptron = "cargo run --color=always --package perceptron --bin perceptron"
+doc = "cargo doc --open"
+
+[doc]
+browser = "chromium"
 
 [lib]
 #crate-type = ["cdylib"]
 name = "rustunumic"
-path = "src/pkg/lib.rs"
+path = "src/lib.rs"
 test = false
 doctest = false
 
 [workspace]
-members = ["examples/perceptron"]
+members = [
+    "cli",
+    "examples/perceptron"
+]
 
 [dependencies]
 

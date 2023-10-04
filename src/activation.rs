@@ -6,30 +6,30 @@
 ///
 /// ### List of mode:
 ///
-/// | Code | Activation | Description                              |
-/// |------|------------|------------------------------------------|
-/// | 0    | Linear     | Linear/identity                          |
-/// | 1    | RELU       | ReLu (rectified linear unit)             |
-/// | 2    | LeakyRELU  | Leaky ReLu (leaky rectified linear unit) |
-/// | 3    | Sigmoid    | Logistic, a.k.a. sigmoid or soft step    |
-/// | 4    | TANH       | TanH (hyperbolic tangent)                |
-#[repr(u8)]
+/// | Mode      | Description                           |
+/// |-----------|---------------------------------------|
+/// | Linear    | Linear/identity                       |
+/// | ReLu      | Rectified linear unit                 |
+/// | LeakyReLu | Leaky rectified linear unit           |
+/// | Sigmoid   | Logistic, a.k.a. sigmoid or soft step |
+/// | TanH      | Hyperbolic tangent                    |
+///
 #[derive(Debug)]
 pub enum Activation {
-    /// LINEAR - Linear/identity.
+    /// Linear - Linear/identity.
     Linear,
 
-    /// RELU - ReLu (rectified linear unit).
-    RELU,
+    /// ReLu - Rectified linear unit.
+    ReLu,
 
-    /// LEAKY_RELU - Leaky ReLu (leaky rectified linear unit).
-    LeakyRELU,
+    /// LeakyReLu - Leaky rectified linear unit.
+    LeakyReLu,
 
-    /// SIGMOID - Logistic, a.k.a. sigmoid or soft step.
+    /// Sigmoid - Logistic, a.k.a. sigmoid or soft step.
     Sigmoid,
 
-    /// TANH - TanH (hyperbolic tangent).
-    TANH,
+    /// TanH - Hyperbolic tangent.
+    TanH,
 }
 
 /*enum FloatEnum {
