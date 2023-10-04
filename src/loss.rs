@@ -15,15 +15,15 @@
 ///
 #[derive(Debug)]
 pub enum Loss {
-    /// MSE - Mean Squared Error.
+    /// Mean Squared Error.
     MSE,
 
-    /// RMSE - Root Mean Squared Error.
+    /// Root Mean Squared Error.
     RMSE,
 
-    /// Arctan - Arctan Error.
+    /// Arctan Error.
     Arctan,
 
-    /// Avg - Average Error.
+    /// Average Error.
     Avg,
 }

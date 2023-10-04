@@ -14,7 +14,7 @@ struct Perceptron<T> {
             bias: true,
             rate: 0.3,
             hidden_layers: Vec::new(),
-            activation: Activation::TANH,
+            activation: Activation::TanH,
             loss: Loss::MSE,
         }
     }
@@ -25,7 +25,7 @@ fn main() {
     let perceptron = Perceptron::<f32> {
         bias: true,
         rate: 0.3,
-        hidden_layers: vec![3, 2], //Vec::new(),
+        hidden_layers: vec![3, 2],
         activation: Activation::TanH,
         loss: Loss::MSE,
     };

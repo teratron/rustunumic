@@ -9,26 +9,26 @@
 /// | Mode      | Description                           |
 /// |-----------|---------------------------------------|
 /// | Linear    | Linear/identity                       |
-/// | ReLu      | Rectified linear unit                 |
-/// | LeakyReLu | Leaky rectified linear unit           |
+/// | ReLU      | Rectified Linear Unit                 |
+/// | LeakyReLU | Leaky Rectified Linear Unit           |
 /// | Sigmoid   | Logistic, a.k.a. sigmoid or soft step |
-/// | TanH      | Hyperbolic tangent                    |
+/// | TanH      | Hyperbolic Tangent                    |
 ///
 #[derive(Debug)]
 pub enum Activation {
-    /// Linear - Linear/identity.
+    /// Linear/identity.
     Linear,
 
-    /// ReLu - Rectified linear unit.
-    ReLu,
+    /// Rectified Linear Unit.
+    ReLU,
 
-    /// LeakyReLu - Leaky rectified linear unit.
-    LeakyReLu,
+    /// Leaky Rectified Linear Unit.
+    LeakyReLU,
 
-    /// Sigmoid - Logistic, a.k.a. sigmoid or soft step.
+    /// Logistic, a.k.a. sigmoid or soft step.
     Sigmoid,
 
-    /// TanH - Hyperbolic tangent.
+    /// Hyperbolic Tangent.
     TanH,
 }
 
@@ -59,7 +59,7 @@ impl U8<u8> {
     // fn init(&self) {}
     //
     // fn check(self, value: Activation) -> u8 {
-    //     if value < Self::LINEAR || value > self::TANH {
+    //     if value < Self::Linear || value > self::TanH {
     //         self::DEFAULT
     //     }
     //     value
@@ -76,37 +76,37 @@ impl U8<u8> {
 
 //pub fn get_activation<T>(value: T, mode: Activation) -> T {
 //pub fn activation<'a>(&mut'a value: f32, mode: &Activation) -> &'a f32 {
-/// Activation function.
+/// ## Activation function.
 ///
-/// # Examples
+/// ## Examples
 ///
 /// ```rust
-/// let activation = Rustunumic::activation(-0.1, Activation::LEAKYRELU);
+/// let activation = Rustunumic::activation(-0.1, Activation::LeakyReLU);
 ///
 /// assert_eq!(-0.001, activation);
 /// ```
 pub fn activation(value: &f32, mode: &Activation) -> f32 {
     match mode {
-        Activation::LINEAR => *value,
-        Activation::RELU => {
+        Activation::Linear => *value,
+        Activation::ReLU => {
             if *value < 0.0 {
                 0.0
             } else {
                 *value
             }
         }
-        Activation::LEAKY_RELU => {
+        Activation::LeakyReLU => {
             if *value < 0.0 {
                 0.01 * value
             } else {
                 *value
             }
         }
-        Activation::TANH => {
+        Activation::TanH => {
             let val = (2.0 * value).exp();
             (val - 1.0) / (val + 1.0)
         }
-        Activation::SIGMOID => 1.0 / (1.0 + (-value).exp()),
+        Activation::Sigmoid => 1.0 / (1.0 + (-value).exp()),
     }
 }
 
@@ -177,28 +177,28 @@ impl Real for f64 {
     }
 }
 
-/// Derivative activation function.
-pub fn derivative(value: &f32, mode: &Activation) -> f32 {
+/// ## Derivative activation function.
+//pub fn derivative(value: &f32, mode: &Activation) -> f32 {
     //pub fn derivative<T: Real<T>>(value: T, mode: &Activation) -> T {
-    //pub fn derivative<T>(value: &T, mode: &Activation) -> T {
+pub fn derivative<T>(value: &T, mode: &Activation) -> T {
     //let val = value.to_primitive();
     match mode {
-        Activation::LINEAR => 1.0, //.to_real(),
-        Activation::RELU => {
+        Activation::Linear => 1.0, //.to_real(),
+        Activation::ReLU => {
             if *value < 0.0 {
                 0.0 //.to_real()
             } else {
                 1.0 //.to_real()
             }
         }
-        Activation::LEAKY_RELU => {
+        Activation::LeakyReLU => {
             if *value < 0.0 {
                 0.01
             } else {
                 1.0
             }
         }
-        Activation::TANH => 1.0 - value.powf(2.0),
-        Activation::SIGMOID => value * (1.0 - value),
+        Activation::TanH => 1.0 - value.powf(2.0),
+        Activation::Sigmoid => value * (1.0 - value),
     }
 }
