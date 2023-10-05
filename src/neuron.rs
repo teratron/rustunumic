@@ -3,6 +3,45 @@ use crate::axon::Axon;
 
 #[derive(Debug)]
 pub(crate) struct Neuron<'a, T> {
+    /// Neuron value.
+    value: T,
+
+    /// Neuron error.
+    miss: T,
+
+    /// All incoming axons.
+    incoming: Vec<&'a Axon<'a, T>>,
+
+    /// All outgoing axons.
+    outgoing: Vec<&'a Axon<'a, T>>,
+
+    /// Function activation.
+    activation: Option<Activation>,
+}
+
+impl<'a> Neuron<'a, f64> {
+    pub(crate) fn new() -> Self {
+        Self {
+            value: 0.,
+            miss: 0.,
+            incoming: Vec::new(), //.push(Axon<'a, f64>::new()),
+            outgoing: Vec::new(),
+            activation: None,
+        }
+    }
+}
+
+/*#[derive(Debug)]
+pub(crate) struct NeuronInput<'a, T> {
+    /// Neuron value.
+    value: T,
+
+    /// All outgoing axons.
+    outgoing: Vec<&'a Axon<'a, T>>,
+}*/
+
+/*#[derive(Debug)]
+pub(crate) struct NeuronOutput<'a, T> {
     /// Neuron value
     value: T,
 
@@ -16,56 +55,17 @@ pub(crate) struct Neuron<'a, T> {
     outgoing: Vec<&'a Axon<'a, T>>,
 
     /// Function activation
-    activation: Option<Activation>,
-}
+    activation: Activation,
+}*/
 
-impl<'a> Neuron<'a, f64> {
-    pub(crate) fn new() -> Self {
-        Self {
-            value: 0.,
-            miss: 0.,
-            incoming: Vec::new(),
-            outgoing: Vec::new(),
-            activation: None,
-        }
-    }
-}
-
-#[derive(Debug)]
-pub(crate) struct NeuronInput<'a, T> {
-    /// Neuron value
-    value: T,
-
-    /// All outgoing axons
-    outgoing: Vec<&'a Axon<'a, T>>,
-}
-
-// #[derive(Debug)]
-// pub(crate) struct NeuronOutput<'a, T> {
-//     /// Neuron value
-//     value: T,
-//
-//     /// Neuron error
-//     miss: T,
-//
-//     /// All incoming axons
-//     incoming: Vec<&'a Axon<'a, T>>,
-//
-//     /// All outgoing axons
-//     outgoing: Vec<&'a Axon<'a, T>>,
-//
-//     /// Function activation
-//     activation: Activation,
-// }
-
-#[derive(Debug)]
+/*#[derive(Debug)]
 pub(crate) struct NeuronTarget<'a, T> {
-    /// Neuron value
+    /// Neuron value.
     value: T,
 
-    /// All incoming axons
+    /// All incoming axons.
     incoming: Vec<&'a Axon<'a, T>>,
-}
+}*/
 
 #[derive(Debug)]
 pub(crate) enum CellKind<T> {

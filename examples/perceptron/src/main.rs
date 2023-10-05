@@ -21,8 +21,6 @@ fn main() {
 
     // Creat instance
     let mut rn = Rustunumic::new();
-    rn.rate = 0.5;
-
     rn.calculate_neurons();
     //let (num, loss) = rn.train(vec![1., 2., 3.], vec![1., 2., 3.]);
     //println!("{:#?} {:#?}", num, loss);
