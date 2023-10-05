@@ -25,69 +25,48 @@
 
 use std::fmt::Debug;
 
-// use std::marker::PhantomData;
-// use axon::Axon;
-use activation::Activation;
-use float::Float;
-use interface::Interface;
-use neuron::Neuron;
+use crate::activation::Activation;
+use crate::float::Float;
+use crate::interface::Interface;
+use crate::loss::Loss;
+use crate::neuron::Neuron;
 
 pub mod activation;
-mod axon;
-pub mod float;
-mod interface;
 pub mod loss;
+
+mod axon;
+mod float;
+mod interface;
 mod neuron;
 
 #[derive(Debug)]
 pub struct Rustunumic<'a, T: Float> {
-    neurons: Vec<&'a Neuron<'a, T>>,
-    pub rate: T, //<T as Float>::FloatType,
+    neurons: Box<Vec<&'a Neuron<'a, T>>>,
+    pub rate: T,
     activation: Option<Activation>,
+    loss: Option<Loss>,
 }
 
-impl<'a, T: Float + Debug> Rustunumic<'a, T> {
-    //const DEFAULT_RATE: T::Float = 0.3;
+impl<'a> Rustunumic<'a, f64> {
     /// Creat new
-    pub const fn new() -> Self {
+    pub fn new() -> Self {
         Self {
-            neurons: Vec::new(),
-            rate: 0.3, //T::as_float(0.3),// 0.3.into(),//T::from(0.3),//T::INITIAL_VALUE,//<T as Float>::FloatType::to_real(0.3), //default(0.3), //,
+            neurons: Box::new(Vec::new()),
+            rate: 0.3,
             activation: None,
+            loss: None,
         }
     }
 
-    /*pub fn calculate_neurons(self) {
+    pub fn calculate_neurons(&mut self) {
         println!("+++++++++++++++++++++++");
-        for (i, neuron) in self.neurons.enumerate() {
+        self.neurons.push(Neuron::<'a, f64>::new());
+        for (i, neuron) in self.neurons.into_iter().enumerate() {
             println!("- {:#?} {:#?}", i, neuron);
         }
         println!("-----------------------");
-    }*/
+    }
 }
-
-/*impl<'a> Rustunumic<'a, f32> {
-    //const DEFAULT_RATE: f32 = 0.3;
-    //// Creat new
-    pub const fn new() -> Self {
-        Rustunumic {
-            neurons: Vec::new(),
-            rate: 0.3,
-            activation: None,
-        }
-    }
-}*/
-
-/*impl<'a> Rustunumic<'a, f64> {
-    //// Creat new
-    pub const fn new() -> Self {
-        Rustunumic {
-            neurons: Vec::new(),
-            rate: 0.3,
-            activation: None,
-        }
-    }
-}*/
 
 impl<T: Float> Interface<T> for Rustunumic<'_, T> {
     fn verify(&self, _input: Vec<T>, _target: Vec<T>) -> T {

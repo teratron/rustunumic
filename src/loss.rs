@@ -13,6 +13,7 @@
 /// | Arctan | Arctan Error            |
 /// | Avg    | Average Error           |
 ///
+#[repr(u8)]
 #[derive(Debug)]
 pub enum Loss {
     /// Mean Squared Error.

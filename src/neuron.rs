@@ -16,7 +16,19 @@ pub(crate) struct Neuron<'a, T> {
     outgoing: Vec<&'a Axon<'a, T>>,
 
     /// Function activation
-    activation: Activation,
+    activation: Option<Activation>,
+}
+
+impl<'a> Neuron<'a, f64> {
+    pub(crate) fn new() -> Self {
+        Self {
+            value: 0.,
+            miss: 0.,
+            incoming: Vec::new(),
+            outgoing: Vec::new(),
+            activation: None,
+        }
+    }
 }
 
 #[derive(Debug)]

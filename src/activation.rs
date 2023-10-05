@@ -13,7 +13,7 @@
 /// | LeakyReLU | Leaky Rectified Linear Unit           |
 /// | Sigmoid   | Logistic, a.k.a. sigmoid or soft step |
 /// | TanH      | Hyperbolic Tangent                    |
-///
+#[repr(u8)]
 #[derive(Debug)]
 pub enum Activation {
     /// Linear/identity.
@@ -32,60 +32,16 @@ pub enum Activation {
     TanH,
 }
 
-/*enum FloatEnum {
-    F32(f32),
-    F64(f64),
-}*/
-
-/*impl U8 for Activation {}
-
-struct U8<T>
-where
-    T: u8;
-
-impl U8<u8> {
-    fn to_activation(&self) -> Activation {
-        Activation::U8(&self)
-    }
-}*/
-
-/*impl Activation {
-    // fn activation_to(value: u8) -> Activation {
-    //     Activation::U8(value)
-    // }
-    // fn to_u8(self) -> u8 {
-    //     self as u8
-    // }
-    // fn init(&self) {}
-    //
-    // fn check(self, value: Activation) -> u8 {
-    //     if value < Self::Linear || value > self::TanH {
-    //         self::DEFAULT
-    //     }
-    //     value
-    // }
-
-    pub fn get_activation(self, value: f32) -> f32 {
-        return get_activation(value, self._activation_mode);
-    }
-
-    pub fn get_derivative(self, value: f32) -> f32 {
-        return get_derivative(value, self._activation_mode);
-    }
-}*/
-
-//pub fn get_activation<T>(value: T, mode: Activation) -> T {
-//pub fn activation<'a>(&mut'a value: f32, mode: &Activation) -> &'a f32 {
 /// ## Activation function.
 ///
-/// ## Examples
+/// ### Example:
 ///
 /// ```rust
-/// let activation = Rustunumic::activation(-0.1, Activation::LeakyReLU);
+/// let a = Rustunumic::activation(-0.1, Activation::LeakyReLU);
 ///
-/// assert_eq!(-0.001, activation);
+/// assert_eq!(-0.001, a);
 /// ```
-pub fn activation(value: &f32, mode: &Activation) -> f32 {
+pub fn activation(value: &f64, mode: &Activation) -> f64 {
     match mode {
         Activation::Linear => *value,
         Activation::ReLU => {
@@ -110,85 +66,23 @@ pub fn activation(value: &f32, mode: &Activation) -> f32 {
     }
 }
 
-/*mod foo {
-trait MyTrait {}
-impl MyTrait for f32 {}
-impl MyTrait for f64 {}
-
-pub fn f<T: MyTrait>(x: T) {}
-}*/
-
-/*pub fn main() {
-    foo::f(3f32);
-    foo::f(3f64);
-    foo::f(3u64);  // doesn't work as u64 doesn't implement MyTrait
-}*/
-
-/*mod internal {
-    pub trait Real {}
-}
-use internal::Real;
-
-pub struct Quat<T>([T; 4]) where T: Real;
-
-impl Real for f32 {}
-impl Real for f64 {}
-
-#[test]
-fn test_thing() {}
-
-union FloatUnion {
-    float32: f32,
-    float64: f64,
-}*/
-
-trait Real {
-    type T;
-
-    fn to_real(self) -> Self::T;
-    fn to_primitive(self: Self) -> Self::T;
-}
-
-/*impl<T> Real for T {
-    fn to_real(self) -> T {
-        self
-    }
-}*/
-
-impl Real for f32 {
-    type T = f32;
-
-    fn to_real(self) -> Self::T {
-        self
-    }
-    fn to_primitive(self: Self::T) -> f32 {
-        self
-    }
-}
-
-impl Real for f64 {
-    type T = f64;
-
-    fn to_real(self) -> Self::T {
-        self
-    }
-    fn to_primitive(self: Self::T) -> f64 {
-        self
-    }
-}
-
 /// ## Derivative activation function.
-//pub fn derivative(value: &f32, mode: &Activation) -> f32 {
-    //pub fn derivative<T: Real<T>>(value: T, mode: &Activation) -> T {
-pub fn derivative<T>(value: &T, mode: &Activation) -> T {
-    //let val = value.to_primitive();
+///
+/// ### Example:
+///
+/// ```rust
+/// let d = Rustunumic::derivative(-0.1, Activation::LeakyReLU);
+///
+/// assert_eq!(0.01, d);
+/// ```
+pub fn derivative(value: &f64, mode: &Activation) -> f64 {
     match mode {
-        Activation::Linear => 1.0, //.to_real(),
+        Activation::Linear => 1.0,
         Activation::ReLU => {
             if *value < 0.0 {
-                0.0 //.to_real()
+                0.0
             } else {
-                1.0 //.to_real()
+                1.0
             }
         }
         Activation::LeakyReLU => {
