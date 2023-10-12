@@ -1,9 +1,15 @@
-impl Neuron<T> {
-    fn calculate_neurons(&self) -> Option<T> {
+/*impl Neuron<T> {
+     fn calculate_neurons(&self) -> Option<T> {
         //for i in &self.
         None
     }
-}
+    pub fn calculate_neurons(&mut self) -> Option<T> {
+        for (i, neuron) in self.neurons.iter_mut().enumerate() {
+            println!("- {:#?} {:#?}", i, neuron);
+        }
+        None
+    } 
+}*/
 
 //fn calc_neuron() -> Option {}
 

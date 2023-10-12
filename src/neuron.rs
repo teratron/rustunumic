@@ -1,22 +1,26 @@
-use crate::activation::Activation;
+//! # Neuron
+//!
+//!
+
+use crate::activation::{activation, get_activation, Activation};
 use crate::axon::Axon;
 
 #[derive(Debug)]
 pub(crate) struct Neuron<'a, T> {
     /// Neuron value.
-    value: T,
+    pub value: T,
 
     /// Neuron error.
-    miss: T,
+    pub miss: T,
 
     /// All incoming axons.
-    incoming: Vec<&'a Axon<'a, T>>,
+    pub incoming: Box<Vec<Axon<'a, T>>>,
 
     /// All outgoing axons.
-    outgoing: Vec<&'a Axon<'a, T>>,
+    pub outgoing: Box<Vec<Axon<'a, T>>>,
 
     /// Function activation.
-    activation: Option<Activation>,
+    pub activation: Option<Activation>,
 }
 
 impl<'a> Neuron<'a, f64> {
@@ -24,10 +28,34 @@ impl<'a> Neuron<'a, f64> {
         Self {
             value: 0.,
             miss: 0.,
-            incoming: Vec::new(), //.push(Axon<'a, f64>::new()),
-            outgoing: Vec::new(),
+            incoming: Box::new(Vec::new()), //.push(Axon<'a, f64>::new()),
+            outgoing: Box::new(Vec::new()),
             activation: None,
         }
+    }
+
+    pub(crate) fn calculate_value(&mut self) {
+        self.value = 0.;
+        for axon in self.incoming.iter_mut() {
+            self.value += axon.incoming.value * axon.weight;
+        }
+
+        if let Some(mode) = &self.activation {
+            //self.value = activation(&self.value, mode);
+            get_activation(&mut self.value, mode);
+        }
+    }
+
+    pub(crate) fn calculate_loss(&mut self) {
+
+    }
+
+    pub(crate) fn calculate_miss(&mut self) {
+
+    }
+
+    pub(crate) fn update_axons(&mut self) {
+
     }
 }
 
@@ -68,6 +96,7 @@ pub(crate) struct NeuronTarget<'a, T> {
 }*/
 
 #[derive(Debug)]
+#[allow(dead_code)]
 pub(crate) enum CellKind<T> {
     Input(T),
     BackfedInput,

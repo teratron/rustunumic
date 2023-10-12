@@ -25,7 +25,7 @@
 
 use std::fmt::Debug;
 
-use crate::activation::Activation;
+use crate::activation::{activation, Activation};
 use crate::float::Float;
 use crate::interface::Interface;
 use crate::loss::Loss;
@@ -39,16 +39,29 @@ mod float;
 mod interface;
 mod neuron;
 
+/// ## Rustunumic.
+///
+/// ### Example:
+///
+/// ```rust
+/// use rustunumic::Rustunumic;
+///
+/// let mut rn = Rustunumic::new();
+/// ```
 #[derive(Debug)]
 pub struct Rustunumic<'a, T: Float> {
-    neurons: Box<Vec<&'a Neuron<'a, T>>>,
+    neurons: Box<Vec<Neuron<'a, T>>>,
     rate: T,
     activation: Option<Activation>,
     loss: Option<Loss>,
 }
 
+/* impl<'a, T: Float> Rustunumic<'a, T> {
+
+} */
+
 impl<'a> Rustunumic<'a, f64> {
-    /// Creat new.
+    /// Creat new instance.
     pub fn new() -> Self {
         Self {
             neurons: Box::new(Vec::new()),
@@ -58,14 +71,12 @@ impl<'a> Rustunumic<'a, f64> {
         }
     }
 
+    //
     pub fn calculate_neurons(&mut self) {
-        println!("+++++++++++++++++++++++");
-        //let n = Neuron::new();
-        //self.neurons.push(n);
-        for (i, neuron) in self.neurons.iter_mut().enumerate() {
-            println!("- {:#?} {:#?}", i, neuron);
+        for neuron in self.neurons.iter_mut() {
+            //println!("- {:#?} {:#?}", i, neuron);
+            neuron.calculate_value();
         }
-        println!("-----------------------");
     }
 }
 

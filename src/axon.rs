@@ -1,15 +1,19 @@
+//! # Axon
+//!
+//!
+
 use crate::neuron::{CellKind, Neuron};
 
 #[derive(Debug)]
 pub struct Axon<'a, T> {
     /// Axon weight.
-    weight: T,
+    pub weight: T,
 
     /// Incoming synapse.
-    incoming: &'a Neuron<'a, T>,
+    pub(crate) incoming: &'a Neuron<'a, T>,
 
     /// Outgoing synapse.
-    outgoing: &'a Neuron<'a, T>,
+    pub(crate) outgoing: &'a Neuron<'a, T>,
 
     /// Bias.
     bias: CellKind<T>,
