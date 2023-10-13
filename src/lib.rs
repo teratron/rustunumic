@@ -71,7 +71,7 @@ impl<'a> Rustunumic<'a, f64> {
         }
     }
 
-    //
+    // Propagation
     pub fn calculate_neurons(&mut self) {
         for neuron in self.neurons.iter_mut() {
             //println!("- {:#?} {:#?}", i, neuron);

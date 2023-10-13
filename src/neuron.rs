@@ -14,7 +14,7 @@ pub(crate) struct Neuron<'a, T> {
     pub miss: T,
 
     /// All incoming axons.
-    pub incoming: Box<Vec<&'a Axon<'a, T>>>,
+    pub incoming: Box<Vec<Axon<'a, T>>>,
 
     /// All outgoing axons.
     pub outgoing: Box<Vec<&'a Axon<'a, T>>>,
@@ -36,7 +36,7 @@ impl<'a> Neuron<'a, f64> {
 
     pub(crate) fn calculate_value(&mut self) {
         self.value = 0.;
-        for axon in self.incoming.iter_mut() {
+        for axon in self.incoming.iter() {
             self.value += axon.incoming.value * axon.weight;
         }
 
