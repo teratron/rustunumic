@@ -97,8 +97,8 @@ pub(crate) struct NeuronTarget<'a, T> {
 
 #[derive(Debug)]
 #[allow(dead_code)]
-pub(crate) enum CellKind<T> {
-    Input(T),
+pub(crate) enum CellKind<'a, T> {
+    Input(T, Box<Vec<Axon<'a, T>>>),
     BackfedInput,
     NoisyInput,
 
