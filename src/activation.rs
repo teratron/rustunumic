@@ -97,7 +97,29 @@ pub fn derivative(value: &f64, mode: &Activation) -> f64 {
                 1.
             }
         }
-        Activation::TanH => 1. - value.powf(2.0),
+        Activation::TanH => 1. - value.powf(2.),
         Activation::Sigmoid => *value * (1. - *value),
+    }
+}
+
+pub(crate) fn get_derivative(value: &mut f64, mode: &Activation) {
+    match mode {
+        Activation::Linear => *value = 1.,
+        Activation::ReLU => {
+            if *value < 0. {
+                *value = 0.;
+            } else {
+                *value = 1.;
+            }
+        }
+        Activation::LeakyReLU => {
+            if *value < 0. {
+                *value = 0.01;
+            } else {
+                *value = 1.;
+            }
+        }
+        Activation::TanH => *value = 1. - value.powf(2.),
+        Activation::Sigmoid => *value *= 1. - *value,
     }
 }

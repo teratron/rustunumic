@@ -15,8 +15,8 @@ pub struct Axon<'a, T> {
     /// Outgoing synapse.
     pub(crate) outgoing: &'a Neuron<'a, T>,
 
-    /// Bias.
-    bias: CellKind<T>,
+    ///// Bias.
+    //bias: CellKind<T>,
 }
 
 impl<'a> Axon<'a, f64> {
@@ -25,7 +25,11 @@ impl<'a> Axon<'a, f64> {
             weight: 0.,
             incoming: inn,
             outgoing: out,
-            bias: CellKind::Bias(true),
+            //bias: CellKind::Bias(true),
         }
+    }
+
+    pub(crate) fn back(&mut self) -> f64 {
+        self.incoming.value * self.weight
     }
 }

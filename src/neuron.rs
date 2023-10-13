@@ -14,10 +14,10 @@ pub(crate) struct Neuron<'a, T> {
     pub miss: T,
 
     /// All incoming axons.
-    pub incoming: Box<Vec<Axon<'a, T>>>,
+    pub incoming: Box<Vec<&'a Axon<'a, T>>>,
 
     /// All outgoing axons.
-    pub outgoing: Box<Vec<Axon<'a, T>>>,
+    pub outgoing: Box<Vec<&'a Axon<'a, T>>>,
 
     /// Function activation.
     pub activation: Option<Activation>,
@@ -70,6 +70,8 @@ pub(crate) struct NeuronInput<'a, T> {
 
 /*#[derive(Debug)]
 pub(crate) struct NeuronOutput<'a, T> {
+    target: T,
+
     /// Neuron value
     value: T,
 
@@ -90,15 +92,14 @@ pub(crate) struct NeuronOutput<'a, T> {
 pub(crate) struct NeuronTarget<'a, T> {
     /// Neuron value.
     value: T,
-
-    /// All incoming axons.
-    incoming: Vec<&'a Axon<'a, T>>,
 }*/
 
-#[derive(Debug)]
+type AxonsType<'a, T> = Box<Vec<&'a Axon<'a, T>>>;
+
 #[allow(dead_code)]
+#[derive(Debug)]
 pub(crate) enum CellKind<'a, T> {
-    Input(T, Box<Vec<Axon<'a, T>>>),
+    Input(T, AxonsType<'a, T>),
     BackfedInput,
     NoisyInput,
 
@@ -108,7 +109,7 @@ pub(crate) enum CellKind<'a, T> {
     Capsule,
     Bias(bool),
 
-    Output(T),
+    Output(T, Neuron<'a, T>),
     MatchInputOutput,
 
     Recurrent,
