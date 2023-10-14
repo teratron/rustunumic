@@ -46,17 +46,11 @@ impl<'a> Neuron<'a, f64> {
         }
     }
 
-    pub(crate) fn calculate_loss(&mut self) {
+    pub(crate) fn calculate_loss(&mut self) {}
 
-    }
+    pub(crate) fn calculate_miss(&mut self) {}
 
-    pub(crate) fn calculate_miss(&mut self) {
-
-    }
-
-    pub(crate) fn update_axons(&mut self) {
-
-    }
+    pub(crate) fn update_weights(&mut self) {}
 }
 
 /*#[derive(Debug)]
@@ -79,19 +73,10 @@ pub(crate) struct NeuronOutput<'a, T> {
     miss: T,
 
     /// All incoming axons
-    incoming: Vec<&'a Axon<'a, T>>,
-
-    /// All outgoing axons
-    outgoing: Vec<&'a Axon<'a, T>>,
+    incoming: Vec<Axon<'a, T>>,
 
     /// Function activation
     activation: Activation,
-}*/
-
-/*#[derive(Debug)]
-pub(crate) struct NeuronTarget<'a, T> {
-    /// Neuron value.
-    value: T,
 }*/
 
 type AxonsType<'a, T> = Box<Vec<&'a Axon<'a, T>>>;
@@ -99,6 +84,7 @@ type AxonsType<'a, T> = Box<Vec<&'a Axon<'a, T>>>;
 #[allow(dead_code)]
 #[derive(Debug)]
 pub(crate) enum CellKind<'a, T> {
+    // T - value of neuron, AxonsType<'a, T> - outgoing axons
     Input(T, AxonsType<'a, T>),
     BackfedInput,
     NoisyInput,
@@ -109,7 +95,23 @@ pub(crate) enum CellKind<'a, T> {
     Capsule,
     Bias(bool),
 
-    Output(T, Neuron<'a, T>),
+    // T - target
+    //Output(T, Neuron<'a, T>),
+    Output {
+        target: T,
+
+        /// Neuron value
+        value: T,
+
+        /// Neuron error
+        miss: T,
+
+        /// All incoming axons
+        incoming: Box<Vec<Axon<'a, T>>>,
+
+        /// Function activation
+        activation: Activation,
+    },
     MatchInputOutput,
 
     Recurrent,
