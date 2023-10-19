@@ -13,7 +13,6 @@ pub trait Float: Debug {
 impl Float for f32 {
     type FloatType = f32;
     const DEFAULT_RATE: Self = ABC as Self;
-    
 
     fn type_name(&self) -> &'static str {
         "f32"

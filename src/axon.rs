@@ -14,7 +14,6 @@ pub struct Axon<'a, T> {
 
     /// Outgoing synapse.
     pub(crate) outgoing: &'a Neuron<'a, T>,
-
     ///// Bias.
     //bias: CellKind<T>,
 }
