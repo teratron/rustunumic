@@ -124,3 +124,42 @@ pub(crate) fn get_derivative(value: &mut f64, mode: &Activation) {
         Activation::Sigmoid => *value *= 1. - *value,
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_get_activation() {
+        let mut data: [(f64, Activation, f64); 7] = [
+            (0.1, Activation::Linear, 0.1),
+            (0.1, Activation::ReLU, 0.1),
+            (-0.1, Activation::ReLU, 0.0),
+            (0.1, Activation::LeakyReLU, 0.1),
+            (-0.1, Activation::LeakyReLU, -0.001),
+            (0.1, Activation::Sigmoid, 0.52497918747894),
+            (0.1, Activation::TanH, 0.09966799462495583),
+        ];
+        for (value, mode, result) in data.iter_mut() {
+            get_activation(value, mode);
+            assert_eq!(*value, *result, "{:?} test", *mode);
+        }
+    }
+
+    #[test]
+    fn test_get_derivative() {
+        let mut data: [(f64, Activation, f64); 7] = [
+            (0.1, Activation::Linear, 1.0),
+            (0.1, Activation::ReLU, 1.0),
+            (-0.1, Activation::ReLU, 0.0),
+            (0.1, Activation::LeakyReLU, 1.0),
+            (-0.1, Activation::LeakyReLU, 0.01),
+            (0.1, Activation::Sigmoid, 0.09000000000000001),
+            (0.1, Activation::TanH, 0.99),
+        ];
+        for (value, mode, result) in data.iter_mut() {
+            get_derivative(value, mode);
+            assert_eq!(*value, *result, "{:?} test", *mode);
+        }
+    }
+}
