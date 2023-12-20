@@ -1,1 +1,1 @@
-# RustuNumic
+# Rustunumic

@@ -10,14 +10,75 @@ license = "MIT"
 homepage = "https://zigenzoog.github.io/rustunumic"
 documentation = "https://zigenzoog.github.io/rustunumic"
 repository = "https://github.com/zigenzoog/rustunumic"
-keywords = [
-    "neural",
-    "network",
-    "machine",
-    "learning",
-    "library"
-]
+keywords = ["neural", "network", "machine", "learning", "library"]
+categories = ["command-line-utilities", "development-tools::cargo-plugins"]
+build = false #"build.rs"
 exclude = ["/ci", "images/", ".*"]
-include = ["/src", "COPYRIGHT", "/examples", "!/examples/big_example"]
+include = [
+    #"/src",
+    #"/examples",
+    #"!/examples/*.md",
+    "COPYRIGHT",
+    "LICENSE",
+]
+publish = false #["some-registry-name"]
+
+[package.metadata.scripts]
+perceptron = "cargo run --color=always --package perceptron --bin perceptron"
+doc = "cargo doc --open"
+
+[doc]
+browser = "chromium"
+
+[lib]
+#crate-type = ["cdylib"]
+name = "rustunumic"
+path = "src/lib.rs"
+test = false
+doctest = false
+
+[workspace]
+members = [
+    "cli",
+    "examples/perceptron"
+]
 
 [dependencies]
+
+[dev-dependencies]
+
+[build-dependencies]
+
+[badges]
+
+[features]
+
+[profile.dev]
+opt-level = 0
+debug = true
+split-debuginfo = "..." # Platform-specific.
+debug-assertions = true
+overflow-checks = true
+lto = false
+panic = "unwind"
+incremental = true
+codegen-units = 256
+rpath = false
+
+[profile.release]
+opt-level = 3
+debug = false
+split-debuginfo = "..."  # Platform-specific.
+debug-assertions = false
+overflow-checks = false
+lto = false
+panic = "unwind"
+incremental = false
+codegen-units = 16
+rpath = false
+
+[profile.test]
+opt-level = 1
+
+[profile.bench]
+opt-level = 1
