@@ -16,7 +16,7 @@
 //!
 //! This is the neural network library.
 //!
-//! For examples, see [examples](https://github.com/zigenzoog/rustunumic/examples).
+//! For examples, see [examples](https://github.com/teratron/rustunumic/examples).
 
 // Reexported crates.
 // pub use event_loop::{self, *};
@@ -25,7 +25,7 @@
 
 use std::fmt::Debug;
 
-use crate::activation::{activation, Activation};
+use crate::activation::Activation;
 use crate::float::Float;
 use crate::interface::Interface;
 use crate::loss::Loss;
