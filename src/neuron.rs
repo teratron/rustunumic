@@ -2,7 +2,7 @@
 //!
 //!
 
-use crate::activation::{activation, get_activation, Activation};
+use crate::activation::{get_activation, Activation};
 use crate::axon::Axon;
 
 #[derive(Debug)]
@@ -174,9 +174,15 @@ pub(crate) enum CellKind2<'a, T> {
 
 type AxonsType<'a, T> = Box<Vec<&'a Axon<'a, T>>>;
 
+pub(crate) struct Cell<T> {
+    value: T,
+}
+
+pub(crate) struct Target<T>(T);
+
 pub(crate) enum CellKind<'a, T> {
     // T - value of neuron, AxonsType<'a, T> - outgoing axons
-    Input(T, AxonsType<'a, T>),
+    Input(Cell<T>, AxonsType<'a, T>),
     BackfedInput,
     NoisyInput,
 
@@ -187,7 +193,8 @@ pub(crate) enum CellKind<'a, T> {
     Bias(bool),
 
     // T - target
-    Output(T, Neuron<'a, T>),
+    //Output(T, Neuron<'a, T>),
+    Output(Cell<T>, Target<T>, AxonsType<'a, T>),
     MatchInputOutput,
 
     Recurrent,
