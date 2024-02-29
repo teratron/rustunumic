@@ -74,7 +74,7 @@ pub(crate) struct CellOutput<'a, T> {
     /// All incoming axons
     incoming: Box<Vec<Axon<'a, T>>>,
 
-    bias: bool,
+    has_bias: bool,
 
     /// Function activation
     activation: Activation,
@@ -176,17 +176,18 @@ type AxonsType<'a, T> = Box<Vec<&'a Axon<'a, T>>>;
 
 pub(crate) struct Cell<T> {
     value: T,
+    miss: T,
 }
 
 pub(crate) struct Target<T>(T);
 
 pub(crate) enum CellKind<'a, T> {
     // T - value of neuron, AxonsType<'a, T> - outgoing axons
-    Input(Cell<T>, AxonsType<'a, T>),
+    Input(T),
     BackfedInput,
     NoisyInput,
 
-    Hidden,
+    Hidden {},
     ProbabilisticHidden,
     SpikingHidden,
     Capsule,
