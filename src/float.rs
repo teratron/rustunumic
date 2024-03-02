@@ -4,7 +4,7 @@ const DEFAULT_RATE: f64 = 0.3;
 const ZERO: f64 = 0.;
 
 /// Float trait
-pub trait Float: Debug {
+pub(crate) trait Float: Debug {
     type FloatType;
     const DEFAULT_RATE: Self;
     const ZERO: Self;

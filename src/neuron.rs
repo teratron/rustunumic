@@ -4,6 +4,7 @@
 
 use crate::activation::{get_activation, Activation};
 use crate::axon::Axon;
+use crate::float::Float;
 
 #[derive(Debug)]
 pub(crate) struct Neuron<'a, T> {
@@ -23,7 +24,19 @@ pub(crate) struct Neuron<'a, T> {
     pub activation: Option<Activation>,
 }
 
-impl<'a> Neuron<'a, f64> {
+impl<'a, T: Float> Neuron<'a, T> {
+    pub(crate) fn new() -> Self {
+        Self {
+            value: T::ZERO,
+            miss: T::ZERO,
+            incoming: Box::new(Vec::new()), //.push(Axon<'a, f64>::new()),
+            outgoing: Box::new(Vec::new()),
+            activation: None,
+        }
+    }
+}
+
+/*impl<'a> Neuron<'a, f64> {
     pub(crate) fn new() -> Self {
         Self {
             value: 0.,
@@ -51,7 +64,7 @@ impl<'a> Neuron<'a, f64> {
     pub(crate) fn calculate_miss(&mut self) {}
 
     pub(crate) fn update_weights(&mut self) {}
-}
+}*/
 
 pub(crate) struct CellInput<'a, T> {
     /// Neuron value.
