@@ -114,3 +114,37 @@ impl<'a, T> Synapse<'a, T> {
         self.incoming.value * self.weight
     }
 }*/
+
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_new_axon() {
+        let in_neuron = Neuron::new();
+        let out_neuron = Neuron::new();
+
+        let axon = Axon::new(&in_neuron, &out_neuron);
+
+        assert_eq!(axon.incoming, &in_neuron);
+        assert_eq!(axon.outgoing, &out_neuron);
+    }
+
+    #[test]
+    fn test_random_weight() {
+        let axon = Axon::new(&Neuron::new(), &Neuron::new());
+
+        assert!(axon.weight >= -0.5);
+        assert!(axon.weight <= 0.5);
+    }
+
+    #[test]
+    fn test_synapse() {
+        let in_neuron = Neuron::new();
+        let out_neuron = Neuron::new();
+
+        let axon = Axon::new(&in_neuron, &out_neuron);
+
+        assert_eq!(axon.synapse.incoming, &in_neuron);
+        assert_eq!(axon.synapse.outgoing, &out_neuron);
+    }
+}
