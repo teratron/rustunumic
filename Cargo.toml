@@ -44,7 +44,7 @@ members = [
 ]
 
 [dependencies]
-rand = "0.9.0-alpha.0"
+rand = "0.8.5"
 
 [dev-dependencies]
 

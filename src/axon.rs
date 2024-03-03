@@ -3,10 +3,10 @@
 //!
 extern crate rand;
 
+//use std::ops::{Range, RangeInclusive};
 //use rand::Rng;
 use rand::{thread_rng, Rng};
 
-use crate::float::Float;
 use crate::neuron::Neuron;
 
 #[derive(Debug)]
@@ -20,21 +20,54 @@ pub struct Axon<'a, T> {
     /// Outgoing synapse.
     pub(crate) outgoing: &'a Neuron<'a, T>,
 
-    pub(crate) synapse: Synapse<'a, T>
+    pub(crate) synapse: Synapse<'a, T>,
 }
 
-impl<'a, T: Float> Axon<'a, T> {
+/*impl<'a, T: Float> Axon<'a, T> {
     pub(crate) fn new(inn: &'a Neuron<T>, out: &'a Neuron<T>) -> Self {
-        let mut rng = thread_rng();
-        
+        //let mut rng = thread_rng();
+
         Self {
-            //let num = rand::thread_rng().gen_range(0..100);
-            //let mut rng = rand::thread_rng();
-            //println!("Float: {}", rng.gen_range(0.0, 10.0));
-            weight: rng.gen_range<T, R>(-0.5..=0.5), //T::ZERO,
+            weight: generate_random_weight::<T>(), //rng.gen_range(-0.5..=0.5), //T::ZERO,
             incoming: inn,
             outgoing: out,
             synapse: Synapse::new(inn, out)
+        }
+    }
+}*/
+
+/*const WEIGHT_RANGE: RangeInclusive<f64> = -0.5..=0.5;
+
+fn generate_random_weight<T: Float>() -> T {
+    let mut rng = thread_rng();
+
+    //let v: T = 0.5 as <T as Float>::FloatType;
+
+    rng.gen_range(WEIGHT_RANGE)
+}*/
+
+impl<'a> Axon<'a, f64> {
+    pub(crate) fn new(inn: &'a Neuron<f64>, out: &'a Neuron<f64>) -> Self {
+        let mut rng = thread_rng();
+
+        Self {
+            weight: rng.gen_range(-0.5..=0.5),
+            incoming: inn,
+            outgoing: out,
+            synapse: Synapse::new(inn, out),
+        }
+    }
+}
+
+impl<'a> Axon<'a, f32> {
+    pub(crate) fn new(inn: &'a Neuron<f32>, out: &'a Neuron<f32>) -> Self {
+        let mut rng = thread_rng();
+
+        Self {
+            weight: rng.gen_range(-0.5..=0.5),
+            incoming: inn,
+            outgoing: out,
+            synapse: Synapse::new(inn, out),
         }
     }
 }
@@ -45,14 +78,14 @@ struct Synapse<'a, T> {
     incoming: &'a Neuron<'a, T>,
 
     /// Outgoing synapse.
-    outgoing: &'a Neuron<'a, T>
+    outgoing: &'a Neuron<'a, T>,
 }
 
 impl<'a, T> Synapse<'a, T> {
     fn new(p0: &'a Neuron<T>, p1: &'a Neuron<T>) -> Self {
         Self {
             incoming: p0, //Neuron::new(),
-            outgoing: p1 //Neuron::new()
+            outgoing: p1, //Neuron::new()
         }
     }
 }
