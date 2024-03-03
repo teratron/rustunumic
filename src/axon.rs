@@ -1,6 +1,10 @@
 //! # Axon
 //!
 //!
+extern crate rand;
+
+//use rand::Rng;
+use rand::{thread_rng, Rng};
 
 use crate::float::Float;
 use crate::neuron::Neuron;
@@ -21,8 +25,13 @@ pub struct Axon<'a, T> {
 
 impl<'a, T: Float> Axon<'a, T> {
     pub(crate) fn new(inn: &'a Neuron<T>, out: &'a Neuron<T>) -> Self {
+        let mut rng = thread_rng();
+        
         Self {
-            weight: T::ZERO,
+            //let num = rand::thread_rng().gen_range(0..100);
+            //let mut rng = rand::thread_rng();
+            //println!("Float: {}", rng.gen_range(0.0, 10.0));
+            weight: rng.gen_range<T, R>(-0.5..=0.5), //T::ZERO,
             incoming: inn,
             outgoing: out,
             synapse: Synapse::new(inn, out)
