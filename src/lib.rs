@@ -41,7 +41,7 @@ mod neuron;
 
 /// ## Rustunumic.
 ///
-/// ### Example:
+/// **Example:**
 ///
 /// ```rust
 /// use rustunumic::Rustunumic;

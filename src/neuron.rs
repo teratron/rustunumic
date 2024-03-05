@@ -6,7 +6,95 @@ use crate::activation::{get_activation, Activation};
 use crate::axon::Axon;
 use crate::float::Float;
 
-#[derive(Debug)]
+type AxonsType<'a, T> = Box<Vec<&'a Axon<'a, T>>>;
+
+struct Incoming<'a, T>(AxonsType<'a, T>);
+
+struct Outgoing<'a, T>(AxonsType<'a, T>);
+
+struct Target<T>(T);
+
+trait Neuron<T> {
+    /*fn new() -> Self;
+    fn calculate_value(&mut self);
+    fn calculate_error(&mut self, target: &Target<T>);
+    fn calculate_gradient(&mut self);
+    fn calculate_delta(&mut self, target: &Target<T>);
+    fn calculate_weight(&mut self, target: &Target<T>);
+    fn calculate_bias(&mut self, target: &Target<T>);
+    fn calculate_activation(&mut self);
+    fn calculate_miss(&mut self);
+    fn calculate_error_gradient(&mut self, target: &Target<T>);
+    fn calculate_error_delta(&mut self, target: &Target<T>);
+    fn calculate_error_weight(&mut self, target: &Target<T>);
+    fn calculate_error_bias(&mut self, target: &Target<T>);
+    fn calculate_error_activation(&mut self, target: &Target<T>);
+    fn calculate_error_miss(&mut self, target: &Target<T>);
+    fn calculate_error_error(&mut self, target: &Target<T>);*/
+}
+
+struct Cell<T> {
+    /// Neuron value.
+    pub value: T,
+
+    /// Neuron error.
+    pub miss: T,
+
+    /// Function activation.
+    pub activation: Option<Activation>,
+
+    /// Is there a bias neuron.
+    has_bias: bool,
+}
+
+impl<T: Float> Cell<T> {
+    fn new() -> Self {
+        Self {
+            value: T::ZERO,
+            miss: T::ZERO,
+            activation: None,
+            has_bias: false,
+        }
+    }
+}
+
+struct Input<T>(T);
+
+struct Hidden<'a, T> {
+    cell: Cell<T>,
+    incoming: AxonsType<'a, T>,
+    outgoing: AxonsType<'a, T>,
+}
+
+struct Output<'a, T> {
+    cell: Cell<T>,
+    target: T,
+    incoming: AxonsType<'a, T>,
+}
+
+pub(crate) enum CellKind<'a, T> {
+    Input(T),
+    BackfedInput,
+    NoisyInput,
+
+    Hidden(Cell<T>, Incoming<'a, T>, Outgoing<'a, T>),
+    ProbabilisticHidden,
+    SpikingHidden,
+    Capsule,
+    Bias(bool),
+
+    Output(Cell<T>, Target<T>, Incoming<'a, T>),
+    MatchInputOutput,
+
+    Recurrent,
+    Memory,
+    GatedMemory,
+
+    Kernel,
+    Convolution, // or Pool
+}
+
+/*#[derive(Debug)]
 pub(crate) struct Neuron<'a, T> {
     /// Neuron value.
     pub value: T,
@@ -36,7 +124,7 @@ impl<'a, T: Float> Neuron<'a, T> {
     }
 }
 
-/*impl<'a> Neuron<'a, f64> {
+impl<'a> Neuron<'a, f64> {
     pub(crate) fn new() -> Self {
         Self {
             value: 0.,
@@ -64,9 +152,15 @@ impl<'a, T: Float> Neuron<'a, T> {
     pub(crate) fn calculate_miss(&mut self) {}
 
     pub(crate) fn update_weights(&mut self) {}
+}
+
+
+trait Neurons<T> {
+    fn calculate_value(&mut self);
+    fn calculate_miss(&mut self);
 }*/
 
-pub(crate) struct CellInput<'a, T> {
+/*pub(crate) struct CellInput<'a, T> {
     /// Neuron value.
     value: T,
 
@@ -106,20 +200,15 @@ pub(crate) struct CellHidden<'a, T> {
     /// All outgoing axons.
     pub outgoing: Box<Vec<&'a Axon<'a, T>>>,
 
-    bias: bool,
+    has_bias: bool,
 
     /// Function activation.
     pub activation: Option<Activation>,
-}
+}*/
 
-trait Neurons<T> {
-    fn calculate_value(&mut self);
-    fn calculate_miss(&mut self);
-}
-
-#[allow(dead_code)]
+/*#[allow(dead_code)]
 #[derive(Debug)]
-pub(crate) enum CellKind2<'a, T> {
+pub(crate) enum CellKind<'a, T> {
     Input {
         /// Neuron value.
         value: T,
@@ -163,9 +252,9 @@ pub(crate) enum CellKind2<'a, T> {
         /// Function activation
         activation: Activation,
     },
-}
+}*/
 
-/*impl<'a> CellKind2<'a, f64> {
+/*impl<'a> CellKind<'a, f64> {
     pub(crate) fn calculate_value(&mut self) {
         match self {
             CellKind2::Input {value, outgoing} => todo!(),
@@ -184,37 +273,3 @@ pub(crate) enum CellKind2<'a, T> {
         }
     }
 }*/
-
-type AxonsType<'a, T> = Box<Vec<&'a Axon<'a, T>>>;
-
-pub(crate) struct Cell<T> {
-    value: T,
-    miss: T,
-}
-
-pub(crate) struct Target<T>(T);
-
-pub(crate) enum CellKind<'a, T> {
-    // T - value of neuron, AxonsType<'a, T> - outgoing axons
-    Input(T),
-    BackfedInput,
-    NoisyInput,
-
-    Hidden {},
-    ProbabilisticHidden,
-    SpikingHidden,
-    Capsule,
-    Bias(bool),
-
-    // T - target
-    //Output(T, Neuron<'a, T>),
-    Output(Cell<T>, Target<T>, AxonsType<'a, T>),
-    MatchInputOutput,
-
-    Recurrent,
-    Memory,
-    GatedMemory,
-
-    Kernel,
-    Convolution, // or Pool
-}
