@@ -52,9 +52,9 @@ mod neuron;
 pub struct Rustunumic<'a, T: Float> {
     neurons: Box<Vec<Neuron<'a, T>>>,
     rate: T,
-    bias: Option<bool>,
     activation: Option<Activation>,
     loss: Option<Loss>,
+    bias: Option<bool>,
 }
 
 /* impl<'a, T: Float> Rustunumic<'a, T> {

@@ -2,36 +2,11 @@
 //!
 //!
 
-use crate::activation::{get_activation, Activation};
+use crate::activation::Activation;
 use crate::axon::Axon;
 use crate::float::Float;
 
 type AxonsType<'a, T> = Box<Vec<&'a Axon<'a, T>>>;
-
-struct Incoming<'a, T>(AxonsType<'a, T>);
-
-struct Outgoing<'a, T>(AxonsType<'a, T>);
-
-struct Target<T>(T);
-
-trait Neuron<T> {
-    /*fn new() -> Self;
-    fn calculate_value(&mut self);
-    fn calculate_error(&mut self, target: &Target<T>);
-    fn calculate_gradient(&mut self);
-    fn calculate_delta(&mut self, target: &Target<T>);
-    fn calculate_weight(&mut self, target: &Target<T>);
-    fn calculate_bias(&mut self, target: &Target<T>);
-    fn calculate_activation(&mut self);
-    fn calculate_miss(&mut self);
-    fn calculate_error_gradient(&mut self, target: &Target<T>);
-    fn calculate_error_delta(&mut self, target: &Target<T>);
-    fn calculate_error_weight(&mut self, target: &Target<T>);
-    fn calculate_error_bias(&mut self, target: &Target<T>);
-    fn calculate_error_activation(&mut self, target: &Target<T>);
-    fn calculate_error_miss(&mut self, target: &Target<T>);
-    fn calculate_error_error(&mut self, target: &Target<T>);*/
-}
 
 struct Cell<T> {
     /// Neuron value.
@@ -72,7 +47,32 @@ struct Output<'a, T> {
     incoming: AxonsType<'a, T>,
 }
 
-pub(crate) enum CellKind<'a, T> {
+/*struct Incoming<'a, T>(AxonsType<'a, T>);
+
+struct Outgoing<'a, T>(AxonsType<'a, T>);
+
+struct Target<T>(T);*/
+
+/*trait Neuron<T> {
+    fn new() -> Self;
+    fn calculate_value(&mut self);
+    fn calculate_error(&mut self, target: &Target<T>);
+    fn calculate_gradient(&mut self);
+    fn calculate_delta(&mut self, target: &Target<T>);
+    fn calculate_weight(&mut self, target: &Target<T>);
+    fn calculate_bias(&mut self, target: &Target<T>);
+    fn calculate_activation(&mut self);
+    fn calculate_miss(&mut self);
+    fn calculate_error_gradient(&mut self, target: &Target<T>);
+    fn calculate_error_delta(&mut self, target: &Target<T>);
+    fn calculate_error_weight(&mut self, target: &Target<T>);
+    fn calculate_error_bias(&mut self, target: &Target<T>);
+    fn calculate_error_activation(&mut self, target: &Target<T>);
+    fn calculate_error_miss(&mut self, target: &Target<T>);
+    fn calculate_error_error(&mut self, target: &Target<T>);
+}*/
+
+/*pub(crate) enum CellKind<'a, T> {
     Input(T),
     BackfedInput,
     NoisyInput,
@@ -92,7 +92,7 @@ pub(crate) enum CellKind<'a, T> {
 
     Kernel,
     Convolution, // or Pool
-}
+}*/
 
 /*#[derive(Debug)]
 pub(crate) struct Neuron<'a, T> {
