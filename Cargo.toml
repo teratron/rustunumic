@@ -23,6 +23,7 @@ include = [
 ]
 publish = false #["some-registry-name"]
 
+# For VSCode
 [package.metadata.scripts]
 perceptron = "cargo run --color=always --package perceptron --bin perceptron"
 doc = "cargo doc --open"

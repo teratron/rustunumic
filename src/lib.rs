@@ -48,9 +48,9 @@ mod neuron;
 ///
 /// let mut rn = Rustunumic::new();
 /// ```
-#[derive(Debug)]
+//#[derive(Debug)]
 pub struct Rustunumic<'a, T: Float> {
-    neurons: Box<Vec<Neuron<'a, T>>>,
+    neurons: Box<Vec<&'a dyn Neuron<'a, T>>>,
     rate: T,
     activation: Option<Activation>,
     loss: Option<Loss>,
@@ -77,7 +77,7 @@ impl<'a> Rustunumic<'a, f64> {
     pub fn calculate_neurons(&mut self) {
         for neuron in self.neurons.iter_mut() {
             //println!("- {:#?} {:#?}", i, neuron);
-            neuron.calculate_value();
+            //neuron.calculate_value();
         }
     }
 }

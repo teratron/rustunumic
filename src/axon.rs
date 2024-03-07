@@ -4,19 +4,19 @@
 extern crate rand;
 
 use rand::{thread_rng, Rng};
+
 use crate::neuron::Neuron;
 
-#[derive(Debug)]
-pub struct Axon<'a, T> {
+//#[derive(Debug)]
+pub(crate) struct Axon<'a, T> {
     /// Axon weight.
     pub weight: T,
 
     /// Incoming synapse.
-    pub(crate) incoming: &'a Neuron<'a, T>,
+    pub(crate) incoming: &'a dyn Neuron<'a, T>,
 
     /// Outgoing synapse.
-    pub(crate) outgoing: &'a Neuron<'a, T>,
-
+    pub(crate) outgoing: &'a dyn Neuron<'a, T>,
     //pub(crate) synapse: Synapse<'a, T>,
 }
 
@@ -34,7 +34,7 @@ pub struct Axon<'a, T> {
 }*/
 
 impl<'a> Axon<'a, f32> {
-    pub(crate) fn new(inn: &'a Neuron<f32>, out: &'a Neuron<f32>) -> Self {
+    pub(crate) fn new(inn: &'a (dyn Neuron<'a, f32> + 'a), out: &'a dyn Neuron<f32>) -> Self {
         let mut rng = thread_rng();
 
         Self {
@@ -46,12 +46,13 @@ impl<'a> Axon<'a, f32> {
     }
 
     pub(crate) fn back(&mut self) -> f32 {
-        self.incoming.value * self.weight
+        //self.incoming.value * self.weight
+        self.incoming.get_value() * self.weight
     }
 }
 
 impl<'a> Axon<'a, f64> {
-    pub(crate) fn new(inn: &'a Neuron<f64>, out: &'a Neuron<f64>) -> Self {
+    pub(crate) fn new(inn: &'a dyn Neuron<f64>, out: &'a dyn Neuron<f64>) -> Self {
         let mut rng = thread_rng();
 
         Self {
@@ -61,30 +62,30 @@ impl<'a> Axon<'a, f64> {
             //synapse: Synapse::new(inn, out),
         }
     }
-    
+
     pub(crate) fn back(&mut self) -> f64 {
-        self.incoming.value * self.weight
+        //self.incoming.value * self.weight
+        self.incoming.get_value() * self.weight
     }
 }
 
-
-#[derive(Debug)]
-struct Synapse<'a, T> {
+//#[derive(Debug)]
+/*struct Synapse<'a, T> {
     /// Incoming synapse.
-    incoming: &'a Neuron<'a, T>,
+    incoming: &'a dyn Neuron<'a, T>,
 
     /// Outgoing synapse.
-    outgoing: &'a Neuron<'a, T>,
+    outgoing: &'a dyn Neuron<'a, T>,
 }
 
 impl<'a, T> Synapse<'a, T> {
-    fn new(p0: &'a Neuron<T>, p1: &'a Neuron<T>) -> Self {
+    fn new(p0: &'a dyn Neuron<T>, p1: &'a dyn Neuron<T>) -> Self {
         Self {
             incoming: p0, //Neuron::new(),
             outgoing: p1, //Neuron::new()
         }
     }
-}
+}*/
 
 mod tests {
     use super::*;

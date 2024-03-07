@@ -8,21 +8,29 @@ use crate::float::Float;
 
 type AxonsType<'a, T> = Box<Vec<&'a Axon<'a, T>>>;
 
-struct Cell<T> {
+pub trait Neuron<'a, T> {
+    fn get_value(&self) -> &T;
+}
+
+pub(crate) trait Addition<'a, T>: Neuron<'a, T> {
+    fn get_miss(&self) -> &T;
+}
+
+struct Nucleus<T> {
     /// Neuron value.
-    pub value: T,
+    value: T,
 
     /// Neuron error.
-    pub miss: T,
+    miss: T,
 
     /// Function activation.
-    pub activation: Option<Activation>,
+    activation: Option<Activation>,
 
     /// Is there a bias neuron.
     has_bias: bool,
 }
 
-impl<T: Float> Cell<T> {
+impl<'a, T: Float> Nucleus<T> {
     fn new() -> Self {
         Self {
             value: T::ZERO,
@@ -31,20 +39,65 @@ impl<T: Float> Cell<T> {
             has_bias: false,
         }
     }
+
+    fn add(&mut self, activation: Option<Activation>, bias: bool) -> &Self {
+        self.activation = activation;
+        self.has_bias = bias;
+        self
+    }
+
+    fn get_value(&self) -> &T {
+        &self.value
+    }
+
+    fn get_miss(&self) -> &T {
+        &self.value
+    }
 }
 
+// Input neuron.
 struct Input<T>(T);
 
+impl<T: Float> Neuron<'_, T> for Input<T> {
+    fn get_value(&self) -> &T {
+        &self.0
+    }
+}
+
+// Hidden neuron.
 struct Hidden<'a, T> {
-    cell: Cell<T>,
+    cell: Nucleus<T>,
     incoming: AxonsType<'a, T>,
     outgoing: AxonsType<'a, T>,
 }
 
+impl<T: Float> Neuron<'_, T> for Hidden<'_, T> {
+    fn get_value(&self) -> &T {
+        &self.cell.value
+    }
+}
+
+impl<T: Float> Addition<'_, T> for Hidden<'_, T> {
+    fn get_miss(&self) -> &T {
+        &self.cell.miss
+    }
+}
+
+// Output neuron.
 struct Output<'a, T> {
-    cell: Cell<T>,
+    cell: Nucleus<T>,
     target: T,
     incoming: AxonsType<'a, T>,
+}
+
+impl<T: Float> Neuron<'_, T> for Output<'_, T> {
+    fn get_value(&self) -> &T {
+        &self.cell.value
+    }
+
+    /*fn get_miss(&self) -> &T {
+        &self.cell.miss
+    }*/
 }
 
 /*struct Incoming<'a, T>(AxonsType<'a, T>);
