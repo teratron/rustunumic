@@ -12,6 +12,8 @@ pub trait Neuron<'a, T> {
     fn get_value(&self) -> &T;
 }
 
+pub(crate) trait Synapse<'a, T>: Neuron<'a, T> {}
+
 pub(crate) trait Addition<'a, T>: Neuron<'a, T> {
     fn get_miss(&self) -> &T;
 }

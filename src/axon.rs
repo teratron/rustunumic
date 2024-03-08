@@ -5,7 +5,7 @@ extern crate rand;
 
 use rand::{thread_rng, Rng};
 
-use crate::neuron::Neuron;
+use crate::neuron::{Neuron, Synapse};
 
 //#[derive(Debug)]
 pub(crate) struct Axon<'a, T> {
@@ -13,11 +13,11 @@ pub(crate) struct Axon<'a, T> {
     pub weight: T,
 
     /// Incoming synapse.
-    pub(crate) incoming: &'a dyn Neuron<'a, T>,
+    pub(crate) incoming: &'a dyn Synapse<'a, T>, //&'a dyn Neuron<'a, T>,
 
     /// Outgoing synapse.
-    pub(crate) outgoing: &'a dyn Neuron<'a, T>,
-    //pub(crate) synapse: Synapse<'a, T>,
+    pub(crate) outgoing: &'a dyn Synapse<'a, T>, //&'a dyn Neuron<'a, T>,
+                                                 //pub(crate) synapse: Synapse<'a, T>,
 }
 
 /*impl<'a, T: Float> Axon<'a, T> {
@@ -34,7 +34,8 @@ pub(crate) struct Axon<'a, T> {
 }*/
 
 impl<'a> Axon<'a, f32> {
-    pub(crate) fn new(inn: &'a (dyn Neuron<'a, f32> + 'a), out: &'a dyn Neuron<f32>) -> Self {
+    //pub(crate) fn new(inn: &'a (dyn Neuron<'a, f32> + 'a), out: &'a dyn Neuron<f32>) -> Self {
+    pub(crate) fn new(inn: &'a dyn Synapse<'a, f32>, out: &'a dyn Synapse<'a, f32>) -> Self {
         let mut rng = thread_rng();
 
         Self {
@@ -52,7 +53,8 @@ impl<'a> Axon<'a, f32> {
 }
 
 impl<'a> Axon<'a, f64> {
-    pub(crate) fn new(inn: &'a dyn Neuron<f64>, out: &'a dyn Neuron<f64>) -> Self {
+    //pub(crate) fn new(inn: &'a dyn Neuron<f64>, out: &'a dyn Neuron<f64>) -> Self {
+    pub(crate) fn new(inn: &'a dyn Synapse<'a, f64>, out: &'a dyn Synapse<'a, f64>) -> Self {
         let mut rng = thread_rng();
 
         Self {
