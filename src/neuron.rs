@@ -8,15 +8,15 @@ use crate::float::Float;
 
 type AxonsType<'a, T> = Box<Vec<&'a Axon<'a, T>>>;
 
-pub trait Neuron<'a, T> {
+pub trait Core<T> {
     fn get_value(&self) -> &T;
 }
 
-pub(crate) trait Synapse<'a, T>: Neuron<'a, T> {}
-
-pub(crate) trait Addition<'a, T>: Neuron<'a, T> {
+pub trait Neuron<'a, T>: Core<T> {
     fn get_miss(&self) -> &T;
 }
+
+pub(crate) trait Synapse<'a, T>: Core<T> {}
 
 struct Nucleus<T> {
     /// Neuron value.
@@ -60,7 +60,7 @@ impl<'a, T: Float> Nucleus<T> {
 // Input neuron.
 struct Input<T>(T);
 
-impl<T: Float> Neuron<'_, T> for Input<T> {
+impl<T: Float> Core<T> for Input<T> {
     fn get_value(&self) -> &T {
         &self.0
     }
@@ -77,9 +77,7 @@ impl<T: Float> Neuron<'_, T> for Hidden<'_, T> {
     fn get_value(&self) -> &T {
         &self.cell.value
     }
-}
 
-impl<T: Float> Addition<'_, T> for Hidden<'_, T> {
     fn get_miss(&self) -> &T {
         &self.cell.miss
     }
@@ -97,9 +95,9 @@ impl<T: Float> Neuron<'_, T> for Output<'_, T> {
         &self.cell.value
     }
 
-    /*fn get_miss(&self) -> &T {
+    fn get_miss(&self) -> &T {
         &self.cell.miss
-    }*/
+    }
 }
 
 /*struct Incoming<'a, T>(AxonsType<'a, T>);
