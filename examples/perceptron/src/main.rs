@@ -1,6 +1,10 @@
 #![allow(unused)]
 
-use rustunumic::{activation::Activation, loss::Loss, Rustunumic};
+use rustunumic::{
+    activation::Activation, 
+    loss::Loss, 
+    Rustunumic
+};
 
 struct Perceptron<T> {
     bias: bool,
@@ -20,6 +24,7 @@ fn main() {
     };
 
     // Creat instance
+    //let mut rn = Rustunumic::<f32>::new();
     let mut rn = Rustunumic::new();
     rn.calculate_neurons();
     //let (num, loss) = rn.train(vec![1., 2., 3.], vec![1., 2., 3.]);

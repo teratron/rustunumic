@@ -5,7 +5,7 @@ extern crate rand;
 
 use rand::{thread_rng, Rng};
 
-use crate::neuron::{Neuron, Synapse};
+use crate::neuron::Synapse;
 
 //#[derive(Debug)]
 pub(crate) struct Axon<'a, T> {
@@ -13,19 +13,25 @@ pub(crate) struct Axon<'a, T> {
     pub weight: T,
 
     /// Incoming synapse.
-    pub(crate) incoming: &'a dyn Synapse<'a, T>,
+    pub(crate) incoming: &'a dyn Synapse<T>,
 
     /// Outgoing synapse.
-    pub(crate) outgoing: &'a dyn Synapse<'a, T>,
+    pub(crate) outgoing: dyn Synapse<T>,
 
     //pub(crate) synapse: (&'a dyn Synapse<'a, T>, &'a dyn Synapse<'a, T>),
 }
 
+impl<T> Axon<'_, T> {
+    pub(crate) fn calculate_forward_value(&self) -> T {
+        todo!()
+    }
+}
+
 impl<'a> Axon<'a, f32> {
-    pub(crate) fn new(inn: &'a dyn Synapse<'a, f32>, out: &'a dyn Synapse<'a, f32>) -> Self {
+    pub(crate) fn new(inn: impl Synapse<f32>, out: impl Synapse<f32>) -> &'a Self {
         let mut rng = thread_rng();
 
-        Self {
+        &Self {
             weight: rng.gen_range(-0.5..=0.5),
             incoming: inn,
             outgoing: out,
@@ -33,20 +39,21 @@ impl<'a> Axon<'a, f32> {
         }
     }
 
-    pub(crate) fn calculate_forward_value(&mut self) -> f32 {
+    /*pub(crate) fn calculate_forward_value(&self) -> f32 {
         self.outgoing.get_value() + self.incoming.get_value() * self.weight
     }
 
     pub(crate) fn calculate_backward_value(&mut self) -> f32 {
         self.outgoing.get_value() + self.incoming.get_value() * self.weight
-    }
+    }*/
 }
 
 impl<'a> Axon<'a, f64> {
-    pub(crate) fn new(inn: &'a dyn Synapse<'a, f64>, out: &'a dyn Synapse<'a, f64>) -> Self {
+    //pub(crate) fn new(inn: &'a dyn Synapse<'a, f64>, out: &'a dyn Synapse<'a, f64>) -> Self {
+    pub(crate) fn new(inn: impl Synapse<f64>, out: impl Synapse<f64>) -> &'a Self {
         let mut rng = thread_rng();
 
-        Self {
+        &Self {
             weight: rng.gen_range(-0.5..=0.5),
             incoming: inn,
             outgoing: out,
@@ -57,6 +64,14 @@ impl<'a> Axon<'a, f64> {
     pub(crate) fn back(&mut self) -> f64 {
         self.incoming.get_value() * self.weight
     }
+
+    /*pub(crate) fn calculate_forward_value(&self) -> f64 {
+        self.outgoing.get_value() + self.incoming.get_value() * self.weight
+    }
+
+    pub(crate) fn calculate_backward_value(&mut self) -> f64 {
+        self.outgoing.get_value() + self.incoming.get_value() * self.weight
+    }*/
 }
 
 /*impl<'a, T: Float> Axon<'a, T> {
@@ -68,24 +83,6 @@ impl<'a> Axon<'a, f64> {
             incoming: inn,
             outgoing: out,
             synapse: Synapse::new(inn, out)
-        }
-    }
-}*/
-
-//#[derive(Debug)]
-/*struct Synapse<'a, T> {
-    /// Incoming synapse.
-    incoming: &'a dyn Neuron<'a, T>,
-
-    /// Outgoing synapse.
-    outgoing: &'a dyn Neuron<'a, T>,
-}
-
-impl<'a, T> Synapse<'a, T> {
-    fn new(p0: &'a dyn Neuron<T>, p1: &'a dyn Neuron<T>) -> Self {
-        Self {
-            incoming: p0, //Neuron::new(),
-            outgoing: p1, //Neuron::new()
         }
     }
 }*/

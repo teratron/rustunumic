@@ -6,18 +6,18 @@ use crate::activation::Activation;
 use crate::axon::Axon;
 use crate::float::Float;
 
-type AxonsType<'a, T> = Box<Vec<&'a Axon<'a, T>>>;
+//type AxonsType<'a, T> = Box<Vec<Axon<'a, T>>>;
+type AxonsType<T> = Box<Vec<Axon<T>>>;
 
-pub trait Nucleus<T> {
+pub(crate) trait Nucleus<T> {
     fn get_value(&self) -> &T;
-    //fn set_value(&self);
 }
 
 pub trait Neuron<'a, T>: Nucleus<T> {
     fn get_miss(&self) -> &T;
 }
 
-pub(crate) trait Synapse<'a, T>: Nucleus<T> {}
+pub(crate) trait Synapse<T>: Nucleus<T> {}
 
 struct Core<T> {
     /// Neuron value.
@@ -33,7 +33,7 @@ struct Core<T> {
     has_bias: bool,
 }
 
-impl<'a, T: Float> Core<T> {
+impl<T: Float> Core<T> {
     fn new() -> Self {
         Self {
             value: T::ZERO,
@@ -56,6 +56,12 @@ impl<'a, T: Float> Core<T> {
     fn get_miss(&self) -> &T {
         &self.value
     }
+
+    /*pub(crate) fn calculate_neuron(&mut self) {
+        for neuron in self.incoming.iter_mut() {
+            neuron.calculate_value();
+        }
+    }*/
 }
 
 // Input neuron.
@@ -68,44 +74,60 @@ impl<T: Float> Nucleus<T> for Input<T> {
 }
 
 // Hidden neuron.
-struct Hidden<'a, T> {
+struct Hidden<T> {
     cell: Core<T>,
-    incoming: AxonsType<'a, T>,
-    outgoing: AxonsType<'a, T>,
+    incoming: AxonsType<'_, T>,
+    outgoing: AxonsType<'_, T>,
 }
 
-impl<T: Float> Nucleus<T> for Hidden<'_, T> {
+impl <T: Float> Hidden<T> {
+    fn new() -> Self {
+        Self {
+            cell: Core::new(),
+            incoming: Box::new(Vec::new()),
+            outgoing: Box::new(Vec::new()),
+        }
+    }
+
+    pub(crate) fn calculate_neuron(&mut self) {
+        for axon in self.incoming.iter() {
+            let _s = axon.calculate_forward_value();
+        }
+    }
+}
+
+impl<T: Float> Nucleus<T> for Hidden<T> {
     fn get_value(&self) -> &T {
         &self.cell.value
     }
 }
 
-impl<T: Float> Neuron<'_, T> for Hidden<'_, T> {
+impl<T: Float> Neuron<'_, T> for Hidden<T> {
     fn get_miss(&self) -> &T {
         &self.cell.miss
     }
 }
 
 // Output neuron.
-struct Output<'a, T> {
+struct Output<T> {
     cell: Core<T>,
     target: T,
-    incoming: AxonsType<'a, T>,
+    incoming: AxonsType<T>,
 }
 
-impl<T: Float> Nucleus<T> for Output<'_, T> {
+impl<T: Float> Nucleus<T> for Output<T> {
     fn get_value(&self) -> &T {
         &self.cell.value
     }
 }
 
-impl<T: Float> Neuron<'_, T> for Output<'_, T> {
+impl<T: Float> Neuron<'_, T> for Output<T> {
     fn get_miss(&self) -> &T {
         &self.cell.miss
     }
 }
 
-pub(crate) enum CellKind<'a, T> {
+/*pub(crate) enum CellKind<'a, T> {
     Input(T),
     BackfedInput,
     NoisyInput,
@@ -127,7 +149,7 @@ pub(crate) enum CellKind<'a, T> {
 
     Kernel,
     Convolution, // or Pool
-}
+}*/
 
 /*struct Incoming<'a, T>(AxonsType<'a, T>);
 
