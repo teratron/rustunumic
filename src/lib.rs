@@ -35,6 +35,7 @@ pub mod activation;
 pub mod loss;
 
 mod axon;
+mod cell;
 mod float;
 mod interface;
 mod neuron;
@@ -50,7 +51,8 @@ mod neuron;
 /// ```
 //#[derive(Debug)]
 pub struct Rustunumic<'a, T: Float> {
-    neurons: Box<Vec<&'a dyn Neuron<'a, T>>>,
+    //neurons: Box<Vec<&'a dyn Neuron<'a, T>>>,
+    neurons: Vec<&'a dyn Neuron<'a, T>>,
     rate: T,
     activation: Option<Activation>,
     loss: Option<Loss>,
@@ -65,7 +67,8 @@ impl<'a> Rustunumic<'a, f64> {
     /// Creat new instance.
     pub fn new() -> Self {
         Self {
-            neurons: Box::new(Vec::new()),
+            //neurons: Box::new(Vec::new()),
+            neurons: Vec::new(),
             rate: 0.3,
             bias: None,
             activation: None,
