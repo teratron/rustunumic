@@ -54,13 +54,12 @@ pub struct Rustunumic<'a, T: Float> {
     //neurons: Box<Vec<&'a dyn Neuron<'a, T>>>,
     neurons: Vec<&'a dyn Neuron<'a, T>>,
     rate: T,
-    activation: Option<Activation>,
-    loss: Option<Loss>,
+    loss_mode: Loss,
+    activation_mode: Option<Activation>,
     bias: Option<bool>,
 }
 
 /* impl<'a, T: Float> Rustunumic<'a, T> {
-
 } */
 
 impl<'a> Rustunumic<'a, f64> {
@@ -71,8 +70,8 @@ impl<'a> Rustunumic<'a, f64> {
             neurons: Vec::new(),
             rate: 0.3,
             bias: None,
-            activation: None,
-            loss: None,
+            activation_mode: None,
+            loss_mode: Loss::MSE,
         }
     }
 

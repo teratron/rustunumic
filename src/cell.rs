@@ -1,10 +1,18 @@
 use crate::activation::{get_derivative, Activation};
 
+trait CoreTrait {
+    fn get_value(&self) -> &f32;
+}
+
+trait CellTrait {
+    fn get_miss(&self) -> &f32;
+}
+
 struct Axon {
     weight: f32,
 
     // InCell, InputCell, BiasCell
-    incoming_cell: InCell,
+    incoming_cell: dyn CoreTrait,
 
     // OutCell, TargetCell
     outgoing_cell: OutCell,
@@ -12,13 +20,13 @@ struct Axon {
 
 impl Axon {
     // Forward propagation.
-    fn calculate_value(&self, cell: &mut InCell) {
-        cell.value += self.incoming_cell.get_value() * self.weight;
+    fn calculate_value(&mut self) {
+        self.outgoing_cell.value += self.incoming_cell.get_value() * self.weight;
     }
 
     // Backward propagation.
-    fn calculate_miss(&self, cell: &mut OutCell) {
-        cell.miss += self.outgoing_cell.get_miss() * self.weight;
+    fn calculate_miss(&mut self) {
+        self.incoming_cell.miss += self.outgoing_cell.get_miss() * self.weight;
     }
 
     fn update_weight(&mut self, gradient: f32) {
@@ -36,17 +44,16 @@ struct CoreCell {
 
 struct InCell {
     value: f32,
+    miss: f32,
     incoming_axons: Vec<Axon>,
 
     rate: f32,
     activation_function: Activation,
-    //fn(f32) -> f32,
     cell: OutCell,
 }
 
 impl InCell {
     fn activation(&mut self) {}
-
     fn derivative(&mut self) {}
 
     fn get_value(&self) -> &f32 {
@@ -56,8 +63,8 @@ impl InCell {
     // Forward propagation.
     fn calculate_value(&mut self) {
         self.value = 0.;
-        for axon in &self.incoming_axons {
-            axon.calculate_value(self);
+        for axon in &mut self.incoming_axons {
+            axon.calculate_value();
         }
     }
 
@@ -76,6 +83,7 @@ impl InCell {
 //************************************************************************
 
 struct OutCell {
+    value: f32,
     miss: f32,
     outgoing_axons: Vec<Axon>,
 }
@@ -88,16 +96,38 @@ impl OutCell {
     // Backward propagation.
     fn calculate_miss(&mut self) {
         self.miss = 0.;
-        for axon in &self.outgoing_axons {
-            axon.calculate_miss(self);
+        for axon in &mut self.outgoing_axons {
+            axon.calculate_miss();
         }
     }
 }
 
 //************************************************************************
 
-struct BiasCell(bool);
+struct BiasCell;
+
+impl CoreTrait for BiasCell {
+    fn get_value(&self) -> &f32 {
+        &1.
+    }
+}
+
+//************************************************************************
 
 struct InputCell(f32);
+
+impl CoreTrait for InputCell {
+    fn get_value(&self) -> &f32 {
+        &self.0
+    }
+}
+
+//************************************************************************
+
+struct OutputCell {
+    target: f32
+}
+
+//************************************************************************
 
 struct TargetCell(f32);
