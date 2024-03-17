@@ -44,3 +44,13 @@ fn main() {
     let fs_64 = float_struct::FloatStruct::<f64>::new();
     println!("{:#?} {:#?}", fs_32.f, fs_64.f)
 }
+
+/*
+fn calculate_miss(&mut self) {
+    let mut n: usize = self.outgoing_axons_last_index;
+    while n >= 0 {
+        self.outgoing_axons[n].calculate_miss(self);
+        n -= 1;
+    }
+}
+*/
