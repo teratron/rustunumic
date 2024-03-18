@@ -12,9 +12,7 @@ trait CellTrait: CoreTrait {
 
 trait IncomingSynapse: CoreTrait {}
 
-trait OutgoingSynapse: CoreTrait {
-    fn set_value(&mut self, value: f32);
-}
+trait OutgoingSynapse: CoreTrait {}
 
 //************************************************************************
 
@@ -33,22 +31,26 @@ struct Axon {
 
 impl Axon {
     // Forward propagation.
-    fn calculate_value(&mut self) {
+    fn calculate_value(&self) -> f32 {
         //self.outgoing_cell.value += self.incoming_cell.get_value() * self.weight;
-        self.outgoing_cell.set_value(
-            self.outgoing_cell.get_value() + self.incoming_cell.get_value() * self.weight,
-        );
+        /*self.outgoing_cell.set_value(
+            self.outgoing_cell.get_value() + self.incoming_cell.get_value() * self.weight
+        );*/
+        self.incoming_cell.get_value() * self.weight
+        
     }
 
     // Backward propagation.
-    fn calculate_miss(&mut self) {
+    fn calculate_miss(&self) -> f32 {
         //self.incoming_cell.miss += self.outgoing_cell.get_miss() * self.weight;
-        self.incoming_cell
-            .set_miss(self.incoming_cell.get_miss() + self.outgoing_cell.get_miss() * self.weight);
+        /*self.incoming_cell.set_miss(
+            self.incoming_cell.get_miss() + self.outgoing_cell.get_miss() * self.weight
+        );*/
+        self.outgoing_cell.get_miss() * self.weight
     }
 
     fn update_weight(&mut self, gradient: &f32) {
-        self.weight += *gradient * self.incoming_cell.get_value();
+        self.weight += gradient * self.incoming_cell.get_value();
     }
 }
 
@@ -60,8 +62,6 @@ impl CoreTrait for BiasCell {
     fn get_value(&self) -> &f32 {
         &1.
     }
-
-    //fn set_value(&mut self, value: f32) {}
 }
 
 //************************************************************************
@@ -73,9 +73,9 @@ impl CoreTrait for InputCell {
         &self.0
     }
 
-    fn set_value(&mut self, value: f32) {
+    /*fn set_value(&mut self, value: f32) {
         self.0 = value;
-    }
+    }*/
 }
 
 //************************************************************************
@@ -100,10 +100,6 @@ struct OutputCell {
 impl OutputCell {
     fn activation(&mut self) {}
     fn derivative(&mut self) {}
-
-    fn set_value(&mut self, value: f32) {
-        self.value = value;
-    }
 
     // Forward propagation.
     fn calculate_value(&mut self) {
@@ -134,9 +130,9 @@ impl CoreTrait for OutputCell {
         &self.value
     }
 
-    fn set_value(&mut self, value: f32) {
+    /*fn set_value(&mut self, value: f32) {
         self.value = value;
-    }
+    }*/
 }
 
 impl CellTrait for OutputCell {
@@ -171,16 +167,12 @@ struct HiddenCell {
 impl HiddenCell {
     fn activation(&mut self) {}
     fn derivative(&mut self) {}
-
-    fn set_value(&mut self, value: f32) {
-        self.value = value;
-    }
-
+    
     // Forward propagation.
     fn calculate_value(&mut self) {
         self.value = 0.;
-        for axon in &mut self.incoming_axons {
-            axon.calculate_value();
+        for axon in self.incoming_axons {
+            self.value += axon.calculate_value();
         }
     }
 
@@ -208,9 +200,9 @@ impl CoreTrait for HiddenCell {
         &self.value
     }
 
-    fn set_value(&mut self, value: f32) {
+    /*fn set_value(&mut self, value: f32) {
         self.value = value;
-    }
+    }*/
 }
 
 impl CellTrait for HiddenCell {
