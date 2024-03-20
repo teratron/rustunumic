@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use crate::activation::{get_derivative, Activation};
 
 trait CoreTrait {
@@ -10,8 +12,11 @@ trait CellTrait: CoreTrait {
     //fn set_miss(&mut self, value: f32);
 }
 
-trait KindTrait {
+trait KindTrait: Display {
     fn calculate_miss(&mut self);
+    fn calculate_miss2(&mut self) {
+        calculate_miss2(self);
+    }
 }
 
 //trait IncomingSynapse: CoreTrait {}
@@ -91,33 +96,32 @@ impl CoreTrait for InputCell {
 
 //************************************************************************
 
-struct CoreCell {
+struct OutputCell {
     /// Neuron value.
     value: f32,
 
     /// Neuron error.
     miss: f32,
 
-    /// Function activation mode.
-    activation_mode: Option<Activation>,
+    /// Target neuron.
+    target: f32,
 
     /// All incoming axons.
     incoming_axons: Vec<Axon>,
-    //&'a
+
+    /// Function activation mode.
+    activation_mode: Activation,
+
     _rate: f32,
-
-    // incoming_axons or (incoming_axons, outgoing_axons)
-    // Vec<Axon> or (Vec<Axon>, Vec<Axon>)
-    // (Vec<Axon>, Option<Vec<Axon>>)
-    synapses: dyn Synapse,
-
-    // HiddenCell, OutputCell
-    cell: dyn KindTrait,
 }
 
-impl CoreCell {
+impl OutputCell {
     fn activation(&mut self) {}
     fn derivative(&mut self) {}
+
+    fn set_value(&mut self, value: f32) {
+        self.value = value;
+    }
 
     // Forward propagation.
     fn calculate_value(&mut self) {
@@ -128,24 +132,32 @@ impl CoreCell {
     }
 
     // Backward propagation.
+    fn calculate_miss(&mut self) {
+        self.miss = self.target - self.value;
+    }
+
     fn update_weight(&mut self) {
         let gradient = self._rate
             * self.miss
-            * get_derivative(&mut (self.value as f64), &self.activation_mode.unwrap());
+            * get_derivative(&mut (self.value as f64), &self.activation_mode);
 
         for axon in &mut self.incoming_axons {
-            axon.update_weight(&gradient);
+            axon.update_weight(gradient);
         }
     }
 }
 
-impl CoreTrait for CoreCell {
+impl CoreTrait for OutputCell {
     fn get_value(&self) -> &f32 {
         &self.value
     }
+
+    /*fn set_value(&mut self, value: f32) {
+        self.value = value;
+    }*/
 }
 
-impl CellTrait for CoreCell {
+impl CellTrait for OutputCell {
     fn get_miss(&self) -> &f32 {
         &self.miss
     }
@@ -157,26 +169,41 @@ impl CellTrait for CoreCell {
 
 //************************************************************************
 
-struct OutputCell {
-    /// Target neuron.
-    target: f32,
-}
-
-impl KindTrait for OutputCell {
-    // Backward propagation.
-    fn calculate_miss(&mut self) {
-        self.miss = self.target - self.value;
-    }
-}
-
-//************************************************************************
-
 struct HiddenCell {
+    /// Neuron value.
+    value: f32,
+
+    /// Neuron error.
+    miss: f32,
+
+    /// All incoming axons.
+    incoming_axons: Vec<Axon>,
+
     /// All outgoing axons.
     outgoing_axons: Vec<Axon>,
+
+    /// Function activation mode.
+    activation_mode: Activation, //Option<Activation>,
+
+    _rate: f32,
 }
 
-impl KindTrait for HiddenCell {
+impl HiddenCell {
+    fn activation(&mut self) {}
+    fn derivative(&mut self) {}
+
+    fn set_value(&mut self, value: f32) {
+        self.value = value;
+    }
+
+    // Forward propagation.
+    fn calculate_value(&mut self) {
+        self.value = 0.;
+        for axon in self.incoming_axons {
+            self.value += axon.calculate_value();
+        }
+    }
+
     // Backward propagation.
     fn calculate_miss(&mut self) {
         self.miss = 0.;
@@ -184,4 +211,38 @@ impl KindTrait for HiddenCell {
             axon.calculate_miss();
         }
     }
+
+    fn update_weight(&mut self) {
+        let gradient = self._rate
+            * self.miss
+            * get_derivative(&mut (self.value as f64), &self.activation_mode);
+
+        for axon in &mut self.incoming_axons {
+            axon.update_weight(&gradient);
+        }
+    }
+}
+
+impl CoreTrait for HiddenCell {
+    fn get_value(&self) -> &f32 {
+        &self.value
+    }
+
+    /*fn set_value(&mut self, value: f32) {
+        self.value = value;
+    }*/
+}
+
+impl CellTrait for HiddenCell {
+    fn get_miss(&self) -> &f32 {
+        &self.miss
+    }
+
+    /*fn set_miss(&mut self, value: f32) {
+        self.miss = value;
+    }*/
+}
+
+fn calculate_miss2(cell: &dyn KindTrait) {
+    println!("calculate_miss3 {:}", cell);
 }
