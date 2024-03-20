@@ -17,6 +17,10 @@ impl CoreTrait for OutputCell {
 }
 
 impl CellTrait for OutputCell {
+    fn get_miss(&self) -> &f32 {
+        &self.cell.miss
+    }
+
     fn calculate_value(&mut self) {
         self.cell.calculate_value();
     }
@@ -27,9 +31,5 @@ impl CellTrait for OutputCell {
 
     fn calculate_weight(&mut self) {
         self.cell.calculate_weight();
-    }
-    
-    fn get_miss(&self) -> &f32 {
-        &self.cell.miss
     }
 }

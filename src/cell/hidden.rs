@@ -17,6 +17,10 @@ impl CoreTrait for HiddenCell {
 }
 
 impl CellTrait for HiddenCell {
+    fn get_miss(&self) -> &f32 {
+        &self.cell.miss
+    }
+
     fn calculate_value(&mut self) {
         self.cell.calculate_value();
     }
@@ -30,9 +34,5 @@ impl CellTrait for HiddenCell {
 
     fn calculate_weight(&mut self) {
         self.cell.calculate_weight();
-    }
-
-    fn get_miss(&self) -> &f32 {
-        &self.cell.miss
     }
 }
