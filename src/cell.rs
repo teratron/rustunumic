@@ -4,12 +4,10 @@ use crate::activation::{get_derivative, Activation};
 
 trait CoreTrait {
     fn get_value(&self) -> &f32;
-    //fn set_value(&mut self, value: f32);
 }
 
 trait CellTrait: CoreTrait {
     fn get_miss(&self) -> &f32;
-    //fn set_miss(&mut self, value: f32);
 }
 
 trait KindTrait: Display {
@@ -18,10 +16,6 @@ trait KindTrait: Display {
         calculate_miss2(self);
     }
 }
-
-//trait IncomingSynapse: CoreTrait {}
-
-//trait OutgoingSynapse: CoreTrait {}
 
 //************************************************************************
 
@@ -64,14 +58,6 @@ impl Axon {
 
 //************************************************************************
 
-trait Synapse {}
-
-impl Synapse for Vec<Axon> {}
-
-impl Synapse for (Vec<Axon>, Vec<Axon>) {}
-
-//************************************************************************
-
 struct BiasCell;
 
 impl CoreTrait for BiasCell {
@@ -88,10 +74,6 @@ impl CoreTrait for InputCell {
     fn get_value(&self) -> &f32 {
         &self.0
     }
-
-    /*fn set_value(&mut self, value: f32) {
-        self.0 = value;
-    }*/
 }
 
 //************************************************************************
@@ -151,20 +133,12 @@ impl CoreTrait for OutputCell {
     fn get_value(&self) -> &f32 {
         &self.value
     }
-
-    /*fn set_value(&mut self, value: f32) {
-        self.value = value;
-    }*/
 }
 
 impl CellTrait for OutputCell {
     fn get_miss(&self) -> &f32 {
         &self.miss
     }
-
-    /*fn set_miss(&mut self, value: f32) {
-        self.miss = value;
-    }*/
 }
 
 //************************************************************************
@@ -227,20 +201,12 @@ impl CoreTrait for HiddenCell {
     fn get_value(&self) -> &f32 {
         &self.value
     }
-
-    /*fn set_value(&mut self, value: f32) {
-        self.value = value;
-    }*/
 }
 
 impl CellTrait for HiddenCell {
     fn get_miss(&self) -> &f32 {
         &self.miss
     }
-
-    /*fn set_miss(&mut self, value: f32) {
-        self.miss = value;
-    }*/
 }
 
 fn calculate_miss2(cell: &dyn KindTrait) {

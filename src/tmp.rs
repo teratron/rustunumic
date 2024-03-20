@@ -53,7 +53,14 @@ fn main() {
     }
 }*/
 
-/*struct CoreCell {
+/*
+trait Synapse {}
+
+impl Synapse for Vec<Axon> {}
+
+impl Synapse for (Vec<Axon>, Vec<Axon>) {}
+
+struct CoreCell {
     /// Neuron value.
     value: f32,
 

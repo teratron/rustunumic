@@ -17,7 +17,6 @@ pub(crate) struct Axon<'a, T> {
 
     /// Outgoing synapse.
     pub(crate) outgoing: dyn Synapse<T>,
-
     //pub(crate) synapse: (&'a dyn Synapse<'a, T>, &'a dyn Synapse<'a, T>),
 }
 

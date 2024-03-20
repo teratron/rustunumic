@@ -1,10 +1,6 @@
 #![allow(unused)]
 
-use rustunumic::{
-    activation::Activation, 
-    loss::Loss, 
-    Rustunumic
-};
+use rustunumic::{activation::Activation, loss::Loss, Rustunumic};
 
 struct Perceptron<T> {
     bias: bool,

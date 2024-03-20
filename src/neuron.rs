@@ -80,7 +80,7 @@ struct Hidden<T> {
     outgoing: AxonsType<'_, T>,
 }
 
-impl <T: Float> Hidden<T> {
+impl<T: Float> Hidden<T> {
     fn new() -> Self {
         Self {
             cell: Core::new(),
