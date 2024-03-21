@@ -4,7 +4,7 @@ struct OutputCell {
     /// Core cell.
     cell: CoreCell,
 
-    /// Target neuron.
+    /// Target data.
     target: f32,
 }
 

@@ -7,22 +7,11 @@ const DEFAULT_RATE: f64 = 0.3;
 pub trait Float: Debug {
     type FloatType;
 
-    const ZERO: Self;
-    const DEFAULT_RATE: Self;
+    const ZERO: Self = ZERO;
+    const DEFAULT_RATE: Self::FloatType = DEFAULT_RATE;
 
     fn type_name(&self) -> &'static str;
 }
-
-/*impl<T: Debug> Float for T {
-    type FloatType = T;
-
-    const ZERO: Self = 0.;
-    const DEFAULT_RATE: Self = DEFAULT_RATE as Self;
-
-    fn type_name(&self) -> &'static str {
-        "f32"
-    }
-}*/
 
 impl Float for f32 {
     type FloatType = f32;
@@ -38,8 +27,8 @@ impl Float for f32 {
 impl Float for f64 {
     type FloatType = f64;
 
-    const ZERO: Self = ZERO;
-    const DEFAULT_RATE: Self::FloatType = DEFAULT_RATE;
+    //const ZERO: Self = ZERO;
+    //const DEFAULT_RATE: Self::FloatType = DEFAULT_RATE;
 
     fn type_name(&self) -> &'static str {
         "f64"

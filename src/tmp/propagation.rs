@@ -8,7 +8,7 @@
             println!("- {:#?} {:#?}", i, neuron);
         }
         None
-    } 
+    }
 }*/
 
 //fn calc_neuron() -> Option {}

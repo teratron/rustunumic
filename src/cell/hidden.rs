@@ -1,4 +1,5 @@
-use crate::cell::{Axon, CellTrait, CoreCell, CoreTrait};
+use crate::axon::Axon;
+use crate::cell::{CellTrait, CoreCell, CoreTrait};
 
 struct HiddenCell {
     /// Core cell.

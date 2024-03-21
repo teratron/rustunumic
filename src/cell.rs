@@ -1,59 +1,29 @@
-use crate::activation::{Activation, get_derivative};
+use crate::activation::{get_derivative, Activation};
+use crate::axon::Axon;
 
 mod bias;
+mod hidden;
 mod input;
 mod output;
-mod hidden;
 
-trait CoreTrait {
+pub(crate) trait CoreTrait {
     fn get_value(&self) -> &f32;
 }
 
-trait CellTrait: CoreTrait {
+pub(crate) trait CellTrait: CoreTrait {
     fn get_miss(&self) -> &f32;
     fn calculate_value(&mut self);
     fn calculate_miss(&mut self);
     fn calculate_weight(&mut self);
 }
 
-//************************************************************************
-
-struct Axon {
-    /// Axon weight.
-    weight: f32,
-
-    /// Incoming cell (InputCell, HiddenCell, BiasCell).
-    incoming_cell: dyn CoreTrait,
-
-    /// Outgoing cell (HiddenCell, OutputCell).
-    outgoing_cell: dyn CellTrait,
-}
-
-impl Axon {
-    // Forward propagation.
-    fn calculate_value(&self) -> f32 {
-        self.incoming_cell.get_value() * self.weight
-    }
-
-    // Backward propagation.
-    fn calculate_miss(&self) -> f32 {
-        self.outgoing_cell.get_miss() * self.weight
-    }
-
-    fn calculate_weight(&mut self, gradient: &f32) {
-        self.weight += gradient * self.incoming_cell.get_value();
-    }
-}
+/*fn calculate_value(cell: &mut dyn CellTrait) { // TODO: return value
+    cell.calculate_value();
+}*/
 
 //************************************************************************
 
-trait Synapse {}
-impl Synapse for Vec<Axon> {}
-impl Synapse for (Vec<Axon>, Vec<Axon>) {}
-
-//************************************************************************
-
-struct CoreCell {
+pub(crate) struct CoreCell {
     /// Neuron value.
     value: f32,
 
@@ -65,6 +35,8 @@ struct CoreCell {
 
     /// All incoming axons.
     incoming_axons: Vec<Axon>,
+
+    synapses: (Vec<Axon>, Option<Vec<Axon>>), //dyn Synapse,
 
     _rate: f32,
 }

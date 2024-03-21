@@ -13,7 +13,7 @@ repository = "https://github.com/teratron/rustunumic"
 keywords = ["neural", "network", "machine", "learning", "library"]
 categories = ["command-line-utilities", "development-tools::cargo-plugins"]
 build = false #"build.rs"
-exclude = ["/ci", "images/", ".*"]
+exclude = ["/ci", "images/", ".*", "/src/tmp/"]
 include = [
     #"/src",
     #"/examples",
