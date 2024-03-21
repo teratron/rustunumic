@@ -1,4 +1,4 @@
-use crate::activation::{get_derivative, Activation};
+use crate::activation::{Activation, get_derivative};
 use crate::axon::Axon;
 
 mod bias;
@@ -17,10 +17,6 @@ pub(crate) trait CellTrait: CoreTrait {
     fn calculate_weight(&mut self);
 }
 
-/*fn calculate_value(cell: &mut dyn CellTrait) { // TODO: return value
-    cell.calculate_value();
-}*/
-
 //************************************************************************
 
 pub(crate) struct CoreCell {
@@ -36,7 +32,7 @@ pub(crate) struct CoreCell {
     /// All incoming axons.
     incoming_axons: Vec<Axon>,
 
-    synapses: (Vec<Axon>, Option<Vec<Axon>>), //dyn Synapse,
+    //synapses: (Vec<Axon>, Option<Vec<Axon>>), //dyn Synapse,
 
     _rate: f32,
 }

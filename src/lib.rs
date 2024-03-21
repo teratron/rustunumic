@@ -9,6 +9,7 @@ pub mod activation;
 mod axon;
 mod cell;
 pub mod loss;
+mod train;
 
 pub struct Rustunumic {
     /// All neurons.
@@ -33,5 +34,21 @@ impl Rustunumic {
         for neuron in self.neurons.iter_mut() {
             neuron.calculate_value();
         }
+    }
+
+    // Backward propagation.
+    fn calculate_miss(&mut self) {
+        for neuron in self.neurons.iter_mut() {
+            neuron.calculate_miss();
+        }
+        let mut n: usize = self.outgoing_axons_last_index;
+        while n >= 0 {
+            self.outgoing_axons[n].calculate_miss(self);
+            n -= 1;
+        }
+    }
+
+    fn calculate_weight(&mut self, gradient: &f32) {
+        self.weight += gradient * self.incoming_cell.get_value();
     }
 }
