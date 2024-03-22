@@ -18,7 +18,7 @@ pub(crate) struct CoreCell {
 
     /// All incoming and outgoing axons.
     pub(super) synapses: (Vec<Axon>, Option<Vec<Axon>>),
-    // synapses: dyn Synapse,
+    // synapses: &mut dyn Synapse,
     _rate: f32, // TODO: Remove rate.
 }
 
