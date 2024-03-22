@@ -1,8 +1,8 @@
-use crate::cell::CoreTrait;
+use crate::cell::Nucleus;
 
 struct BiasCell;
 
-impl CoreTrait for BiasCell {
+impl Nucleus for BiasCell {
     fn get_value(&self) -> &f32 {
         &1.
     }

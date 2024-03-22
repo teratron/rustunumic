@@ -8,8 +8,7 @@
 //! For examples, see [examples](https://github.com/teratron/rustunumic/examples).
 
 use crate::activation::Activation;
-use crate::cell::CellTrait;
-use crate::interface::Interface;
+use crate::cell::Neuron;
 use crate::loss::Loss;
 
 pub mod activation;
@@ -19,6 +18,7 @@ mod axon;
 mod cell;
 mod interface;
 mod train;
+mod float;
 
 /// ## Rustunumic
 ///
@@ -34,7 +34,7 @@ mod train;
 //#[derive(Debug)]
 pub struct Rustunumic {
     /// All neurons.
-    neurons: Vec<Box<dyn CellTrait>>,
+    neurons: Vec<Box<dyn Neuron>>,
 
     /// Function activation mode.
     activation_mode: Option<Activation>,
@@ -50,6 +50,18 @@ pub struct Rustunumic {
 }
 
 impl Rustunumic {
+    /// Creat new instance.
+    pub fn new() -> Self {
+        Self {
+            //neurons: Box::new(Vec::new()),
+            neurons: Vec::new(),
+            rate: 0.3,
+            bias: None,
+            activation_mode: None,
+            loss_mode: Loss::MSE,
+        }
+    }
+    
     // Forward propagation.
     fn calculate_value(&mut self) {
         for neuron in self.neurons.iter_mut() {
@@ -59,9 +71,6 @@ impl Rustunumic {
 
     // Backward propagation.
     fn calculate_miss(&mut self) {
-        for neuron in self.neurons.iter_mut() {
-            neuron.calculate_miss();
-        }
         let mut n: usize = self.outgoing_axons_last_index;
         while n >= 0 {
             self.outgoing_axons[n].calculate_miss(self);
@@ -70,24 +79,8 @@ impl Rustunumic {
     }
 
     fn calculate_weight(&mut self, gradient: &f32) {
-        self.weight += gradient * self.incoming_cell.get_value();
+        for neuron in self.neurons.iter_mut() {
+            neuron.calculate_weight();
+        }
     }
 }
-
-/*impl Interface<T> for Rustunumic<'_, T> {
-    fn verify(&self, _input: Vec<T>, _target: Vec<T>) -> T {
-        let loss: T = todo!();
-        loss
-    }
-
-    fn query(&self, _input: Vec<T>) -> Vec<T> {
-        let output: Vec<T> = todo!();
-        output
-    }
-
-    fn train(&self, _input: Vec<T>, _target: Vec<T>) -> (usize, T) {
-        let count: usize = 0;
-        let loss: T = todo!();
-        (count, loss)
-    }
-}*/

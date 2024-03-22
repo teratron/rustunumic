@@ -2,8 +2,8 @@
 //!
 //!
 
+use crate::cell::{Neuron, Nucleus};
 use crate::cell::core::CoreCell;
-use crate::cell::{CellTrait, CoreTrait};
 
 pub(super) struct OutputCell {
     /// Core cell.
@@ -15,13 +15,13 @@ pub(super) struct OutputCell {
 
 impl OutputCell {}
 
-impl CoreTrait for OutputCell {
+impl Nucleus for OutputCell {
     fn get_value(&self) -> &f32 {
         &self.core.value
     }
 }
 
-impl CellTrait for OutputCell {
+impl Neuron for OutputCell {
     fn get_miss(&self) -> &f32 {
         &self.core.miss
     }

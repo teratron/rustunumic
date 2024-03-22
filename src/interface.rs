@@ -1,24 +1,34 @@
-pub trait Interface<T> {
-    /// verify
-    fn verify(&self, input: Vec<T>, target: Vec<T>) -> T;
+//! # Interface
+//!
+//!
 
-    /// query
-    fn query(&self, input: Vec<T>) -> Vec<T>;
+use crate::Rustunumic;
 
-    /// train
-    fn train(&self, _input: Vec<T>, _target: Vec<T>) -> (usize, T);
+pub trait Interface {
+    /// Verify
+    fn verify(&mut self, input: Vec<f32>, target: Vec<f32>) -> f32;
+
+    /// Query
+    fn query(&mut self, input: Vec<f32>) -> Vec<f32>;
+
+    /// Train
+    fn train(&mut self, _input: Vec<f32>, _target: Vec<f32>) -> (usize, f32);
 }
 
-/* impl Interface<f64> for Rustunumic<f64> {
-    //type Float = f64;
+impl Interface for Rustunumic {
+    fn verify(&mut self, _input: Vec<f32>, _target: Vec<f32>) -> f32 {
+        let loss: f32 = todo!();
+        loss
+    }
 
-    fn verify(&self, _input: Vec<f64>, _target: Vec<f64>) -> f64 {
-        0.
+    fn query(&mut self, _input: Vec<f32>) -> Vec<f32> {
+        let output: Vec<f32> = todo!();
+        output
     }
-    fn query(&self, _input: Vec<f64>) -> Vec<f64> {
-        vec![1., 2., 3.]
+
+    fn train(&mut self, _input: Vec<f32>, _target: Vec<f32>) -> (usize, f32) {
+        let count: usize = 0;
+        let loss: f32 = todo!();
+        (count, loss)
     }
-    fn train(&self, _input: Vec<f64>, _target: Vec<f64>) -> (usize, f64) {
-        (42, 0.5)
-    }
-}*/
+}

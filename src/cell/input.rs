@@ -1,8 +1,8 @@
-use crate::cell::CoreTrait;
+use crate::cell::Nucleus;
 
 struct InputCell(f32);
 
-impl CoreTrait for InputCell {
+impl Nucleus for InputCell {
     fn get_value(&self) -> &f32 {
         &self.0
     }

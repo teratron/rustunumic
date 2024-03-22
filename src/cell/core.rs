@@ -2,9 +2,9 @@
 //!
 //!
 
-use crate::activation::{derivative, Activation};
+use crate::activation::{Activation, derivative};
 use crate::axon::Axon;
-use crate::cell::{CellTrait, CoreTrait};
+use crate::cell::{Neuron, Nucleus};
 
 pub(crate) struct CoreCell {
     /// Neuron value.
@@ -16,45 +16,21 @@ pub(crate) struct CoreCell {
     /// Function activation mode.
     activation_mode: Activation, //Option<Activation>,
 
-    //// All incoming axons.
-    //incoming_axons: Vec<Axon>,
-    /// All axons.
+    /// All incoming and outgoing axons.
     pub(super) synapses: (Vec<Axon>, Option<Vec<Axon>>), //dyn Synapse,
 
     _rate: f32, // TODO: Remove rate.
 }
 
-/*impl CoreCell {
-    // Forward propagation.
-    pub(super) fn calculate_value(&mut self) {
-        self.value = 0.;
-        //for axon in self.incoming_axons {
-        for axon in self.synapses.0 {
-            self.value += axon.calculate_value();
-        }
-    }
+impl CoreCell {}
 
-    // Backward propagation.
-    pub(super) fn calculate_weight(&mut self) {
-        let gradient =
-            self._rate
-                * self.miss
-                * derivative(&(self.value as f64), &self.activation_mode) as f32;
-
-        //for axon in &mut self.incoming_axons {
-        for axon in &mut self.synapses.0 {
-            axon.calculate_weight(&gradient);
-        }
-    }
-}*/
-
-impl CoreTrait for CoreCell {
+impl Nucleus for CoreCell {
     fn get_value(&self) -> &f32 {
         &self.value
     }
 }
 
-impl CellTrait for CoreCell {
+impl Neuron for CoreCell {
     fn get_miss(&self) -> &f32 {
         &self.miss
     }
@@ -78,8 +54,9 @@ impl CellTrait for CoreCell {
     }
 
     fn calculate_weight(&mut self) {
-        let gradient =
-            self._rate * self.miss * derivative(&(self.value as f64), &self.activation_mode) as f32;
+        let gradient = self._rate
+            * self.miss
+            * derivative(&(self.value as f64), &self.activation_mode) as f32;
 
         //for axon in &mut self.incoming_axons {
         for axon in &mut self.synapses.0 {
