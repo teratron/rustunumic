@@ -1,8 +1,13 @@
-use crate::cell::{CellTrait, CoreCell, CoreTrait};
+//! # Output Cell
+//!
+//!
+
+use crate::cell::core::CoreCell;
+use crate::cell::{CellTrait, CoreTrait};
 
 struct OutputCell {
     /// Core cell.
-    cell: CoreCell,
+    core: CoreCell,
 
     /// Target data.
     target: f32,
@@ -12,24 +17,24 @@ impl OutputCell {}
 
 impl CoreTrait for OutputCell {
     fn get_value(&self) -> &f32 {
-        &self.cell.value
+        &self.core.value
     }
 }
 
 impl CellTrait for OutputCell {
     fn get_miss(&self) -> &f32 {
-        &self.cell.miss
+        &self.core.miss
     }
 
     fn calculate_value(&mut self) {
-        self.cell.calculate_value();
+        self.core.calculate_value();
     }
 
     fn calculate_miss(&mut self) {
-        self.cell.miss = self.target - self.cell.value;
+        self.core.miss = self.target - self.core.value;
     }
 
     fn calculate_weight(&mut self) {
-        self.cell.calculate_weight();
+        self.core.calculate_weight();
     }
 }

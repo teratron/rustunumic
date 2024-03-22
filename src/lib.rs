@@ -1,16 +1,37 @@
 #![crate_type = "lib"]
 #![crate_name = "rustunumic"]
 
+//! # Neural network library for Rust
+//!
+//! This is the neural network library.
+//!
+//! For examples, see [examples](https://github.com/teratron/rustunumic/examples).
+
 use crate::activation::Activation;
 use crate::cell::CellTrait;
+use crate::interface::Interface;
 use crate::loss::Loss;
 
 pub mod activation;
+pub mod loss;
+
 mod axon;
 mod cell;
-pub mod loss;
+mod interface;
 mod train;
 
+/// ## Rustunumic
+///
+/// **Example:**
+///
+/// ```rust
+/// use rustunumic::Rustunumic;
+///
+/// let mut rn = Rustunumic::new();
+/// let mut rn_f32 = Rustunumic::<f32>::new();
+/// let mut rn_f64 = Rustunumic::<f64>::new();
+/// ```
+//#[derive(Debug)]
 pub struct Rustunumic {
     /// All neurons.
     neurons: Vec<Box<dyn CellTrait>>,
@@ -52,3 +73,21 @@ impl Rustunumic {
         self.weight += gradient * self.incoming_cell.get_value();
     }
 }
+
+/*impl Interface<T> for Rustunumic<'_, T> {
+    fn verify(&self, _input: Vec<T>, _target: Vec<T>) -> T {
+        let loss: T = todo!();
+        loss
+    }
+
+    fn query(&self, _input: Vec<T>) -> Vec<T> {
+        let output: Vec<T> = todo!();
+        output
+    }
+
+    fn train(&self, _input: Vec<T>, _target: Vec<T>) -> (usize, T) {
+        let count: usize = 0;
+        let loss: T = todo!();
+        (count, loss)
+    }
+}*/
