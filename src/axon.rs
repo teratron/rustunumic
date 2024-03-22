@@ -4,7 +4,7 @@
 
 extern crate rand;
 
-use rand::{Rng, thread_rng};
+use rand::{thread_rng, Rng};
 
 use crate::cell::{Neuron, Nucleus};
 
@@ -44,12 +44,18 @@ impl Axon {
     }
 }
 
-/*pub(super) enum Synapse {
+/*
+pub(super) enum Synapse {
     Incoming(Vec<Axon>),
     Outgoing(Vec<Axon>),
-}*/
+}
+
+trait Synapse {}
+impl Synapse for Vec<Axon> {}
+impl Synapse for (Vec<Axon>, Vec<Axon>)
 
 struct Synapse {
     incoming_axons: Vec<Axon>,
     outgoing_axons: Option<Vec<Axon>>,
 }
+*/
