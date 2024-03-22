@@ -8,7 +8,7 @@ mod hidden;
 mod input;
 mod output;
 
-pub(crate) trait CoreTrait {
+pub(super) trait CoreTrait {
     fn get_value(&self) -> &f32;
 }
 
