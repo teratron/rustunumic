@@ -3,7 +3,7 @@
 //!
 
 use crate::activation::{derivative, Activation};
-use crate::axon::Axon;
+use crate::axon::{Axon, Synapses};
 
 pub(crate) struct CoreCell {
     /// Neuron value.

@@ -4,7 +4,7 @@
 
 use crate::cell::{CellTrait, CoreTrait};
 
-pub(crate) struct Axon {
+pub(super) struct Axon {
     /// Axon weight.
     weight: f32,
 
@@ -30,3 +30,8 @@ impl Axon {
         self.weight += gradient * self.incoming_cell.get_value();
     }
 }
+
+/*pub(super) enum Synapse {
+    Incoming(Vec<Axon>),
+    Outgoing(Vec<Axon>),
+}*/
