@@ -2,16 +2,15 @@
 //!
 //!
 
-use crate::axon::Axon;
-use crate::cell::core::CoreCell;
 use crate::cell::{CellTrait, CoreTrait};
+//use crate::axon::Axon;
+use crate::cell::core::CoreCell;
 
 struct HiddenCell {
     /// Core cell.
     core: CoreCell,
-
-    /// All outgoing axons.
-    outgoing_axons: Vec<Axon>,
+    //// All outgoing axons.
+    //outgoing_axons: Vec<Axon>,
 }
 
 impl HiddenCell {}
@@ -33,7 +32,8 @@ impl CellTrait for HiddenCell {
 
     fn calculate_miss(&mut self) {
         self.core.miss = 0.;
-        for axon in &mut self.outgoing_axons {
+        //for axon in &mut self.outgoing_axons {
+        for axon in self.core.synapses.1.as_mut().unwrap() {
             axon.calculate_miss();
         }
     }

@@ -5,7 +5,7 @@
 use crate::cell::core::CoreCell;
 use crate::cell::{CellTrait, CoreTrait};
 
-struct OutputCell {
+pub(super) struct OutputCell {
     /// Core cell.
     core: CoreCell,
 
