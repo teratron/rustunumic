@@ -2,10 +2,10 @@
 //!
 //!
 
-use crate::activation::{Activation, derivative};
-use crate::axon::Synapse;
+use crate::activation::{derivative, Activation};
 //use crate::axon::Axon;
 use crate::cell::{Neuron, Nucleus};
+use crate::synapse::Synapse;
 
 pub(crate) struct CoreCell {
     /// Neuron value.

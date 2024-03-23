@@ -16,9 +16,10 @@ pub mod loss;
 
 mod axon;
 mod cell;
-mod interface;
-mod train;
 mod float;
+mod interface;
+mod synapse;
+mod train;
 
 /// ## Rustunumic
 ///
@@ -61,7 +62,7 @@ impl Rustunumic {
             loss_mode: Loss::MSE,
         }
     }
-    
+
     // Forward propagation.
     fn calculate_value(&mut self) {
         for neuron in self.neurons.iter_mut() {
