@@ -11,13 +11,14 @@ pub(super) enum SynapseKind {
 }
 
 pub(super) trait Synapse {
-    fn get_incoming_axons(&self) -> &Vec<Axon>;
+    fn get_incoming_axons(&mut self) -> &Vec<Axon>;
     fn get_outgoing_axons(&mut self) -> &Vec<Axon>;
-    fn get_kind(&self, axons: SynapseKind) -> &Vec<Axon>;
+    //fn get_kind(&self, axons: SynapseKind) -> &Vec<Axon>;
+    //axon.get_kind(SynapseKind.Incoming);
 }
 
 impl Synapse for Vec<Axon> {
-    fn get_incoming_axons(&self) -> &Self {
+    fn get_incoming_axons(&mut self) -> &Self {
         self
     }
 
@@ -27,7 +28,7 @@ impl Synapse for Vec<Axon> {
 }
 
 impl Synapse for (Vec<Axon>, Vec<Axon>) {
-    fn get_incoming_axons(&self) -> &Vec<Axon> {
+    fn get_incoming_axons(&mut self) -> &Vec<Axon> {
         &self.0
     }
 
