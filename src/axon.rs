@@ -13,10 +13,10 @@ pub(super) struct Axon {
     weight: f32,
 
     /// Incoming cell (InputCell, BiasCell, HiddenCell).
-    incoming_cell: Box<dyn Nucleus>,
+    incoming_cell: dyn Nucleus,
 
     /// Outgoing cell (HiddenCell, OutputCell).
-    outgoing_cell: Box<dyn Neuron>,
+    outgoing_cell: dyn Neuron,
 }
 
 impl Axon {

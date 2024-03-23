@@ -4,14 +4,16 @@
 
 use crate::axon::Axon;
 
+#[repr(u8)]
 pub(super) enum SynapseKind {
-    Incoming,
+    Incoming = 0,
     Outgoing,
 }
 
 pub(super) trait Synapse {
     fn get_incoming_axons(&self) -> &Vec<Axon>;
     fn get_outgoing_axons(&mut self) -> &Vec<Axon>;
+    fn get_kind(&self, axons: SynapseKind) -> &Vec<Axon>;
 }
 
 impl Synapse for Vec<Axon> {
