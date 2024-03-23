@@ -4,7 +4,7 @@
 
 extern crate rand;
 
-use rand::{thread_rng, Rng};
+use rand::{Rng, thread_rng};
 
 use crate::cell::{Neuron, Nucleus};
 
@@ -12,7 +12,7 @@ pub(super) struct Axon {
     /// Axon weight.
     weight: f32,
 
-    /// Incoming cell (InputCell, HiddenCell, BiasCell).
+    /// Incoming cell (InputCell, BiasCell, HiddenCell).
     incoming_cell: Box<dyn Nucleus>,
 
     /// Outgoing cell (HiddenCell, OutputCell).
@@ -44,15 +44,36 @@ impl Axon {
     }
 }
 
+pub(super) trait Synapse {
+    fn get_incoming_axons(&self) -> &Self;
+    fn get_outgoing_axons(&mut self) -> &Self;
+}
+
+impl Synapse for Vec<Axon> {
+    fn get_incoming_axons(&self) -> &Self {
+        self
+    }
+
+    fn get_outgoing_axons(&mut self) -> &Self {
+        self
+    }
+}
+
+impl Synapse for (Vec<Axon>, Vec<Axon>) {
+    fn get_incoming_axons(&self) -> &Self {
+        self
+    }
+
+    fn get_outgoing_axons(&mut self) -> &Self {
+        self
+    }
+}
+
 /*
 pub(super) enum Synapse {
     Incoming(Vec<Axon>),
     Outgoing(Vec<Axon>),
 }
-
-trait Synapse {}
-impl Synapse for Vec<Axon> {}
-impl Synapse for (Vec<Axon>, Vec<Axon>)
 
 struct Synapse {
     incoming_axons: Vec<Axon>,
