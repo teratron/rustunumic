@@ -37,6 +37,9 @@ pub struct Rustunumic {
     /// All neurons.
     neurons: Vec<Box<dyn Neuron>>,
 
+    /// Bias neuron.
+    bias: Option<bool>,
+
     /// Function activation mode.
     activation_mode: Option<Activation>,
 
@@ -45,9 +48,6 @@ pub struct Rustunumic {
 
     /// Learning rate.
     rate: f32,
-
-    /// Bias neuron.
-    bias: Option<bool>,
 }
 
 impl Rustunumic {
@@ -64,14 +64,16 @@ impl Rustunumic {
     }
 
     // Forward propagation.
-    fn calculate_value(&mut self) {
+    /// Calculating neuron's value.
+    fn calculate_values(&mut self) {
         for neuron in self.neurons.iter_mut() {
             neuron.calculate_value();
         }
     }
 
     // Backward propagation.
-    fn calculate_miss(&mut self) {
+    /// Calculating the error of neuron.
+    fn calculate_misses(&mut self) {
         let mut n: usize = 10; //self.outgoing_axons_last_index;
         while n >= 0 {
             self.neurons[n].calculate_miss();
@@ -79,9 +81,17 @@ impl Rustunumic {
         }
     }
 
-    fn calculate_weight(&mut self, gradient: &f32) {
+    /// Update weights.
+    fn calculate_weights(&mut self) {
         for neuron in self.neurons.iter_mut() {
-            neuron.calculate_weight();
+            neuron.calculate_weight(&self.rate);
+        }
+    }
+
+    /// Calculating and return the total error of the output neurons.
+    fn calculate_loss(&mut self) {
+        for output in self.neurons[1..100].iter_mut() {
+            output.get_miss();
         }
     }
 }

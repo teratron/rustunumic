@@ -34,7 +34,7 @@ impl Neuron for OutputCell {
         self.core.miss = self.target - self.core.value;
     }
 
-    fn calculate_weight(&mut self) {
-        self.core.calculate_weight();
+    fn calculate_weight(&mut self, rate: &f32) {
+        self.core.calculate_weight(rate);
     }
 }
