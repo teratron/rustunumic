@@ -60,6 +60,16 @@ impl Synapse for Vec<Axon> {}
 
 impl Synapse for (Vec<Axon>, Vec<Axon>) {}
 
+pub(super) enum Synapse {
+    Incoming(Vec<Axon>),
+    Outgoing(Vec<Axon>),
+}
+
+struct Synapse {
+    incoming_axons: Vec<Axon>,
+    outgoing_axons: Option<Vec<Axon>>,
+}
+
 struct CoreCell {
     /// Neuron value.
     value: f32,

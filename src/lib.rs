@@ -72,9 +72,9 @@ impl Rustunumic {
 
     // Backward propagation.
     fn calculate_miss(&mut self) {
-        let mut n: usize = self.outgoing_axons_last_index;
+        let mut n: usize = 10; //self.outgoing_axons_last_index;
         while n >= 0 {
-            self.outgoing_axons[n].calculate_miss(self);
+            self.neurons[n].calculate_miss();
             n -= 1;
         }
     }

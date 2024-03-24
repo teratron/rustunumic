@@ -5,7 +5,7 @@
 use crate::activation::{derivative, Activation};
 //use crate::axon::Axon;
 use crate::cell::{Neuron, Nucleus};
-use crate::synapse::Synapse;
+use crate::synapse::{Synapse, SynapseIncoming};
 
 pub(crate) struct CoreCell {
     /// Neuron value.
@@ -19,7 +19,7 @@ pub(crate) struct CoreCell {
 
     /// All incoming and outgoing axons.
     // pub(super) synapses: (Vec<Axon>, Option<Vec<Axon>>),
-    pub(super) synapses: dyn Synapse,
+    pub(super) synapses: Box<dyn Synapse>,
 
     _rate: f32, // TODO: Remove rate.
 }
