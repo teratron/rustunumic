@@ -2,7 +2,6 @@
 //!
 //!
 
-//use std::fmt::{Debug, Formatter};
 use crate::float::Float;
 
 /// ## Activation mode
@@ -36,15 +35,11 @@ pub enum Activation {
     // TODO: ELU, SeLU, SWiSH, ELiSH
 }
 
-/*impl std::primitive::f32 {
-    fn activation(&mut self, mode: &Activation) { 
-    }
-}*/
-
 /// Activation function.
 pub fn get_activation<T: Float>(value: &mut T, mode: &Activation) -> T {
-    activation(value, mode);
-    value
+    let v: &mut T = value;
+    activation(v, mode);
+    v
 }
 
 pub(super) fn activation<T: Float>(value: &mut T, mode: &Activation) {
@@ -70,8 +65,9 @@ pub(super) fn activation<T: Float>(value: &mut T, mode: &Activation) {
 
 /// Derivative activation function.
 pub fn get_derivative<T: Float>(value: &mut T, mode: &Activation) -> T {
-    derivative(value, mode);
-    value
+    let v: &mut T = value;
+    derivative(v, mode);
+    v
 }
 
 pub(super) fn derivative<T: Float>(value: &mut T, mode: &Activation) {
