@@ -29,7 +29,7 @@ pub enum Loss {
     Avg,
 }
 
-pub(super) fn get_loss(value: &f64, mode: &Loss) -> f64 {
+pub(super) fn get_loss<T>(value: &T, mode: &Loss) -> T {
     match mode {
         Loss::Avg => value.abs(),
         Loss::Arctan => value.atan().powi(2),

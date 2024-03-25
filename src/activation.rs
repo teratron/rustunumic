@@ -30,7 +30,7 @@ pub enum Activation {
 
     /// Hyperbolic Tangent.
     TanH,
-    // TODO: ELU, SELU, SWISH, ELiSH
+    // TODO: ELU, SeLU, SWiSH, ELiSH
 }
 
 /// Activation function.

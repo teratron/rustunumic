@@ -2,7 +2,7 @@
 //!
 //!
 
-use crate::activation::{Activation, derivative};
+use crate::activation::{derivative, get_activation, Activation};
 use crate::cell::{Neuron, Nucleus};
 use crate::synapse::{Synapse, SynapseIncoming};
 
@@ -20,7 +20,11 @@ pub(super) struct CoreCell {
     pub(super) synapses: Box<dyn Synapse>,
 }
 
-impl CoreCell {}
+impl CoreCell {
+    fn get_activation(&mut self, mode: &Activation) {
+        get_activation(&mut self.value, mode);
+    }
+}
 
 impl Nucleus for CoreCell {
     fn get_value(&self) -> &f32 {
@@ -39,6 +43,7 @@ impl Neuron for CoreCell {
         for axon in self.synapses.get_incoming_axons() {
             self.value += axon.calculate_value();
         }
+        self.get_activation(&self.activation_mode);
     }
 
     // Backward propagation.
@@ -51,9 +56,7 @@ impl Neuron for CoreCell {
 
     fn calculate_weight(&mut self, rate: &f32) {
         let gradient =
-            *rate
-                * self.miss
-                * derivative(&(self.value as f64), &self.activation_mode) as f32;
+            *rate * self.miss * derivative(&(self.value as f64), &self.activation_mode) as f32;
 
         for axon in &mut self.synapses.get_incoming_axons() {
             axon.calculate_weight(&gradient);

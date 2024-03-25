@@ -92,7 +92,7 @@ impl Rustunumic {
     fn calculate_loss(&mut self) -> f32 {
         let mut loss: f32 = 0.;
         for output in self.neurons[90..100].iter_mut() {
-            loss += get_loss(&(*output.get_miss() as f64), &self.loss_mode) as f32;
+            loss += get_loss(output.get_miss(), &self.loss_mode) as f32;
         }
         loss /= 10.;
         if self.loss_mode == Loss::RMSE {
