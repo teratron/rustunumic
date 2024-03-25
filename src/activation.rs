@@ -2,12 +2,15 @@
 //!
 //!
 
+//use std::fmt::{Debug, Formatter};
+use crate::float::Float;
+
 /// ## Activation mode
 ///
 /// **List of mode:**
 ///
 /// | Mode      | Description                           |
-/// |-----------|---------------------------------------|
+/// |:----------|:--------------------------------------|
 /// | Linear    | Linear/identity                       |
 /// | ReLU      | Rectified Linear Unit                 |
 /// | LeakyReLU | Leaky Rectified Linear Unit           |
@@ -33,33 +36,18 @@ pub enum Activation {
     // TODO: ELU, SeLU, SWiSH, ELiSH
 }
 
-/// Activation function.
-pub fn activation(value: &f64, mode: &Activation) -> f64 {
-    match mode {
-        Activation::Linear => *value,
-        Activation::ReLU => {
-            if *value < 0. {
-                0.
-            } else {
-                *value
-            }
-        }
-        Activation::LeakyReLU => {
-            if *value < 0. {
-                0.01 * *value
-            } else {
-                *value
-            }
-        }
-        Activation::TanH => {
-            let val = (2. * *value).exp();
-            (val - 1.) / (val + 1.)
-        }
-        Activation::Sigmoid => 1. / (1. + (-*value).exp()),
+/*impl std::primitive::f32 {
+    fn activation(&mut self, mode: &Activation) { 
     }
+}*/
+
+/// Activation function.
+pub fn get_activation<T: Float>(value: &mut T, mode: &Activation) -> T {
+    activation(value, mode);
+    value
 }
 
-pub(crate) fn get_activation(value: &mut f64, mode: &Activation) {
+pub(super) fn activation<T: Float>(value: &mut T, mode: &Activation) {
     match mode {
         Activation::Linear => return,
         Activation::ReLU => {
@@ -73,37 +61,20 @@ pub(crate) fn get_activation(value: &mut f64, mode: &Activation) {
             }
         }
         Activation::TanH => {
-            *value = (2. * *value).exp();
-            *value = (*value - 1.) / (*value + 1.);
+            *value = (2. * value).exp();
+            *value = (value - 1.) / (value + 1.);
         }
-        Activation::Sigmoid => *value = 1. / (1. + (-*value).exp()),
+        Activation::Sigmoid => *value = 1. / (1. + (-value).exp()),
     };
 }
 
 /// Derivative activation function.
-pub fn derivative(value: &f64, mode: &Activation) -> f64 {
-    match mode {
-        Activation::Linear => 1.,
-        Activation::ReLU => {
-            if *value < 0. {
-                0.
-            } else {
-                1.
-            }
-        }
-        Activation::LeakyReLU => {
-            if *value < 0. {
-                0.01
-            } else {
-                1.
-            }
-        }
-        Activation::TanH => 1. - value.powf(2.),
-        Activation::Sigmoid => *value * (1. - *value),
-    }
+pub fn get_derivative<T: Float>(value: &mut T, mode: &Activation) -> T {
+    derivative(value, mode);
+    value
 }
 
-pub(crate) fn get_derivative(value: &mut f64, mode: &Activation) {
+pub(super) fn derivative<T: Float>(value: &mut T, mode: &Activation) {
     match mode {
         Activation::Linear => *value = 1.,
         Activation::ReLU => {
@@ -121,7 +92,7 @@ pub(crate) fn get_derivative(value: &mut f64, mode: &Activation) {
             }
         }
         Activation::TanH => *value = 1. - value.powf(2.),
-        Activation::Sigmoid => *value *= 1. - *value,
+        Activation::Sigmoid => *value *= 1. - value,
     }
 }
 

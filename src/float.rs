@@ -1,10 +1,11 @@
-use std::fmt::Debug;
+//use std::fmt::Debug;
 
 const ZERO: f64 = 0.;
 const DEFAULT_RATE: f64 = 0.3;
 
 /// Float trait
-pub trait Float: Debug {
+pub trait Float {
+    //:Debug
     type FloatType;
 
     const ZERO: Self = ZERO;
@@ -12,6 +13,14 @@ pub trait Float: Debug {
 
     fn type_name(&self) -> &'static str;
 }
+
+/*impl<T:Debug> Float for T {
+    type FloatType = T;
+
+    fn type_name(&self) -> &'static str {
+        ""
+    }
+}*/
 
 impl Float for f32 {
     type FloatType = f32;
