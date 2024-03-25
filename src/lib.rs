@@ -9,7 +9,7 @@
 
 use crate::activation::Activation;
 use crate::cell::Neuron;
-use crate::loss::Loss;
+use crate::loss::{get_loss, Loss};
 
 pub mod activation;
 pub mod loss;
@@ -89,9 +89,15 @@ impl Rustunumic {
     }
 
     /// Calculating and return the total error of the output neurons.
-    fn calculate_loss(&mut self) {
-        for output in self.neurons[1..100].iter_mut() {
-            output.get_miss();
+    fn calculate_loss(&mut self) -> f32 {
+        let mut loss: f32 = 0.;
+        for output in self.neurons[90..100].iter_mut() {
+            loss += get_loss(&(*output.get_miss() as f64), &self.loss_mode) as f32;
         }
+        loss /= 10.;
+        if self.loss_mode == Loss::RMSE {
+            loss = loss.sqrt();
+        }
+        loss
     }
 }

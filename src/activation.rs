@@ -4,7 +4,7 @@
 
 /// ## Activation mode
 ///
-/// ### List of mode:
+/// **List of mode:**
 ///
 /// | Mode      | Description                           |
 /// |-----------|---------------------------------------|

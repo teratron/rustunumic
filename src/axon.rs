@@ -12,10 +12,10 @@ pub(super) struct Axon {
     /// Axon weight.
     weight: f32,
 
-    /// Incoming cell (InputCell, BiasCell, HiddenCell).
+    /// Incoming cell (InputCell, BiasCell, CoreCell).
     incoming_cell: dyn Nucleus,
 
-    /// Outgoing cell (HiddenCell, OutputCell).
+    /// Outgoing cell (CoreCell, OutputCell).
     outgoing_cell: dyn Neuron,
 }
 

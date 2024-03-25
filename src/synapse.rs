@@ -4,12 +4,6 @@
 
 use crate::axon::Axon;
 
-#[repr(u8)]
-pub(super) enum SynapseKind {
-    Incoming = 0,
-    Outgoing,
-}
-
 pub(super) trait SynapseIncoming {
     fn get_incoming_axons(&mut self) -> &Vec<Axon>;
 }
