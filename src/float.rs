@@ -3,13 +3,15 @@
 const ZERO: f64 = 0.;
 const DEFAULT_RATE: f64 = 0.3;
 
+//trait FloatAsWeNeedIt: num::Float + 'static {}
+
 /// Float trait
-pub trait Float {
+pub trait Float: PartialEq + PartialOrd {
     //: PartialEq + PartialOrd + Debug
     type FloatType;
 
-    const ZERO: Self = ZERO;
-    const DEFAULT_RATE: Self::FloatType = DEFAULT_RATE;
+    const ZERO: Self;
+    const DEFAULT_RATE: Self;
 
     fn type_name(&self) -> &'static str;
 
@@ -21,6 +23,7 @@ pub trait Float {
     fn atan(&self) -> Self;
 }
 
+// f32.
 impl Float for f32 {
     type FloatType = f32;
 
@@ -35,22 +38,30 @@ impl Float for f32 {
     fn abs(&self) -> Self {
         self.abs()
     }
+
     fn powi(&self, n: i32) -> Self {
         self.powi(n)
     }
+
     fn sqrt(&self) -> Self {
         self.sqrt()
     }
+
     fn exp(&self) -> Self {
         self.exp()
     }
+
     fn atan(&self) -> Self {
         self.atan()
     }
 }
 
+// f64.
 impl Float for f64 {
     type FloatType = f64;
+
+    const ZERO: Self = ZERO;
+    const DEFAULT_RATE: Self::FloatType = DEFAULT_RATE;
 
     fn type_name(&self) -> &'static str {
         "f64"
@@ -60,15 +71,19 @@ impl Float for f64 {
     fn abs(&self) -> Self {
         self.abs()
     }
+
     fn powi(&self, n: i32) -> Self {
         self.powi(n)
     }
+
     fn sqrt(&self) -> Self {
         self.sqrt()
     }
+
     fn exp(&self) -> Self {
         self.exp()
     }
+
     fn atan(&self) -> Self {
         self.atan()
     }

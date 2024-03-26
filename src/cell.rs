@@ -7,13 +7,15 @@ mod core;
 mod input;
 mod output;
 
-pub(super) trait Nucleus {
-    fn get_value(&self) -> &f32;
+// For InputCell, BiasCell, CoreCell (HiddenCell).
+pub(super) trait Nucleus<T> {
+    fn get_value(&self) -> &T;
 }
 
-pub(super) trait Neuron: Nucleus {
-    fn get_miss(&self) -> &f32;
+// For CoreCell (HiddenCell), OutputCell.
+pub(super) trait Neuron<T>: Nucleus<T> {
+    fn get_miss(&self) -> &T;
     fn calculate_value(&mut self);
     fn calculate_miss(&mut self);
-    fn calculate_weight(&mut self, _: &f32);
+    fn calculate_weight(&mut self, _: &T);
 }

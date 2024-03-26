@@ -2,6 +2,8 @@
 //!
 //!
 
+use std::ops::{Add, Mul, Sub};
+
 use crate::float::Float;
 
 /// ## Activation mode
@@ -36,7 +38,11 @@ pub enum Activation {
 }
 
 /// Activation function.
-pub(super) fn activation<T: Float>(value: &mut T, mode: &Activation) {
+pub(super) fn activation<T: Float>(value: &mut T, mode: &Activation)
+where
+    for<'a> &'a mut T: Add<f64>,
+    for<'a> &'a mut T: Sub<f64>,
+{
     match mode {
         Activation::Linear => return,
         Activation::ReLU => {

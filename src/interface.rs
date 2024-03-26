@@ -4,29 +4,29 @@
 
 use crate::Rustunumic;
 
-pub trait Interface {
+pub trait Interface<T> {
     /// Verify
-    fn verify(&mut self, input: Vec<f32>, target: Vec<f32>) -> f32;
+    fn verify(&mut self, input: Vec<T>, target: Vec<T>) -> T;
 
     /// Query
-    fn query(&mut self, input: Vec<f32>) -> Vec<f32>;
+    fn query(&mut self, input: Vec<T>) -> Vec<T>;
 
     /// Train
-    fn train(&mut self, _input: Vec<f32>, _target: Vec<f32>) -> (usize, f32);
+    fn train(&mut self, _input: Vec<T>, _target: Vec<T>) -> (usize, T);
 }
 
-impl Interface for Rustunumic {
-    fn verify(&mut self, _input: Vec<f32>, _target: Vec<f32>) -> f32 {
-        let loss: f32 = todo!();
+impl<T> Interface<T> for Rustunumic<T> {
+    fn verify(&mut self, _input: Vec<T>, _target: Vec<T>) -> T {
+        let loss: T = todo!();
         loss
     }
 
-    fn query(&mut self, _input: Vec<f32>) -> Vec<f32> {
-        let output: Vec<f32> = todo!();
+    fn query(&mut self, _input: Vec<T>) -> Vec<T> {
+        let output: Vec<T> = todo!();
         output
     }
 
-    fn train(&mut self, _input: Vec<f32>, _target: Vec<f32>) -> (usize, f32) {
+    fn train(&mut self, _input: Vec<T>, _target: Vec<T>) -> (usize, T) {
         let count: usize = 0;
         let loss: f32 = todo!();
         (count, loss)

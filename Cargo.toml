@@ -28,9 +28,6 @@ publish = false #["some-registry-name"]
 perceptron = "cargo run --color=always --package perceptron --bin perceptron"
 doc = "cargo doc --open"
 
-[doc]
-browser = "chromium"
-
 [lib]
 #crate-type = ["cdylib"]
 name = "rustunumic"

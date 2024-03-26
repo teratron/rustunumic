@@ -1,9 +1,13 @@
+//! # Input Cell
+//!
+//!
+
 use crate::cell::Nucleus;
 
-struct InputCell(f32);
+struct InputCell<T>(T);
 
-impl Nucleus for InputCell {
-    fn get_value(&self) -> &f32 {
+impl<T> Nucleus<T> for InputCell<T> {
+    fn get_value(&self) -> &T {
         &self.0
     }
 }

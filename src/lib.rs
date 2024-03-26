@@ -9,10 +9,11 @@
 
 // Reexported crates.
 pub use activation::Activation;
+pub use loss::Loss;
 
 use crate::cell::Neuron;
+use crate::float::Float;
 use crate::loss::get_loss;
-pub use crate::loss::Loss;
 
 pub mod activation;
 pub mod loss;
@@ -36,9 +37,9 @@ mod train;
 /// let mut rn_f64 = Rustunumic::<f64>::new();
 /// ```
 //#[derive(Debug)]
-pub struct Rustunumic {
+pub struct Rustunumic<T> {
     /// All neurons.
-    neurons: Vec<Box<dyn Neuron>>,
+    neurons: Vec<Box<dyn Neuron<T>>>,
 
     /// Bias neuron.
     bias: Option<bool>,
@@ -50,23 +51,24 @@ pub struct Rustunumic {
     loss_mode: Loss,
 
     /// Learning rate.
-    rate: f32,
+    rate: T,
 }
 
-impl Rustunumic {
+impl<T: Float> Rustunumic<T> {
     /// Creat new instance.
     pub fn new() -> Self {
         Self {
             //neurons: Box::new(Vec::new()),
             neurons: Vec::new(),
-            rate: 0.3,
             bias: None,
-            activation_mode: None,
+            activation_mode: Some(Activation::ReLU),
             loss_mode: Loss::MSE,
+            rate: 0.3 as T,
         }
     }
 
     // Forward propagation.
+
     /// Calculating neuron's value.
     fn calculate_values(&mut self) {
         for neuron in self.neurons.iter_mut() {
@@ -75,6 +77,7 @@ impl Rustunumic {
     }
 
     // Backward propagation.
+
     /// Calculating the error of neuron.
     fn calculate_misses(&mut self) {
         let mut n: usize = 10; //self.outgoing_axons_last_index;
@@ -92,14 +95,14 @@ impl Rustunumic {
     }
 
     /// Calculating and return the total error of the output neurons.
-    fn calculate_loss<T>(&mut self) -> T {
-        let mut loss: T = 0.;
+    fn calculate_loss(&mut self) -> T {
+        let &mut loss: T = 0.;
         for output in self.neurons[90..100].iter_mut() {
-            loss += get_loss(output.get_miss(), &self.loss_mode);
+            *loss += get_loss(output.get_miss(), &self.loss_mode);
         }
-        loss /= 10.;
+        *loss /= 10.;
         if self.loss_mode == Loss::RMSE {
-            loss = loss.sqrt();
+            *loss = loss.sqrt();
         }
         loss
     }

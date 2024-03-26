@@ -1,9 +1,13 @@
+//! # Bias Cell
+//!
+//!
+
 use crate::cell::Nucleus;
 
 struct BiasCell;
 
-impl Nucleus for BiasCell {
-    fn get_value(&self) -> &f32 {
+impl<T> Nucleus<T> for BiasCell {
+    fn get_value(&self) -> &T {
         &1.
     }
 }

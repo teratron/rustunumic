@@ -4,40 +4,42 @@
 
 use crate::activation::{activation, get_derivative, Activation};
 use crate::cell::{Neuron, Nucleus};
+use crate::float::Float;
 use crate::synapse::Synapse;
 
-pub(super) struct CoreCell {
+pub(super) struct CoreCell<T: Float> {
     /// Neuron value.
-    pub(super) value: f32,
+    pub(super) value: T,
 
     /// Neuron error.
-    pub(super) miss: f32,
+    pub(super) miss: T,
 
     /// Function activation mode.
     activation_mode: Activation, //Option<Activation>,
 
     /// All incoming and outgoing axons.
-    pub(super) synapses: Box<dyn Synapse>,
+    synapses: Box<dyn Synapse<T>>,
 }
 
-impl CoreCell {
+impl<T: Float> CoreCell<T> {
     /*fn get_activation(&mut self, mode: &Activation) {
         get_activation(&mut self.value, mode);
     }*/
 }
 
-impl Nucleus for CoreCell {
-    fn get_value(&self) -> &f32 {
+impl<T: Float> Nucleus<T> for CoreCell<T> {
+    fn get_value(&self) -> &T {
         &self.value
     }
 }
 
-impl Neuron for CoreCell {
-    fn get_miss(&self) -> &f32 {
+impl<T: Float> Neuron<T> for CoreCell<T> {
+    fn get_miss(&self) -> &T {
         &self.miss
     }
 
     // Forward propagation.
+
     fn calculate_value(&mut self) {
         self.value = 0.;
         for axon in self.synapses.get_incoming_axons() {
@@ -48,6 +50,7 @@ impl Neuron for CoreCell {
     }
 
     // Backward propagation.
+
     fn calculate_miss(&mut self) {
         self.miss = 0.;
         for axon in self.synapses.get_outgoing_axons() {
@@ -55,10 +58,10 @@ impl Neuron for CoreCell {
         }
     }
 
-    fn calculate_weight(&mut self, rate: &f32) {
-        let gradient = *rate * self.miss * get_derivative(&mut self.value, &self.activation_mode);
+    fn calculate_weight(&mut self, rate: &T) {
+        let gradient = rate * *self.miss * get_derivative(&mut self.value, &self.activation_mode);
 
-        for axon in self.synapses.get_incoming_axons() {
+        for axon in self.synapses.get_incoming_axons().iter_mut() {
             axon.calculate_weight(&gradient);
         }
     }

@@ -2,32 +2,34 @@
 //!
 //!
 
-use crate::axon::Axon;
+use crate::float::Float;
 
-pub(super) trait SynapseIncoming {
-    fn get_incoming_axons(&mut self) -> &Vec<Axon>;
+use super::axon::Axon;
+
+pub(super) trait SynapseIncoming<T: Float> {
+    fn get_incoming_axons(&mut self) -> &Vec<Axon<T>>;
 }
 
-pub(super) trait Synapse: SynapseIncoming {
-    fn get_outgoing_axons(&mut self) -> &Vec<Axon>;
+pub(super) trait Synapse<T: Float>: SynapseIncoming<T> {
+    fn get_outgoing_axons(&mut self) -> &Vec<Axon<T>>;
 }
 
-// For Vec<Axon>
-impl SynapseIncoming for Vec<Axon> {
+// For type Vec<Axon<T>>
+impl<T: Float> SynapseIncoming<T> for Vec<Axon<T>> {
     fn get_incoming_axons(&mut self) -> &Self {
         self
     }
 }
 
-// For (Vec<Axon>, Vec<Axon>)
-impl SynapseIncoming for (Vec<Axon>, Vec<Axon>) {
-    fn get_incoming_axons(&mut self) -> &Vec<Axon> {
+// For type (Vec<Axon<T>>, Vec<Axon<T>>)
+impl<T: Float> SynapseIncoming<T> for (Vec<Axon<T>>, Vec<Axon<T>>) {
+    fn get_incoming_axons(&mut self) -> &Vec<Axon<T>> {
         &self.0
     }
 }
 
-impl Synapse for (Vec<Axon>, Vec<Axon>) {
-    fn get_outgoing_axons(&mut self) -> &Vec<Axon> {
+impl<T: Float> Synapse<T> for (Vec<Axon<T>>, Vec<Axon<T>>) {
+    fn get_outgoing_axons(&mut self) -> &Vec<Axon<T>> {
         &self.1
     }
 }
