@@ -9,7 +9,6 @@ const DEFAULT_RATE: f64 = 0.3;
 pub trait Float: PartialEq + PartialOrd {
     //: PartialEq + PartialOrd + Debug
     type FloatType;
-
     const ZERO: Self;
     const DEFAULT_RATE: Self;
 
@@ -26,7 +25,6 @@ pub trait Float: PartialEq + PartialOrd {
 // f32.
 impl Float for f32 {
     type FloatType = f32;
-
     const ZERO: Self = ZERO as Self;
     const DEFAULT_RATE: Self = DEFAULT_RATE as Self;
 
@@ -59,7 +57,6 @@ impl Float for f32 {
 // f64.
 impl Float for f64 {
     type FloatType = f64;
-
     const ZERO: Self = ZERO;
     const DEFAULT_RATE: Self::FloatType = DEFAULT_RATE;
 
@@ -86,5 +83,65 @@ impl Float for f64 {
 
     fn atan(&self) -> Self {
         self.atan()
+    }
+}
+
+impl Float for &f32 {
+    type FloatType = Self;
+    const ZERO: Self = &0.;
+    const DEFAULT_RATE: Self = &0.3;
+
+    fn type_name(&self) -> &'static str {
+        todo!()
+    }
+
+    fn abs(&self) -> Self {
+        todo!()
+    }
+
+    fn powi(&self, n: i32) -> Self {
+        todo!()
+    }
+
+    fn sqrt(&self) -> Self {
+        todo!()
+    }
+
+    fn exp(&self) -> Self {
+        todo!()
+    }
+
+    fn atan(&self) -> Self {
+        todo!()
+    }
+}
+
+impl Float for &f64 {
+    type FloatType = Self;
+    const ZERO: Self = &0.;
+    const DEFAULT_RATE: Self = &0.3;
+
+    fn type_name(&self) -> &'static str {
+        todo!()
+    }
+
+    fn abs(&self) -> Self {
+        todo!()
+    }
+
+    fn powi(&self, n: i32) -> Self {
+        todo!()
+    }
+
+    fn sqrt(&self) -> Self {
+        todo!()
+    }
+
+    fn exp(&self) -> Self {
+        todo!()
+    }
+
+    fn atan(&self) -> Self {
+        todo!()
     }
 }
