@@ -7,9 +7,12 @@
 //!
 //! For examples, see [examples](https://github.com/teratron/rustunumic/examples).
 
-use crate::activation::Activation;
+// Reexported crates.
+pub use activation::Activation;
+
 use crate::cell::Neuron;
-use crate::loss::{get_loss, Loss};
+use crate::loss::get_loss;
+pub use crate::loss::Loss;
 
 pub mod activation;
 pub mod loss;
@@ -89,10 +92,10 @@ impl Rustunumic {
     }
 
     /// Calculating and return the total error of the output neurons.
-    fn calculate_loss(&mut self) -> f32 {
-        let mut loss: f32 = 0.;
+    fn calculate_loss<T>(&mut self) -> T {
+        let mut loss: T = 0.;
         for output in self.neurons[90..100].iter_mut() {
-            loss += get_loss(output.get_miss(), &self.loss_mode) as f32;
+            loss += get_loss(output.get_miss(), &self.loss_mode);
         }
         loss /= 10.;
         if self.loss_mode == Loss::RMSE {

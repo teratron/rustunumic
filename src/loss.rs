@@ -2,6 +2,8 @@
 //!
 //!
 
+use crate::float::Float;
+
 /// ## Loss mode
 ///
 /// **List of mode:**
@@ -29,10 +31,25 @@ pub enum Loss {
     Avg,
 }
 
-pub(super) fn get_loss<T>(value: &T, mode: &Loss) -> T {
+pub(super) fn get_loss<T: Float>(value: &T, mode: &Loss) -> T {
     match mode {
         Loss::Avg => value.abs(),
         Loss::Arctan => value.atan().powi(2),
         Loss::MSE | Loss::RMSE | _ => value.powi(2),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_loss() {
+        let value = 2.;
+
+        assert_eq!(get_loss(&value, &Loss::MSE), 4.);
+        assert_eq!(get_loss(&value, &Loss::RMSE), 4.);
+        assert_eq!(get_loss(&value, &Loss::Avg), 2.);
+        assert_eq!(get_loss(&value, &Loss::Arctan), value.atan().powi(2));
     }
 }

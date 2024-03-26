@@ -36,12 +36,6 @@ pub enum Activation {
 }
 
 /// Activation function.
-pub fn get_activation<T: Float>(value: &mut T, mode: &Activation) -> T {
-    let v: &mut T = value;
-    activation(v, mode);
-    v
-}
-
 pub(super) fn activation<T: Float>(value: &mut T, mode: &Activation) {
     match mode {
         Activation::Linear => return,
@@ -60,16 +54,16 @@ pub(super) fn activation<T: Float>(value: &mut T, mode: &Activation) {
             *value = (value - 1.) / (value + 1.);
         }
         Activation::Sigmoid => *value = 1. / (1. + (-value).exp()),
-    };
+    }
 }
 
-/// Derivative activation function.
-pub fn get_derivative<T: Float>(value: &mut T, mode: &Activation) -> T {
+pub fn get_activation<T: Float>(value: &mut T, mode: &Activation) -> T {
     let v: &mut T = value;
-    derivative(v, mode);
+    activation(v, mode);
     v
 }
 
+/// Derivative activation function.
 pub(super) fn derivative<T: Float>(value: &mut T, mode: &Activation) {
     match mode {
         Activation::Linear => *value = 1.,
@@ -87,9 +81,15 @@ pub(super) fn derivative<T: Float>(value: &mut T, mode: &Activation) {
                 *value = 1.;
             }
         }
-        Activation::TanH => *value = 1. - value.powf(2.),
+        Activation::TanH => *value = 1. - value.powi(2),
         Activation::Sigmoid => *value *= 1. - value,
     }
+}
+
+pub fn get_derivative<T: Float>(value: &mut T, mode: &Activation) -> T {
+    let v: &mut T = value;
+    derivative(v, mode);
+    v
 }
 
 #[cfg(test)]

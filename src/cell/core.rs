@@ -2,9 +2,9 @@
 //!
 //!
 
-use crate::activation::{activation, Activation, get_derivative};
+use crate::activation::{activation, get_derivative, Activation};
 use crate::cell::{Neuron, Nucleus};
-use crate::synapse::{Synapse, SynapseIncoming};
+use crate::synapse::Synapse;
 
 pub(super) struct CoreCell {
     /// Neuron value.
@@ -56,10 +56,9 @@ impl Neuron for CoreCell {
     }
 
     fn calculate_weight(&mut self, rate: &f32) {
-        let gradient =
-            *rate * self.miss * get_derivative(&mut self.value, &self.activation_mode);
+        let gradient = *rate * self.miss * get_derivative(&mut self.value, &self.activation_mode);
 
-        for axon in &mut self.synapses.get_incoming_axons() {
+        for axon in self.synapses.get_incoming_axons() {
             axon.calculate_weight(&gradient);
         }
     }
