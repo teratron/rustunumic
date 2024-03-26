@@ -86,7 +86,7 @@ impl Float for f64 {
     }
 }
 
-impl Float for &f32 {
+/*impl Float for &f32 {
     type FloatType = Self;
     const ZERO: Self = &0.;
     const DEFAULT_RATE: Self = &0.3;
@@ -145,3 +145,4 @@ impl Float for &f64 {
         todo!()
     }
 }
+*/
