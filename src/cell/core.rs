@@ -3,9 +3,10 @@
 //!
 
 use crate::activation::{activation, get_derivative, Activation};
-use crate::cell::{Neuron, Nucleus};
 use crate::float::Float;
 use crate::synapse::Synapse;
+
+use super::{Neuron, Nucleus};
 
 pub(super) struct CoreCell<T: Float> {
     /// Neuron value.

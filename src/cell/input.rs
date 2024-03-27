@@ -2,7 +2,7 @@
 //!
 //!
 
-use crate::cell::Nucleus;
+use super::Nucleus;
 
 struct InputCell<T>(T);
 

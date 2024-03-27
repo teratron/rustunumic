@@ -1,6 +1,6 @@
 //use std::fmt::Debug;
 
-use std::ops::DivAssign;
+use std::ops::{Add, DivAssign, Sub};
 
 const ZERO: f64 = 0.;
 const DEFAULT_RATE: f64 = 0.3;
@@ -8,7 +8,7 @@ const DEFAULT_RATE: f64 = 0.3;
 //trait FloatAsWeNeedIt: num::Float + 'static {}
 
 /// Float trait
-pub trait Float: PartialEq + PartialOrd + DivAssign {
+pub trait Float: PartialEq + PartialOrd + Default + Add + Sub + DivAssign {
     //: PartialEq + PartialOrd + Debug
     type FloatType;
     const ZERO: Self;

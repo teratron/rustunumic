@@ -2,10 +2,10 @@
 //!
 //!
 
-use crate::cell::{Neuron, Nucleus};
 use crate::float::Float;
 
 use super::core::CoreCell;
+use super::{Neuron, Nucleus};
 
 pub(super) struct OutputCell<T: Float> {
     /// Core cell.
