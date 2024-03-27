@@ -1,12 +1,14 @@
 //use std::fmt::Debug;
 
+use std::ops::DivAssign;
+
 const ZERO: f64 = 0.;
 const DEFAULT_RATE: f64 = 0.3;
 
 //trait FloatAsWeNeedIt: num::Float + 'static {}
 
 /// Float trait
-pub trait Float: PartialEq + PartialOrd {
+pub trait Float: PartialEq + PartialOrd + DivAssign {
     //: PartialEq + PartialOrd + Debug
     type FloatType;
     const ZERO: Self;
@@ -85,64 +87,3 @@ impl Float for f64 {
         self.atan()
     }
 }
-
-/*impl Float for &f32 {
-    type FloatType = Self;
-    const ZERO: Self = &0.;
-    const DEFAULT_RATE: Self = &0.3;
-
-    fn type_name(&self) -> &'static str {
-        todo!()
-    }
-
-    fn abs(&self) -> Self {
-        todo!()
-    }
-
-    fn powi(&self, n: i32) -> Self {
-        todo!()
-    }
-
-    fn sqrt(&self) -> Self {
-        todo!()
-    }
-
-    fn exp(&self) -> Self {
-        todo!()
-    }
-
-    fn atan(&self) -> Self {
-        todo!()
-    }
-}
-
-impl Float for &f64 {
-    type FloatType = Self;
-    const ZERO: Self = &0.;
-    const DEFAULT_RATE: Self = &0.3;
-
-    fn type_name(&self) -> &'static str {
-        todo!()
-    }
-
-    fn abs(&self) -> Self {
-        todo!()
-    }
-
-    fn powi(&self, n: i32) -> Self {
-        todo!()
-    }
-
-    fn sqrt(&self) -> Self {
-        todo!()
-    }
-
-    fn exp(&self) -> Self {
-        todo!()
-    }
-
-    fn atan(&self) -> Self {
-        todo!()
-    }
-}
-*/

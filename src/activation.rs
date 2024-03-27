@@ -38,17 +38,12 @@ pub enum Activation {
 }
 
 /// Activation function.
-pub(super) fn activation<T: Float>(value: &mut T, mode: &Activation)
-where
-    for<'a> &'a mut T: Add<f64>,
-    for<'a> &'a mut T: Sub<f64>,
-    for<'a> &'a mut T: Mul<f64>,
-{
+pub(super) fn activation<T: Float>(value: &mut T, mode: &Activation) {
     match mode {
         Activation::Linear => return,
         Activation::ReLU => {
-            if *value < 0. {
-                *value = 0.;
+            if *value < T::ZERO {
+                *value = T::ZERO;
             }
         }
         Activation::LeakyReLU => {
