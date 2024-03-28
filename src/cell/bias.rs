@@ -2,12 +2,14 @@
 //!
 //!
 
+use crate::float::Float;
+
 use super::Nucleus;
 
 struct BiasCell;
 
-impl<T> Nucleus<T> for BiasCell {
+impl<T: Float> Nucleus<T> for BiasCell {
     fn get_value(&self) -> &T {
-        &1.
+        &T::ONE
     }
 }

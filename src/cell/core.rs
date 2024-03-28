@@ -2,7 +2,7 @@
 //!
 //!
 
-use crate::activation::{activation, get_derivative, Activation};
+use crate::activation::{activation, derivative, Activation};
 use crate::float::Float;
 use crate::synapse::Synapse;
 
@@ -42,25 +42,25 @@ impl<T: Float> Neuron<T> for CoreCell<T> {
     // Forward propagation.
 
     fn calculate_value(&mut self) {
-        self.value = 0.;
+        self.value = T::ZERO;
         for axon in self.synapses.get_incoming_axons() {
             self.value += axon.calculate_value();
         }
         //self.get_activation(&self.activation_mode);
-        activation(&mut self.value, &self.activation_mode);
+        activation(self.value, &self.activation_mode);
     }
 
     // Backward propagation.
 
     fn calculate_miss(&mut self) {
-        self.miss = 0.;
+        self.miss = T::ZERO;
         for axon in self.synapses.get_outgoing_axons() {
             axon.calculate_miss();
         }
     }
 
     fn calculate_weight(&mut self, rate: &T) {
-        let gradient = rate * *self.miss * get_derivative(&mut self.value, &self.activation_mode);
+        let gradient = *rate * self.miss * derivative(self.value, &self.activation_mode);
 
         for axon in self.synapses.get_incoming_axons().iter_mut() {
             axon.calculate_weight(&gradient);

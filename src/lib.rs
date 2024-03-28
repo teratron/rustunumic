@@ -63,7 +63,7 @@ impl<T: Float> Rustunumic<T> {
             bias: None,
             activation_mode: Some(Activation::ReLU),
             loss_mode: Loss::MSE,
-            rate: 0.3 as T,
+            rate: T::DEFAULT_RATE,
         }
     }
 
@@ -96,13 +96,13 @@ impl<T: Float> Rustunumic<T> {
 
     /// Calculating and return the total error of the output neurons.
     fn calculate_loss(&mut self) -> T {
-        let &mut loss: T = 0.;
+        let mut loss = T::ZERO;
         for output in self.neurons[90..100].iter_mut() {
-            *loss += get_loss(output.get_miss(), &self.loss_mode);
+            loss += get_loss(output.get_miss(), &self.loss_mode);
         }
-        *loss /= 10.;
+        loss /= T::from(10.);
         if self.loss_mode == Loss::RMSE {
-            *loss = loss.sqrt();
+            loss = loss.sqrt();
         }
         loss
     }

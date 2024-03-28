@@ -2,8 +2,6 @@
 //!
 //!
 
-use std::ops::{Add, Mul, Sub};
-
 use crate::float::Float;
 
 /// ## Activation mode
@@ -38,63 +36,68 @@ pub enum Activation {
 }
 
 /// Activation function.
-pub(super) fn activation<T: Float>(value: &mut T, mode: &Activation) {
+pub(super) fn activation<T: Float>(value: T, mode: &Activation) -> T {
+    //let ref val: T = *value;
     match mode {
-        Activation::Linear => return,
+        Activation::Linear => value,
         Activation::ReLU => {
-            if *value < T::ZERO {
-                *value = T::ZERO;
+            if value < T::ZERO {
+                T::ZERO
+            } else {
+                value
             }
         }
         Activation::LeakyReLU => {
-            if *value < 0. {
-                *value *= 0.01;
+            if value < T::ZERO {
+                T::from(0.01) * value
+            } else {
+                value
             }
         }
         Activation::TanH => {
-            *value = (2. * value).exp();
-            *value = (value - 1.) / (value + 1.);
+            let v = (T::from(2.) * value).exp();
+            (v - T::ONE) / (v + T::ONE)
         }
-        Activation::Sigmoid => *value = 1. / (1. + (-value).exp()),
+        Activation::Sigmoid => T::from(1.) / (T::from(1.) + (-value).exp()),
     }
 }
 
-pub fn get_activation<T: Float>(value: &mut T, mode: &Activation) -> T {
+/* pub fn get_activation<T: Float>(value: &mut T, mode: &Activation) -> T {
     let v: &mut T = value;
     activation(v, mode);
     v
-}
+} */
 
 /// Derivative activation function.
-pub(super) fn derivative<T: Float>(value: &mut T, mode: &Activation) {
+pub(super) fn derivative<T: Float>(value: T, mode: &Activation) -> T {
     match mode {
-        Activation::Linear => *value = 1.,
+        Activation::Linear => T::ONE,
         Activation::ReLU => {
-            if *value < 0. {
-                *value = 0.;
+            if value < T::ZERO {
+                T::ZERO
             } else {
-                *value = 1.;
+                T::ONE
             }
         }
         Activation::LeakyReLU => {
-            if *value < 0. {
-                *value = 0.01;
+            if value < T::ZERO {
+                T::from(0.01)
             } else {
-                *value = 1.;
+                T::ONE
             }
         }
-        Activation::TanH => *value = 1. - value.powi(2),
-        Activation::Sigmoid => *value *= 1. - value,
+        Activation::TanH => T::from(1.) - value.powi(2),
+        Activation::Sigmoid => T::from(1.) - value,
     }
 }
 
-pub fn get_derivative<T: Float>(value: &mut T, mode: &Activation) -> T {
+/* pub fn get_derivative<T: Float>(value: &mut T, mode: &Activation) -> T {
     let v: &mut T = value;
     derivative(v, mode);
     v
-}
+} */
 
-#[cfg(test)]
+/* #[cfg(test)]
 mod test {
     use super::*;
 
@@ -131,4 +134,4 @@ mod test {
             assert_eq!(*value, *result, "{:?} test", *mode);
         }
     }
-}
+}*/

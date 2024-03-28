@@ -33,7 +33,7 @@ impl<T: Float> Neuron<T> for OutputCell<T> {
     }
 
     fn calculate_miss(&mut self) {
-        self.core.miss = *self.target - *self.core.value;
+        self.core.miss = self.target - self.core.value;
     }
 
     fn calculate_weight(&mut self, rate: &T) {

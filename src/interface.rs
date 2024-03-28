@@ -2,7 +2,7 @@
 //!
 //!
 
-use crate::Rustunumic;
+use crate::{float::Float, Rustunumic};
 
 pub trait Interface<T> {
     /// Verify
@@ -15,20 +15,20 @@ pub trait Interface<T> {
     fn train(&mut self, _input: Vec<T>, _target: Vec<T>) -> (usize, T);
 }
 
-impl<T> Interface<T> for Rustunumic<T> {
+impl<T: Float> Interface<T> for Rustunumic<T> {
     fn verify(&mut self, _input: Vec<T>, _target: Vec<T>) -> T {
-        let loss: T = todo!();
+        let loss: T = T::ZERO;
         loss
     }
 
     fn query(&mut self, _input: Vec<T>) -> Vec<T> {
-        let output: Vec<T> = todo!();
+        let output: Vec<T> = vec![T::ZERO; 10];
         output
     }
 
     fn train(&mut self, _input: Vec<T>, _target: Vec<T>) -> (usize, T) {
         let count: usize = 0;
-        let loss: f32 = todo!();
+        let loss: T = T::ZERO;
         (count, loss)
     }
 }
