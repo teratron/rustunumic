@@ -1,14 +1,15 @@
 [package]
-name = "cli"
+name = "rustunumic-cli"
 version = "0.1.0"
 edition = "2021"
 categories = ["command-line-utilities"]
 
 [dependencies]
-
-[dev-dependencies]
 dotenv-vault = "0.1.1"
 
+[dev-dependencies]
+
+[build-dependencies]
 
 [[bin]]
 name = "rustunumic"
