@@ -1,4 +1,6 @@
-//use std::fmt::Debug;
+//! # Float
+//!
+//!
 
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, Neg, Sub};
 
@@ -7,8 +9,6 @@ const ONE: f64 = 1.;
 const TWO: f64 = 2.;
 const DEFAULT_RATE: f64 = 0.3;
 const DEFAULT_RAND: f64 = 0.5;
-
-//trait FloatAsWeNeedIt: num::Float + 'static {}
 
 /// Float trait
 pub trait Float
@@ -32,6 +32,7 @@ where
     const DEFAULT_RATE: Self;
     const DEFAULT_RAND: Self;
 
+    fn from(x: f64) -> Self;
     fn type_name(&self) -> &'static str;
 
     // Math functions.
@@ -54,8 +55,6 @@ where
     fn atan(&self) -> Self {
         self.atan()
     }
-
-    fn from(x: f64) -> Self;
 }
 
 // f32.
@@ -68,12 +67,12 @@ impl Float for f32 {
     const DEFAULT_RATE: Self = DEFAULT_RATE as Self;
     const DEFAULT_RAND: Self = DEFAULT_RAND as Self;
 
-    fn type_name(&self) -> &'static str {
-        "f32"
-    }
-
     fn from(x: f64) -> Self {
         x as Self::FloatType
+    }
+
+    fn type_name(&self) -> &'static str {
+        "f32"
     }
 }
 
@@ -87,11 +86,11 @@ impl Float for f64 {
     const DEFAULT_RATE: Self::FloatType = DEFAULT_RATE;
     const DEFAULT_RAND: Self::FloatType = DEFAULT_RAND;
 
-    fn type_name(&self) -> &'static str {
-        "f64"
-    }
-
     fn from(x: f64) -> Self {
         x
+    }
+
+    fn type_name(&self) -> &'static str {
+        "f64"
     }
 }

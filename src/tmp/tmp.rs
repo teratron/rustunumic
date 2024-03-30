@@ -45,6 +45,12 @@ fn main() {
     println!("{:#?} {:#?}", fs_32.f, fs_64.f)
 }
 
+/*impl PartialEq for Loss {
+    fn eq(&self, other: &Self) -> bool {
+        todo!()
+    }
+}*/
+
 /*fn calculate_miss(&mut self) {
     let mut n: usize = self.outgoing_axons_last_index;
     while n >= 0 {

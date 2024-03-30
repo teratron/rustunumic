@@ -1,5 +1,16 @@
 #![crate_type = "lib"]
 #![crate_name = "rustunumic"]
+/*#![deny(
+    rust_2021_compatibility,
+    future_incompatible,
+    nonstandard_style,
+    clippy::all,
+    clippy::doc_markdown,
+    missing_docs,
+    missing_copy_implementations,
+    missing_debug_implementations
+)] //unused,
+*/
 
 //! # Neural network library for Rust
 //!
