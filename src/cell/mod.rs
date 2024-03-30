@@ -2,11 +2,6 @@
 //!
 //!
 
-// pub use core::*;
-// pub use core::*;
-// pub use input::*;
-// pub use output::*;
-
 mod bias;
 mod core;
 mod input;
