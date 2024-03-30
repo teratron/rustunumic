@@ -23,10 +23,12 @@ include = [
 ]
 publish = false #["some-registry-name"]
 
-# For VSCode
 [package.metadata.scripts]
-perceptron = "cargo run --color=always --package perceptron --bin perceptron"
+check = "cargo check"
 doc = "cargo doc --open"
+run = "cargo run --color=always --package perceptron --bin perceptron"
+build = "cargo build"
+build-release = "cargo build --release"
 
 [lib]
 #crate-type = ["cdylib"]
