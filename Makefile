@@ -1,5 +1,5 @@
 
-# Dotenv.
+# Dotenv
 ##########################################################
 
 dotenv-new: ## connect to it locally (one-time setup)
@@ -21,13 +21,13 @@ dotenv-push: ## push yours up
 	npx dotenv-vault@latest push production
 #npx dotenv-vault@latest push example
 
-# Git.
+# Git
 ##########################################################
 
 set-url: ## git remote set-url origin git@github.com:login/repo.git
 	git remote set-url origin git@github.com:teratron/rustunumic.git
 
-# Help.
+# Help
 ##########################################################
 
 .PHONY: help
