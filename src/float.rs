@@ -4,6 +4,8 @@
 
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, Neg, Sub};
 
+use super::loss::LOSS_LIMIT;
+
 const ZERO: f64 = 0.;
 const ONE: f64 = 1.;
 const TWO: f64 = 2.;
@@ -31,6 +33,7 @@ where
     const TWO: Self;
     const DEFAULT_RATE: Self;
     const DEFAULT_RAND: Self;
+    const LOSS_LIMIT: Self;
 
     fn from(x: f64) -> Self;
     fn type_name(&self) -> &'static str;
@@ -66,6 +69,7 @@ impl Float for f32 {
     const TWO: Self = TWO as Self;
     const DEFAULT_RATE: Self = DEFAULT_RATE as Self;
     const DEFAULT_RAND: Self = DEFAULT_RAND as Self;
+    const LOSS_LIMIT: Self = LOSS_LIMIT as Self;
 
     fn from(x: f64) -> Self {
         x as Self::FloatType
@@ -80,11 +84,12 @@ impl Float for f32 {
 impl Float for f64 {
     type FloatType = f64;
 
-    const ZERO: Self = ZERO;
-    const ONE: Self = ONE;
-    const TWO: Self = TWO;
+    const ZERO: Self::FloatType = ZERO;
+    const ONE: Self::FloatType = ONE;
+    const TWO: Self::FloatType = TWO;
     const DEFAULT_RATE: Self::FloatType = DEFAULT_RATE;
     const DEFAULT_RAND: Self::FloatType = DEFAULT_RAND;
+    const LOSS_LIMIT: Self::FloatType = LOSS_LIMIT;
 
     fn from(x: f64) -> Self {
         x

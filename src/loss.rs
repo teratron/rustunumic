@@ -4,6 +4,8 @@
 
 use crate::float::Float;
 
+pub(super) const LOSS_LIMIT: f64 = 1E-10;
+
 /// ## Loss mode
 ///
 /// **List of mode:**
