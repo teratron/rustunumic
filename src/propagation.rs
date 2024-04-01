@@ -15,12 +15,13 @@ impl<T: Float> Rustunumic<T> {
     // Backward propagation.
 
     /// Calculating the error of neuron.
-    pub(super) fn calculate_misses(&mut self) {
+    pub(super) fn calculate_misses(&mut self) -> &mut Self {
         let mut n: usize = 10; //self.outgoing_axons_last_index;
         while n >= 0 {
             self.neurons[n].calculate_miss();
             n -= 1;
         }
+        self
     }
 
     /// Calculating and return the total error of the output neurons.

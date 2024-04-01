@@ -64,6 +64,8 @@ pub struct Rustunumic<T> {
 
     /// Learning rate.
     rate: T,
+
+    is_init: bool,
 }
 
 impl<T: Float> Rustunumic<T> {
@@ -76,6 +78,7 @@ impl<T: Float> Rustunumic<T> {
             activation_mode: Some(Activation::ReLU),
             loss_mode: Loss::MSE,
             rate: T::DEFAULT_RATE,
+            is_init: false,
         }
     }
 }
