@@ -9,8 +9,7 @@
     missing_docs,
     missing_copy_implementations,
     missing_debug_implementations
-)] //unused,
-*/
+)] //unused,*/
 
 //! # Neural network library for Rust
 //!
@@ -23,7 +22,7 @@ pub use activation::Activation;
 pub use loss::Loss;
 
 use crate::cell::Neuron;
-use crate::float::Float;
+pub(crate) use crate::float::Float;
 
 pub mod activation;
 pub mod loss;
@@ -33,8 +32,10 @@ mod cell;
 mod float;
 mod interface;
 mod propagation;
+mod query;
 mod synapse;
 mod train;
+mod verify;
 
 /// ## Rustunumic
 ///

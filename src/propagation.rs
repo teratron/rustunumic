@@ -1,5 +1,5 @@
-use super::float::Float;
 use super::loss::{get_loss, Loss};
+use super::Float;
 use super::Rustunumic;
 
 impl<T: Float> Rustunumic<T> {
