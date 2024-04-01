@@ -38,7 +38,7 @@ fn main() {
 
     // Training.
     for _ in 10_000 {
-        for i in (len_input..len_data) {
+        for i in len_input..len_data {
             let (num, loss) = rn.train(&dataset[i - len_input..i], &dataset[i..i + len_output]);
         }
 
