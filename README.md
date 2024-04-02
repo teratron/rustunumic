@@ -1,5 +1,9 @@
 # Rustunumic
 
+![Crates.io License (version)](https://img.shields.io/crates/l/rustunumic/0.1.0?style=flat)
+![docs.rs (with version)](https://img.shields.io/docsrs/rustunumic/0.1.0?style=flat&logo=docs.rs)
+![Crates.io Total Downloads](https://img.shields.io/crates/d/rustunumic?style=flat&logo=rust)
+![Crates.io Version](https://img.shields.io/crates/v/rustunumic?style=flat&logo=rust&label=rustunumic)
 [![fork with dotenv-vault](https://badge.dotenv.org/fork.svg?r=1)](https://vault.dotenv.org/project/vlt_ea1a620a9e0e1bad96488e86eff7a82a82b6eef20c8d40c0ae0bac94029e6191/example)
 
 ---
@@ -9,8 +13,6 @@
 Simple neural network library for rust.
 
 ## Visuals
-
-
 
 ## Installation
 
@@ -28,8 +30,8 @@ fn main() {
     let mut rn = Rustunumic::new();
 
     // Dataset.
-    data_input  = [0.27, 0.31]
-    data_target = [0.7]
+    data_input = [0.27, 0.31];
+    data_target = [0.7];
 
     // Training dataset.
     let (num, loss) = rn.train(&data_input, &data_target);
@@ -58,11 +60,11 @@ ActivationMode function mode (required field for a config).
 
 | Activation | Description                              |
 |------------|------------------------------------------|
-| LINEAR     | Linear/identity                          |
-| RELU       | ReLu (rectified linear unit)             |
-| LEAKY_RELU | Leaky ReLu (leaky rectified linear unit) |
-| SIGMOID    | Logistic, a.k.a. sigmoid or soft step    |
-| TANH       | TanH (hyperbolic tangent)                |
+| Linear     | Linear/identity                          |
+| ReLU       | ReLU (rectified linear unit)             |
+| LeakyReLU  | Leaky ReLU (leaky rectified linear unit) |
+| Sigmoid    | Logistic, a.k.a. sigmoid or soft step    |
+| TanH       | TanH (hyperbolic tangent)                |
 
 #### _loss_mode_
 
@@ -72,8 +74,8 @@ The mode of calculation of the total error.
 |--------|-------------------------|
 | MSE    | Mean Squared Error      |
 | RMSE   | Root Mean Squared Error |
-| ARCTAN | Arctan                  |
-| AVG    | Average                 |
+| Arctan | Arctan                  |
+| Avg    | Average                 |
 
 #### _loss_limit_
 
@@ -98,19 +100,11 @@ You can find examples of neural networks in the [example's directory](examples).
 
 ## Support
 
-
-
 ## Roadmap
-
-
 
 ## Contributing
 
-
-
 ## Authors and acknowledgment
-
-
 
 ## License
 

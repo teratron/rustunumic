@@ -6,7 +6,7 @@ extern crate rand;
 
 use rand::{thread_rng, Rng};
 
-use super::cell::{Neuron, Nucleus};
+use super::cell::{Neuron, NeuronBase};
 use super::float::Float;
 
 pub(super) struct Axon<T: Float> {
@@ -14,7 +14,7 @@ pub(super) struct Axon<T: Float> {
     weight: T,
 
     /// Incoming cell: InputCell, BiasCell, CoreCell.
-    incoming_cell: Box<dyn Nucleus<T>>,
+    incoming_cell: Box<dyn NeuronBase<T>>,
 
     /// Outgoing cell: CoreCell, OutputCell.
     outgoing_cell: Box<dyn Neuron<T>>,

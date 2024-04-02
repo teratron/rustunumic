@@ -5,7 +5,7 @@
 use crate::Float;
 
 use super::core::CoreCell;
-use super::{Neuron, Nucleus};
+use super::{Neuron, NeuronBase};
 
 pub(super) struct OutputCell<T: Float> {
     /// Core cell.
@@ -17,7 +17,7 @@ pub(super) struct OutputCell<T: Float> {
 
 impl<T: Float> OutputCell<T> {}
 
-impl<T: Float> Nucleus<T> for OutputCell<T> {
+impl<T: Float> NeuronBase<T> for OutputCell<T> {
     fn get_value(&self) -> &T {
         &self.core.value
     }
@@ -30,6 +30,7 @@ impl<T: Float> Neuron<T> for OutputCell<T> {
 
     fn calculate_value(&mut self) {
         self.core.calculate_value();
+        self.calculate_miss();
     }
 
     fn calculate_miss(&mut self) {

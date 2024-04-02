@@ -66,6 +66,8 @@ pub struct Rustunumic<T> {
     rate: T,
 
     is_init: bool,
+    // Ссылка на срез выходных нейронов.
+    //output_cells: Self<<Box<dyn Neuron<T>>>>.neurons,
 }
 
 impl<T: Float> Rustunumic<T> {

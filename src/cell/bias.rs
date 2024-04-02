@@ -4,11 +4,11 @@
 
 use crate::float::Float;
 
-use super::Nucleus;
+use super::NeuronBase;
 
 struct BiasCell;
 
-impl<T: Float> Nucleus<T> for BiasCell {
+impl<T: Float> NeuronBase<T> for BiasCell {
     fn get_value(&self) -> &T {
         &T::ONE
     }

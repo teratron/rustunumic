@@ -6,7 +6,7 @@ use crate::activation::{activation, derivative, Activation};
 use crate::float::Float;
 use crate::synapse::Synapse;
 
-use super::{Neuron, Nucleus};
+use super::{Neuron, NeuronBase};
 
 pub(super) struct CoreCell<T: Float> {
     /// Neuron value.
@@ -28,7 +28,7 @@ impl<T: Float> CoreCell<T> {
     }*/
 }
 
-impl<T: Float> Nucleus<T> for CoreCell<T> {
+impl<T: Float> NeuronBase<T> for CoreCell<T> {
     fn get_value(&self) -> &T {
         &self.value
     }
