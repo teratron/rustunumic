@@ -1,8 +1,12 @@
-use super::Float;
+use super::{Float, Rustunumic};
 
-fn verify<T: Float>(_input: Vec<T>, _target: Vec<T>) -> T {
-    let loss: T = T::ZERO;
-    loss
+impl<T: Float> Rustunumic<T> {
+    pub fn verify(&mut self, input: &[T], target: &[T]) -> T {
+        //let numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+        //let slice = &numbers[1..5];
+        //Self::new()
+        todo!()
+    }
 }
 
 /*

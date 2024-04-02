@@ -84,12 +84,12 @@ impl Float for f32 {
 impl Float for f64 {
     type FloatType = f64;
 
-    const ZERO: Self::FloatType = ZERO;
-    const ONE: Self::FloatType = ONE;
-    const TWO: Self::FloatType = TWO;
-    const DEFAULT_RATE: Self::FloatType = DEFAULT_RATE;
-    const DEFAULT_RAND: Self::FloatType = DEFAULT_RAND;
-    const LOSS_LIMIT: Self::FloatType = LOSS_LIMIT;
+    const ZERO: Self = ZERO;
+    const ONE: Self = ONE;
+    const TWO: Self = TWO;
+    const DEFAULT_RATE: Self = DEFAULT_RATE;
+    const DEFAULT_RAND: Self = DEFAULT_RAND;
+    const LOSS_LIMIT: Self = LOSS_LIMIT;
 
     fn from(x: f64) -> Self {
         x

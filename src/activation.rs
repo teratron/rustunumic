@@ -2,7 +2,7 @@
 //!
 //!
 
-use crate::float::Float;
+use crate::Float;
 
 /// ## Activation mode
 ///

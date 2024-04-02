@@ -1,16 +1,16 @@
 #![allow(unused)]
 
-use std::time::Instant;
+use std::time;
 
-use rustunumic::Rustunumic;
+use rustunumic::{Activation, Loss, Rustunumic};
 
-/*struct Perceptron<T> {
+struct Perceptron<T> {
     bias: bool,
     rate: T,
     hidden_layers: Vec<usize>,
     activation: Activation,
     loss: Loss,
-}*/
+}
 
 fn main() {
     /*
@@ -34,7 +34,7 @@ fn main() {
     let len_data = dataset.len() - len_output + 1;
 
     // Start time.
-    let now = Instant::now();
+    let now = time::Instant::now();
 
     // Training.
     for _ in 10_000 {

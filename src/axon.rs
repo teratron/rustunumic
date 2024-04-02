@@ -7,7 +7,7 @@ extern crate rand;
 use rand::{thread_rng, Rng};
 
 use super::cell::{Neuron, NeuronBase};
-use super::float::Float;
+use super::Float;
 
 pub(super) struct Axon<T> {
     /// Axon weight.
@@ -31,11 +31,13 @@ impl<T: Float> Axon<T> {
     }
 
     // Forward propagation.
+
     pub(super) fn calculate_value(&self) -> T {
         *self.incoming_cell.get_value() * self.weight
     }
 
     // Backward propagation.
+
     pub(super) fn calculate_miss(&self) -> T {
         *self.outgoing_cell.get_miss() * self.weight
     }

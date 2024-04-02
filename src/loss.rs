@@ -2,7 +2,7 @@
 //!
 //!
 
-use crate::float::Float;
+use crate::Float;
 
 pub(super) const LOSS_LIMIT: f64 = 1E-10;
 

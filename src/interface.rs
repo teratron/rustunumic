@@ -2,10 +2,9 @@
 //!
 //!
 
-use super::Float;
-use super::Rustunumic;
+//use super::{Float, Rustunumic};
 
-const MAX_ITERATION: usize = 1_000_000;
+//const MAX_ITERATION: usize = 1_000_000;
 
 pub trait Interface<T> {
     /// Verify
@@ -18,7 +17,7 @@ pub trait Interface<T> {
     fn train(&mut self, input: &[T], target: &[T]) -> (usize, T);
 }
 
-impl<T: Float> Interface<T> for Rustunumic<T> {
+/*impl<T: Float> Interface<T> for Rustunumic<T> {
     fn verify(&mut self, input: &[T], target: &[T]) -> T {
         //let numbers = [1, 2, 3, 4, 5, 6, 7, 8];
         //let slice = &numbers[1..5];
@@ -35,9 +34,9 @@ impl<T: Float> Interface<T> for Rustunumic<T> {
     fn train(&mut self, input: &[T], target: &[T]) -> (usize, T) {
         // TODO: Result<(usize, T), Box<dyn Error>>
         if !self.is_init {
-            /*if not self.__init(len(data_input), len(data_target)) {
+            if not self.__init(len(data_input), len(data_target)) {
                 raise ValueError(f"{__name__}: not initialized")
-            } */
+            }
         }
 
         //self._input = input;
@@ -74,4 +73,4 @@ impl<T: Float> Interface<T> for Rustunumic<T> {
 
         (count, loss)
     }
-}
+}*/

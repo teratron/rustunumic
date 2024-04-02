@@ -1,8 +1,10 @@
-use super::Float;
+use super::{Float, Rustunumic};
 
-fn query<T: Float>(_input: Vec<T>) -> Vec<T> {
-    let output: Vec<T> = vec![T::ZERO; 10];
-    output
+impl<T: Float> Rustunumic<T> {
+    pub fn query(&mut self, input: &[T]) -> Vec<T> {
+        let output: Vec<T> = vec![T::ZERO; 10];
+        output
+    }
 }
 
 /*
