@@ -3,12 +3,12 @@
 //!
 
 use crate::activation::{activation, derivative, Activation};
-use crate::float::Float;
 use crate::synapse::Synapse;
+use crate::Float;
 
 use super::{Neuron, NeuronBase};
 
-pub(super) struct CoreCell<T: Float> {
+pub(super) struct CoreCell<T> {
     /// Neuron value.
     pub(super) value: T,
 
@@ -16,7 +16,7 @@ pub(super) struct CoreCell<T: Float> {
     pub(super) miss: T,
 
     /// Function activation mode.
-    activation_mode: Activation, //Option<Activation>,
+    activation_mode: Activation,
 
     /// All incoming and outgoing axons.
     synapses: Box<dyn Synapse<T>>,
@@ -43,7 +43,7 @@ impl<T: Float> Neuron<T> for CoreCell<T> {
 
     fn calculate_value(&mut self) {
         self.value = T::ZERO;
-        for axon in self.synapses.get_incoming_axons() {
+        for axon in self.synapses.get_incoming_synapse() {
             self.value += axon.calculate_value();
         }
         //self.get_activation(&self.activation_mode);
@@ -54,15 +54,15 @@ impl<T: Float> Neuron<T> for CoreCell<T> {
 
     fn calculate_miss(&mut self) {
         self.miss = T::ZERO;
-        for axon in self.synapses.get_outgoing_axons() {
-            axon.calculate_miss();
+        for axon in self.synapses.get_outgoing_synapse() {
+            self.miss += axon.calculate_miss();
         }
     }
 
     fn calculate_weight(&mut self, rate: &T) {
         let gradient = *rate * self.miss * derivative(self.value, &self.activation_mode);
 
-        for axon in self.synapses.get_incoming_axons().iter_mut() {
+        for axon in self.synapses.get_incoming_synapse().iter_mut() {
             axon.calculate_weight(&gradient);
         }
     }

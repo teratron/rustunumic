@@ -9,7 +9,7 @@ use rand::{thread_rng, Rng};
 use super::cell::{Neuron, NeuronBase};
 use super::float::Float;
 
-pub(super) struct Axon<T: Float> {
+pub(super) struct Axon<T> {
     /// Axon weight.
     weight: T,
 

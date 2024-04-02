@@ -20,6 +20,12 @@ Simple neural network library for rust.
 cargo add rustunumic
 ```
 
+If you have already added **rustunumic**, you can update to the latest version by using:
+
+```shell
+cargo update rustunumic
+```
+
 ## Usage
 
 ```rust

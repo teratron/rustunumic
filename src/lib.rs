@@ -50,9 +50,6 @@ mod verify;
 /// ```
 //#[derive(Debug)]
 pub struct Rustunumic<T> {
-    /// All neurons.
-    neurons: Vec<Box<dyn Neuron<T>>>,
-
     /// Bias neuron.
     bias: Option<bool>,
 
@@ -65,9 +62,14 @@ pub struct Rustunumic<T> {
     /// Learning rate.
     rate: T,
 
+    /// All neurons.
+    neurons: Vec<Box<dyn Neuron<T>>>,
+    output_neurons: OutputNeurons<T>,
+    hidden_neurons: HiddenNeurons<T>,
+
+    //
     is_init: bool,
-    // Ссылка на срез выходных нейронов.
-    //output_cells: Self<<Box<dyn Neuron<T>>>>.neurons,
+    is_query: bool,
 }
 
 impl<T: Float> Rustunumic<T> {
@@ -81,6 +83,49 @@ impl<T: Float> Rustunumic<T> {
             loss_mode: Loss::MSE,
             rate: T::DEFAULT_RATE,
             is_init: false,
+            is_query: false,
+            output_neurons: OutputNeurons::new(5),
+            hidden_neurons: HiddenNeurons::new(5),
+        }
+    }
+}
+
+struct OutputNeurons<T> {
+    // Ссылка на срез выходных нейронов.
+    neurons: Vec<Box<dyn Neuron<T>>>,
+    //TODO: neurons2: Vec<cell::output::OutputCell<T>>,
+
+    // Количество выходных нейронов.
+    number: usize,
+    number_float: T,
+}
+
+impl<T: Float> OutputNeurons<T> {
+    pub fn new(number: usize) -> Self {
+        Self {
+            neurons: Vec::new(),
+            number,
+            number_float: T::from(number as f64), //self.get_number_float(),
+        }
+    }
+
+    /*pub fn get_number_float(&self) -> T {
+        T::from(self.number as f64)
+    }*/
+}
+
+struct HiddenNeurons<T> {
+    neurons: Vec<Box<dyn Neuron<T>>>,
+    number: usize,
+    number_float: T,
+}
+
+impl<T: Float> HiddenNeurons<T> {
+    pub fn new(number: usize) -> Self {
+        Self {
+            neurons: Vec::new(),
+            number,
+            number_float: T::from(number as f64), //self.get_number_float(),
         }
     }
 }

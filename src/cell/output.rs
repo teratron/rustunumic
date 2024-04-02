@@ -7,7 +7,7 @@ use crate::Float;
 use super::core::CoreCell;
 use super::{Neuron, NeuronBase};
 
-pub(super) struct OutputCell<T: Float> {
+pub(super) struct OutputCell<T> {
     /// Core cell.
     core: CoreCell<T>,
 
