@@ -93,8 +93,6 @@ Learning coefficient (greater than 0.0 and less than or equal to 1.0).
 
 More documentation is available at the [rustunumic website](https://teratron.github.io/rustunumic).
 
----
-
 ## Examples
 
 You can find examples of neural networks in the [example's directory](examples).
