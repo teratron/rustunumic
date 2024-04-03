@@ -2,5 +2,4 @@
 
 echo "--- pre-commit ---"
 
-npx dotenv-vault@latest push
-npx dotenv-vault@latest push production
+make dotenv-push
