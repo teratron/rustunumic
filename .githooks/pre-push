@@ -1,7 +1,3 @@
 #!/bin/sh
 
 echo "--- pre-push ---"
-
-make dotenv-push
-#npx dotenv-vault@latest push
-#npx dotenv-vault@latest push production
