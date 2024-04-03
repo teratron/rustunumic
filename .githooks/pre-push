@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "pre-push"
+
+npx dotenv-vault@latest push
+npx dotenv-vault@latest push production

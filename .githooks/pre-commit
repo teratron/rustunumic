@@ -1,4 +1,3 @@
 #!/bin/sh
 
-npx dotenv-vault@latest push
-npx dotenv-vault@latest push production
+echo "pre-commit"
