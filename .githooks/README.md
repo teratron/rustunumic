@@ -29,6 +29,7 @@ git config --global --unset core.hooksPath
 1. pre-commit
 2. prepare-commit-msg
 3. commit-msg
+4. post-commit
 
 ## Push
 
