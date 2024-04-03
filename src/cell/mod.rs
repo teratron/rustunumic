@@ -2,7 +2,7 @@
 //!
 //!
 
-use crate::float::FloatTrait;
+use super::FloatTrait;
 
 pub mod core;
 pub mod output;

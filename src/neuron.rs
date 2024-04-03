@@ -6,7 +6,7 @@ pub(super) struct Neurons<T, S> {
     pub(super) neurons: Vec<S>,
 
     // Number of output neurons.
-    number: usize,
+    pub(super) number: usize,
     pub(super) number_float: T,
 }
 

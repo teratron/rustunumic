@@ -22,8 +22,8 @@ pub use activation::Activation;
 pub use loss::Loss;
 
 use crate::cell::core::CoreCell;
-use crate::cell::output::OutputCell;
 use crate::cell::NeuronTrait;
+use crate::cell::output::OutputCell;
 use crate::float::FloatTrait;
 use crate::neuron::Neurons;
 
@@ -72,7 +72,7 @@ pub struct Rustunumic<T> {
     hidden_neurons: Neurons<T, CoreCell<T>>,
     common_neurons: Neurons<T, Box<dyn NeuronTrait<T>>>,
 
-    //
+    // State.
     is_init: bool,
     is_query: bool,
 }
