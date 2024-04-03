@@ -41,7 +41,7 @@ fn main() {
 
     // Training dataset.
     let (num, loss) = rn.train(&data_input, &data_target);
-    print!();
+    print!("{} {}", num, loss);
 }
 ```
 

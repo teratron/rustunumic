@@ -1,5 +1,3 @@
 #!/bin/sh
 
 echo "--- post-update ---"
-
-npx dotenv-vault@latest pull

@@ -1,5 +1,3 @@
 #!/bin/sh
 
 echo "--- commit-msg ---"
-
-npx dotenv-vault@latest push

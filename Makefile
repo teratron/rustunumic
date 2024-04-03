@@ -5,6 +5,7 @@
 dotenv-pull: ## pull it down
 	npx dotenv-vault@latest pull
 	npx dotenv-vault@latest pull production
+	npx dotenv-vault@latest pull example
 
 dotenv-push: ## push yours up
 	npx dotenv-vault@latest push
