@@ -2,6 +2,8 @@
 //!
 //!
 
+use crate::float::FloatTrait;
+
 pub mod core;
 pub mod output;
 
@@ -14,7 +16,11 @@ pub(super) trait NeuronBaseTrait<T> {
 }
 
 // For CoreCell (HiddenCell), OutputCell.
-pub(super) trait NeuronTrait<T>: NeuronBaseTrait<T> {
+pub(super) trait NeuronTrait<T: FloatTrait>: NeuronBaseTrait<T> {
+    fn new() -> Self {
+        <Self>::Float
+    }
+
     fn get_miss(&self) -> &T;
     fn calculate_value(&mut self);
     fn calculate_miss(&mut self);

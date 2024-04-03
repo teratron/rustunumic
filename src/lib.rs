@@ -70,6 +70,7 @@ pub struct Rustunumic<T> {
     neurons: Vec<Box<dyn NeuronTrait<T>>>,
     output_neurons: Neurons<T, OutputCell<T>>,
     hidden_neurons: Neurons<T, CoreCell<T>>,
+    common_neurons: Neurons<T, Box<dyn NeuronTrait<T>>>,
 
     //
     is_init: bool,
@@ -86,10 +87,10 @@ impl<T: FloatTrait> Rustunumic<T> {
             rate: T::DEFAULT_RATE,
             is_init: false,
             is_query: false,
-            //neurons: Box::new(Vec::new()),
             neurons: Vec::new(),
-            output_neurons: Neurons::new(5),
-            hidden_neurons: Neurons::new(5),
+            output_neurons: Neurons::<T, OutputCell<T>>::new(5),
+            hidden_neurons: Neurons::<T, CoreCell<T>>::new(5),
+            common_neurons: Neurons::<T, Box<dyn NeuronTrait<T>>>::new(5),
         }
     }
 }

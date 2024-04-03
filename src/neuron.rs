@@ -1,10 +1,9 @@
-use super::cell::NeuronTrait;
-use super::FloatTrait;
+use super::{FloatTrait, NeuronTrait};
 
 pub(super) struct Neurons<T, S> {
     // Reference to a slice of output neurons.
     //neurons: Vec<Box<dyn NeuronTrait<T>>>,
-    pub(super) neurons: Vec<Box<S>>,
+    pub(super) neurons: Vec<S>,
 
     // Number of output neurons.
     number: usize,
