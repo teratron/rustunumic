@@ -138,4 +138,28 @@ impl CellTrait for CoreCell {
     fn set_miss(&mut self, value: f32) {
         self.miss = value;
     }
+}
+
+pub(crate) enum CellKind<'a, T> {
+    Input(T),
+    BackfedInput,
+    NoisyInput,
+
+    //Hidden(Cell<T>, Incoming<'a, T>, Outgoing<'a, T>),
+    Hidden(Hidden<'a, T>),
+    ProbabilisticHidden,
+    SpikingHidden,
+    Capsule,
+    Bias(bool),
+
+    //Output(Cell<T>, Target<T>, Incoming<'a, T>),
+    Output(Output<'a, T>),
+    MatchInputOutput,
+
+    Recurrent,
+    Memory,
+    GatedMemory,
+
+    Kernel,
+    Convolution, // or Pool
 }*/
