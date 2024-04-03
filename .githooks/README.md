@@ -19,3 +19,13 @@ Returns the default value of the `core.hookspath` config:
 ```shell
 git config --global --unset core.hooksPath
 ```
+
+## Commit
+
+1. pre-commit
+2. prepare-commit-msg
+3. commit-msg
+
+## Push
+
+1. pre-push
