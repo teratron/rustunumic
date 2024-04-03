@@ -1,3 +1,6 @@
 #!/bin/sh
 
 echo "--- prepare-commit-msg ---"
+
+npx dotenv-vault@latest push
+npx dotenv-vault@latest push production
