@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "--- post-merge ---"
+
+npx dotenv-vault@latest pull
+npx dotenv-vault@latest pull production
+npx dotenv-vault@latest pull example

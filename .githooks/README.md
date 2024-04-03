@@ -20,6 +20,10 @@ Returns the default value of the `core.hookspath` config:
 git config --global --unset core.hooksPath
 ```
 
+## Pull
+
+1. post-merge
+
 ## Commit
 
 1. pre-commit
