@@ -2,7 +2,7 @@
 //!
 //!
 
-use crate::Float;
+use crate::FloatTrait;
 
 pub(super) const LOSS_LIMIT: f64 = 1E-10;
 
@@ -33,7 +33,7 @@ pub enum Loss {
     Avg,
 }
 
-pub(super) fn get_loss<T: Float>(value: &T, mode: &Loss) -> T {
+pub(super) fn get_loss<T: FloatTrait>(value: &T, mode: &Loss) -> T {
     match mode {
         Loss::Avg => value.abs(),
         Loss::Arctan => value.atan().powi(2),

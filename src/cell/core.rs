@@ -3,12 +3,12 @@
 //!
 
 use crate::activation::{activation, derivative, Activation};
-use crate::synapse::Synapse;
-use crate::Float;
+use crate::synapse::SynapseTrait;
+use crate::FloatTrait;
 
-use super::{Neuron, NeuronBase};
+use super::{NeuronBaseTrait, NeuronTrait};
 
-pub(super) struct CoreCell<T> {
+pub(crate) struct CoreCell<T> {
     /// Neuron value.
     pub(super) value: T,
 
@@ -19,22 +19,22 @@ pub(super) struct CoreCell<T> {
     activation_mode: Activation,
 
     /// All incoming and outgoing axons.
-    synapses: Box<dyn Synapse<T>>,
+    synapses: Box<dyn SynapseTrait<T>>,
 }
 
-impl<T: Float> CoreCell<T> {
+impl<T> CoreCell<T> {
     /*fn get_activation(&mut self, mode: &Activation) {
         get_activation(&mut self.value, mode);
     }*/
 }
 
-impl<T: Float> NeuronBase<T> for CoreCell<T> {
+impl<T> NeuronBaseTrait<T> for CoreCell<T> {
     fn get_value(&self) -> &T {
         &self.value
     }
 }
 
-impl<T: Float> Neuron<T> for CoreCell<T> {
+impl<T: FloatTrait> NeuronTrait<T> for CoreCell<T> {
     fn get_miss(&self) -> &T {
         &self.miss
     }

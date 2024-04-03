@@ -21,8 +21,11 @@
 pub use activation::Activation;
 pub use loss::Loss;
 
-use crate::cell::Neuron;
-pub(crate) use crate::float::Float;
+use crate::cell::core::CoreCell;
+use crate::cell::output::OutputCell;
+use crate::cell::NeuronTrait;
+use crate::float::FloatTrait;
+use crate::neuron::Neurons;
 
 pub mod activation;
 pub mod loss;
@@ -31,6 +34,7 @@ mod axon;
 mod cell;
 mod float;
 mod interface;
+mod neuron;
 mod propagation;
 mod query;
 mod synapse;
@@ -63,69 +67,29 @@ pub struct Rustunumic<T> {
     rate: T,
 
     /// All neurons.
-    neurons: Vec<Box<dyn Neuron<T>>>,
-    output_neurons: OutputNeurons<T>,
-    hidden_neurons: HiddenNeurons<T>,
+    neurons: Vec<Box<dyn NeuronTrait<T>>>,
+    output_neurons: Neurons<T, OutputCell<T>>,
+    hidden_neurons: Neurons<T, CoreCell<T>>,
 
     //
     is_init: bool,
     is_query: bool,
 }
 
-impl<T: Float> Rustunumic<T> {
+impl<T: FloatTrait> Rustunumic<T> {
     /// Creat new instance.
     pub fn new() -> Self {
         Self {
-            //neurons: Box::new(Vec::new()),
-            neurons: Vec::new(),
             bias: None,
             activation_mode: Some(Activation::ReLU),
             loss_mode: Loss::MSE,
             rate: T::DEFAULT_RATE,
             is_init: false,
             is_query: false,
-            output_neurons: OutputNeurons::new(5),
-            hidden_neurons: HiddenNeurons::new(5),
-        }
-    }
-}
-
-struct OutputNeurons<T> {
-    // Ссылка на срез выходных нейронов.
-    neurons: Vec<Box<dyn Neuron<T>>>,
-    //TODO: neurons2: Vec<cell::output::OutputCell<T>>,
-
-    // Количество выходных нейронов.
-    number: usize,
-    number_float: T,
-}
-
-impl<T: Float> OutputNeurons<T> {
-    pub fn new(number: usize) -> Self {
-        Self {
+            //neurons: Box::new(Vec::new()),
             neurons: Vec::new(),
-            number,
-            number_float: T::from(number as f64), //self.get_number_float(),
-        }
-    }
-
-    /*pub fn get_number_float(&self) -> T {
-        T::from(self.number as f64)
-    }*/
-}
-
-struct HiddenNeurons<T> {
-    neurons: Vec<Box<dyn Neuron<T>>>,
-    number: usize,
-    number_float: T,
-}
-
-impl<T: Float> HiddenNeurons<T> {
-    pub fn new(number: usize) -> Self {
-        Self {
-            neurons: Vec::new(),
-            number,
-            number_float: T::from(number as f64), //self.get_number_float(),
+            output_neurons: Neurons::new(5),
+            hidden_neurons: Neurons::new(5),
         }
     }
 }

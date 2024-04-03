@@ -2,7 +2,7 @@
 //!
 //!
 
-//use super::{Float, Rustunumic};
+//use super::{FloatTrait, Rustunumic};
 
 //const MAX_ITERATION: usize = 1_000_000;
 
@@ -17,7 +17,7 @@ pub trait Interface<T> {
     fn train(&mut self, input: &[T], target: &[T]) -> (usize, T);
 }
 
-/*impl<T: Float> Interface<T> for Rustunumic<T> {
+/*impl<T: FloatTrait> Interface<T> for Rustunumic<T> {
     fn verify(&mut self, input: &[T], target: &[T]) -> T {
         //let numbers = [1, 2, 3, 4, 5, 6, 7, 8];
         //let slice = &numbers[1..5];

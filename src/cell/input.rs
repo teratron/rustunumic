@@ -2,11 +2,11 @@
 //!
 //!
 
-use super::NeuronBase;
+use super::NeuronBaseTrait;
 
 struct InputCell<T>(T);
 
-impl<T> NeuronBase<T> for InputCell<T> {
+impl<T> NeuronBaseTrait<T> for InputCell<T> {
     fn get_value(&self) -> &T {
         &self.0
     }

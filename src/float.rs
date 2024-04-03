@@ -1,4 +1,4 @@
-//! # Float
+//! # FloatTrait
 //!
 //!
 
@@ -12,8 +12,8 @@ const TWO: f64 = 2.;
 const DEFAULT_RATE: f64 = 0.3;
 const DEFAULT_RAND: f64 = 0.5;
 
-/// Float trait
-pub trait Float
+/// FloatTrait trait
+pub trait FloatTrait
 where
     Self: Sized
         + Copy
@@ -26,7 +26,7 @@ where
         + Sub<Output = Self>
         + Neg<Output = Self>,
 {
-    type FloatType;
+    type Float;
 
     const ZERO: Self;
     const ONE: Self;
@@ -61,8 +61,8 @@ where
 }
 
 // f32.
-impl Float for f32 {
-    type FloatType = f32;
+impl FloatTrait for f32 {
+    type Float = f32;
 
     const ZERO: Self = ZERO as Self;
     const ONE: Self = ONE as Self;
@@ -72,7 +72,7 @@ impl Float for f32 {
     const LOSS_LIMIT: Self = LOSS_LIMIT as Self;
 
     fn from(x: f64) -> Self {
-        x as Self::FloatType
+        x as Self::Float
     }
 
     fn type_name(&self) -> &'static str {
@@ -81,8 +81,8 @@ impl Float for f32 {
 }
 
 // f64.
-impl Float for f64 {
-    type FloatType = f64;
+impl FloatTrait for f64 {
+    type Float = f64;
 
     const ZERO: Self = ZERO;
     const ONE: Self = ONE;

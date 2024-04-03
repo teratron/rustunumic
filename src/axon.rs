@@ -6,21 +6,21 @@ extern crate rand;
 
 use rand::{thread_rng, Rng};
 
-use super::cell::{Neuron, NeuronBase};
-use super::Float;
+use super::cell::{NeuronBaseTrait, NeuronTrait};
+use super::FloatTrait;
 
 pub(super) struct Axon<T> {
     /// Axon weight.
     weight: T,
 
     /// Incoming cell: InputCell, BiasCell, CoreCell.
-    incoming_cell: Box<dyn NeuronBase<T>>,
+    incoming_cell: Box<dyn NeuronBaseTrait<T>>,
 
     /// Outgoing cell: CoreCell, OutputCell.
-    outgoing_cell: Box<dyn Neuron<T>>,
+    outgoing_cell: Box<dyn NeuronTrait<T>>,
 }
 
-impl<T: Float> Axon<T> {
+impl<T: FloatTrait> Axon<T> {
     fn new() -> Box<Self> {
         let mut rng = thread_rng();
         Box::new(Self {

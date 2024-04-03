@@ -29,8 +29,8 @@ fn main() {
     let dataset = [
         0.27, -0.31, -0.52, 0.66, 0.81, -0.13, 0.2, 0.49, 0.11, -0.73, 0.28,
     ];
-    let len_input = 3; // Number of input data
-    let len_output = 2; // Number of output data
+    let len_input = 3; // Number of input data.
+    let len_output = 2; // Number of output data.
     let len_data = dataset.len() - len_output + 1;
 
     // Start time.

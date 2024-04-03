@@ -2,13 +2,13 @@
 //!
 //!
 
-use crate::Float;
+use crate::FloatTrait;
 
-use super::NeuronBase;
+use super::NeuronBaseTrait;
 
 struct BiasCell;
 
-impl<T: Float> NeuronBase<T> for BiasCell {
+impl<T: FloatTrait> NeuronBaseTrait<T> for BiasCell {
     fn get_value(&self) -> &T {
         &T::ONE
     }

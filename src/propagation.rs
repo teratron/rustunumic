@@ -1,7 +1,9 @@
-use super::loss::{get_loss, Loss};
-use super::{Float, Rustunumic};
+use crate::cell::NeuronTrait;
 
-impl<T: Float> Rustunumic<T> {
+use super::loss::{get_loss, Loss};
+use super::{FloatTrait, Rustunumic};
+
+impl<T: FloatTrait> Rustunumic<T> {
     // Forward propagation.
 
     /// Calculating neuron's value.
