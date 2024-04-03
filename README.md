@@ -10,7 +10,7 @@
 
 ## Description
 
-Simple neural network library for rust.
+Simple neural network library for Rust.
 
 ## Visuals
 
