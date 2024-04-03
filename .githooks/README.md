@@ -24,6 +24,10 @@ git config --global --unset core.hooksPath
 
 1. post-merge
 
+## Add
+
+1. post-index-change
+
 ## Commit
 
 1. pre-commit
