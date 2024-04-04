@@ -42,7 +42,10 @@ fn main() {
     let fs_32 = float_struct::FloatStruct::<f32>::new();
     // или f64
     let fs_64 = float_struct::FloatStruct::<f64>::new();
-    println!("{:#?} {:#?}", fs_32.f, fs_64.f)
+    println!("{:#?} {:#?}", fs_32.f, fs_64.f);
+
+    let a = vec![1, 2, 3];
+    let b = &a[1..3];
 }
 
 /*impl PartialEq for Loss {

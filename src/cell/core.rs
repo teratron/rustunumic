@@ -3,10 +3,10 @@
 //!
 
 use crate::activation::{activation, derivative, Activation};
-use crate::synapse::SynapseTrait;
-use crate::FloatTrait;
+use crate::synapse::Synapse;
+use crate::Float;
 
-use super::{NeuronBaseTrait, NeuronTrait};
+use super::{Neuron, NeuronBase};
 
 pub(crate) struct CoreCell<T> {
     /// Neuron value.
@@ -19,7 +19,7 @@ pub(crate) struct CoreCell<T> {
     activation_mode: Activation,
 
     /// All incoming and outgoing axons.
-    synapses: Box<dyn SynapseTrait<T>>,
+    synapses: Box<dyn Synapse<T>>,
 }
 
 impl<T> CoreCell<T> {
@@ -28,13 +28,13 @@ impl<T> CoreCell<T> {
     }*/
 }
 
-impl<T> NeuronBaseTrait<T> for CoreCell<T> {
+impl<T> NeuronBase<T> for CoreCell<T> {
     fn get_value(&self) -> &T {
         &self.value
     }
 }
 
-impl<T: FloatTrait> NeuronTrait<T> for CoreCell<T> {
+impl<T: Float> Neuron<T> for CoreCell<T> {
     fn get_miss(&self) -> &T {
         &self.miss
     }
@@ -47,7 +47,7 @@ impl<T: FloatTrait> NeuronTrait<T> for CoreCell<T> {
             self.value += axon.calculate_value();
         }
         //self.get_activation(&self.activation_mode);
-        activation(self.value, &self.activation_mode);
+        self.value = activation(self.value, &self.activation_mode);
     }
 
     // Backward propagation.

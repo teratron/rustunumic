@@ -2,10 +2,10 @@
 //!
 //!
 
-use crate::FloatTrait;
+use crate::Float;
 
 use super::core::CoreCell;
-use super::{NeuronBaseTrait, NeuronTrait};
+use super::{Neuron, NeuronBase};
 
 pub(crate) struct OutputCell<T> {
     /// Core cell.
@@ -17,13 +17,13 @@ pub(crate) struct OutputCell<T> {
 
 impl<T> OutputCell<T> {}
 
-impl<T> NeuronBaseTrait<T> for OutputCell<T> {
+impl<T> NeuronBase<T> for OutputCell<T> {
     fn get_value(&self) -> &T {
         &self.core.value
     }
 }
 
-impl<T: FloatTrait> NeuronTrait<T> for OutputCell<T> {
+impl<T: Float> Neuron<T> for OutputCell<T> {
     fn get_miss(&self) -> &T {
         &self.core.miss
     }

@@ -1,8 +1,8 @@
-use super::{FloatTrait, Rustunumic};
+use super::{Float, Rustunumic};
 
 const MAX_ITERATION: usize = 1_000_000;
 
-impl<T: FloatTrait> Rustunumic<T> {
+impl<T: Float> Rustunumic<T> {
     /// Training dataset.
     pub fn train(&mut self, input: &[T], target: &[T]) -> (usize, T) {
         // TODO: Result<(usize, T), Box<dyn Error>>

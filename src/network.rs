@@ -1,19 +1,18 @@
-use super::{FloatTrait, NeuronTrait};
+use super::{Float, Neuron};
 
-pub(super) struct Neurons<T, S> {
-    // Reference to a slice of output neurons.
-    //neurons: Vec<Box<dyn NeuronTrait<T>>>,
-    pub(super) neurons: Vec<S>,
+pub(super) struct Network<T, S> {
+    /// Reference to a slice of output or hidden neurons.
+    pub(super) neurons: Box<[S]>,
 
-    // Number of output neurons.
+    /// Number of output neurons.
     pub(super) number: usize,
     pub(super) number_float: T,
 }
 
-impl<T: FloatTrait, S: NeuronTrait<T>> Neurons<T, S> {
+impl<T: Float, S: Neuron<T>> Network<T, S> {
     pub fn new(number: usize) -> Self {
         Self {
-            neurons: Vec::new(),
+            neurons: Box::new([]),
             number,
             number_float: T::from(number as f64), //self.get_number_float(),
         }

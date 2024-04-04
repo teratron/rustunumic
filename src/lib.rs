@@ -22,10 +22,10 @@ pub use activation::Activation;
 pub use loss::Loss;
 
 use crate::cell::core::CoreCell;
-use crate::cell::NeuronTrait;
 use crate::cell::output::OutputCell;
-use crate::float::FloatTrait;
-use crate::neuron::Neurons;
+use crate::cell::Neuron;
+use crate::float::Float;
+use crate::network::Network;
 
 pub mod activation;
 pub mod loss;
@@ -34,7 +34,7 @@ mod axon;
 mod cell;
 mod float;
 mod interface;
-mod neuron;
+mod network;
 mod propagation;
 mod query;
 mod synapse;
@@ -67,17 +67,20 @@ pub struct Rustunumic<T> {
     rate: T,
 
     /// All neurons.
-    neurons: Vec<Box<dyn NeuronTrait<T>>>,
-    output_neurons: Neurons<T, OutputCell<T>>,
-    hidden_neurons: Neurons<T, CoreCell<T>>,
-    common_neurons: Neurons<T, Box<dyn NeuronTrait<T>>>,
+    network: Vec<Box<dyn Neuron<T>>>,
+
+    /// Output neurons.
+    output: Network<T, OutputCell<T>>,
+
+    /// Hidden neurons.
+    hidden: Network<T, CoreCell<T>>,
 
     // State.
     is_init: bool,
     is_query: bool,
 }
 
-impl<T: FloatTrait> Rustunumic<T> {
+impl<T: Float> Rustunumic<T> {
     /// Creat new instance.
     pub fn new() -> Self {
         Self {
@@ -87,10 +90,9 @@ impl<T: FloatTrait> Rustunumic<T> {
             rate: T::DEFAULT_RATE,
             is_init: false,
             is_query: false,
-            neurons: Vec::new(),
-            output_neurons: Neurons::<T, OutputCell<T>>::new(5),
-            hidden_neurons: Neurons::<T, CoreCell<T>>::new(5),
-            common_neurons: Neurons::<T, Box<dyn NeuronTrait<T>>>::new(5),
+            network: Vec::new(),
+            output: Network::<T, OutputCell<T>>::new(5),
+            hidden: Network::<T, CoreCell<T>>::new(5),
         }
     }
 }
