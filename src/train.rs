@@ -11,22 +11,21 @@ impl<T: Float> Rustunumic<T> {
                 raise ValueError(f"{__name__}: not initialized")
             } */
         }
-
         //self._input = input;
         //self._target = target;
 
-        let mut count: usize = 1;
-        let mut min_count: usize = 0;
         let mut loss: T = T::ZERO;
         let mut min_loss: T = T::ONE;
+        let mut count: usize = 1; // TODO: 1 or 0?
+        let mut min_count: usize = 0;
 
         while count <= MAX_ITERATION {
             self.calculate_values();
             loss = self.calculate_loss();
 
-            if loss < min_loss {
-                min_count = count;
+            if loss < min_loss { // TODO: every 10 iteration!
                 min_loss = loss;
+                min_count = count;
                 //self.__weights = deepcopy(self.weights)
 
                 if loss < T::LOSS_LIMIT {
