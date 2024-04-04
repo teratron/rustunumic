@@ -1,3 +1,7 @@
+//! # Network
+//!
+//!
+
 use super::{Float, Neuron};
 
 pub(super) struct Network<T, S> {
