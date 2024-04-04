@@ -9,10 +9,8 @@ fn main() {
         &dest_path,
         "pub fn message() -> &'static str {
             \"Hello, World!\"
-        }
-        ",
-    )
-    .unwrap();
+        }",
+    ).unwrap();
     println!("cargo:rerun-if-changed=build.rs");
 }
 
