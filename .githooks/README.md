@@ -30,10 +30,11 @@ git config --global --unset core.hooksPath
 
 ## Commit
 
-1. pre-commit
-2. prepare-commit-msg
-3. commit-msg
-4. post-commit
+1. post-index-change
+2. pre-commit
+3. prepare-commit-msg
+4. commit-msg
+5. post-commit
 
 ## Push
 
