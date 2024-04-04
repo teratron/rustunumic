@@ -14,7 +14,7 @@ pub(super) struct Network<T, S> {
 }
 
 impl<T: Float, S: Neuron<T>> Network<T, S> {
-    pub fn new(number: usize) -> Self {
+    pub(super) fn new(number: usize) -> Self {
         Self {
             neurons: Box::new([]),
             number,
