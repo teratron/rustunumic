@@ -1,3 +1,7 @@
+//! # Training
+//!
+//!
+
 use super::{Float, Rustunumic};
 
 const MAX_ITERATION: usize = 1_000_000;

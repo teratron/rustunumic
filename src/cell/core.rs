@@ -2,11 +2,10 @@
 //!
 //!
 
-use crate::activation::{activation, derivative, Activation};
+use crate::activation::{activation, Activation, derivative};
 use crate::synapse::Synapse;
-use crate::Float;
 
-use super::{Neuron, NeuronBase};
+use super::{Float, Neuron, NeuronBase};
 
 pub(crate) struct CoreCell<T> {
     /// Neuron value.
@@ -22,7 +21,16 @@ pub(crate) struct CoreCell<T> {
     synapses: Box<dyn Synapse<T>>,
 }
 
-impl<T> CoreCell<T> {
+impl<T: Float> CoreCell<T> {
+    pub(super) fn new() -> Self {
+        Self {
+            value: T::ZERO,
+            miss: T::ZERO,
+            activation_mode: Activation::ReLU,
+            synapses: Box::new((_)),
+        }
+    }
+
     /*fn get_activation(&mut self, mode: &Activation) {
         get_activation(&mut self.value, mode);
     }*/

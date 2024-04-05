@@ -2,7 +2,7 @@
 //!
 //!
 
-use crate::Float;
+use super::Float;
 
 /// ## Activation mode
 ///

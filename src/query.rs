@@ -1,3 +1,7 @@
+//! # Querying
+//!
+//!
+
 use super::{Float, Rustunumic};
 
 impl<T: Float> Rustunumic<T> {
@@ -6,7 +10,3 @@ impl<T: Float> Rustunumic<T> {
         output
     }
 }
-
-/*
-
-*/

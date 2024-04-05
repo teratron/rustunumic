@@ -2,10 +2,8 @@
 //!
 //!
 
-use crate::Float;
-
+use super::{Float, Neuron, NeuronBase};
 use super::core::CoreCell;
-use super::{Neuron, NeuronBase};
 
 pub(crate) struct OutputCell<T> {
     /// Core cell.
@@ -15,7 +13,14 @@ pub(crate) struct OutputCell<T> {
     target: T,
 }
 
-impl<T> OutputCell<T> {}
+impl<T: Float> OutputCell<T> {
+    fn new() -> Self {
+        Self {
+            core: CoreCell::new(),
+            target: T::ZERO,
+        }
+    }
+}
 
 impl<T> NeuronBase<T> for OutputCell<T> {
     fn get_value(&self) -> &T {

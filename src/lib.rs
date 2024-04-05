@@ -21,12 +21,13 @@
 pub use activation::Activation;
 pub use loss::Loss;
 
+use crate::cell::{Neuron, NeuronBase};
 use crate::cell::core::CoreCell;
 use crate::cell::output::OutputCell;
-use crate::cell::Neuron;
 use crate::float::Float;
 use crate::network::Network;
 
+// Reexported modules.
 pub mod activation;
 pub mod loss;
 
@@ -57,14 +58,11 @@ pub struct Rustunumic<T> {
     /// Bias neuron.
     bias: Option<bool>,
 
-    /// Function activation mode.
-    activation_mode: Option<Activation>,
+    /// Learning rate.
+    rate: T,
 
     /// Loss mode.
     loss_mode: Loss,
-
-    /// Learning rate.
-    rate: T,
 
     /// All neurons.
     network: Vec<Box<dyn Neuron<T>>>,
@@ -85,7 +83,6 @@ impl<T: Float> Rustunumic<T> {
     pub fn new() -> Self {
         Self {
             bias: None,
-            activation_mode: Some(Activation::ReLU),
             loss_mode: Loss::MSE,
             rate: T::DEFAULT_RATE,
             is_init: false,

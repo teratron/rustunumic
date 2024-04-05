@@ -1,7 +1,9 @@
-use crate::cell::Neuron;
+//! # Propagation
+//!
+//!
 
+use super::{Float, Neuron, Rustunumic};
 use super::loss::{get_loss, Loss};
-use super::{Float, Rustunumic};
 
 impl<T: Float> Rustunumic<T> {
     // Forward propagation.

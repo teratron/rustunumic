@@ -4,10 +4,9 @@
 
 extern crate rand;
 
-use rand::{thread_rng, Rng};
+use rand::{Rng, thread_rng};
 
-use super::cell::{Neuron, NeuronBase};
-use super::Float;
+use super::{Float, Neuron, NeuronBase};
 
 pub(super) struct Axon<T> {
     /// Axon weight.
@@ -25,8 +24,8 @@ impl<T: Float> Axon<T> {
         let mut rng = thread_rng();
         Box::new(Self {
             weight: T::from(rng.gen_range(-0.5..=0.5)),
-            incoming: Box::new(todo!()),
-            outgoing: Box::new(todo!()),
+            incoming: Box::new((_)),
+            outgoing: Box::new((_)),
         })
     }
 
