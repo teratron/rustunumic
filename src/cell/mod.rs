@@ -4,8 +4,8 @@
 
 use super::Float;
 
-pub mod core;
-pub mod output;
+pub(super) mod core;
+pub(super) mod output;
 
 mod bias;
 mod input;
