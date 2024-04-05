@@ -15,9 +15,10 @@ impl<T: Float> Rustunumic<T> {
             /*if not self.__init(len(data_input), len(data_target)) {
                 raise ValueError(f"{__name__}: not initialized")
             } */
+            panic!("not initialized");
         }
-        //self._input = input;
-        //self._target = target;
+        //self.input = input;
+        //self.target = target;
 
         let mut loss: T = T::ZERO;
         let mut min_loss: T = T::ONE;

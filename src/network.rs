@@ -22,6 +22,13 @@ impl<T: Float, S: Neuron<T>> Network<T, S> {
         }
     }
 
+    pub(super) fn get_collect_values(&self) -> Vec<&T> {
+        self.neurons
+            .iter()
+            .map(|n| n.get_value())
+            .collect::<Vec<&T>>()
+    }
+
     /*pub fn get_number_float(&self) -> T {
         T::from(self.number as f64)
     }*/
