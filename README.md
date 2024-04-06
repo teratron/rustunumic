@@ -65,24 +65,24 @@ Array of the number of neurons in each hidden layer.
 
 ActivationMode function mode (required field for a config).
 
-| Activation | Description                              |
-|------------|------------------------------------------|
-| Linear     | Linear/identity                          |
-| ReLU       | ReLU (rectified linear unit)             |
-| LeakyReLU  | Leaky ReLU (leaky rectified linear unit) |
-| Sigmoid    | Logistic, a.k.a. sigmoid or soft step    |
-| TanH       | TanH (hyperbolic tangent)                |
+| Code | Activation | Description                              |
+|:----:|:-----------|:-----------------------------------------|
+|  0   | Linear     | Linear/identity                          |
+|  1   | ReLU       | ReLU (rectified linear unit)             |
+|  2   | LeakyReLU  | Leaky ReLU (leaky rectified linear unit) |
+|  3   | Sigmoid    | Logistic, a.k.a. sigmoid or soft step    |
+|  4   | TanH       | TanH (hyperbolic tangent)                |
 
 #### _loss_mode_
 
 The mode of calculation of the total error.
 
-| Loss   | Description             |
-|--------|-------------------------|
-| MSE    | Mean Squared Error      |
-| RMSE   | Root Mean Squared Error |
-| Arctan | Arctan                  |
-| Avg    | Average                 |
+| Code | Loss   | Description             |
+|:----:|:-------|:------------------------|
+|  0   | MSE    | Mean Squared Error      |
+|  1   | RMSE   | Root Mean Squared Error |
+|  2   | Arctan | Arctan                  |
+|  3   | Avg    | Average                 |
 
 #### _loss_limit_
 
@@ -123,4 +123,4 @@ See the latest [commits](https://github.com/teratron/rustunumic/commits/master).
 
 ---
 
-![My Skills](https://skillicons.dev/icons?i=python,golang,rust,git,github)
+![My Skills](https://skillicons.dev/icons?i=python,golang,rust,javascript,git,github)

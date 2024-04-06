@@ -3,5 +3,17 @@
   "rate": 0.3,
   "loss_mode": 0,
   "network": [
+    {
+      "position": [
+        0,
+        0
+      ],
+      "activation_mode": 1,
+      "synapses": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
   ]
 }

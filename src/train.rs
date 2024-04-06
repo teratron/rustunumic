@@ -9,13 +9,12 @@ const MAX_ITERATION: usize = 1_000_000;
 
 impl<T: Float> Rustunumic<T> {
     /// Training dataset.
-    pub fn train(&mut self, _input: &[T], _target: &[T]) -> (usize, T) {
+    pub fn train(&mut self, input: &[T], target: &[T]) -> (usize, T) {
         // TODO: Result<(usize, T), Box<dyn Error>>
         if !self.is_init {
-            /*if not self.__init(len(data_input), len(data_target)) {
-                raise ValueError(f"{__name__}: not initialized")
-            } */
-            panic!("not initialized");
+            if !self.init(input, target) {
+                panic!("not initialized");
+            }
         }
         //self.input = input;
         //self.target = target;

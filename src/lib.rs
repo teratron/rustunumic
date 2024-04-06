@@ -34,6 +34,7 @@ pub mod loss;
 mod axon;
 mod cell;
 mod float;
+mod init;
 mod interface;
 mod network;
 mod propagation;
