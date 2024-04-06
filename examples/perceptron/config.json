@@ -1,0 +1,7 @@
+{
+  "bias": true,
+  "rate": 0.3,
+  "loss_mode": 0,
+  "network": [
+  ]
+}

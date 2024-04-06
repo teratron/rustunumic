@@ -6,7 +6,7 @@ use super::{Float, Rustunumic};
 
 impl<T: Float> Rustunumic<T> {
     /// Querying dataset.
-    pub fn query(&mut self, input: &[T]) -> Vec<&T> {
+    pub fn query(&mut self, _input: &[T]) -> Vec<&T> {
         if !self.is_init {
             panic!("not initialized");
         }

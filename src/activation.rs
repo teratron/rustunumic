@@ -36,7 +36,7 @@ pub enum Activation {
 }
 
 /// Activation function.
-pub(super) fn activation<T: Float>(value: T, mode: &Activation) -> T {
+pub(super) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
     //let ref val: T = *value;
     match mode {
         Activation::Linear => value,
@@ -69,7 +69,7 @@ pub(super) fn activation<T: Float>(value: T, mode: &Activation) -> T {
 } */
 
 /// Derivative activation function.
-pub(super) fn derivative<T: Float>(value: T, mode: &Activation) -> T {
+pub(super) fn get_derivative<T: Float>(value: T, mode: &Activation) -> T {
     match mode {
         Activation::Linear => T::ONE,
         Activation::ReLU => {

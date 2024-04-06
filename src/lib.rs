@@ -21,9 +21,9 @@
 pub use activation::Activation;
 pub use loss::Loss;
 
-use crate::cell::{Neuron, NeuronBase};
-use crate::cell::core::CoreCell;
+use crate::cell::hidden::HiddenCell;
 use crate::cell::output::OutputCell;
+use crate::cell::{Neuron, NeuronBase};
 use crate::float::Float;
 use crate::network::Network;
 
@@ -71,7 +71,7 @@ pub struct Rustunumic<T> {
     output: Network<T, OutputCell<T>>,
 
     /// Hidden neurons.
-    hidden: Network<T, CoreCell<T>>,
+    hidden: Network<T, HiddenCell<T>>,
 
     // State.
     is_init: bool,
@@ -89,7 +89,7 @@ impl<T: Float> Rustunumic<T> {
             is_query: false,
             network: Vec::new(),
             output: Network::<T, OutputCell<T>>::new(5),
-            hidden: Network::<T, CoreCell<T>>::new(5),
+            hidden: Network::<T, HiddenCell<T>>::new(5),
         }
     }
 }

@@ -5,6 +5,7 @@
 use super::Float;
 
 pub(super) mod core;
+pub(super) mod hidden;
 pub(super) mod output;
 
 mod bias;
@@ -16,7 +17,7 @@ pub(super) trait NeuronBase<T> {
 }
 
 // For CoreCell (HiddenCell), OutputCell.
-pub(super) trait Neuron<T: Float>: NeuronBase<T> {
+pub(super) trait Neuron<T>: NeuronBase<T> {
     fn get_miss(&self) -> &T;
     fn calculate_value(&mut self);
     fn calculate_miss(&mut self);
