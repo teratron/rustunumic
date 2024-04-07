@@ -2,7 +2,7 @@
 //!
 //!
 
-use super::{Float, Neuron};
+use super::{Float, Neuron, NeuronBase};
 
 pub(super) struct Network<T, S> {
     /// Reference to a slice of output or hidden neurons.
@@ -25,7 +25,7 @@ impl<T: Float, S: Neuron<T>> Network<T, S> {
     pub(super) fn get_collect_values(&self) -> Vec<&T> {
         self.neurons
             .iter()
-            .map(|n| n.get_value())
+            .map(|neuron| neuron.get_value())
             .collect::<Vec<&T>>()
     }
 
@@ -33,3 +33,5 @@ impl<T: Float, S: Neuron<T>> Network<T, S> {
         T::from(self.number as f64)
     }*/
 }
+
+impl<T: Float, S: NeuronBase<T>> Network<T, S> {}

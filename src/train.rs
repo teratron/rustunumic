@@ -16,8 +16,6 @@ impl<T: Float> Rustunumic<T> {
                 panic!("not initialized");
             }
         }
-        //self.input = input;
-        //self.target = target;
 
         let mut loss: T = T::ZERO;
         let mut min_loss: T = T::ONE;

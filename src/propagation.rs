@@ -2,8 +2,8 @@
 //!
 //!
 
-use super::{Float, Neuron, Rustunumic};
 use super::loss::{get_loss, Loss};
+use super::{Float, Neuron, Rustunumic};
 
 impl<T: Float> Rustunumic<T> {
     // Forward propagation.
@@ -15,21 +15,19 @@ impl<T: Float> Rustunumic<T> {
         }*/
         self.network
             .iter_mut()
-            .for_each(|n| n.calculate_value())
+            .for_each(|neuron| neuron.calculate_value())
     }
 
     /// Calculating and return the total error of the output neurons.
-    pub(super) fn calculate_loss(&mut self) -> T {
+    pub(super) fn calculate_loss(&self) -> T {
         let mut loss = T::ZERO;
-        for output in self.output.neurons.iter_mut() {
+        /*for output in self.output.neurons.iter() {
             loss += get_loss(output.get_miss(), &self.loss_mode);
-        }
-
-        self.output.neurons
-            .iter_mut()
-            .reduce(|acc, e| acc + get_loss(e.get_miss(), &self.loss_mode))
-            .unwrap();
-
+        }*/
+        self.output
+            .neurons
+            .iter()
+            .for_each(|neuron| loss += get_loss(neuron.get_miss(), &self.loss_mode));
         loss /= self.output.number_float;
         if self.loss_mode == Loss::RMSE {
             loss = loss.sqrt();
@@ -44,10 +42,11 @@ impl<T: Float> Rustunumic<T> {
         /*for neuron in self.hidden.neurons.iter_mut().rev() {
             neuron.calculate_miss();
         }*/
-        self.hidden.neurons
+        self.hidden
+            .neurons
             .iter_mut()
             .rev()
-            .for_each(|n| n.calculate_miss());
+            .for_each(|neuron| neuron.calculate_miss());
         self
     }
 
@@ -58,6 +57,6 @@ impl<T: Float> Rustunumic<T> {
         }*/
         self.network
             .iter_mut()
-            .for_each(|n| n.calculate_weight(&self.rate));
+            .for_each(|neuron| neuron.calculate_weight(&self.rate));
     }
 }

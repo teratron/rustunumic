@@ -4,19 +4,19 @@
 
 use super::Float;
 
-pub(super) mod core;
 pub(super) mod hidden;
+pub(super) mod input;
 pub(super) mod output;
 
 mod bias;
-mod input;
+mod core;
 
-// For InputCell, BiasCell, CoreCell (HiddenCell).
+// For types: InputCell, BiasCell, CoreCell (HiddenCell).
 pub(super) trait NeuronBase<T> {
     fn get_value(&self) -> &T;
 }
 
-// For CoreCell (HiddenCell), OutputCell.
+// For types: CoreCell (HiddenCell), OutputCell.
 pub(super) trait Neuron<T>: NeuronBase<T> {
     fn get_miss(&self) -> &T;
     fn calculate_value(&mut self);
