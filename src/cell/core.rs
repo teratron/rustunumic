@@ -51,9 +51,6 @@ impl<T: Float> Neuron<T> for CoreCell<T> {
 
     fn calculate_value(&mut self) {
         self.value = T::ZERO;
-        /*for axon in self.synapses.get_incoming_axons() {
-            self.value += axon.calculate_value();
-        }*/
         self.synapses
             .get_incoming_axons()
             .iter()
@@ -66,9 +63,6 @@ impl<T: Float> Neuron<T> for CoreCell<T> {
 
     fn calculate_miss(&mut self) {
         self.miss = T::ZERO;
-        /*for axon in self.synapses.get_outgoing_axons() {
-            self.miss += axon.calculate_miss();
-        }*/
         self.synapses
             .get_outgoing_axons()
             .iter()
@@ -77,9 +71,6 @@ impl<T: Float> Neuron<T> for CoreCell<T> {
 
     fn calculate_weight(&mut self, rate: &T) {
         let gradient = *rate * self.miss * get_derivative(self.value, &self.activation_mode);
-        /*for axon in self.synapses.get_incoming_axons().iter_mut() {
-            axon.calculate_weight(&gradient);
-        }*/
         self.synapses
             .get_incoming_axons()
             .iter_mut()

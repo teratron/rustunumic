@@ -2,13 +2,13 @@
 //!
 //!
 
-use super::{Float, Neuron, NeuronBase};
+use super::{Float, Neuron};
 
 pub(super) struct Network<T, S> {
-    /// Reference to a slice of output or hidden neurons.
+    /// Reference to a slice of neurons.
     pub(super) neurons: Box<[S]>,
 
-    /// Number of output neurons.
+    /// Number neurons.
     pub(super) number: usize,
     pub(super) number_float: T,
 }
@@ -22,6 +22,11 @@ impl<T: Float, S: Neuron<T>> Network<T, S> {
         }
     }
 
+    pub(super) fn set_number(&mut self, number: usize) {
+        self.number = number;
+        self.number_float = T::from(self.number as f64);
+    }
+
     pub(super) fn get_collect_values(&self) -> Vec<&T> {
         self.neurons
             .iter()
@@ -33,5 +38,3 @@ impl<T: Float, S: Neuron<T>> Network<T, S> {
         T::from(self.number as f64)
     }*/
 }
-
-impl<T: Float, S: NeuronBase<T>> Network<T, S> {}

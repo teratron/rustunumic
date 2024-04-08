@@ -4,10 +4,12 @@
 
 use super::axon::Axon;
 
+// Массив входящих аксонов для нейрона.
 pub(super) trait SynapseIncoming<T> {
     fn get_incoming_axons(&mut self) -> &Vec<Axon<T>>;
 }
 
+// Массив исходящих аксонов для нейрона.
 pub(super) trait SynapseOutgoing<T> {
     fn get_outgoing_axons(&mut self) -> &Vec<Axon<T>>;
 }
@@ -33,9 +35,3 @@ impl<T> SynapseOutgoing<T> for (Vec<Axon<T>>, Vec<Axon<T>>) {
         &self.1
     }
 }
-
-/*impl<T> Synapse<T> for (Vec<Axon<T>>, Vec<Axon<T>>) {
-    fn get_outgoing_axons(&mut self) -> &Vec<Axon<T>> {
-        &self.1
-    }
-}*/

@@ -35,6 +35,18 @@ pub enum Activation {
     // TODO: ELU, SeLU, SWiSH, ELiSH
 }
 
+/*trait ActivationTrait<T: Float> {
+    fn activation(&self, value: &T);
+}
+
+struct Linear;
+
+impl<T: Float> ActivationTrait<T> for Linear {
+    fn activation(&self, _value: &T) -> () {
+        return;
+    }
+}*/
+
 /// Activation function.
 pub(super) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
     //let ref val: T = *value;
