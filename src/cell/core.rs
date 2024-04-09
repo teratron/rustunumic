@@ -27,7 +27,7 @@ impl<T: Float> CoreCell<T> {
             value: T::ZERO,
             miss: T::ZERO,
             activation_mode: Activation::ReLU,
-            synapses: Box::new((_)),
+            synapses: Box::new(()),
         }
     }
 

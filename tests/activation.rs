@@ -1,4 +1,4 @@
-use rustunumic::activation::*;
+use rustunumic::activation::{get_activation, get_derivative, Activation};
 
 #[test]
 fn test_activation() {
@@ -12,7 +12,12 @@ fn test_activation() {
         (0.1, Activation::TanH, 0.09966799462495583),
     ];
     for (value, mode, result) in data {
-        assert_eq!(activation(&value, &mode), result, "{:?} failed test", mode);
+        assert_eq!(
+            get_activation(&value, &mode),
+            result,
+            "{:?} failed test",
+            mode
+        );
     }
 }
 
@@ -28,6 +33,11 @@ fn test_derivative() {
         (0.1, Activation::TanH, 0.99),
     ];
     for (value, mode, result) in data {
-        assert_eq!(derivative(&value, &mode), result, "{:?} failed test", mode);
+        assert_eq!(
+            get_derivative(&value, &mode),
+            result,
+            "{:?} failed test",
+            mode
+        );
     }
 }

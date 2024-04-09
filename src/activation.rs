@@ -48,7 +48,7 @@ impl<T: Float> ActivationTrait<T> for Linear {
 }*/
 
 /// Activation function.
-pub(super) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
+pub(crate) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
     //let ref val: T = *value;
     match mode {
         Activation::Linear => value,

@@ -24,8 +24,8 @@ impl<T: Float> Axon<T> {
         let mut rng = thread_rng();
         Box::new(Self {
             weight: T::from(rng.gen_range(-0.5..=0.5)),
-            incoming_cell: Box::new((_)),
-            outgoing_cell: Box::new((_)),
+            incoming_cell: Box::new(()),
+            outgoing_cell: Box::new(()),
         })
     }
 
