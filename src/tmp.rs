@@ -20,7 +20,7 @@ mod float_struct {
         phantom: PhantomData<T>,
         _i: i8,
         _s: String,
-        pub f: <f64 as Float>::FloatType,
+        pub f: T,
     }
 
     // Часть кода выводящего ошибку
@@ -54,14 +54,6 @@ fn main() {
     }
 }*/
 
-/*fn calculate_miss(&mut self) {
-    let mut n: usize = self.outgoing_axons_last_index;
-    while n >= 0 {
-        self.outgoing_axons[n].calculate_miss(self);
-        n -= 1;
-    }
-}*/
-
 /*
 trait Synapse {}
 
@@ -77,70 +69,6 @@ pub(super) enum Synapse {
 struct Synapse {
     incoming_axons: Vec<Axon>,
     outgoing_axons: Option<Vec<Axon>>,
-}
-
-struct CoreCell {
-    /// Neuron value.
-    value: f32,
-
-    /// Neuron error.
-    miss: f32,
-
-    /// Function activation mode.
-    activation_mode: Option<Activation>,
-
-    /// All incoming axons.
-    incoming_axons: Vec<Axon>,
-    //&'a
-    _rate: f32,
-
-    // incoming_axons or (incoming_axons, outgoing_axons)
-    // Vec<Axon> or (Vec<Axon>, Vec<Axon>)
-    // (Vec<Axon>, Option<Vec<Axon>>)
-    synapses: dyn Synapse,
-
-    // HiddenCell, OutputCell
-    cell: dyn KindTrait,
-}
-
-impl CoreCell {
-    fn activation(&mut self) {}
-    fn derivative(&mut self) {}
-
-    // Forward propagation.
-    fn calculate_value(&mut self) {
-        self.value = 0.;
-        for axon in self.incoming_axons {
-            self.value += axon.calculate_value();
-        }
-    }
-
-    // Backward propagation.
-    fn update_weight(&mut self) {
-        let gradient = self._rate
-            * self.miss
-            * get_derivative(&mut (self.value as f64), &self.activation_mode.unwrap());
-
-        for axon in &mut self.incoming_axons {
-            axon.update_weight(&gradient);
-        }
-    }
-}
-
-impl CoreTrait for CoreCell {
-    fn get_value(&self) -> &f32 {
-        &self.value
-    }
-}
-
-impl CellTrait for CoreCell {
-    fn get_miss(&self) -> &f32 {
-        &self.miss
-    }
-
-    fn set_miss(&mut self, value: f32) {
-        self.miss = value;
-    }
 }
 
 pub(crate) enum CellKind<'a, T> {

@@ -22,6 +22,7 @@ pub use activation::Activation;
 pub use loss::Loss;
 
 use crate::cell::hidden::HiddenCell;
+use crate::cell::input::InputCell;
 use crate::cell::output::OutputCell;
 use crate::cell::{Neuron, NeuronBase};
 use crate::float::Float;

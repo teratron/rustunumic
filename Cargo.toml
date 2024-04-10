@@ -41,7 +41,7 @@ doctest = false
 members = [
     "cli",
     "examples/perceptron"
-]
+    , "examples/query"]
 
 [dependencies]
 rand = "0.8.5"
