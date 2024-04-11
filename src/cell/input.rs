@@ -17,3 +17,8 @@ impl<T> NeuronBase<T> for InputCell<T> {
         &self.0
     }
 }
+
+struct InputData<'a, T> {
+    neurons: &'a [T],
+    cells: Vec<InputCell<T>>,
+}

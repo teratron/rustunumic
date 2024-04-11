@@ -17,24 +17,11 @@ impl<T: Float> Rustunumic<T> {
 
     /// Calculating and return the total error of the output neurons.
     pub(super) fn calculate_loss(&self) -> T {
-        /*let mut loss = T::ZERO;
-        self.output_cells
-            .neurons
-            .iter()
-            .for_each(|neuron| loss += get_loss(neuron.get_miss(), &self.loss_mode));
-
-        loss /= self.output_cells.number_float;
-        if self.loss_mode == Loss::RMSE {
-            loss = loss.sqrt();
-        }
-        loss
-        */
-
         get_total_loss(
             self.output_cells
                 .neurons
                 .iter()
-                .map(|n| *n.get_miss())
+                .map(|neuron| *neuron.get_miss())
                 .collect::<Vec<T>>(),
             &self.loss_mode,
         )

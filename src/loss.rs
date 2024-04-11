@@ -34,18 +34,15 @@ pub enum Loss {
 }
 
 pub(super) fn get_total_loss<T: Float>(misses: Vec<T>, mode: &Loss) -> T {
-    let mut loss: T = T::ZERO;
-    let mut count: T = T::ZERO;
-
+    let mut loss = T::ZERO;
+    let mut count = T::ZERO;
     misses.iter().for_each(|miss| {
         loss += get_loss(miss, mode);
         count += T::ONE;
     });
-
     if count > T::ONE {
         loss /= count;
     }
-
     if *mode == Loss::RMSE {
         loss = loss.sqrt();
     }

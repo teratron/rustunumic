@@ -35,6 +35,13 @@ impl<T: Float, S: Neuron<T>> Network<T, S> {
             .collect::<Vec<&T>>()
     }
 
+    pub(super) fn get_collect_misses(&self) -> Vec<&T> {
+        self.neurons
+            .iter()
+            .map(|neuron| neuron.get_value())
+            .collect::<Vec<&T>>()
+    }
+
     /*pub fn get_number_float(&self) -> T {
         T::from(self.number as f64)
     }*/
