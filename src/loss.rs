@@ -2,7 +2,7 @@
 //!
 //!
 
-use super::{Float, Rustunumic};
+use super::Float;
 
 pub(super) const LOSS_LIMIT: f64 = 1E-10;
 
@@ -33,35 +33,31 @@ pub enum Loss {
     Avg,
 }
 
-pub(super) fn get_loss<T: Float>(value: &T, mode: &Loss) -> T {
+pub(super) fn get_total_loss<T: Float>(misses: Vec<T>, mode: &Loss) -> T {
+    let mut loss: T = T::ZERO;
+    let mut count: T = T::ZERO;
+
+    misses.iter().for_each(|miss| {
+        loss += get_loss(miss, mode);
+        count += T::ONE;
+    });
+
+    if count > T::ONE {
+        loss /= count;
+    }
+
+    if *mode == Loss::RMSE {
+        loss = loss.sqrt();
+    }
+    loss
+}
+
+fn get_loss<T: Float>(value: &T, mode: &Loss) -> T {
     match mode {
         Loss::Avg => value.abs(),
         Loss::Arctan => value.atan().powi(2),
         Loss::MSE | Loss::RMSE | _ => value.powi(2),
     }
-}
-
-fn total_loss<T: Float>(
-    func: fn(Rustunumic<T>) -> dyn Iterator<Item = T>,
-) -> fn(Rustunumic<T>) -> T {
-    let inner = |obj: Rustunumic<T>| -> T {
-        let mut loss: T = T::ZERO;
-        let mut count: T = T::ZERO;
-        let miss = func(obj).next().unwrap();
-
-        loss += get_loss(&miss, &obj.loss_mode);
-        count += T::ONE;
-
-        if count > T::ONE {
-            loss /= count;
-        }
-
-        if obj.loss_mode == Loss::RMSE {
-            loss = loss.sqrt();
-        }
-        loss
-    };
-    inner
 }
 
 #[cfg(test)]
