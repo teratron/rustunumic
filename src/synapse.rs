@@ -8,6 +8,7 @@ type AxonBundle<T> = Vec<Axon<T>>;
 
 // Массив входящих аксонов для нейрона.
 pub(super) trait SynapseIncoming<T> {
+    fn new() -> Self;
     fn get_incoming_axons(&mut self) -> &AxonBundle<T>;
 }
 
@@ -20,6 +21,10 @@ pub(super) trait Synapse<T>: SynapseIncoming<T> + SynapseOutgoing<T> {}
 
 // For type Vec<Axon<T>>
 impl<T> SynapseIncoming<T> for AxonBundle<T> {
+    fn new() -> Self {
+        vec![]
+    }
+
     fn get_incoming_axons(&mut self) -> &Self {
         self
     }
@@ -27,6 +32,10 @@ impl<T> SynapseIncoming<T> for AxonBundle<T> {
 
 // For type (Vec<Axon<T>>, Vec<Axon<T>>)
 impl<T> SynapseIncoming<T> for (AxonBundle<T>, AxonBundle<T>) {
+    fn new() -> Self {
+        (vec![], vec![])
+    }
+
     fn get_incoming_axons(&mut self) -> &AxonBundle<T> {
         &self.0
     }
