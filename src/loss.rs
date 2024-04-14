@@ -44,16 +44,16 @@ pub(super) fn get_total_loss<T: Float>(misses: Vec<T>, mode: &Loss) -> T {
         loss /= count;
     }
     if *mode == Loss::RMSE {
-        loss = loss.sqrt();
+        loss = loss.float_sqrt();
     }
     loss
 }
 
 fn get_loss<T: Float>(value: &T, mode: &Loss) -> T {
     match mode {
-        Loss::Avg => value.abs(),
-        Loss::Arctan => value.atan().powi(2),
-        Loss::MSE | Loss::RMSE | _ => value.powi(2),
+        Loss::Avg => value.float_abs(),
+        Loss::Arctan => value.float_atan().float_powi(2),
+        Loss::MSE | Loss::RMSE => value.float_powi(2),
     }
 }
 

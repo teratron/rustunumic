@@ -67,10 +67,10 @@ pub(crate) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
             }
         }
         Activation::TanH => {
-            let v = (T::from(2.) * value).exp();
+            let v = (T::from(2.) * value).float_exp();
             (v - T::ONE) / (v + T::ONE)
         }
-        Activation::Sigmoid => T::from(1.) / (T::from(1.) + (-value).exp()),
+        Activation::Sigmoid => T::from(1.) / ((-value).float_exp() + T::ONE),
     }
 }
 
@@ -98,7 +98,7 @@ pub(super) fn get_derivative<T: Float>(value: T, mode: &Activation) -> T {
                 T::ONE
             }
         }
-        Activation::TanH => T::from(1.) - value.powi(2),
+        Activation::TanH => T::from(1.) - value.float_powi(2),
         Activation::Sigmoid => T::from(1.) - value,
     }
 }

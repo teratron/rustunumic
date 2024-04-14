@@ -37,11 +37,11 @@ where
     fn type_name(&self) -> &'static str;
 
     // Math functions.
-    fn abs(&self) -> Self;
-    fn powi(&self, n: i32) -> Self;
-    fn sqrt(&self) -> Self;
-    fn exp(&self) -> Self;
-    fn atan(&self) -> Self;
+    fn float_abs(&self) -> Self;
+    fn float_powi(&self, n: i32) -> Self;
+    fn float_sqrt(&self) -> Self;
+    fn float_exp(&self) -> Self;
+    fn float_atan(&self) -> Self;
 }
 
 // f32.
@@ -63,23 +63,23 @@ impl Float for f32 {
     }
 
     // Math functions.
-    fn abs(&self) -> Self {
+    fn float_abs(&self) -> Self {
         self.abs()
     }
 
-    fn powi(&self, n: i32) -> Self {
+    fn float_powi(&self, n: i32) -> Self {
         self.powi(n)
     }
 
-    fn sqrt(&self) -> Self {
+    fn float_sqrt(&self) -> Self {
         self.sqrt()
     }
 
-    fn exp(&self) -> Self {
+    fn float_exp(&self) -> Self {
         self.exp()
     }
 
-    fn atan(&self) -> Self {
+    fn float_atan(&self) -> Self {
         self.atan()
     }
 }
@@ -103,23 +103,23 @@ impl Float for f64 {
     }
 
     // Math functions.
-    fn abs(&self) -> Self {
+    fn float_abs(&self) -> Self {
         self.abs()
     }
 
-    fn powi(&self, n: i32) -> Self {
+    fn float_powi(&self, n: i32) -> Self {
         self.powi(n)
     }
 
-    fn sqrt(&self) -> Self {
+    fn float_sqrt(&self) -> Self {
         self.sqrt()
     }
 
-    fn exp(&self) -> Self {
+    fn float_exp(&self) -> Self {
         self.exp()
     }
 
-    fn atan(&self) -> Self {
+    fn float_atan(&self) -> Self {
         self.atan()
     }
 }

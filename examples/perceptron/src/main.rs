@@ -37,7 +37,7 @@ fn main() {
     let now = time::Instant::now();
 
     // Training.
-    for _ in 10_000 {
+    for _ in 0..10_000 {
         for i in len_input..len_data {
             let (num, loss) = rn.train(&dataset[i - len_input..i], &dataset[i..i + len_output]);
         }

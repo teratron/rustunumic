@@ -4,10 +4,10 @@
 
 use super::NeuronBase;
 
-pub(crate) struct InputCell<T>(T);
+pub(crate) struct InputCell<'a, T>(&'a T);
 
 impl<T> InputCell<T> {
-    fn new(value: T) -> Self {
+    fn new(value: &T) -> Self {
         InputCell(value)
     }
 }
