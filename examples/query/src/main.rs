@@ -43,7 +43,36 @@ impl Area for Square {
     }
 }
 
+fn print_type<T: 'static>() {
+    match std::any::TypeId::of::<T>() {
+        t if t == std::any::TypeId::of::<f32>() => println!("f32"),
+        t if t == std::any::TypeId::of::<f64>() => println!("f64"),
+        _ => println!("Unknown type"),
+    }
+}
+
+fn identify_type<T>(value: T) {
+    match value {
+        // Explicitly check for f32 and f64 using `is` operator
+        val if val.is::<f32>() => println!("f32"), // is - error
+        val if val.is::<f64>() => println!("f64"),
+        _ => println!("Неизвестный тип (Unknown type)"), // Handle other types with a descriptive message
+    }
+}
+
 fn main() {
+    print_type::<f32>();
+    print_type::<f64>();
+    print_type::<i32>();
+
+    let my_float_32: f32 = 3.14;
+    let my_float_64: f64 = 2.718;
+    let my_string: String = "Hello, world!".to_string();
+
+    identify_type(my_float_32);
+    identify_type(my_float_64);
+    identify_type(my_string);
+
     let rect1 = Rectangle::new(3., 5.).unwrap();
     let rect2 = Rectangle::new(4., 6.).unwrap();
 
