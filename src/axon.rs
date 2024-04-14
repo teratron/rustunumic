@@ -20,12 +20,12 @@ pub(super) struct Axon<T> {
 }
 
 impl<T: Float> Axon<T> {
-    fn new() -> Box<Self> {
+    fn new(incoming_cell: Box<dyn NeuronBase<T>>, outgoing_cell: Box<dyn Neuron<T>>) -> Box<Self> {
         let mut rng = thread_rng();
         Box::new(Self {
             weight: T::from(rng.gen_range(-0.5..=0.5)),
-            incoming_cell: Box::new(()),
-            outgoing_cell: Box::new(()),
+            incoming_cell,
+            outgoing_cell,
         })
     }
 

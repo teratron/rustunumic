@@ -22,11 +22,11 @@ pub(super) struct CoreCell<T> {
 }
 
 impl<T: Float> CoreCell<T> {
-    pub(super) fn new() -> Self {
+    pub(super) fn new(activation_mode: Activation) -> Self {
         Self {
             value: T::ZERO,
             miss: T::ZERO,
-            activation_mode: Activation::ReLU,
+            activation_mode,
             synapses: Box::new(()),
         }
     }
