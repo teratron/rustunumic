@@ -6,7 +6,7 @@ use crate::synapse::AxonBundle;
 use crate::Activation;
 use crate::Float;
 
-use super::core::CoreCell;
+use super::CoreCell;
 use super::{Neuron, NeuronBase};
 
 pub(crate) struct HiddenCell<T> {
@@ -21,7 +21,7 @@ impl<T: Float> HiddenCell<T> {
     fn new(activation_mode: Activation) -> Self {
         Self {
             core: CoreCell::new(activation_mode),
-            outgoing_axons: vec![],
+            outgoing_axons: Vec::new(),
         }
     }
 }
@@ -51,10 +51,6 @@ impl<T: Float> Neuron<T> for HiddenCell<T> {
             .iter()
             .for_each(|axon| self.core.miss += axon.calculate_miss());
     }
-
-    /*fn calculate_miss(&mut self) {
-        self.core.calculate_miss();
-    }*/
 
     fn calculate_weight(&mut self, rate: &T) {
         self.core.calculate_weight(rate);

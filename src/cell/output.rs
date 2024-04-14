@@ -5,7 +5,7 @@
 use crate::Activation;
 use crate::Float;
 
-use super::core::CoreCell;
+use super::CoreCell;
 use super::{Neuron, NeuronBase};
 
 pub(crate) struct OutputCell<T> {

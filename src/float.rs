@@ -10,7 +10,6 @@ const ZERO: f64 = 0.;
 const ONE: f64 = 1.;
 const TWO: f64 = 2.;
 const DEFAULT_RATE: f64 = 0.3;
-const DEFAULT_RAND: f64 = 0.5;
 
 /// Float trait
 pub trait Float
@@ -32,11 +31,36 @@ where
     const ONE: Self;
     const TWO: Self;
     const DEFAULT_RATE: Self;
-    const DEFAULT_RAND: Self;
     const LOSS_LIMIT: Self;
 
     fn from(x: f64) -> Self;
     fn type_name(&self) -> &'static str;
+
+    // Math functions.
+    fn abs(&self) -> Self;
+    fn powi(&self, n: i32) -> Self;
+    fn sqrt(&self) -> Self;
+    fn exp(&self) -> Self;
+    fn atan(&self) -> Self;
+}
+
+// f32.
+impl Float for f32 {
+    type FloatType = f32;
+
+    const ZERO: Self = ZERO as Self;
+    const ONE: Self = ONE as Self;
+    const TWO: Self = TWO as Self;
+    const DEFAULT_RATE: Self = DEFAULT_RATE as Self;
+    const LOSS_LIMIT: Self = LOSS_LIMIT as Self;
+
+    fn from(x: f64) -> Self {
+        x as Self::FloatType
+    }
+
+    fn type_name(&self) -> &'static str {
+        "f32"
+    }
 
     // Math functions.
     fn abs(&self) -> Self {
@@ -60,26 +84,6 @@ where
     }
 }
 
-// f32.
-impl Float for f32 {
-    type FloatType = f32;
-
-    const ZERO: Self = ZERO as Self;
-    const ONE: Self = ONE as Self;
-    const TWO: Self = TWO as Self;
-    const DEFAULT_RATE: Self = DEFAULT_RATE as Self;
-    const DEFAULT_RAND: Self = DEFAULT_RAND as Self;
-    const LOSS_LIMIT: Self = LOSS_LIMIT as Self;
-
-    fn from(x: f64) -> Self {
-        x as Self::FloatType
-    }
-
-    fn type_name(&self) -> &'static str {
-        "f32"
-    }
-}
-
 // f64.
 impl Float for f64 {
     type FloatType = f64;
@@ -88,7 +92,6 @@ impl Float for f64 {
     const ONE: Self = ONE;
     const TWO: Self = TWO;
     const DEFAULT_RATE: Self = DEFAULT_RATE;
-    const DEFAULT_RAND: Self = DEFAULT_RAND;
     const LOSS_LIMIT: Self = LOSS_LIMIT;
 
     fn from(x: f64) -> Self {
@@ -97,5 +100,26 @@ impl Float for f64 {
 
     fn type_name(&self) -> &'static str {
         "f64"
+    }
+
+    // Math functions.
+    fn abs(&self) -> Self {
+        self.abs()
+    }
+
+    fn powi(&self, n: i32) -> Self {
+        self.powi(n)
+    }
+
+    fn sqrt(&self) -> Self {
+        self.sqrt()
+    }
+
+    fn exp(&self) -> Self {
+        self.exp()
+    }
+
+    fn atan(&self) -> Self {
+        self.atan()
     }
 }
