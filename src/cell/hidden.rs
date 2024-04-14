@@ -2,18 +2,26 @@
 //!
 //!
 
+use crate::synapse::AxonBundle;
+use crate::Activation;
+use crate::Float;
+
 use super::core::CoreCell;
-use super::{Float, Neuron, NeuronBase};
+use super::{Neuron, NeuronBase};
 
 pub(crate) struct HiddenCell<T> {
     /// Core cell.
     core: CoreCell<T>,
+
+    /// Outgoing axons.
+    outgoing_axons: AxonBundle<T>,
 }
 
 impl<T: Float> HiddenCell<T> {
-    fn new() -> Self {
+    fn new(activation_mode: Activation) -> Self {
         Self {
-            core: CoreCell::new(),
+            core: CoreCell::new(activation_mode),
+            outgoing_axons: vec![],
         }
     }
 }
@@ -38,8 +46,15 @@ impl<T: Float> Neuron<T> for HiddenCell<T> {
     // Backward propagation.
 
     fn calculate_miss(&mut self) {
-        self.core.calculate_miss();
+        self.core.miss = T::ZERO;
+        self.outgoing_axons
+            .iter()
+            .for_each(|axon| self.core.miss += axon.calculate_miss());
     }
+
+    /*fn calculate_miss(&mut self) {
+        self.core.calculate_miss();
+    }*/
 
     fn calculate_weight(&mut self, rate: &T) {
         self.core.calculate_weight(rate);

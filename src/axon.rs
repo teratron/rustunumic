@@ -20,13 +20,16 @@ pub(super) struct Axon<T> {
 }
 
 impl<T: Float> Axon<T> {
-    fn new(incoming_cell: Box<dyn NeuronBase<T>>, outgoing_cell: Box<dyn Neuron<T>>) -> Box<Self> {
+    pub(super) fn new(
+        incoming_cell: Box<dyn NeuronBase<T>>,
+        outgoing_cell: Box<dyn Neuron<T>>,
+    ) -> Self {
         let mut rng = thread_rng();
-        Box::new(Self {
+        Self {
             weight: T::from(rng.gen_range(-0.5..=0.5)),
             incoming_cell,
             outgoing_cell,
-        })
+        }
     }
 
     // Forward propagation.

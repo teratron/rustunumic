@@ -2,8 +2,11 @@
 //!
 //!
 
-use super::{Float, Neuron, NeuronBase};
+use crate::Activation;
+use crate::Float;
+
 use super::core::CoreCell;
+use super::{Neuron, NeuronBase};
 
 pub(crate) struct OutputCell<T> {
     /// Core cell.
@@ -14,9 +17,9 @@ pub(crate) struct OutputCell<T> {
 }
 
 impl<T: Float> OutputCell<T> {
-    fn new() -> Self {
+    fn new(activation_mode: Activation) -> Self {
         Self {
-            core: CoreCell::new(),
+            core: CoreCell::new(activation_mode),
             target: T::ZERO,
         }
     }

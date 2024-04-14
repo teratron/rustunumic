@@ -4,7 +4,7 @@
 
 use super::axon::Axon;
 
-type AxonBundle<T> = Vec<Axon<T>>;
+pub(super) type AxonBundle<T> = Vec<Axon<T>>;
 
 // Массив входящих аксонов для нейрона.
 pub(super) trait SynapseIncoming<T> {

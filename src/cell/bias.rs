@@ -2,7 +2,9 @@
 //!
 //!
 
-use super::{Float, NeuronBase};
+use crate::Float;
+
+use super::NeuronBase;
 
 struct BiasCell;
 
