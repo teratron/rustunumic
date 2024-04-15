@@ -47,7 +47,7 @@ impl<T: Float, S: Neuron<T>> Network<T, S> {
     }*/
 }
 
-struct Network2<'a, T> {
+struct Bundle<'a, T> {
     /// All working neurons.
     network: Vec<&'a dyn Neuron<T>>,
 

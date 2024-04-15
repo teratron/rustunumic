@@ -13,17 +13,17 @@ const DEFAULT_RATE: f64 = 0.3;
 
 /// Float trait
 pub trait Float
-    where
-        Self: Sized
+where
+    Self: Sized
         + Copy
         + PartialOrd
-        + Mul<Output=Self>
-        + Div<Output=Self>
+        + Mul<Output = Self>
+        + Div<Output = Self>
         + DivAssign
-        + Add<Output=Self>
+        + Add<Output = Self>
         + AddAssign
-        + Sub<Output=Self>
-        + Neg<Output=Self>,
+        + Sub<Output = Self>
+        + Neg<Output = Self>,
 {
     type FloatType;
 
@@ -123,15 +123,3 @@ impl Float for f64 {
         self.atan()
     }
 }
-
-/*impl<T> From<T> for f32 where T: Float {
-    fn from(w: T) -> f32 {
-        w
-    }
-}
-
-impl<T> Into<f32> for T where T: Float {
-    fn into(self) -> f32 {
-        self
-    }
-}*/

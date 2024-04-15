@@ -4,16 +4,16 @@
 
 use super::NeuronBase;
 
-//pub(crate) struct InputCell<'a, T>(&'a T);
-pub(crate) struct InputCell<T>(T);
+pub(crate) struct InputCell<'a, T>(&'a T);
+//pub(crate) struct InputCell<T>(T);
 
-impl<T> InputCell<T> {
-    pub(super) fn new(value: T) -> Self {
+impl<'a, T> InputCell<'a, T> {
+    pub(crate) fn new(value: &T) -> Self {
         InputCell(value)
     }
 }
 
-impl<T> NeuronBase<T> for InputCell<T> {
+impl<'a, T> NeuronBase<T> for InputCell<'a, T> {
     fn get_value(&self) -> &T {
         &self.0
     }
