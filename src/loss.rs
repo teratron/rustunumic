@@ -63,7 +63,7 @@ mod tests {
 
     #[test]
     fn test_get_loss() {
-        let value = 2.;
+        let value: f64 = 2.;
 
         assert_eq!(get_loss(&value, &Loss::MSE), 4.);
         assert_eq!(get_loss(&value, &Loss::RMSE), 4.);

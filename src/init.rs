@@ -2,6 +2,8 @@
 //!
 //!
 
+#![allow(unused)]
+
 use super::{Float, Rustunumic};
 
 impl<T: Float> Rustunumic<T> {

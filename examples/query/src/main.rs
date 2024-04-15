@@ -54,8 +54,8 @@ fn print_type<T: 'static>() {
 fn identify_type<T>(value: T) {
     match value {
         // Explicitly check for f32 and f64 using `is` operator
-        val if val.is::<f32>() => println!("f32"), // is - error
-        val if val.is::<f64>() => println!("f64"),
+        //val if val.is::<f32>() => println!("f32"), // is - error
+        //val if val.is::<f64>() => println!("f64"),
         _ => println!("Неизвестный тип (Unknown type)"), // Handle other types with a descriptive message
     }
 }
