@@ -21,7 +21,7 @@ impl<'a, T> NeuronBase<T> for InputCell<'a, T> {
 
 struct InputData<'a, T> {
     neurons: &'a [T],
-    cells: Vec<InputCell<T>>,
+    cells: Vec<InputCell<'a, T>>,
 }
 
 /*#[cfg(test)]
