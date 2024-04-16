@@ -36,8 +36,8 @@ pub enum Loss {
 pub(super) fn get_total_loss<T: Float>(misses: Vec<T>, mode: &Loss) -> T {
     let mut loss = T::ZERO;
     let mut count = T::ZERO;
-    misses.iter().for_each(|miss| {
-        loss += get_loss(miss, mode);
+    misses.iter().for_each(|m| {
+        loss += get_loss(m, mode);
         count += T::ONE;
     });
     if count > T::ONE {

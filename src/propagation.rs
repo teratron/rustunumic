@@ -10,9 +10,7 @@ impl<T: Float> Rustunumic<T> {
 
     /// Calculating neuron's value.
     pub(super) fn calculate_values(&mut self) {
-        self.network
-            .iter_mut()
-            .for_each(|neuron| neuron.calculate_value())
+        self.network.iter_mut().for_each(|n| n.calculate_value())
     }
 
     /// Calculating and return the total error of the output neurons.
@@ -21,7 +19,7 @@ impl<T: Float> Rustunumic<T> {
             self.output_cells
                 .neurons
                 .iter()
-                .map(|neuron| *neuron.get_miss())
+                .map(|n| *n.get_miss())
                 .collect::<Vec<T>>(),
             &self.loss_mode,
         )
@@ -35,7 +33,7 @@ impl<T: Float> Rustunumic<T> {
             .neurons
             .iter_mut()
             .rev()
-            .for_each(|neuron| neuron.calculate_miss());
+            .for_each(|n| n.calculate_miss());
 
         self
     }
@@ -44,6 +42,6 @@ impl<T: Float> Rustunumic<T> {
     pub(super) fn calculate_weights(&mut self) {
         self.network
             .iter_mut()
-            .for_each(|neuron| neuron.calculate_weight(&self.rate));
+            .for_each(|n| n.calculate_weight(&self.rate));
     }
 }

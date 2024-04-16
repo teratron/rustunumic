@@ -36,7 +36,7 @@ impl<T: Float> CoreCell<T> {
         self.value = T::ZERO;
         self.incoming_axons
             .iter()
-            .for_each(|axon| self.value += axon.calculate_value());
+            .for_each(|a| self.value += a.calculate_value());
         //self.get_activation(&self.activation_mode);
         self.value = get_activation(self.value, &self.activation_mode);
     }
@@ -47,6 +47,6 @@ impl<T: Float> CoreCell<T> {
         let gradient = *rate * self.miss * get_derivative(self.value, &self.activation_mode);
         self.incoming_axons
             .iter_mut()
-            .for_each(|axon| axon.calculate_weight(&gradient));
+            .for_each(|a| a.calculate_weight(&gradient));
     }
 }

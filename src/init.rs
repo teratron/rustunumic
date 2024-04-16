@@ -4,7 +4,8 @@
 
 #![allow(unused)]
 
-use crate::cell::input::InputCell;
+use crate::cell::input::InputBundle;
+use crate::cell::output::OutputBundle;
 
 use super::{Float, Rustunumic};
 
@@ -14,15 +15,8 @@ impl<T: Float> Rustunumic<T> {
         let number_input = input.len();
         let number_output = target.len();
 
-        /*let mut inp = Vec::with_capacity(number_input);
-        input.iter().enumerate().for_each(|v| {
-            inp[v.0] = InputCell::new(v.1);
-        });*/
-
-        let mut _input = input
-            .iter()
-            .map(|v| InputCell::new(v))
-            .collect::<Vec<InputCell<T>>>();
+        let mut inp = InputBundle::new(input);
+        let mut out = OutputBundle::new(target);
 
         self.output_cells.set_number(number_output);
 

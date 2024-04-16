@@ -49,7 +49,7 @@ impl<T: Float> Neuron<T> for HiddenCell<T> {
         self.core.miss = T::ZERO;
         self.outgoing_axons
             .iter()
-            .for_each(|axon| self.core.miss += axon.calculate_miss());
+            .for_each(|a| self.core.miss += a.calculate_miss());
     }
 
     fn calculate_weight(&mut self, rate: &T) {

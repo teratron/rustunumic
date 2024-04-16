@@ -31,14 +31,14 @@ impl<T: Float, S: Neuron<T>> Network<T, S> {
     pub(super) fn get_collect_values(&self) -> Vec<&T> {
         self.neurons
             .iter()
-            .map(|neuron| neuron.get_value())
+            .map(|n| n.get_value())
             .collect::<Vec<&T>>()
     }
 
     pub(super) fn get_collect_misses(&self) -> Vec<&T> {
         self.neurons
             .iter()
-            .map(|neuron| neuron.get_value())
+            .map(|n| n.get_value())
             .collect::<Vec<&T>>()
     }
 

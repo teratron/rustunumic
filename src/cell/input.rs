@@ -19,9 +19,21 @@ impl<'a, T> NeuronBase<T> for InputCell<'a, T> {
     }
 }
 
-struct InputData<'a, T> {
-    neurons: &'a [T],
+pub(crate) struct InputBundle<'a, T> {
+    data: &'a [T],
     cells: Vec<InputCell<'a, T>>,
+}
+
+impl<'a, T> InputBundle<'a, T> {
+    pub(crate) fn new(data: &[T]) -> Self {
+        Self {
+            data,
+            cells: data
+                .iter()
+                .map(|v| InputCell::new(v))
+                .collect::<Vec<InputCell<'a, T>>>(),
+        }
+    }
 }
 
 /*#[cfg(test)]
