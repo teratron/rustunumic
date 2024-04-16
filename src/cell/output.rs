@@ -55,14 +55,12 @@ impl<T: Float> Neuron<T> for OutputCell<T> {
 }
 
 pub(crate) struct OutputBundle<'a, T> {
-    data: &'a [T],
     cells: Vec<OutputCell<'a, T>>,
 }
 
 impl<'a, T> OutputBundle<'a, T> {
     pub(crate) fn new(data: &[T]) -> Self {
         Self {
-            data,
             cells: data
                 .iter()
                 .map(|v| OutputCell::new(v))

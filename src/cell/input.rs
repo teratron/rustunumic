@@ -20,19 +20,23 @@ impl<'a, T> NeuronBase<T> for InputCell<'a, T> {
 }
 
 pub(crate) struct InputBundle<'a, T> {
-    data: &'a [T],
     cells: Vec<InputCell<'a, T>>,
+    number: usize,
 }
 
 impl<'a, T> InputBundle<'a, T> {
     pub(crate) fn new(data: &[T]) -> Self {
+        let number = data.len();
         Self {
-            data,
-            cells: data
-                .iter()
-                .map(|v| InputCell::new(v))
-                .collect::<Vec<InputCell<'a, T>>>(),
+            cells: Vec::with_capacity(number),
+            number,
         }
+    }
+
+    pub(crate) fn set_input_data(&mut self, data: &[T]) {
+        data.iter()
+            .enumerate()
+            .for_each(|v| self.cells[v.0].0 = v.1);
     }
 }
 
