@@ -7,13 +7,13 @@ use super::NeuronBase;
 pub(crate) struct InputCell<'a, T>(&'a T);
 //pub(crate) struct InputCell<T>(T);
 
-impl<'a, T> InputCell<'a, T> {
+impl<T> InputCell<'_, T> {
     pub(crate) fn new(value: &T) -> Self {
         InputCell(value)
     }
 }
 
-impl<'a, T> NeuronBase<T> for InputCell<'a, T> {
+impl<T> NeuronBase<T> for InputCell<'_, T> {
     fn get_value(&self) -> &T {
         &self.0
     }

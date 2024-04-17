@@ -21,10 +21,10 @@
 pub use activation::Activation;
 pub use loss::Loss;
 
+use crate::cell::{Neuron, NeuronBase};
 use crate::cell::hidden::HiddenCell;
 use crate::cell::input::InputCell;
 use crate::cell::output::OutputCell;
-use crate::cell::{Neuron, NeuronBase};
 use crate::float::Float;
 use crate::network::Network;
 
@@ -56,7 +56,7 @@ mod verify;
 /// let mut rn_f64 = Rustunumic::<f64>::new();
 /// ```
 //#[derive(Debug)]
-pub struct Rustunumic<T> {
+pub struct Rustunumic<'a, T> {
     /// Bias neuron.
     bias: Option<bool>,
 
@@ -67,23 +67,14 @@ pub struct Rustunumic<T> {
     loss_mode: Loss,
 
     /// All neurons.
-    network: Vec<Box<dyn Neuron<T>>>,
-
-    /// Input neurons.
-    //pub(crate) input_cells: Network<T, InputCell<T>>,
-
-    /// Output neurons.
-    pub(crate) output_cells: Network<T, OutputCell<T>>,
-
-    /// Hidden neurons.
-    pub(crate) hidden_cells: Network<T, HiddenCell<T>>,
+    network: Network<'a, T>,
 
     // State.
     pub(crate) is_init: bool,
     pub(crate) is_query: bool,
 }
 
-impl<T: Float> Rustunumic<T> {
+impl<T: Float> Rustunumic<'a, T> {
     /// Creat new instance.
     pub fn new() -> Self {
         Self {
@@ -93,9 +84,9 @@ impl<T: Float> Rustunumic<T> {
             is_init: false,
             is_query: false,
             network: Vec::new(),
-            //input_cells: Network::<T, InputCell<T>>::new(5),
-            output_cells: Network::<T, OutputCell<T>>::new(5),
-            hidden_cells: Network::<T, HiddenCell<T>>::new(5),
+            //input_cells: Bundle::<T, InputCell<T>>::new(5),
+            //output_cells: Bundle::<T, OutputCell<T>>::new(5),
+            //hidden_cells: Bundle::<T, HiddenCell<T>>::new(5),
         }
     }
 }

@@ -5,7 +5,21 @@
 use super::{Float, Neuron};
 use super::{HiddenCell, InputCell, OutputCell};
 
-pub(super) struct Network<T, S> {
+pub(super) struct Network<'a, T> {
+    /// All working neurons.
+    pub(super) neurons: Vec<&'a dyn Neuron<T>>, //Vec<Box<dyn Neuron<T>>>, 
+
+    /// Input neurons.
+    pub(super) input_cells: Bundle<T, InputCell<'a, T>>,
+
+    /// Output neurons.
+    pub(super) output_cells: Bundle<T, OutputCell<T>>,
+
+    /// Hidden neurons.
+    pub(super) hidden_cells: Bundle<T, HiddenCell<T>>,
+}
+
+pub(super) struct Bundle<T, S> {
     /// Reference to a slice of neurons.
     pub(super) neurons: Box<[S]>,
 
@@ -14,7 +28,7 @@ pub(super) struct Network<T, S> {
     pub(super) number_float: T,
 }
 
-impl<T: Float, S: Neuron<T>> Network<T, S> {
+impl<T: Float, S: Neuron<T>> Bundle<T, S> {
     pub(super) fn new(number: usize) -> Self {
         Self {
             neurons: Box::new([]),
@@ -38,7 +52,7 @@ impl<T: Float, S: Neuron<T>> Network<T, S> {
     pub(super) fn get_collect_misses(&self) -> Vec<&T> {
         self.neurons
             .iter()
-            .map(|n| n.get_value())
+            .map(|n| n.get_miss())
             .collect::<Vec<&T>>()
     }
 
@@ -47,16 +61,3 @@ impl<T: Float, S: Neuron<T>> Network<T, S> {
     }*/
 }
 
-struct Bundle<'a, T> {
-    /// All working neurons.
-    network: Vec<&'a dyn Neuron<T>>,
-
-    /// Input neurons.
-    pub(super) input_cells: Network<T, InputCell<T>>,
-
-    /// Output neurons.
-    pub(super) output_cells: Network<T, OutputCell<T>>,
-
-    /// Hidden neurons.
-    pub(super) hidden_cells: Network<T, HiddenCell<T>>,
-}

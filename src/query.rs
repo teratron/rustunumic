@@ -11,12 +11,12 @@ impl<T: Float> Rustunumic<T> {
             panic!("not initialized");
         }
 
-        self.set_input_data(input);
+        self.network.set_input_data(input);
 
         //self.input = input;
         //self.
         self.calculate_values();
         self.is_query = true;
-        self.output_cells.get_collect_values()
+        self.network.output_cells.get_collect_values()
     }
 }
