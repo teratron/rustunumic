@@ -21,12 +21,12 @@
 pub use activation::Activation;
 pub use loss::Loss;
 
-use crate::cell::{Neuron, NeuronBase};
 use crate::cell::hidden::HiddenCell;
-use crate::cell::input::InputCell;
+use crate::cell::input::InputBundle;
 use crate::cell::output::OutputCell;
+use crate::cell::{Neuron, NeuronBase};
 use crate::float::Float;
-use crate::network::Network;
+use crate::network::Bundle;
 
 // Reexported modules.
 pub mod activation;
@@ -67,14 +67,23 @@ pub struct Rustunumic<'a, T> {
     loss_mode: Loss,
 
     /// All neurons.
-    network: Network<'a, T>,
+    network: Vec<Box<dyn Neuron<T>>>,
+
+    /// Input neurons.
+    pub(crate) input_cells: InputBundle<'a, T>,
+
+    /// Output neurons.
+    pub(crate) output_cells: Bundle<T, OutputCell<'a, T>>,
+
+    /// Hidden neurons.
+    pub(crate) hidden_cells: Bundle<T, HiddenCell<T>>,
 
     // State.
     pub(crate) is_init: bool,
     pub(crate) is_query: bool,
 }
 
-impl<T: Float> Rustunumic<'a, T> {
+impl<T: Float> Rustunumic<'_, T> {
     /// Creat new instance.
     pub fn new() -> Self {
         Self {
@@ -84,9 +93,9 @@ impl<T: Float> Rustunumic<'a, T> {
             is_init: false,
             is_query: false,
             network: Vec::new(),
-            //input_cells: Bundle::<T, InputCell<T>>::new(5),
-            //output_cells: Bundle::<T, OutputCell<T>>::new(5),
-            //hidden_cells: Bundle::<T, HiddenCell<T>>::new(5),
+            input_cells: InputBundle::new(&[]),
+            output_cells: Bundle::<T, OutputCell<T>>::new(5),
+            hidden_cells: Bundle::<T, HiddenCell<T>>::new(5),
         }
     }
 }

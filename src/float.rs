@@ -17,6 +17,7 @@ where
     Self: Sized
         + Copy
         + PartialOrd
+        + PartialEq
         + Mul<Output = Self>
         + Div<Output = Self>
         + DivAssign

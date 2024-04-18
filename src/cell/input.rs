@@ -2,13 +2,14 @@
 //!
 //!
 
+#![allow(dead_code)]
+
 use super::NeuronBase;
 
 pub(crate) struct InputCell<'a, T>(&'a T);
-//pub(crate) struct InputCell<T>(T);
 
-impl<T> InputCell<'_, T> {
-    pub(crate) fn new(value: &T) -> Self {
+impl<'a, T> InputCell<'a, T> {
+    pub(crate) fn new(value: &'a T) -> Self {
         InputCell(value)
     }
 }
@@ -25,7 +26,8 @@ pub(crate) struct InputBundle<'a, T> {
 }
 
 impl<'a, T> InputBundle<'a, T> {
-    pub(crate) fn new(data: &[T]) -> Self {
+    // Создает объект входных сетей.
+    pub(crate) fn new(data: &'a [T]) -> Self {
         let number = data.len();
         Self {
             cells: Vec::with_capacity(number),
@@ -33,7 +35,8 @@ impl<'a, T> InputBundle<'a, T> {
         }
     }
 
-    pub(crate) fn set_input_data(&mut self, data: &[T]) {
+    // Помещает входные данные в сеть.
+    pub(crate) fn set_input_data(&mut self, data: &'a [T]) {
         data.iter()
             .enumerate()
             .for_each(|v| self.cells[v.0].0 = v.1);

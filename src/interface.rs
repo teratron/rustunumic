@@ -17,7 +17,7 @@ pub trait Interface<T> {
     fn train(&mut self, input: &[T], target: &[T]) -> (usize, T);
 }
 
-/*impl<T: Float> Interface<T> for Rustunumic<T> {
+/*impl<T: Float> Interface<T> for Rustunumic<'_, T> {
     fn verify(&mut self, input: &[T], target: &[T]) -> T {
         //let numbers = [1, 2, 3, 4, 5, 6, 7, 8];
         //let slice = &numbers[1..5];

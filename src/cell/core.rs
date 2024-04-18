@@ -3,7 +3,7 @@
 //!
 
 use crate::activation::{get_activation, get_derivative, Activation};
-use crate::axon::Axon;
+use crate::axon::AxonBundle;
 use crate::Float;
 
 pub(super) struct CoreCell<T> {
@@ -17,7 +17,7 @@ pub(super) struct CoreCell<T> {
     activation_mode: Activation,
 
     /// Incoming axons.
-    incoming_axons: Vec<Axon<T>>,
+    incoming_axons: AxonBundle<T>,
 }
 
 impl<T: Float> CoreCell<T> {

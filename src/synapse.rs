@@ -2,7 +2,7 @@
 //!
 //!
 
-use super::axon::Axon;
+/*use super::axon::Axon;
 
 pub(super) type AxonBundle<T> = Vec<Axon<T>>;
 
@@ -45,4 +45,4 @@ impl<T> SynapseOutgoing<T> for (AxonBundle<T>, AxonBundle<T>) {
     fn get_outgoing_axons(&mut self) -> &AxonBundle<T> {
         &self.1
     }
-}
+}*/

@@ -2,12 +2,15 @@
 //!
 //!
 
-use super::{Float, Neuron};
-use super::{HiddenCell, InputCell, OutputCell};
+#![allow(dead_code)]
 
-pub(super) struct Network<'a, T> {
+use crate::cell::output::OutputCell;
+
+use super::{Float, Neuron};
+
+/*pub(super) struct Network<'a, T> {
     /// All working neurons.
-    pub(super) neurons: Vec<&'a dyn Neuron<T>>, //Vec<Box<dyn Neuron<T>>>, 
+    pub(super) neurons: Vec<&'a dyn Neuron<T>>, //Vec<Box<dyn Neuron<T>>>,
 
     /// Input neurons.
     pub(super) input_cells: Bundle<T, InputCell<'a, T>>,
@@ -17,10 +20,11 @@ pub(super) struct Network<'a, T> {
 
     /// Hidden neurons.
     pub(super) hidden_cells: Bundle<T, HiddenCell<T>>,
-}
+}*/
 
 pub(super) struct Bundle<T, S> {
     /// Reference to a slice of neurons.
+    //pub(super) neurons: Box<[S]>,
     pub(super) neurons: Box<[S]>,
 
     /// Number neurons.
@@ -49,15 +53,23 @@ impl<T: Float, S: Neuron<T>> Bundle<T, S> {
             .collect::<Vec<&T>>()
     }
 
-    pub(super) fn get_collect_misses(&self) -> Vec<&T> {
+    /*pub(super) fn get_collect_misses(&self) -> Vec<&T> {
         self.neurons
             .iter()
             .map(|n| n.get_miss())
             .collect::<Vec<&T>>()
-    }
+    }*/
 
     /*pub fn get_number_float(&self) -> T {
         T::from(self.number as f64)
     }*/
 }
 
+impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
+    pub(super) fn set_target_data(&mut self, target_data: &'a [T]) {
+        target_data
+            .iter()
+            .enumerate()
+            .for_each(|v| self.neurons[v.0].set_target(&v.1));
+    }
+}

@@ -2,11 +2,15 @@
 //!
 //!
 
+#![allow(dead_code)]
+
 extern crate rand;
 
 use rand::{thread_rng, Rng};
 
 use super::{Float, Neuron, NeuronBase};
+
+pub(super) type AxonBundle<T> = Vec<Axon<T>>;
 
 pub(super) struct Axon<T> {
     /// Axon weight.

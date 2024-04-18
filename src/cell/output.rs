@@ -8,30 +8,43 @@ use crate::Float;
 use super::CoreCell;
 use super::{Neuron, NeuronBase};
 
-pub(crate) struct OutputCell<T> {
+pub(crate) struct OutputCell<'a, T> {
     /// Core cell.
     core: CoreCell<T>,
 
     /// Target data.
-    target: T,
+    target: &'a T,
 }
 
-impl<T: Float> OutputCell<T> {
-    fn new(activation_mode: Activation) -> Self {
+/*impl<T: Float> Default for OutputCell<'_, T> {
+    fn default() -> Self {
+        Self {
+            core: CoreCell::new(Activation::Linear),
+            target: &T::from(0.),
+        }
+    }
+}*/
+
+impl<'a, T: Float> OutputCell<'a, T> {
+    pub(crate) fn new(activation_mode: Activation, target: &'a T) -> Self {
         Self {
             core: CoreCell::new(activation_mode),
-            target: T::ZERO,
+            target,
         }
+    }
+
+    pub(crate) fn set_target(&mut self, target: &'a T) {
+        self.target = target;
     }
 }
 
-impl<T> NeuronBase<T> for OutputCell<T> {
+impl<T> NeuronBase<T> for OutputCell<'_, T> {
     fn get_value(&self) -> &T {
         &self.core.value
     }
 }
 
-impl<T: Float> Neuron<T> for OutputCell<T> {
+impl<T: Float> Neuron<T> for OutputCell<'_, T> {
     fn get_miss(&self) -> &T {
         &self.core.miss
     }
@@ -46,25 +59,10 @@ impl<T: Float> Neuron<T> for OutputCell<T> {
     // Backward propagation.
 
     fn calculate_miss(&mut self) {
-        self.core.miss = self.target - self.core.value;
+        self.core.miss = *self.target - self.core.value;
     }
 
     fn calculate_weight(&mut self, rate: &T) {
         self.core.calculate_weight(rate);
-    }
-}
-
-pub(crate) struct OutputBundle<'a, T> {
-    cells: Vec<OutputCell<'a, T>>,
-}
-
-impl<'a, T> OutputBundle<'a, T> {
-    pub(crate) fn new(data: &[T]) -> Self {
-        Self {
-            cells: data
-                .iter()
-                .map(|v| OutputCell::new(v))
-                .collect::<Vec<OutputCell<'a, T>>>(),
-        }
     }
 }

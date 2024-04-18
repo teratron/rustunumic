@@ -2,7 +2,7 @@
 //!
 //!
 
-use crate::synapse::AxonBundle;
+use crate::axon::AxonBundle;
 use crate::Activation;
 use crate::Float;
 
