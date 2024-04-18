@@ -11,9 +11,9 @@ impl<'a, T: Float> Rustunumic<'a, T> {
             panic!("not initialized");
         }
 
-        self.input_cells.set_input_data(input);
+        self.input_cells.set_inputs(input);
         self.calculate_values();
         self.is_query = true;
-        self.output_cells.get_collect_values()
+        self.output_cells.get_values()
     }
 }

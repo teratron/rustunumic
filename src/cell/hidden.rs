@@ -18,7 +18,7 @@ pub(crate) struct HiddenCell<T> {
 }
 
 impl<T: Float> HiddenCell<T> {
-    fn new(activation_mode: Activation) -> Self {
+    pub(crate) fn new(activation_mode: Activation) -> Self {
         Self {
             core: CoreCell::new(activation_mode),
             outgoing_axons: Vec::new(),

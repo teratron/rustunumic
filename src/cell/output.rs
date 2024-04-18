@@ -16,15 +16,6 @@ pub(crate) struct OutputCell<'a, T> {
     target: &'a T,
 }
 
-/*impl<T: Float> Default for OutputCell<'_, T> {
-    fn default() -> Self {
-        Self {
-            core: CoreCell::new(Activation::Linear),
-            target: &T::from(0.),
-        }
-    }
-}*/
-
 impl<'a, T: Float> OutputCell<'a, T> {
     pub(crate) fn new(activation_mode: Activation, target: &'a T) -> Self {
         Self {
@@ -38,12 +29,14 @@ impl<'a, T: Float> OutputCell<'a, T> {
     }
 }
 
+/// The `NeuronBase` implementation provides a getter for the cell's value.
 impl<T> NeuronBase<T> for OutputCell<'_, T> {
     fn get_value(&self) -> &T {
         &self.core.value
     }
 }
 
+/// The `Neuron` implementation provides methods for calculating the cell's value, miss, and weight updates during forward and backward propagation.
 impl<T: Float> Neuron<T> for OutputCell<'_, T> {
     fn get_miss(&self) -> &T {
         &self.core.miss

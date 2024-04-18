@@ -41,35 +41,33 @@ impl<T: Float, S: Neuron<T>> Bundle<T, S> {
         }
     }
 
-    pub(super) fn set_number(&mut self, number: usize) {
-        self.number = number;
-        self.number_float = T::from(self.number as f64);
-    }
-
-    pub(super) fn get_collect_values(&self) -> Vec<&T> {
+    pub(super) fn get_values(&self) -> Vec<&T> {
         self.neurons
             .iter()
             .map(|n| n.get_value())
             .collect::<Vec<&T>>()
     }
 
-    /*pub(super) fn get_collect_misses(&self) -> Vec<&T> {
+    pub(super) fn get_misses(&self) -> Vec<&T> {
         self.neurons
             .iter()
             .map(|n| n.get_miss())
             .collect::<Vec<&T>>()
-    }*/
+    }
 
+    pub(super) fn set_number(&mut self, number: usize) {
+        self.number = number;
+        self.number_float = T::from(self.number as f64);
+    }
     /*pub fn get_number_float(&self) -> T {
         T::from(self.number as f64)
     }*/
 }
 
 impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
-    pub(super) fn set_target_data(&mut self, target_data: &'a [T]) {
-        target_data
-            .iter()
+    pub(super) fn set_targets(&mut self, data: &'a [T]) {
+        data.iter()
             .enumerate()
-            .for_each(|v| self.neurons[v.0].set_target(&v.1));
+            .for_each(|(i, v)| self.neurons[i].set_target(&v));
     }
 }

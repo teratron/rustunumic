@@ -26,7 +26,7 @@ pub(crate) struct InputBundle<'a, T> {
 }
 
 impl<'a, T> InputBundle<'a, T> {
-    // Создает объект входных сетей.
+    // Создает объект перечня входных нейронов.
     pub(crate) fn new(data: &'a [T]) -> Self {
         let number = data.len();
         Self {
@@ -36,10 +36,10 @@ impl<'a, T> InputBundle<'a, T> {
     }
 
     // Помещает входные данные в сеть.
-    pub(crate) fn set_input_data(&mut self, data: &'a [T]) {
+    pub(crate) fn set_inputs(&mut self, data: &'a [T]) {
         data.iter()
             .enumerate()
-            .for_each(|v| self.cells[v.0].0 = v.1);
+            .for_each(|(i, v)| self.cells[i].0 = v);
     }
 }
 
