@@ -29,14 +29,12 @@ impl<'a, T: Float> OutputCell<'a, T> {
     }
 }
 
-/// The `NeuronBase` implementation provides a getter for the cell's value.
 impl<T> NeuronBase<T> for OutputCell<'_, T> {
     fn get_value(&self) -> &T {
         &self.core.value
     }
 }
 
-/// The `Neuron` implementation provides methods for calculating the cell's value, miss, and weight updates during forward and backward propagation.
 impl<T: Float> Neuron<T> for OutputCell<'_, T> {
     fn get_miss(&self) -> &T {
         &self.core.miss

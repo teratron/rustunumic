@@ -26,7 +26,7 @@ use crate::cell::input::InputBundle;
 use crate::cell::output::OutputCell;
 use crate::cell::{Neuron, NeuronBase};
 use crate::float::Float;
-use crate::network::Bundle;
+use crate::network::Network;
 
 // Reexported modules.
 pub mod activation;
@@ -40,7 +40,7 @@ mod interface;
 mod network;
 mod propagation;
 mod query;
-mod synapse;
+//mod synapse;
 mod train;
 mod verify;
 
@@ -66,17 +66,20 @@ pub struct Rustunumic<'a, T> {
     /// Loss mode.
     loss_mode: Loss,
 
+    /// Network.
+    network: Network<'a, T>,
+
     /// All neurons.
-    network: Vec<Box<dyn Neuron<T>>>,
+    //network: Vec<Box<dyn Neuron<T>>>,
 
     /// Input neurons.
-    pub(crate) input_cells: InputBundle<'a, T>,
+    //pub(crate) input: InputBundle<'a, T>,
 
     /// Output neurons.
-    pub(crate) output_cells: Bundle<T, OutputCell<'a, T>>,
+    //pub(crate) output: Bundle<T, OutputCell<'a, T>>,
 
     /// Hidden neurons.
-    pub(crate) hidden_cells: Bundle<T, HiddenCell<T>>,
+    //pub(crate) hidden: Bundle<T, HiddenCell<T>>,
 
     // State.
     pub(crate) is_init: bool,
@@ -92,10 +95,11 @@ impl<T: Float> Rustunumic<'_, T> {
             rate: T::DEFAULT_RATE,
             is_init: false,
             is_query: false,
-            network: Vec::new(),
-            input_cells: InputBundle::new(&[]),
-            output_cells: Bundle::<T, OutputCell<T>>::new(5),
-            hidden_cells: Bundle::<T, HiddenCell<T>>::new(5),
+            network: Network::new(),
+            //network: Vec::new(),
+            //input: InputBundle::new(&[]),
+            //output: Bundle::<T, OutputCell<T>>::new(5),
+            //hidden: Bundle::<T, HiddenCell<T>>::new(5),
         }
     }
 }

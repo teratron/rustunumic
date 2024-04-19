@@ -14,8 +14,8 @@ impl<'a, T: Float> Rustunumic<'a, T> {
             }
         }
 
-        self.input_cells.set_inputs(input);
-        self.output_cells.set_targets(target);
+        self.network.input.set_inputs(input);
+        self.network.output.set_targets(target);
         self.calculate_values();
         self.calculate_loss()
     }
