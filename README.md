@@ -17,13 +17,13 @@ Simple neural network library for Rust.
 ## Installation
 
 ```shell
-$ cargo add rustunumic
+cargo add rustunumic
 ```
 
 If you have already added **rustunumic**, you can update to the latest version by using:
 
 ```shell
-$ cargo update rustunumic
+cargo update rustunumic
 ```
 
 ## Usage
