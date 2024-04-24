@@ -33,12 +33,12 @@ use crate::network::Network;
 pub mod activation;
 pub mod loss;
 
+mod _interface;
 mod axon;
 mod bundle;
 mod cell;
 mod float;
 mod init;
-mod interface;
 mod network;
 mod propagation;
 mod query;
