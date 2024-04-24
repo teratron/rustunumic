@@ -35,25 +35,26 @@ impl<T: Float, S: Neuron<T>> Bundle<T, S> {
         self.number = number;
         self.number_float = T::from(self.number as f64);
     }
+
     pub fn get_number_float(&self) -> T {
         T::from(self.number as f64)
     }*/
 }
 
-impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
+impl<T: Float> Bundle<T, OutputCell<'_, T>> {
     // Помещает целевые данные в сеть.
-    pub(super) fn set_targets(&mut self, data: &'a [T]) {
+    pub(super) fn set_targets(&mut self, data: &[T]) {
         data.iter()
             .enumerate()
             .for_each(|(i, v)| self.cells[i].set_target(&v));
     }
 }
 
-impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
+impl<T: Float> Bundle<T, InputCell<'_, T>> {
     // Помещает входные данные в сеть.
-    pub(crate) fn set_inputs(&mut self, data: &'a [T]) {
+    pub(crate) fn set_inputs(&mut self, data: &[T]) {
         data.iter()
             .enumerate()
-            .for_each(|(i, v)| self.cells[i].set_input(&v));
+            .for_each(|(i, v)| self.cells[i].set_value(&v));
     }
 }

@@ -40,8 +40,10 @@ doctest = false
 [workspace]
 members = [
     "cli",
-    "examples/perceptron"
-    , "examples/query"]
+    "examples/perceptron",
+    "examples/query",
+    "examples/verify"
+]
 
 [dependencies]
 rand = "0.8.5"

@@ -5,6 +5,21 @@ use super::{Float, Rustunumic};
 
 impl<'a, T: Float> Rustunumic<'a, T> {
     /// Verifying dataset.
+    ///
+    /// # Arguments
+    ///
+    /// * `input` - Input dataset.
+    /// * `target` - Target dataset.
+    ///
+    /// # Returns
+    ///
+    /// * `T` - Total error of the output neurons.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use rustunumic::Rustunumic;
+    /// ```
     pub fn verify(&mut self, input: &'a [T], target: &'a [T]) -> T {
         if !self.is_init {
             if self.init(input, target) {

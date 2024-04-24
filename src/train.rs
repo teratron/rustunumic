@@ -9,6 +9,22 @@ const MAX_ITERATION: usize = 1_000_000;
 
 impl<T: Float> Rustunumic<'_, T> {
     /// Training dataset.
+    ///
+    /// # Arguments
+    ///
+    /// * `input` - Input dataset.
+    /// * `target` - Target dataset.
+    ///
+    /// # Returns
+    ///
+    /// * `usize` - Number of iterations.
+    /// * `T` - Total error of the output neurons.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use rustunumic::Rustunumic;
+    /// ```
     pub fn train(&mut self, input: &[T], target: &[T]) -> (usize, T) {
         // TODO: Result<(usize, T), Box<dyn Error>>
         if !self.is_init {

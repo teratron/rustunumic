@@ -13,7 +13,7 @@ impl<T> InputCell<'_, T> {
         InputCell(value)
     }
 
-    pub(crate) fn set_input(&mut self, input: &T) {
+    pub(crate) fn set_value(&mut self, input: &T) {
         self.0 = input;
     }
 }
