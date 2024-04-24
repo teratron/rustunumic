@@ -8,7 +8,7 @@ extern crate rand;
 
 use rand::{thread_rng, Rng};
 
-use super::{Float, Neuron, NeuronBase};
+use super::{Float, Neuron, Nucleus};
 
 pub(super) type AxonBundle<T> = Vec<Axon<T>>;
 
@@ -17,7 +17,7 @@ pub(super) struct Axon<T> {
     weight: T,
 
     /// Incoming cell: InputCell, BiasCell, HiddenCell.
-    incoming_cell: Box<dyn NeuronBase<T>>,
+    incoming_cell: Box<dyn Nucleus<T>>,
 
     /// Outgoing cell: HiddenCell, OutputCell.
     outgoing_cell: Box<dyn Neuron<T>>,
@@ -25,7 +25,7 @@ pub(super) struct Axon<T> {
 
 impl<T: Float> Axon<T> {
     pub(super) fn new(
-        incoming_cell: Box<dyn NeuronBase<T>>,
+        incoming_cell: Box<dyn Nucleus<T>>,
         outgoing_cell: Box<dyn Neuron<T>>,
     ) -> Self {
         let mut rng = thread_rng();

@@ -21,10 +21,11 @@
 pub use activation::Activation;
 pub use loss::Loss;
 
+use crate::bundle::Bundle;
 use crate::cell::hidden::HiddenCell;
-use crate::cell::input::InputBundle;
+use crate::cell::input::InputCell;
 use crate::cell::output::OutputCell;
-use crate::cell::{Neuron, NeuronBase};
+use crate::cell::{Neuron, Nucleus};
 use crate::float::Float;
 use crate::network::Network;
 
@@ -33,6 +34,7 @@ pub mod activation;
 pub mod loss;
 
 mod axon;
+mod bundle;
 mod cell;
 mod float;
 mod init;
@@ -40,13 +42,12 @@ mod interface;
 mod network;
 mod propagation;
 mod query;
-//mod synapse;
 mod train;
 mod verify;
 
-/// ## Rustunumic
+/// Rustunumic
 ///
-/// **Example:**
+/// # Example
 ///
 /// ```rust
 /// use rustunumic::Rustunumic;
@@ -68,18 +69,6 @@ pub struct Rustunumic<'a, T> {
 
     /// Network.
     network: Network<'a, T>,
-
-    /// All neurons.
-    //network: Vec<Box<dyn Neuron<T>>>,
-
-    /// Input neurons.
-    //pub(crate) input: InputBundle<'a, T>,
-
-    /// Output neurons.
-    //pub(crate) output: Bundle<T, OutputCell<'a, T>>,
-
-    /// Hidden neurons.
-    //pub(crate) hidden: Bundle<T, HiddenCell<T>>,
 
     // State.
     pub(crate) is_init: bool,

@@ -2,26 +2,18 @@
 
 use std::time;
 
-use rustunumic::{Activation, Loss, Rustunumic};
+use rustunumic::Rustunumic;
 
-struct Perceptron<T> {
+/*struct Perceptron<T> {
     bias: bool,
     rate: T,
     hidden_layers: Vec<usize>,
     activation: Activation,
     loss: Loss,
-}
+    loss_limit: T,
+}*/
 
 fn main() {
-    /*
-    bias=True,
-    hidden_layers=[5, 3],
-    activation_mode=.TANH,
-    loss_mode=.MSE,
-    loss_limit=1e-6,
-    rate=0.3,
-    */
-
     // Returns a new neural network instance.
     let mut rn = Rustunumic::<f32>::new();
 
@@ -71,6 +63,7 @@ fn main() {
         rate: 0.3,
         hidden_layers: vec![3, 2],
         activation: Activation::TanH,
-        loss: Loss::MSE,
+        loss_mode: Loss::MSE,
+        loss_limit: 1e-6,
     };*/
 }

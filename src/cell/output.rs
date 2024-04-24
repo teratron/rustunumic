@@ -6,7 +6,7 @@ use crate::Activation;
 use crate::Float;
 
 use super::CoreCell;
-use super::{Neuron, NeuronBase};
+use super::{Neuron, Nucleus};
 
 pub(crate) struct OutputCell<'a, T> {
     /// Core cell.
@@ -16,20 +16,20 @@ pub(crate) struct OutputCell<'a, T> {
     target: &'a T,
 }
 
-impl<'a, T: Float> OutputCell<'a, T> {
-    pub(crate) fn new(activation_mode: Activation, target: &'a T) -> Self {
+impl<T: Float> OutputCell<'_, T> {
+    pub(crate) fn new(activation_mode: Activation, target: &T) -> Self {
         Self {
             core: CoreCell::new(activation_mode),
             target,
         }
     }
 
-    pub(crate) fn set_target(&mut self, target: &'a T) {
+    pub(crate) fn set_target(&mut self, target: &T) {
         self.target = target;
     }
 }
 
-impl<T> NeuronBase<T> for OutputCell<'_, T> {
+impl<T> Nucleus<T> for OutputCell<'_, T> {
     fn get_value(&self) -> &T {
         &self.core.value
     }

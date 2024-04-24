@@ -4,23 +4,27 @@
 
 #![allow(dead_code)]
 
-use super::NeuronBase;
+use super::Nucleus;
 
 pub(crate) struct InputCell<'a, T>(&'a T);
 
-impl<'a, T> InputCell<'a, T> {
-    pub(crate) fn new(value: &'a T) -> Self {
+impl<T> InputCell<'_, T> {
+    pub(crate) fn new(value: &T) -> Self {
         InputCell(value)
+    }
+
+    pub(crate) fn set_input(&mut self, input: &T) {
+        self.0 = input;
     }
 }
 
-impl<T> NeuronBase<T> for InputCell<'_, T> {
+impl<T> Nucleus<T> for InputCell<'_, T> {
     fn get_value(&self) -> &T {
         &self.0
     }
 }
 
-pub(crate) struct InputBundle<'a, T> {
+/*pub(crate) struct InputBundle<'a, T> {
     cells: Vec<InputCell<'a, T>>,
     number: usize,
 }
@@ -41,7 +45,7 @@ impl<'a, T> InputBundle<'a, T> {
             .enumerate()
             .for_each(|(i, v)| self.cells[i].0 = v);
     }
-}
+}*/
 
 /*#[cfg(test)]
 mod tests {
