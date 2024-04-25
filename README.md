@@ -41,7 +41,7 @@ fn main() {
 
     // Training dataset.
     let (num, loss) = rn.train(&data_input, &data_target);
-    print!("{:?} {:?}", num, loss);
+    print!("{num:?} {loss:?}");
 }
 ```
 
@@ -101,6 +101,7 @@ You can find examples of neural networks in the [example's directory](examples).
 - [perceptron](examples/perceptron)
 - [linear](examples/linear)
 - [query](examples/query)
+- [verify](examples/verify)
 - [and_train](examples/and_train)
 
 ## Support

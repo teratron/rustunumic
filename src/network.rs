@@ -2,9 +2,7 @@
 //!
 //!
 
-use super::{HiddenCell, InputCell, OutputCell};
-use super::Bundle;
-use super::Neuron;
+use super::{Bundle, HiddenCell, InputCell, Neuron, OutputCell};
 
 #[derive(Debug)]
 pub(super) struct Network<'a, T> {
@@ -23,16 +21,17 @@ pub(super) struct Network<'a, T> {
 
 impl<'a, T> Network<'a, T> {
     pub(crate) fn new() -> Self {
-        todo!()
-        /*Network {
+        Network { ..Self::default() }
+    }
+}
+
+impl<T> Default for Network<'_, T> {
+    fn default() -> Self {
+        Self {
             cells: Vec::new(),
-            input: (),
-            output: Bundle::new(5),
-            hidden: Bundle {},
-            //network: Vec::new(),
-            //input: InputBundle::new(&[]),
-            //output: Bundle::<T, OutputCell<T>>::new(5),
-            //hidden: Bundle::<T, HiddenCell<T>>::new(5),
-        }*/
+            input: Bundle::<T, InputCell<T>>::new(1),
+            output: Bundle::<T, OutputCell<T>>::new(1),
+            hidden: Bundle::<T, HiddenCell<T>>::new(2),
+        }
     }
 }
