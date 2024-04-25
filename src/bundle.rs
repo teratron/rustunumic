@@ -1,3 +1,5 @@
+use crate::cell::hidden::HiddenCell;
+
 use super::Float;
 use super::Neuron;
 use super::{InputCell, OutputCell};
@@ -12,6 +14,7 @@ pub(super) struct Bundle<T, S> {
     pub(super) number_float: T,
 }
 
+// Common Bundle.
 impl<T: Float, S> Bundle<T, S> {
     pub(super) fn set_number(number: usize) -> Self {
         let number_float = T::from(number as f64);
@@ -23,6 +26,7 @@ impl<T: Float, S> Bundle<T, S> {
     }
 }
 
+// Bundle for OutputCell or HiddenCell.
 impl<T: Float, S: Neuron<T>> Bundle<T, S> {
     pub(super) fn get_values(&self) -> Vec<&T> {
         self.cells
@@ -36,10 +40,11 @@ impl<T: Float, S: Neuron<T>> Bundle<T, S> {
     }
 }
 
+// Output Bundle.
 impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
     pub(super) fn new(number: usize) -> Self {
         Self {
-            cells: Box::new([]), // TODO: Нужно ли сделать это внутри?
+            cells: Box::new([]), // TODO: ?
             ..Self::set_number(number)
         }
     }
@@ -52,10 +57,11 @@ impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
     }
 }
 
+// Input Bundle.
 impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
     pub(super) fn new(number: usize) -> Self {
         Self {
-            cells: Box::new([]), // TODO: Нужно ли сделать это внутри?
+            cells: Box::new([]), // TODO: ?
             ..Self::set_number(number)
         }
     }
@@ -65,5 +71,15 @@ impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
         data.iter()
             .enumerate()
             .for_each(|(i, v)| self.cells[i].set_value(&v));
+    }
+}
+
+// Hidden Bundle.
+impl<T: Float> Bundle<T, HiddenCell<T>> {
+    pub(super) fn new(number: usize) -> Self {
+        Self {
+            cells: Box::new([]), // TODO: ?
+            ..Self::set_number(number)
+        }
     }
 }

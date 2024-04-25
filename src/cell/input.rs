@@ -4,6 +4,8 @@
 
 #![allow(dead_code)]
 
+use std::fmt::{Debug, Formatter, Result};
+
 use super::Nucleus;
 
 pub(crate) struct InputCell<'a, T>(&'a T);
@@ -21,6 +23,12 @@ impl<'a, T> InputCell<'a, T> {
 impl<T> Nucleus<T> for InputCell<'_, T> {
     fn get_value(&self) -> &T {
         &self.0
+    }
+}
+
+impl<T> Debug for InputCell<'_, T> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        f.debug_tuple("InputCell").field(&self.0).finish()
     }
 }
 

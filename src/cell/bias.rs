@@ -2,6 +2,8 @@
 //!
 //!
 
+use std::fmt::{Debug, Formatter, Result};
+
 use crate::Float;
 
 use super::Nucleus;
@@ -34,5 +36,11 @@ mod tests {
     fn test_get_value() {
         let bias = BiasCell::<f64>::new();
         assert_eq!(bias.get_value(), &1.);
+    }
+}
+
+impl<T> Debug for BiasCell<T> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        f.debug_tuple("BiasCell").field(&self.0).finish()
     }
 }

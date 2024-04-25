@@ -2,6 +2,8 @@
 //!
 //!
 
+use std::fmt::{Debug, Formatter, Result};
+
 use crate::Activation;
 use crate::Float;
 
@@ -55,5 +57,14 @@ impl<T: Float> Neuron<T> for OutputCell<'_, T> {
 
     fn calculate_weight(&mut self, rate: &T) {
         self.core.calculate_weight(rate);
+    }
+}
+
+impl<T> Debug for OutputCell<'_, T> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        f.debug_struct("OutputCell")
+            .field("core", &self.core)
+            .field("target", &self.target)
+            .finish()
     }
 }

@@ -65,13 +65,13 @@ Array of the number of neurons in each hidden layer.
 
 ActivationMode function mode (required field for a config).
 
-| Code | Activation | Description                              |
-|:----:|:-----------|:-----------------------------------------|
-|  0   | Linear     | Linear/identity                          |
-|  1   | ReLU       | ReLU (rectified linear unit)             |
-|  2   | LeakyReLU  | Leaky ReLU (leaky rectified linear unit) |
-|  3   | Sigmoid    | Logistic, a.k.a. sigmoid or soft step    |
-|  4   | TanH       | TanH (hyperbolic tangent)                |
+| Code | Activation | Description                           |
+|:----:|:-----------|:--------------------------------------|
+|  0   | Linear     | Linear/identity                       |
+|  1   | ReLU       | Rectified Linear Unit                 |
+|  2   | LeakyReLU  | Leaky Rectified Linear Unit           |
+|  3   | Sigmoid    | Logistic, a.k.a. sigmoid or soft step |
+|  4   | TanH       | Hyperbolic Tangent                    |
 
 #### _loss_mode_
 
@@ -81,8 +81,8 @@ The mode of calculation of the total error.
 |:----:|:-------|:------------------------|
 |  0   | MSE    | Mean Squared Error      |
 |  1   | RMSE   | Root Mean Squared Error |
-|  2   | Arctan | Arctan                  |
-|  3   | Avg    | Average                 |
+|  2   | Arctan | Arctan Error            |
+|  3   | Avg    | Average Error           |
 
 #### _loss_limit_
 

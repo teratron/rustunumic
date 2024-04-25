@@ -6,17 +6,14 @@ use super::Float;
 
 pub(super) const LOSS_LIMIT: f64 = 1E-10;
 
-/// ## Loss mode
+/// Loss mode
 ///
-/// **List of mode:**
+/// **Note:**
 ///
-/// | Mode   | Description             |
-/// |:-------|:------------------------|
-/// | MSE    | Mean Squared Error      |
-/// | RMSE   | Root Mean Squared Error |
-/// | Arctan | Arctan Error            |
-/// | Avg    | Average Error           |
-///
+/// - MSE is mean squared error.
+/// - RMSE is root mean squared error.
+/// - Arctan is arctan error.
+/// - Avg is average error.
 #[repr(u8)]
 #[derive(Debug, PartialEq)]
 pub enum Loss {

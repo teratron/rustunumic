@@ -4,17 +4,15 @@
 
 use super::Float;
 
-/// ## Activation mode
+/// Activation mode
 ///
-/// **List of mode:**
+/// **Note:**
 ///
-/// | Mode      | Description                           |
-/// |:----------|:--------------------------------------|
-/// | Linear    | Linear/identity                       |
-/// | ReLU      | Rectified Linear Unit                 |
-/// | LeakyReLU | Leaky Rectified Linear Unit           |
-/// | Sigmoid   | Logistic, a.k.a. sigmoid or soft step |
-/// | TanH      | Hyperbolic Tangent                    |
+/// - `Linear` is a linear/identity activation function.
+/// - `ReLU` is a rectified linear unit activation function.
+/// - `LeakyReLU` is a leaky rectified linear unit activation function.
+/// - `Sigmoid` is a logistic, a.k.a. sigmoid or soft step activation function.
+/// - `TanH` is a hyperbolic tangent activation function.
 #[repr(u8)]
 #[derive(Debug)]
 pub enum Activation {

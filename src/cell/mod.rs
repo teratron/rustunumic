@@ -14,13 +14,13 @@ mod bias;
 mod core;
 
 // For types: HiddenCell, InputCell, BiasCell.
-pub(super) trait Nucleus<T> {
+pub(super) trait Nucleus<T>: Debug {
     fn get_value(&self) -> &T;
     //fn set_value(&self);
 }
 
 // For types: HiddenCell, OutputCell.
-pub(super) trait Neuron<T>: Nucleus<T> + Debug {
+pub(super) trait Neuron<T>: Nucleus<T> {
     fn get_miss(&self) -> &T;
     fn calculate_value(&mut self);
     fn calculate_miss(&mut self);

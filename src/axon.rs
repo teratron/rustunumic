@@ -12,6 +12,7 @@ use super::{Float, Neuron, Nucleus};
 
 pub(super) type AxonBundle<T> = Vec<Axon<T>>;
 
+#[derive(Debug)]
 pub(super) struct Axon<T> {
     /// Axon weight.
     weight: T,

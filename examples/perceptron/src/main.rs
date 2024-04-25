@@ -16,7 +16,7 @@ use rustunumic::Rustunumic;
 fn main() {
     // Returns a new neural network instance.
     let mut rn = Rustunumic::<f32>::new();
-    dbg!("{:?} {:?}", rn, Rustunumic::SIGMOID);
+    println!("{:?} {}", rn, Rustunumic::SIGMOID);
 
     // Dataset.
     let dataset = [
@@ -33,7 +33,7 @@ fn main() {
     for _ in 0..10_000 {
         for i in len_input..len_data {
             let (num, loss) = rn.train(&dataset[i - len_input..i], &dataset[i..i + len_output]);
-            dbg!("{:?} {:?}", num, loss);
+            println!("{num} {loss}");
         }
 
         // Verifying.
@@ -55,7 +55,7 @@ fn main() {
     println!("Elapsed time: {} seconds.", now.elapsed().as_secs());
 
     // Check the trained data, the result should be about [-0.13 0.2].
-    print!("Check: {:?}", rn.query(&dataset[2..4])); // -0.52, 0.66, 0.81
+    print!("Check: {}", rn.query(&dataset[2..4])); // -0.52, 0.66, 0.81
 
     /*let perceptron = Perceptron::<f64> {
         bias: true,

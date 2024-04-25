@@ -2,12 +2,13 @@
 //!
 //!
 
+use std::fmt::{Debug, Formatter, Result};
+
 use crate::axon::AxonBundle;
 use crate::Activation;
 use crate::Float;
 
-use super::CoreCell;
-use super::{Neuron, Nucleus};
+use super::{CoreCell, Neuron, Nucleus};
 
 pub(crate) struct HiddenCell<T> {
     /// Core cell.
@@ -58,5 +59,14 @@ impl<T: Float> Neuron<T> for HiddenCell<T> {
 
     fn calculate_weight(&mut self, rate: &T) {
         self.core.calculate_weight(rate);
+    }
+}
+
+impl<T> Debug for HiddenCell<T> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        f.debug_struct("HiddenCell")
+            .field("core", &self.core)
+            .field("outgoing_axons", &self.outgoing_axons)
+            .finish()
     }
 }
