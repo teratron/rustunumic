@@ -16,6 +16,8 @@ impl<T: Float> Rustunumic<'_, T> {
         let mut inp = Bundle::<T, InputCell<T>>::new(number_input);
         let mut out = Bundle::<T, OutputCell<T>>::new(number_output);
 
+        self.network.cells.clear();
+
         !self.is_init //self.is_init = true;
     }
 }

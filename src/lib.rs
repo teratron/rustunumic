@@ -11,9 +11,9 @@
     missing_debug_implementations
 )] //unused,*/
 
-//! # Neural network library for Rust
+//! # Rustunumic
 //!
-//! This is the neural network library.
+//! Neural network library for Rust.
 //!
 //! For examples, see [examples](https://github.com/teratron/rustunumic/examples).
 
