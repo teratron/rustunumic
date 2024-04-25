@@ -22,10 +22,10 @@ pub use activation::Activation;
 pub use loss::Loss;
 
 use crate::bundle::Bundle;
+use crate::cell::{Neuron, Nucleus};
 use crate::cell::hidden::HiddenCell;
 use crate::cell::input::InputCell;
 use crate::cell::output::OutputCell;
-use crate::cell::{Neuron, Nucleus};
 use crate::float::Float;
 use crate::network::Network;
 
@@ -78,16 +78,21 @@ impl<T: Float> Rustunumic<'_, T> {
     /// Creat new instance.
     pub fn new() -> Self {
         Self {
+            network: Network::new(),
+            ..Self::default()
+        }
+    }
+}
+
+impl<T: Float> Default for Rustunumic<'_, T> {
+    fn default() -> Self {
+        Self {
             bias: None,
             loss_mode: Loss::MSE,
             rate: T::DEFAULT_RATE,
             is_init: false,
             is_query: false,
             network: Network::new(),
-            //network: Vec::new(),
-            //input: InputBundle::new(&[]),
-            //output: Bundle::<T, OutputCell<T>>::new(5),
-            //hidden: Bundle::<T, HiddenCell<T>>::new(5),
         }
     }
 }

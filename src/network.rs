@@ -2,9 +2,9 @@
 //!
 //!
 
+use super::{HiddenCell, InputCell, OutputCell};
 use super::Bundle;
 use super::Neuron;
-use super::{HiddenCell, InputCell, OutputCell};
 
 #[derive(Debug)]
 pub(super) struct Network<'a, T> {
@@ -29,6 +29,10 @@ impl<'a, T> Network<'a, T> {
             input: (),
             output: Bundle::new(5),
             hidden: Bundle {},
+            //network: Vec::new(),
+            //input: InputBundle::new(&[]),
+            //output: Bundle::<T, OutputCell<T>>::new(5),
+            //hidden: Bundle::<T, HiddenCell<T>>::new(5),
         }*/
     }
 }
