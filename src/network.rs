@@ -2,12 +2,11 @@
 //!
 //!
 
-#![allow(dead_code)]
-
 use super::Bundle;
 use super::Neuron;
 use super::{HiddenCell, InputCell, OutputCell};
 
+#[derive(Debug)]
 pub(super) struct Network<'a, T> {
     /// All working neurons.
     pub(super) cells: Vec<Box<dyn Neuron<T>>>, //Vec<&'a dyn Neuron<T>>,

@@ -8,12 +8,12 @@ use super::Nucleus;
 
 pub(crate) struct InputCell<'a, T>(&'a T);
 
-impl<T> InputCell<'_, T> {
-    pub(crate) fn new(value: &T) -> Self {
+impl<'a, T> InputCell<'a, T> {
+    pub(crate) fn new(value: &'a T) -> Self {
         InputCell(value)
     }
 
-    pub(crate) fn set_value(&mut self, input: &T) {
+    pub(crate) fn set_value(&mut self, input: &'a T) {
         self.0 = input;
     }
 }

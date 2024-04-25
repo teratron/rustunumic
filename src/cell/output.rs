@@ -16,15 +16,15 @@ pub(crate) struct OutputCell<'a, T> {
     target: &'a T,
 }
 
-impl<T: Float> OutputCell<'_, T> {
-    pub(crate) fn new(activation_mode: Activation, target: &T) -> Self {
+impl<'a, T: Float> OutputCell<'a, T> {
+    pub(crate) fn new(activation_mode: Activation, target: &'a T) -> Self {
         Self {
             core: CoreCell::new(activation_mode),
             target,
         }
     }
 
-    pub(crate) fn set_target(&mut self, target: &T) {
+    pub(crate) fn set_target(&mut self, target: &'a T) {
         self.target = target;
     }
 }

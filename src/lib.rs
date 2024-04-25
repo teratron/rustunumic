@@ -55,7 +55,7 @@ mod verify;
 /// let mut rn_f32 = Rustunumic::<f32>::new();
 /// let mut rn_f64 = Rustunumic::<f64>::new();
 /// ```
-//#[derive(Debug)]
+#[derive(Debug)]
 pub struct Rustunumic<'a, T> {
     /// Bias neuron.
     bias: Option<bool>,

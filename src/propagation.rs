@@ -6,7 +6,9 @@ use super::loss::get_total_loss;
 use super::{Float, Neuron, Rustunumic};
 
 impl<T: Float> Rustunumic<'_, T> {
+    //////////////////////////////////////////////////////////////////////////
     // Forward propagation.
+    //////////////////////////////////////////////////////////////////////////
 
     /// Calculating neuron's value.
     pub(super) fn calculate_values(&mut self) {
@@ -29,7 +31,9 @@ impl<T: Float> Rustunumic<'_, T> {
         )
     }
 
+    //////////////////////////////////////////////////////////////////////////
     // Backward propagation.
+    //////////////////////////////////////////////////////////////////////////
 
     /// Calculating the error of neuron.
     pub(super) fn calculate_misses(&mut self) -> &mut Self {

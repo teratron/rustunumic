@@ -2,6 +2,8 @@
 //!
 //!
 
+use std::fmt::Debug;
+
 use core::CoreCell;
 
 pub(super) mod hidden;
@@ -18,7 +20,7 @@ pub(super) trait Nucleus<T> {
 }
 
 // For types: HiddenCell, OutputCell.
-pub(super) trait Neuron<T>: Nucleus<T> {
+pub(super) trait Neuron<T>: Nucleus<T> + Debug {
     fn get_miss(&self) -> &T;
     fn calculate_value(&mut self);
     fn calculate_miss(&mut self);
