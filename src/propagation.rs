@@ -20,15 +20,7 @@ impl<T: Float> Rustunumic<'_, T> {
 
     /// Calculating and return the total error of the output neurons.
     pub(super) fn calculate_loss(&self) -> T {
-        get_total_loss(
-            self.network
-                .output
-                .cells
-                .iter()
-                .map(|n| n.get_miss())
-                .collect::<Vec<&T>>(),
-            &self.loss_mode,
-        )
+        get_total_loss(self.network.output.get_misses(), &self.loss_mode)
     }
 
     //////////////////////////////////////////////////////////////////////////

@@ -2,12 +2,13 @@
 //!
 //!
 
-use std::fmt::{Debug, Formatter, Result};
+use std::fmt::{Debug /*, Formatter, Result*/};
 
 use crate::{Activation, Float};
 
 use super::{CoreCell, Neuron, Nucleus};
 
+#[derive(Debug)]
 pub(crate) struct OutputCell<'a, T> {
     /// Core cell.
     core: CoreCell<T>,
@@ -28,9 +29,9 @@ impl<'a, T: Float> OutputCell<'a, T> {
         self.target = target;
     }
 
-    pub(crate) fn get_miss(&self) -> &T {
+    /*pub(crate) fn get_miss(&self) -> &T {
         &self.core.miss
-    }
+    }*/
 }
 
 impl<T> Nucleus<T> for OutputCell<'_, T>
@@ -73,7 +74,7 @@ where
 }
 
 // Debugging.
-impl<T> Debug for OutputCell<'_, T>
+/*impl<T> Debug for OutputCell<'_, T>
 where
     T: Debug,
 {
@@ -83,4 +84,4 @@ where
             .field("target", &self.target)
             .finish()
     }
-}
+}*/

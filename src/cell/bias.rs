@@ -2,12 +2,13 @@
 //!
 //!
 
-use std::fmt::{Debug, Formatter, Result};
+use std::fmt::{Debug /*, Formatter, Result*/};
 
 use crate::Float;
 
 use super::Nucleus;
 
+#[derive(Debug)]
 struct BiasCell<T>(T);
 
 impl<T: Float> BiasCell<T> {
@@ -26,14 +27,14 @@ where
 }
 
 // Debugging.
-impl<T> Debug for BiasCell<T>
+/*impl<T> Debug for BiasCell<T>
 where
     T: Debug,
 {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
         f.debug_tuple("BiasCell").field(&self.0).finish()
     }
-}
+}*/
 
 #[cfg(test)]
 mod tests {

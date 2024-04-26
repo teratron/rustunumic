@@ -4,10 +4,11 @@
 
 #![allow(dead_code)]
 
-use std::fmt::{Debug, Formatter, Result};
+use std::fmt::{Debug /*, Formatter, Result*/};
 
 use super::Nucleus;
 
+#[derive(Debug)]
 pub(crate) struct InputCell<'a, T>(&'a T);
 
 impl<'a, T> InputCell<'a, T> {
@@ -30,14 +31,14 @@ where
 }
 
 // Debugging.
-impl<T> Debug for InputCell<'_, T>
+/*impl<T> Debug for InputCell<'_, T>
 where
     T: Debug,
 {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
         f.debug_tuple("InputCell").field(&self.0).finish()
     }
-}
+}*/
 
 /*pub(crate) struct InputBundle<'a, T> {
     cells: Vec<InputCell<'a, T>>,

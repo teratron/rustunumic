@@ -2,6 +2,10 @@
 //!
 //!
 
+use std::fmt::Debug;
+
+use crate::cell::Nucleus;
+
 use super::{Float, HiddenCell, InputCell, Neuron, OutputCell};
 
 #[derive(Debug)]
@@ -83,3 +87,35 @@ impl<T: Float> Bundle<T, HiddenCell<T>> {
         }
     }
 }
+
+/*impl<T, S> Nucleus<T> for Bundle<T, S>
+    where
+        T: Float + Debug,
+        S: Neuron<T>
+{
+    fn get_value(&self) -> &T {
+        todo!()
+    }
+}
+
+impl<T, S> Neuron<T> for Bundle<T, S>
+    where
+        T: Float + Debug,
+        S: Neuron<T>
+{
+    fn get_miss(&self) -> &T {
+        todo!()
+    }
+
+    fn calculate_value(&mut self) {
+        todo!()
+    }
+
+    fn calculate_miss(&mut self) {
+        todo!()
+    }
+
+    fn calculate_weight(&mut self, _: &T) {
+        todo!()
+    }
+}*/
