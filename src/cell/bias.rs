@@ -2,7 +2,7 @@
 //!
 //!
 
-use std::fmt::{Debug /*, Formatter, Result*/};
+use std::fmt::Debug;
 
 use crate::Float;
 
@@ -25,16 +25,6 @@ where
         &self.0
     }
 }
-
-// Debugging.
-/*impl<T> Debug for BiasCell<T>
-where
-    T: Debug,
-{
-    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
-        f.debug_tuple("BiasCell").field(&self.0).finish()
-    }
-}*/
 
 #[cfg(test)]
 mod tests {

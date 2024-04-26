@@ -4,7 +4,7 @@
 
 #![allow(dead_code)]
 
-use std::fmt::{Debug /*, Formatter, Result*/};
+use std::fmt::Debug;
 
 use super::Nucleus;
 
@@ -29,39 +29,6 @@ where
         &self.0
     }
 }
-
-// Debugging.
-/*impl<T> Debug for InputCell<'_, T>
-where
-    T: Debug,
-{
-    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
-        f.debug_tuple("InputCell").field(&self.0).finish()
-    }
-}*/
-
-/*pub(crate) struct InputBundle<'a, T> {
-    cells: Vec<InputCell<'a, T>>,
-    number: usize,
-}
-
-impl<'a, T> InputBundle<'a, T> {
-    // Создает объект перечня входных нейронов.
-    pub(crate) fn new(data: &'a [T]) -> Self {
-        let number = data.len();
-        Self {
-            cells: Vec::with_capacity(number),
-            number,
-        }
-    }
-
-    // Помещает входные данные в сеть.
-    pub(crate) fn set_inputs(&mut self, data: &'a [T]) {
-        data.iter()
-            .enumerate()
-            .for_each(|(i, v)| self.cells[i].0 = v);
-    }
-}*/
 
 /*#[cfg(test)]
 mod tests {

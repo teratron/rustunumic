@@ -2,7 +2,7 @@
 //!
 //!
 
-use std::fmt::{Debug /*, Formatter, Result*/};
+use std::fmt::Debug;
 
 use crate::axon::AxonBundle;
 use crate::{Activation, Float};
@@ -25,13 +25,6 @@ impl<T: Float> HiddenCell<T> {
             outgoing_axons: Vec::new(),
         }
     }
-
-    /*pub(crate) fn calculate_miss(&mut self) {
-        self.core.miss = T::ZERO;
-        self.outgoing_axons
-            .iter()
-            .for_each(|a| self.core.miss += a.calculate_miss());
-    }*/
 }
 
 impl<T> Nucleus<T> for HiddenCell<T>
@@ -63,10 +56,6 @@ where
     // Backward propagation.
     //////////////////////////////////////////////////////////////////////////
 
-    /*fn calculate_miss(&mut self) {
-        self.calculate_miss();
-    }*/
-
     fn calculate_miss(&mut self) {
         self.core.miss = T::ZERO;
         self.outgoing_axons
@@ -78,16 +67,3 @@ where
         self.core.calculate_weight(rate);
     }
 }
-
-// Debugging.
-/*impl<T> Debug for HiddenCell<T>
-where
-    T: Debug,
-{
-    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
-        f.debug_struct("HiddenCell")
-            .field("core", &self.core)
-            .field("outgoing_axons", &self.outgoing_axons)
-            .finish()
-    }
-}*/

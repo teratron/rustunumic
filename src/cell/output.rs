@@ -2,7 +2,7 @@
 //!
 //!
 
-use std::fmt::{Debug /*, Formatter, Result*/};
+use std::fmt::Debug;
 
 use crate::{Activation, Float};
 
@@ -28,10 +28,6 @@ impl<'a, T: Float> OutputCell<'a, T> {
     pub(crate) fn set_target(&mut self, target: &'a T) {
         self.target = target;
     }
-
-    /*pub(crate) fn get_miss(&self) -> &T {
-        &self.core.miss
-    }*/
 }
 
 impl<T> Nucleus<T> for OutputCell<'_, T>
@@ -72,16 +68,3 @@ where
         self.core.calculate_weight(rate);
     }
 }
-
-// Debugging.
-/*impl<T> Debug for OutputCell<'_, T>
-where
-    T: Debug,
-{
-    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
-        f.debug_struct("OutputCell")
-            .field("core", &self.core)
-            .field("target", &self.target)
-            .finish()
-    }
-}*/

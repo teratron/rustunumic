@@ -4,9 +4,9 @@
 
 use std::fmt::Debug;
 
-use crate::cell::Nucleus;
-
 use super::{Float, HiddenCell, InputCell, Neuron, OutputCell};
+
+//use crate::cell::Nucleus;
 
 #[derive(Debug)]
 pub(super) struct Bundle<T, S> {
@@ -28,10 +28,21 @@ impl<T: Float, S> Bundle<T, S> {
             number_float,
         }
     }
+
+    pub(super) fn new(number: usize) -> Self {
+        Self {
+            cells: Box::new([]), // TODO: ?
+            ..Self::set_number(number)
+        }
+    }
 }
 
 // Bundle for OutputCell or HiddenCell.
-impl<T: Float, S: Neuron<T>> Bundle<T, S> {
+impl<T, S> Bundle<T, S>
+where
+    T: Float,
+    S: Neuron<T>,
+{
     pub(super) fn get_values(&self) -> Vec<&T> {
         self.cells
             .iter()
@@ -46,12 +57,12 @@ impl<T: Float, S: Neuron<T>> Bundle<T, S> {
 
 // Input Bundle.
 impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
-    pub(super) fn new(number: usize) -> Self {
+    /*pub(super) fn new(number: usize) -> Self {
         Self {
             cells: Box::new([]), // TODO: ?
             ..Self::set_number(number)
         }
-    }
+    }*/
 
     // Помещает входные данные в сеть.
     pub(super) fn set_inputs(&mut self, data: &'a [T]) {
@@ -63,12 +74,12 @@ impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
 
 // Output Bundle.
 impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
-    pub(super) fn new(number: usize) -> Self {
+    /*pub(super) fn new(number: usize) -> Self {
         Self {
             cells: Box::new([]), // TODO: ?
             ..Self::set_number(number)
         }
-    }
+    }*/
 
     // Помещает целевые данные в сеть.
     pub(super) fn set_targets(&mut self, data: &'a [T]) {
@@ -80,12 +91,12 @@ impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
 
 // Hidden Bundle.
 impl<T: Float> Bundle<T, HiddenCell<T>> {
-    pub(super) fn new(number: usize) -> Self {
+    /*pub(super) fn new(number: usize) -> Self {
         Self {
             cells: Box::new([]), // TODO: ?
             ..Self::set_number(number)
         }
-    }
+    }*/
 }
 
 /*impl<T, S> Nucleus<T> for Bundle<T, S>
