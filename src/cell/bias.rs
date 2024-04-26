@@ -16,13 +16,20 @@ impl<T: Float> BiasCell<T> {
     }
 }
 
-impl<T> Nucleus<T> for BiasCell<T> {
+impl<T> Nucleus<T> for BiasCell<T>
+where
+    T: Debug,
+{
     fn get_value(&self) -> &T {
         &self.0
     }
 }
 
-impl<T> Debug for BiasCell<T> {
+// Debugging.
+impl<T> Debug for BiasCell<T>
+where
+    T: Debug,
+{
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
         f.debug_tuple("BiasCell").field(&self.0).finish()
     }

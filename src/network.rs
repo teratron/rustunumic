@@ -2,7 +2,7 @@
 //!
 //!
 
-use super::{Bundle, HiddenCell, InputCell, Neuron, OutputCell};
+use super::{Bundle, Float, HiddenCell, InputCell, Neuron, OutputCell};
 
 #[derive(Debug)]
 pub(super) struct Network<'a, T> {
@@ -19,13 +19,13 @@ pub(super) struct Network<'a, T> {
     pub(super) hidden: Bundle<T, HiddenCell<T>>,
 }
 
-impl<'a, T> Network<'a, T> {
+impl<T: Float> Network<'_, T> {
     pub(crate) fn new() -> Self {
-        Network { ..Self::default() }
+        Self { ..Self::default() }
     }
 }
 
-impl<T> Default for Network<'_, T> {
+impl<T: Float> Default for Network<'_, T> {
     fn default() -> Self {
         Self {
             cells: Vec::new(),

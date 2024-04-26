@@ -4,8 +4,7 @@
 
 #![allow(unused)]
 
-use super::{Bundle, Float, Rustunumic};
-use super::{InputCell, OutputCell};
+use super::{Bundle, Float, InputCell, OutputCell, Rustunumic};
 
 impl<T: Float> Rustunumic<'_, T> {
     /// Initialization neural network.

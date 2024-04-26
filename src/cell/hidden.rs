@@ -5,8 +5,7 @@
 use std::fmt::{Debug, Formatter, Result};
 
 use crate::axon::AxonBundle;
-use crate::Activation;
-use crate::Float;
+use crate::{Activation, Float};
 
 use super::{CoreCell, Neuron, Nucleus};
 
@@ -25,15 +24,28 @@ impl<T: Float> HiddenCell<T> {
             outgoing_axons: Vec::new(),
         }
     }
+
+    pub(crate) fn calculate_miss(&mut self) {
+        self.core.miss = T::ZERO;
+        self.outgoing_axons
+            .iter()
+            .for_each(|a| self.core.miss += a.calculate_miss());
+    }
 }
 
-impl<T> Nucleus<T> for HiddenCell<T> {
+impl<T> Nucleus<T> for HiddenCell<T>
+where
+    T: Debug,
+{
     fn get_value(&self) -> &T {
         &self.core.value
     }
 }
 
-impl<T: Float> Neuron<T> for HiddenCell<T> {
+impl<T> Neuron<T> for HiddenCell<T>
+where
+    T: Float + Debug,
+{
     fn get_miss(&self) -> &T {
         &self.core.miss
     }
@@ -51,10 +63,7 @@ impl<T: Float> Neuron<T> for HiddenCell<T> {
     //////////////////////////////////////////////////////////////////////////
 
     fn calculate_miss(&mut self) {
-        self.core.miss = T::ZERO;
-        self.outgoing_axons
-            .iter()
-            .for_each(|a| self.core.miss += a.calculate_miss());
+        self.calculate_miss();
     }
 
     fn calculate_weight(&mut self, rate: &T) {
@@ -62,7 +71,11 @@ impl<T: Float> Neuron<T> for HiddenCell<T> {
     }
 }
 
-impl<T> Debug for HiddenCell<T> {
+// Debugging.
+impl<T> Debug for HiddenCell<T>
+where
+    T: Debug,
+{
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
         f.debug_struct("HiddenCell")
             .field("core", &self.core)

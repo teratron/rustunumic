@@ -14,7 +14,7 @@ mod bias;
 mod core;
 
 // For types: HiddenCell, InputCell, BiasCell.
-pub(super) trait Nucleus<T> {
+pub(super) trait Nucleus<T>: Debug {
     fn get_value(&self) -> &T;
     //fn set_value(&self);
 }

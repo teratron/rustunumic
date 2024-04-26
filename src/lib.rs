@@ -22,10 +22,10 @@ pub use activation::Activation;
 pub use loss::Loss;
 
 use crate::bundle::Bundle;
-use crate::cell::{Neuron, Nucleus};
 use crate::cell::hidden::HiddenCell;
 use crate::cell::input::InputCell;
 use crate::cell::output::OutputCell;
+use crate::cell::{Neuron, Nucleus};
 use crate::float::Float;
 use crate::network::Network;
 
@@ -69,8 +69,10 @@ pub struct Rustunumic<'a, T> {
     /// Network.
     network: Network<'a, T>,
 
-    // State.
+    // State of initialization.
     pub(crate) is_init: bool,
+
+    // State of query.
     pub(crate) is_query: bool,
 }
 

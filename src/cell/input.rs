@@ -20,13 +20,20 @@ impl<'a, T> InputCell<'a, T> {
     }
 }
 
-impl<T> Nucleus<T> for InputCell<'_, T> {
+impl<T> Nucleus<T> for InputCell<'_, T>
+where
+    T: Debug,
+{
     fn get_value(&self) -> &T {
         &self.0
     }
 }
 
-impl<T> Debug for InputCell<'_, T> {
+// Debugging.
+impl<T> Debug for InputCell<'_, T>
+where
+    T: Debug,
+{
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
         f.debug_tuple("InputCell").field(&self.0).finish()
     }

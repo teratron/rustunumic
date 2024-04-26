@@ -3,7 +3,7 @@
 //!
 
 use super::loss::get_total_loss;
-use super::{Float, Neuron, Rustunumic};
+use super::{Float, Rustunumic};
 
 impl<T: Float> Rustunumic<'_, T> {
     //////////////////////////////////////////////////////////////////////////
@@ -25,8 +25,8 @@ impl<T: Float> Rustunumic<'_, T> {
                 .output
                 .cells
                 .iter()
-                .map(|n| *n.get_miss())
-                .collect::<Vec<T>>(),
+                .map(|n| n.get_miss())
+                .collect::<Vec<&T>>(),
             &self.loss_mode,
         )
     }
@@ -43,7 +43,6 @@ impl<T: Float> Rustunumic<'_, T> {
             .iter_mut()
             .rev()
             .for_each(|n| n.calculate_miss());
-
         self
     }
 

@@ -1,8 +1,8 @@
-use crate::cell::hidden::HiddenCell;
+//! # Bundle
+//!
+//!
 
-use super::Float;
-use super::Neuron;
-use super::{InputCell, OutputCell};
+use super::{Float, HiddenCell, InputCell, Neuron, OutputCell};
 
 #[derive(Debug)]
 pub(super) struct Bundle<T, S> {
@@ -40,23 +40,6 @@ impl<T: Float, S: Neuron<T>> Bundle<T, S> {
     }
 }
 
-// Output Bundle.
-impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
-    pub(super) fn new(number: usize) -> Self {
-        Self {
-            cells: Box::new([]), // TODO: ?
-            ..Self::set_number(number)
-        }
-    }
-
-    // Помещает целевые данные в сеть.
-    pub(super) fn set_targets(&mut self, data: &'a [T]) {
-        data.iter()
-            .enumerate()
-            .for_each(|(i, v)| self.cells[i].set_target(&v));
-    }
-}
-
 // Input Bundle.
 impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
     pub(super) fn new(number: usize) -> Self {
@@ -71,6 +54,23 @@ impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
         data.iter()
             .enumerate()
             .for_each(|(i, v)| self.cells[i].set_value(&v));
+    }
+}
+
+// Output Bundle.
+impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
+    pub(super) fn new(number: usize) -> Self {
+        Self {
+            cells: Box::new([]), // TODO: ?
+            ..Self::set_number(number)
+        }
+    }
+
+    // Помещает целевые данные в сеть.
+    pub(super) fn set_targets(&mut self, data: &'a [T]) {
+        data.iter()
+            .enumerate()
+            .for_each(|(i, v)| self.cells[i].set_target(&v));
     }
 }
 
