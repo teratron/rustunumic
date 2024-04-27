@@ -6,8 +6,6 @@ use std::fmt::Debug;
 
 use super::{Float, HiddenCell, InputCell, Neuron, OutputCell};
 
-//use crate::cell::Nucleus;
-
 #[derive(Debug)]
 pub(super) struct Bundle<T, S> {
     /// Reference to a slice of neurons.
