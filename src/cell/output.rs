@@ -17,7 +17,10 @@ pub(crate) struct OutputCell<'a, T> {
     target: &'a T,
 }
 
-impl<'a, T: Float> OutputCell<'a, T> {
+impl<'a, T> OutputCell<'a, T>
+where
+    T: Float,
+{
     pub(crate) fn new(activation_mode: Activation, target: &'a T) -> Self {
         Self {
             core: CoreCell::new(activation_mode),

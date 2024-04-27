@@ -18,7 +18,10 @@ pub(crate) struct HiddenCell<T> {
     outgoing_axons: AxonBundle<T>,
 }
 
-impl<T: Float> HiddenCell<T> {
+impl<T> HiddenCell<T>
+where
+    T: Float,
+{
     pub(crate) fn new(activation_mode: Activation) -> Self {
         Self {
             core: CoreCell::new(activation_mode),

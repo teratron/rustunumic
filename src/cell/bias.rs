@@ -11,7 +11,10 @@ use super::Nucleus;
 #[derive(Debug)]
 struct BiasCell<T>(T);
 
-impl<T: Float> BiasCell<T> {
+impl<T> BiasCell<T>
+where
+    T: Float,
+{
     pub(super) fn new() -> Self {
         BiasCell(T::ONE)
     }

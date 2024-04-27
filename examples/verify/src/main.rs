@@ -13,4 +13,6 @@ fn main() {
     // Getting the results of the trained network.
     let loss = rn.verify(&data_input, &data_target);
     print!("Verify: {loss}");
+
+    //let a = 0.0..27.0;
 }
