@@ -2,7 +2,7 @@
 //!
 //!
 
-use super::{Bundle, Float /*, HiddenCell, OutputCell*/, InputCell, Neuron};
+use super::{Bundle, Float /*, HiddenCell*/, InputCell, Neuron};
 
 #[derive(Debug)]
 pub(super) struct Network<'a, T> {
