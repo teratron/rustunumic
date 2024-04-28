@@ -15,7 +15,12 @@ use rustunumic::Rustunumic;
 
 fn main() {
     // Returns a new neural network instance.
-    let mut rn = Rustunumic::<f32>::new().set_hidden_layers(vec![3, 2]);
+    let mut rn = Rustunumic::<f32>::new()
+        .set_hidden_layers(vec![3, 2])
+        .set_bias(true)
+        .set_rate(0.3)
+        .set_activation_mode(Rustunumic::SIGMOID)
+        .set_loss_mode(Rustunumic::MSE);
     println!("{:?} {}", rn, Rustunumic::SIGMOID);
 
     // Dataset.

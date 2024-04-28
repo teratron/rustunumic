@@ -63,6 +63,9 @@ pub struct Rustunumic<'a, T> {
     /// Learning rate.
     rate: T,
 
+    /// Activation mode.
+    activation_mode: Option<Activation>,
+
     /// Loss mode.
     loss_mode: Loss,
 
@@ -88,9 +91,41 @@ impl<T: Float> Rustunumic<'_, T> {
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////
+    // Parameters.
+    //////////////////////////////////////////////////////////////////////////
+
+    /// Set bias.
+    pub fn set_bias(&mut self, bias: bool) -> &mut Self {
+        match bias {
+            true => self.bias = Some(bias),
+            false => self.bias = None,
+        }
+        self
+    }
+
+    /// Set learning rate.
+    pub fn set_rate(&mut self, rate: T) -> &mut Self {
+        self.rate = rate;
+        self
+    }
+
+    /// Set loss mode.
+    pub fn set_loss_mode(&mut self, loss_mode: Loss) -> &mut Self {
+        self.loss_mode = loss_mode;
+        self
+    }
+
+    /// Set activation mode.
+    pub fn set_activation_mode(&mut self, activation_mode: Activation) -> &mut Self {
+        self.activation_mode = Some(activation_mode);
+        self
+    }
+
     /// Set hidden layers.
     pub fn set_hidden_layers(&mut self, hidden_layers: Vec<usize>) -> &mut Self {
         println!("hidden_layers: {hidden_layers:?}");
+        // TODO: ?
         self
     }
 }
@@ -99,8 +134,9 @@ impl<T: Float> Default for Rustunumic<'_, T> {
     fn default() -> Self {
         Self {
             bias: None,
-            loss_mode: Loss::MSE,
             rate: T::DEFAULT_RATE,
+            activation_mode: Option::from(Activation::Linear),
+            loss_mode: Loss::MSE,
             is_init: false,
             is_query: false,
             network: Network::new(),
