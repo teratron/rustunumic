@@ -73,7 +73,7 @@ pub struct Rustunumic<'a, T> {
     is_init: bool,
 
     // State of query.
-    pub(crate) is_query: bool,
+    is_query: bool,
 
     // Array of the number of neurons in each hidden layer.
     hidden_layers: Vec<usize>,
