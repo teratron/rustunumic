@@ -1,4 +1,5 @@
 
+##########################################################
 # Dotenv
 ##########################################################
 
@@ -11,6 +12,7 @@ dotenv-push: ## push yours up
 	npx dotenv-vault@latest push
 	npx dotenv-vault@latest push production
 
+##########################################################
 # Git
 ##########################################################
 
@@ -20,6 +22,7 @@ git-pull: ## git pull
 git-set-url: ## git remote set-url origin git@github.com:login/repo.git
 	git remote set-url origin git@github.com:teratron/rustunumic.git
 
+##########################################################
 # Help
 ##########################################################
 
