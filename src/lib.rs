@@ -70,10 +70,13 @@ pub struct Rustunumic<'a, T> {
     network: Network<'a, T>,
 
     // State of initialization.
-    pub(crate) is_init: bool,
+    is_init: bool,
 
     // State of query.
     pub(crate) is_query: bool,
+
+    // Array of the number of neurons in each hidden layer.
+    hidden_layers: Vec<usize>,
 }
 
 impl<T: Float> Rustunumic<'_, T> {
@@ -83,6 +86,12 @@ impl<T: Float> Rustunumic<'_, T> {
             network: Network::new(),
             ..Self::default()
         }
+    }
+
+    /// Set hidden layers.
+    pub fn set_hidden_layers(&mut self, hidden_layers: Vec<usize>) -> &mut Self {
+        println!("hidden_layers: {hidden_layers:?}");
+        self
     }
 }
 
@@ -95,6 +104,7 @@ impl<T: Float> Default for Rustunumic<'_, T> {
             is_init: false,
             is_query: false,
             network: Network::new(),
+            hidden_layers: vec![],
         }
     }
 }
