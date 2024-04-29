@@ -2,6 +2,8 @@
 //!
 //!
 
+#![allow(unused)]
+
 use super::{Bundle, Float, HiddenCell, InputCell, Neuron, OutputCell};
 
 #[derive(Debug)]
@@ -16,6 +18,7 @@ pub(super) struct Network<'a, T> {
     pub(super) output: Bundle<T, OutputCell<'a, T>>,
     //pub(super) output: Bundle<T, &'a dyn Neuron<T>>,
     //pub(super) output: Bundle<T, Box<dyn Neuron<T>>>,
+
     /// Hidden neurons.
     pub(super) hidden: Bundle<T, HiddenCell<T>>,
     //pub(super) hidden: Bundle<T, &'a dyn Neuron<T>>,

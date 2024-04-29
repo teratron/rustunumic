@@ -18,6 +18,13 @@ pub(super) struct Bundle<T, S> {
 
 // Common Bundle.
 impl<T: Float, S> Bundle<T, S> {
+    pub(super) fn new(number: usize) -> Self {
+        Self {
+            cells: Box::new([]), // TODO: ?
+            ..Self::set_number(number)
+        }
+    }
+
     pub(super) fn set_number(number: usize) -> Self {
         let number_float = T::from(number as f64);
         Self {
@@ -26,20 +33,13 @@ impl<T: Float, S> Bundle<T, S> {
             number_float,
         }
     }
-
-    pub(super) fn new(number: usize) -> Self {
-        Self {
-            cells: Box::new([]), // TODO: ?
-            ..Self::set_number(number)
-        }
-    }
 }
 
 // Bundle for OutputCell or HiddenCell.
 impl<T, S> Bundle<T, S>
-where
-    T: Float,
-    S: Neuron<T>,
+    where
+        T: Float,
+        S: Neuron<T>,
 {
     pub(super) fn get_values(&self) -> Vec<&T> {
         self.cells
@@ -55,13 +55,6 @@ where
 
 // Input Bundle.
 impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
-    /*pub(super) fn new(number: usize) -> Self {
-        Self {
-            cells: Box::new([]), // TODO: ?
-            ..Self::set_number(number)
-        }
-    }*/
-
     // Помещает входные данные в сеть.
     pub(super) fn set_inputs(&mut self, data: &'a [T]) {
         data.iter()
@@ -72,13 +65,6 @@ impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
 
 // Output Bundle.
 impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
-    /*pub(super) fn new(number: usize) -> Self {
-        Self {
-            cells: Box::new([]), // TODO: ?
-            ..Self::set_number(number)
-        }
-    }*/
-
     // Помещает целевые данные в сеть.
     pub(super) fn set_targets(&mut self, data: &'a [T]) {
         data.iter()
@@ -88,43 +74,4 @@ impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
 }
 
 // Hidden Bundle.
-impl<T: Float> Bundle<T, HiddenCell<T>> {
-    /*pub(super) fn new(number: usize) -> Self {
-        Self {
-            cells: Box::new([]), // TODO: ?
-            ..Self::set_number(number)
-        }
-    }*/
-}
-
-/*impl<T, S> Nucleus<T> for Bundle<T, S>
-    where
-        T: Float + Debug,
-        S: Neuron<T>
-{
-    fn get_value(&self) -> &T {
-        todo!()
-    }
-}
-
-impl<T, S> Neuron<T> for Bundle<T, S>
-    where
-        T: Float + Debug,
-        S: Neuron<T>
-{
-    fn get_miss(&self) -> &T {
-        todo!()
-    }
-
-    fn calculate_value(&mut self) {
-        todo!()
-    }
-
-    fn calculate_miss(&mut self) {
-        todo!()
-    }
-
-    fn calculate_weight(&mut self, _: &T) {
-        todo!()
-    }
-}*/
+impl<T: Float> Bundle<T, HiddenCell<T>> {}
