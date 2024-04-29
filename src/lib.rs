@@ -123,12 +123,14 @@ impl<T: Float> Rustunumic<'_, T> {
     }
 
     /// Set hidden layers.
-    pub fn set_hidden_layers(&mut self, hidden_layers: Vec<usize>) -> &mut Self {
+    pub unsafe fn set_hidden_layers(&mut self, hidden_layers: Vec<usize>) -> &mut Self {
         println!("hidden_layers: {hidden_layers:?}");
-        self.network.hidden.set_number(hidden_layers.iter().sum());
+        let n = hidden_layers.iter().sum::<usize>();
+        self.network.hidden.set_number(n);
         //self.network.hidden.number = hidden_layers.iter().sum::<usize>();
         //self.network.hidden.number_float = T::from(self.network.hidden.number as f64);
         //self.network.cells.append(&mut hidden_layers);
+        self.network.cells.resize(n, T::ZERO);
         // TODO: ?
         self
     }
