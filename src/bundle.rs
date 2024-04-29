@@ -21,11 +21,11 @@ impl<T: Float, S> Bundle<T, S> {
     pub(super) fn new(number: usize) -> Self {
         Self {
             cells: Box::new([]), // TODO: ?
-            ..Self::set_number(number)
+            ..Self::new_with_number(number)
         }
     }
 
-    pub(super) fn set_number(number: usize) -> Self {
+    pub(super) fn new_with_number(number: usize) -> Self {
         let number_float = T::from(number as f64);
         Self {
             cells: Box::new([]),
@@ -33,13 +33,18 @@ impl<T: Float, S> Bundle<T, S> {
             number_float,
         }
     }
+
+    pub(super) fn set_number(&mut self, number: usize) {
+        self.number = number;
+        self.number_float = T::from(number as f64);
+    }
 }
 
 // Bundle for OutputCell or HiddenCell.
 impl<T, S> Bundle<T, S>
-    where
-        T: Float,
-        S: Neuron<T>,
+where
+    T: Float,
+    S: Neuron<T>,
 {
     pub(super) fn get_values(&self) -> Vec<&T> {
         self.cells

@@ -22,10 +22,10 @@ pub use activation::Activation;
 pub use loss::Loss;
 
 use crate::bundle::Bundle;
-use crate::cell::{Neuron, Nucleus};
 use crate::cell::hidden::HiddenCell;
 use crate::cell::input::InputCell;
 use crate::cell::output::OutputCell;
+use crate::cell::{Neuron, Nucleus};
 use crate::float::Float;
 use crate::network::Network;
 
@@ -123,9 +123,12 @@ impl<T: Float> Rustunumic<'_, T> {
     }
 
     /// Set hidden layers.
-    pub fn set_hidden_layers(&mut self, mut hidden_layers: Vec<usize>) -> &mut Self {
+    pub fn set_hidden_layers(&mut self, hidden_layers: Vec<usize>) -> &mut Self {
         println!("hidden_layers: {hidden_layers:?}");
-        self.network.cells.append(&mut hidden_layers);
+        self.network.hidden.set_number(hidden_layers.iter().sum());
+        //self.network.hidden.number = hidden_layers.iter().sum::<usize>();
+        //self.network.hidden.number_float = T::from(self.network.hidden.number as f64);
+        //self.network.cells.append(&mut hidden_layers);
         // TODO: ?
         self
     }
