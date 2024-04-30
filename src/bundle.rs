@@ -4,6 +4,8 @@
 
 use std::fmt::Debug;
 
+use crate::cell::Nucleus;
+
 use super::{Float, HiddenCell, InputCell, Neuron, OutputCell};
 
 #[derive(Debug)]

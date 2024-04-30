@@ -43,10 +43,6 @@ impl<T> Neuron<T> for HiddenCell<T>
 where
     T: Float + Debug,
 {
-    fn news(activation_mode: Activation) -> Box<Self> {
-        Box::new(Self::new(activation_mode))
-    }
-
     fn get_miss(&self) -> &T {
         &self.core.miss
     }
