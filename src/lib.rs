@@ -127,10 +127,10 @@ impl<T: Float> Rustunumic<'_, T> {
         println!("hidden_layers: {hidden_layers:?}");
         let n = hidden_layers.iter().sum::<usize>();
         self.network.hidden.set_number(n);
-        //self.network.hidden.number = hidden_layers.iter().sum::<usize>();
-        //self.network.hidden.number_float = T::from(self.network.hidden.number as f64);
         //self.network.cells.append(&mut hidden_layers);
-        self.network.cells.resize(n, T::ZERO);
+        self.network
+            .cells
+            .resize(n, HiddenCell::news(Activation::Linear));
         // TODO: ?
         self
     }

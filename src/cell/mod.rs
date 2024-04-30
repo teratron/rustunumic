@@ -6,6 +6,8 @@ use std::fmt::Debug;
 
 use core::CoreCell;
 
+use crate::Activation;
+
 pub(super) mod hidden;
 pub(super) mod input;
 pub(super) mod output;
@@ -20,6 +22,7 @@ pub(super) trait Nucleus<T>: Debug {
 
 // For types: HiddenCell, OutputCell.
 pub(super) trait Neuron<T>: Nucleus<T> {
+    fn news(activation_mode: Activation) -> Box<Self>;
     fn get_miss(&self) -> &T;
     fn calculate_value(&mut self);
     fn calculate_miss(&mut self);

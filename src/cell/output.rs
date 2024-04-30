@@ -21,10 +21,10 @@ impl<'a, T> OutputCell<'a, T>
 where
     T: Float,
 {
-    pub(crate) fn new(activation_mode: Activation, target: &'a T) -> Self {
+    pub(crate) fn new(activation_mode: Activation /*, target: &'a T*/) -> Self {
         Self {
             core: CoreCell::new(activation_mode),
-            target,
+            target: T::ZERO,
         }
     }
 
@@ -46,6 +46,10 @@ impl<T> Neuron<T> for OutputCell<'_, T>
 where
     T: Float + Debug,
 {
+    fn news(activation_mode: Activation) -> Box<Self> {
+        Box::new(Self::new(activation_mode))
+    }
+
     fn get_miss(&self) -> &T {
         &self.core.miss
     }
