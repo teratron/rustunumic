@@ -3,7 +3,7 @@
 //!
 
 use super::loss::get_total_loss;
-use super::{Float, Neuron, Rustunumic};
+use super::{Float, Rustunumic};
 
 impl<T: Float> Rustunumic<'_, T> {
     //////////////////////////////////////////////////////////////////////////

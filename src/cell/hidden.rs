@@ -28,6 +28,13 @@ where
             outgoing_axons: Vec::new(),
         }
     }
+
+    pub(crate) fn calculate_miss(&mut self) {
+        self.core.miss = T::ZERO;
+        self.outgoing_axons
+            .iter()
+            .for_each(|a| self.core.miss += a.calculate_miss());
+    }
 }
 
 impl<T> Nucleus<T> for HiddenCell<T>
@@ -59,12 +66,12 @@ where
     // Backward propagation.
     //////////////////////////////////////////////////////////////////////////
 
-    fn calculate_miss(&mut self) {
+    /*fn calculate_miss(&mut self) {
         self.core.miss = T::ZERO;
         self.outgoing_axons
             .iter()
             .for_each(|a| self.core.miss += a.calculate_miss());
-    }
+    }*/
 
     fn calculate_weight(&mut self, rate: &T) {
         self.core.calculate_weight(rate);

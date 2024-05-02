@@ -28,10 +28,6 @@ where
         }
     }
 
-    /*pub(crate) fn get_value(&self) -> &T {
-        &self.core.value
-    }*/
-
     pub(crate) fn set_target(&mut self, target: &'a T) {
         self.target = target;
     }
@@ -60,16 +56,17 @@ where
 
     fn calculate_value(&mut self) {
         self.core.calculate_value();
-        self.calculate_miss();
+        //self.calculate_miss();
+        self.core.miss = *self.target - self.core.value;
     }
 
     //////////////////////////////////////////////////////////////////////////
     // Backward propagation.
     //////////////////////////////////////////////////////////////////////////
 
-    fn calculate_miss(&mut self) {
+    /*fn calculate_miss(&mut self) {
         self.core.miss = *self.target - self.core.value;
-    }
+    }*/
 
     fn calculate_weight(&mut self, rate: &T) {
         self.core.calculate_weight(rate);
