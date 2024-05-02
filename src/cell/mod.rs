@@ -2,7 +2,7 @@
 //!
 //!
 
-use std::fmt::Debug;
+//use std::fmt::Debug;
 
 use core::CoreCell;
 
@@ -14,7 +14,7 @@ mod bias;
 mod core;
 
 // For types: HiddenCell, InputCell, BiasCell.
-pub(super) trait Nucleus<T>: Debug {
+pub(super) trait Nucleus<T> {
     fn get_value(&self) -> &T;
 }
 

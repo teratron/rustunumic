@@ -4,11 +4,11 @@
 
 #![allow(dead_code)]
 
-use std::fmt::Debug;
+//use std::fmt::Debug;
 
 use super::Nucleus;
 
-#[derive(Debug)]
+//#[derive(Debug)]
 pub(crate) struct InputCell<'a, T>(&'a T);
 
 impl<'a, T> InputCell<'a, T> {
@@ -22,8 +22,8 @@ impl<'a, T> InputCell<'a, T> {
 }
 
 impl<T> Nucleus<T> for InputCell<'_, T>
-where
-    T: Debug,
+/*where
+T: Debug,*/
 {
     fn get_value(&self) -> &T {
         &self.0

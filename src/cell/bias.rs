@@ -2,7 +2,7 @@
 //!
 //!
 
-use std::fmt::Debug;
+//use std::fmt::Debug;
 
 use crate::Float;
 
@@ -21,8 +21,8 @@ where
 }
 
 impl<T> Nucleus<T> for BiasCell<T>
-where
-    T: Debug,
+/*where
+T: Debug,*/
 {
     fn get_value(&self) -> &T {
         &self.0

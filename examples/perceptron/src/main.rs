@@ -2,7 +2,7 @@
 
 use std::time;
 
-use rustunumic::Rustunumic;
+use rustunumic::{Activation, Loss, Rustunumic};
 
 /*struct Perceptron<T> {
     bias: bool,
@@ -19,9 +19,9 @@ fn main() {
         .set_hidden_layers(vec![3, 2])
         .set_bias(true)
         .set_rate(0.3)
-        .set_activation_mode(Rustunumic::SIGMOID)
-        .set_loss_mode(Rustunumic::MSE);
-    println!("{:?} {}", rn, Rustunumic::SIGMOID);
+        .set_activation_mode(Activation::Sigmoid)
+        .set_loss_mode(Loss::MSE);
+    //println!("{:?} {}", rn, Rustunumic::Sigmoid);
 
     // Dataset.
     let dataset = [

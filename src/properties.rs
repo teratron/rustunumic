@@ -1,5 +1,4 @@
 use crate::Float;
-use crate::HiddenCell;
 use crate::{Activation, Loss, Rustunumic};
 
 impl<T: Float> Rustunumic<'_, T> {
@@ -31,13 +30,13 @@ impl<T: Float> Rustunumic<'_, T> {
     }
 
     /// Set hidden layers.
-    pub unsafe fn set_hidden_layers(&mut self, hidden_layers: Vec<usize>) -> &mut Self {
+    pub fn set_hidden_layers(&mut self, hidden_layers: Vec<usize>) -> &mut Self {
         println!("hidden_layers: {hidden_layers:?}");
         let n = hidden_layers.iter().sum::<usize>();
         self.network.hidden.set_number(n);
-        self.network
-            .cells
-            .resize(n, Box::new(HiddenCell::new(Activation::Linear)));
+        //self.network.cells = vec![Box::new(HiddenCell::new(Activation::Linear)); n];
+
+        //.resize(n, Box::new(HiddenCell::new(Activation::Linear)));
         // TODO: ?
         self
     }

@@ -6,7 +6,7 @@ use crate::activation::{get_activation, get_derivative, Activation};
 use crate::axon::AxonBundle;
 use crate::Float;
 
-#[derive(Debug)]
+//#[derive(Debug)]
 pub(super) struct CoreCell<T> {
     /// Neuron value.
     pub(super) value: T,

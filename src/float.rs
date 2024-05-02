@@ -18,6 +18,8 @@ where
         + Copy
         + PartialOrd
         + PartialEq
+        //+ From<f64>
+        //+ Into<f64>
         + Mul<Output = Self>
         + Div<Output = Self>
         + DivAssign

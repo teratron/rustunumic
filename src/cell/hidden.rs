@@ -2,14 +2,14 @@
 //!
 //!
 
-use std::fmt::Debug;
+//use std::fmt::Debug;
 
 use crate::axon::AxonBundle;
 use crate::{Activation, Float};
 
 use super::{CoreCell, Neuron, Nucleus};
 
-#[derive(Debug)]
+//#[derive(Debug)]
 pub(crate) struct HiddenCell<T> {
     /// Core cell.
     core: CoreCell<T>,
@@ -31,8 +31,8 @@ where
 }
 
 impl<T> Nucleus<T> for HiddenCell<T>
-where
-    T: Debug,
+/*where
+T: Debug,*/
 {
     fn get_value(&self) -> &T {
         &self.core.value
@@ -41,7 +41,7 @@ where
 
 impl<T> Neuron<T> for HiddenCell<T>
 where
-    T: Float + Debug,
+    T: Float, /* + Debug*/
 {
     fn get_miss(&self) -> &T {
         &self.core.miss

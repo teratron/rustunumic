@@ -2,13 +2,13 @@
 //!
 //!
 
-use std::fmt::Debug;
+//use std::fmt::Debug;
 
 use crate::cell::Nucleus;
 
 use super::{Float, HiddenCell, InputCell, Neuron, OutputCell};
 
-#[derive(Debug)]
+//#[derive(Debug)]
 pub(super) struct Bundle<T, S> {
     /// Reference to a slice of neurons.
     pub(super) cells: Box<[S]>,
