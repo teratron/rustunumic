@@ -29,7 +29,5 @@ impl<'a, T: Float> Rustunumic<'a, T> {
         self.calculate_values();
         self.is_query = true;
         self.network.output.get_values()
-        //<Bundle<T, <OutputCell<T> as Neuron<T>>>>::get_values(&self.network.output)
-        //<Bundle<T, OutputCell<T>> as Bundle<T, dyn Neuron<T>>>::get_values(&self.network.output)
     }
 }
