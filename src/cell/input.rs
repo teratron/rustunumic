@@ -16,8 +16,8 @@ impl<'a, T> InputCell<'a, T> {
         InputCell(value)
     }
 
-    pub(crate) fn set_value(&mut self, input: &'a T) {
-        self.0 = input;
+    pub(crate) fn set_value(&mut self, value: &'a T) {
+        self.0 = value;
     }
 }
 

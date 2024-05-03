@@ -8,7 +8,7 @@ use crate::Float;
 
 use super::Nucleus;
 
-#[derive(Debug)]
+//#[derive(Debug)]
 struct BiasCell<T>(T);
 
 impl<T> BiasCell<T>

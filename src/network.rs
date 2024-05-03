@@ -30,7 +30,7 @@ impl<T: Float> Network<'_, T> {
     }
 }
 
-impl<'a, T: Float> Default for Network<'a, T> {
+impl<T: Float> Default for Network<'_, T> {
     fn default() -> Self {
         Self {
             cells: Vec::new(),
