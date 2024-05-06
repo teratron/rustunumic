@@ -28,8 +28,8 @@ where
         }
     }
 
-    pub(crate) fn set_target(&mut self, target: &'a T) {
-        self.target = target;
+    pub(crate) fn set_target(&mut self, value: &'a T) {
+        self.target = value;
     }
 }
 

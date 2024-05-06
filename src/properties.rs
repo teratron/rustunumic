@@ -2,7 +2,9 @@
 //!
 //!
 
-use crate::{Activation, Float, HiddenCell, Loss, Rustunumic};
+use crate::{Activation, Float, Loss, Rustunumic};
+
+//use crate::cell::Neuron;
 
 impl<'a, T: Float> Rustunumic<'a, T> {
     /// Set bias.
@@ -34,13 +36,15 @@ impl<'a, T: Float> Rustunumic<'a, T> {
 
     /// Set hidden layers.
     pub fn set_hidden_layers(&mut self, hidden_layers: Vec<usize>) -> &mut Self {
-        println!("hidden_layers: {hidden_layers:?}");
-        let n = hidden_layers.iter().sum::<usize>();
+        //println!("hidden_layers: {hidden_layers:?}");
+        /*let n = hidden_layers.iter().sum::<usize>();
         self.network.hidden.set_number(n);
         self.network.hidden.cells = (0..n)
             //.map(|_| Box::new(HiddenCell::new(Activation::Linear)) as Box<dyn Neuron<T>>)
             .map(|_| HiddenCell::new(Activation::Linear))
-            .collect();
+            .collect();*/
+
+        self.hidden_layers = hidden_layers;
         self
     }
 }

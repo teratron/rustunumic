@@ -7,7 +7,7 @@ use super::{Float, HiddenCell, InputCell, Neuron, OutputCell};
 //#[derive(Debug)]
 pub(super) struct Bundle<T, S> {
     /// Reference to a slice of neurons.
-    pub(super) cells: Box<[S]>,
+    pub(super) cells: Box<Vec<S>>,
 
     /// Number neurons.
     pub(super) number: usize,
@@ -16,26 +16,30 @@ pub(super) struct Bundle<T, S> {
 
 // Common Bundle.
 impl<T: Float, S> Bundle<T, S> {
-    pub(super) fn new(number: usize) -> Self {
+    pub(super) fn new(data: &[T]) -> Self {
+        let number = data.len();
+        // let number_float = T::from(number as f64);
         Self {
-            cells: Box::new([]), // TODO: ?
-            ..Self::new_with_number(number)
+            cells: Box::new(Vec::new()), // TODO: ?
+            //..Self::new_with_number(number)
+            number,
+            number_float: T::from(number as f64),
         }
     }
 
-    pub(super) fn new_with_number(number: usize) -> Self {
+    /*pub(super) fn new_with_number(number: usize) -> Self {
         let number_float = T::from(number as f64);
         Self {
-            cells: Box::new([]),
+            cells: Box::new(Vec::new()),
             number,
             number_float,
         }
-    }
+    }*/
 
-    pub(super) fn set_number(&mut self, number: usize) {
+    /*pub(super) fn set_number(&mut self, number: usize) {
         self.number = number;
         self.number_float = T::from(number as f64);
-    }
+    }*/
 }
 
 // Bundle for OutputCell or HiddenCell.
@@ -62,7 +66,7 @@ impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
     pub(super) fn set_inputs(&mut self, data: &'a [T]) {
         data.iter()
             .enumerate()
-            .for_each(|(i, v)| self.cells[i].set_value(&v));
+            .for_each(|(i, v)| self.cells[i].set_value(v));
     }
 }
 
@@ -72,7 +76,7 @@ impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
     pub(super) fn set_targets(&mut self, data: &'a [T]) {
         data.iter()
             .enumerate()
-            .for_each(|(i, v)| self.cells[i].set_target(&v));
+            .for_each(|(i, v)| self.cells[i].set_target(v));
     }
 }
 
