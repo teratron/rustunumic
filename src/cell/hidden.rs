@@ -5,7 +5,7 @@
 //use std::fmt::Debug;
 
 use crate::axon::AxonBundle;
-use crate::{Activation, Float};
+use crate::Float;
 
 use super::{CoreCell, Neuron, Nucleus};
 
@@ -22,9 +22,9 @@ impl<T> HiddenCell<T>
 where
     T: Float,
 {
-    pub(crate) fn new(activation_mode: Activation) -> Self {
+    pub(crate) fn new() -> Self {
         Self {
-            core: CoreCell::new(activation_mode),
+            core: CoreCell::new(),
             outgoing_axons: Vec::new(),
         }
     }
@@ -65,13 +65,6 @@ where
     //////////////////////////////////////////////////////////////////////////
     // Backward propagation.
     //////////////////////////////////////////////////////////////////////////
-
-    /*fn calculate_miss(&mut self) {
-        self.core.miss = T::ZERO;
-        self.outgoing_axons
-            .iter()
-            .for_each(|a| self.core.miss += a.calculate_miss());
-    }*/
 
     fn calculate_weight(&mut self, rate: &T) {
         self.core.calculate_weight(rate);

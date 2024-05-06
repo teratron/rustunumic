@@ -14,7 +14,15 @@ mod bias;
 mod core;
 
 // For types: HiddenCell, InputCell, BiasCell.
+/// Nucleus trait.
+///
+/// # Example
+///
+/// ```rust
+///
+/// ```
 pub(super) trait Nucleus<T> {
+    //fn new(value: &'_ T) -> Self;
     fn get_value(&self) -> &T;
 }
 

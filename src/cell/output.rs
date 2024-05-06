@@ -4,7 +4,7 @@
 
 //use std::fmt::Debug;
 
-use crate::{Activation, Float};
+use crate::Float;
 
 use super::{CoreCell, Neuron, Nucleus};
 
@@ -21,9 +21,9 @@ impl<'a, T> OutputCell<'a, T>
 where
     T: Float,
 {
-    pub(crate) fn new(activation_mode: Activation, target: &'a T) -> Self {
+    pub(crate) fn new(target: &'a T) -> Self {
         Self {
-            core: CoreCell::new(activation_mode),
+            core: CoreCell::new(),
             target,
         }
     }
@@ -56,17 +56,12 @@ where
 
     fn calculate_value(&mut self) {
         self.core.calculate_value();
-        //self.calculate_miss();
         self.core.miss = *self.target - self.core.value;
     }
 
     //////////////////////////////////////////////////////////////////////////
     // Backward propagation.
     //////////////////////////////////////////////////////////////////////////
-
-    /*fn calculate_miss(&mut self) {
-        self.core.miss = *self.target - self.core.value;
-    }*/
 
     fn calculate_weight(&mut self, rate: &T) {
         self.core.calculate_weight(rate);

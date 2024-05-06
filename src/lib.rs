@@ -79,9 +79,8 @@ pub struct Rustunumic<'a, T> {
 
     // State of query.
     is_query: bool,
-
     // Array of the number of neurons in each hidden layer.
-    hidden_layers: Vec<usize>,
+    //hidden_layers: Vec<usize>,
 }
 
 impl<T: Float> Rustunumic<'_, T> {
@@ -104,7 +103,7 @@ impl<T: Float> Default for Rustunumic<'_, T> {
             is_init: false,
             is_query: false,
             network: Network::new(),
-            hidden_layers: vec![],
+            //hidden_layers: vec![],
         }
     }
 }

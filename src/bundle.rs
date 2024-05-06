@@ -2,6 +2,8 @@
 //!
 //!
 
+use crate::cell::Nucleus;
+
 use super::{Float, HiddenCell, InputCell, Neuron, OutputCell};
 
 //#[derive(Debug)]
@@ -15,26 +17,22 @@ pub(super) struct Bundle<T, S> {
 }
 
 // Common Bundle.
-impl<T: Float, S> Bundle<T, S> {
-    pub(super) fn new(data: &[T]) -> Self {
+impl<T, S> Bundle<T, S>
+where
+    T: Float,
+{
+    pub(super) fn new() -> Self {
+        Self::default()
+    }
+
+    pub(super) fn new_with(data: &[T]) -> Self {
         let number = data.len();
-        // let number_float = T::from(number as f64);
         Self {
-            cells: Box::new(Vec::new()), // TODO: ?
-            //..Self::new_with_number(number)
+            cells: Box::new(Vec::new()),
             number,
             number_float: T::from(number as f64),
         }
     }
-
-    /*pub(super) fn new_with_number(number: usize) -> Self {
-        let number_float = T::from(number as f64);
-        Self {
-            cells: Box::new(Vec::new()),
-            number,
-            number_float,
-        }
-    }*/
 
     /*pub(super) fn set_number(&mut self, number: usize) {
         self.number = number;
@@ -62,6 +60,17 @@ where
 
 // Input Bundle.
 impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
+    pub(super) fn _new(data: &'a [T]) -> Self {
+        Self {
+            cells: Box::new(if data.is_empty() {
+                Vec::new()
+            } else {
+                data.iter().map(|v| InputCell::new(v)).collect()
+            }),
+            ..Self::new_with(data)
+        }
+    }
+
     // Помещает входные данные в сеть.
     pub(super) fn set_inputs(&mut self, data: &'a [T]) {
         data.iter()
@@ -72,6 +81,13 @@ impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
 
 // Output Bundle.
 impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
+    pub(super) fn _new(data: &'a [T]) -> Self {
+        Self {
+            cells: Box::new(data.iter().map(|v| OutputCell::new(v)).collect()),
+            ..Self::new_with(data)
+        }
+    }
+
     // Помещает целевые данные в сеть.
     pub(super) fn set_targets(&mut self, data: &'a [T]) {
         data.iter()
@@ -81,4 +97,21 @@ impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
 }
 
 // Hidden Bundle.
-impl<T: Float> Bundle<T, HiddenCell<T>> {}
+impl<T: Float> Bundle<T, HiddenCell<T>> {
+    pub(super) fn _new(data: &[T]) -> Self {
+        Self {
+            cells: Box::new(data.iter().map(|_| HiddenCell::new()).collect()),
+            ..Self::new_with(data)
+        }
+    }
+}
+
+impl<T: Float, S> Default for Bundle<T, S> {
+    fn default() -> Self {
+        Self {
+            cells: Box::new(Vec::new()),
+            number: 0,
+            number_float: T::ZERO,
+        }
+    }
+}

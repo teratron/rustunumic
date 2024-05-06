@@ -22,18 +22,18 @@ pub(super) struct Network<'a, T> {
 }
 
 impl<T: Float> Network<'_, T> {
-    pub(crate) fn new() -> Self {
-        Self { ..Self::default() }
+    pub(super) fn new() -> Self {
+        Self::default()
     }
 }
 
-impl<T: Float> Default for Network<'_, T> {
+impl<'a, T: Float> Default for Network<'a, T> {
     fn default() -> Self {
         Self {
             cells: Vec::new(),
-            input: Bundle::<T, InputCell<T>>::new(&[T::ONE]),
-            output: Bundle::<T, OutputCell<T>>::new(&[T::ONE]),
-            hidden: Bundle::<T, HiddenCell<T>>::new(&[T::ONE, T::ONE]),
+            input: Bundle::<T, InputCell<T>>::new(),
+            output: Bundle::<T, OutputCell<T>>::new(),
+            hidden: Bundle::<T, HiddenCell<T>>::new(),
         }
     }
 }

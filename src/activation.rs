@@ -4,6 +4,8 @@
 
 use super::Float;
 
+pub(super) const ACTIVATION_DEFAULT: Activation = Activation::Linear;
+
 /// Activation mode
 ///
 /// **Note:**

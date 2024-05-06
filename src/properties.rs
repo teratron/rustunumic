@@ -44,7 +44,7 @@ impl<'a, T: Float> Rustunumic<'a, T> {
             .map(|_| HiddenCell::new(Activation::Linear))
             .collect();*/
 
-        self.hidden_layers = hidden_layers;
+        //self.hidden_layers = hidden_layers;
         self
     }
 }
