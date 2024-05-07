@@ -2,7 +2,7 @@
 //!
 //!
 
-use crate::activation::{get_activation, get_derivative, Activation, ACTIVATION_DEFAULT};
+use crate::activation::{get_activation, get_derivative, Activation};
 use crate::axon::AxonBundle;
 use crate::Float;
 
@@ -26,7 +26,7 @@ impl<T: Float> CoreCell<T> {
         Self {
             value: T::ZERO,
             miss: T::ZERO,
-            activation_mode: ACTIVATION_DEFAULT,
+            activation_mode: Activation::default(),
             incoming_axons: Vec::new(),
         }
     }

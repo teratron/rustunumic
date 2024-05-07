@@ -7,7 +7,7 @@ use super::{Float, Rustunumic};
 /// MaxIteration the maximum number of iterations after which training is forcibly terminated.
 const MAX_ITERATION: usize = 1_000_000;
 
-impl<T: Float> Rustunumic<'_, T> {
+impl<'a, T: Float> Rustunumic<'a, T> {
     /// Training dataset.
     ///
     /// # Arguments
@@ -25,7 +25,7 @@ impl<T: Float> Rustunumic<'_, T> {
     /// ```rust
     /// use rustunumic::Rustunumic;
     /// ```
-    pub fn train(&mut self, input: &[T], target: &[T]) -> (usize, T) {
+    pub fn train(&mut self, input: &'a [T], target: &'a [T]) -> (usize, T) {
         // TODO: Result<(usize, T), Box<dyn Error>>
         if !self.is_init {
             if !self.init(input, target) {

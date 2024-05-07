@@ -23,6 +23,7 @@ pub(super) struct Network<'a, T> {
 
 impl<T: Float> Network<'_, T> {
     pub(super) fn new() -> Self {
+        println!("Network::new");
         Self {
             cells: Vec::new(),
             input: Bundle::<T, InputCell<T>>::new(),

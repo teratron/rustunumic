@@ -86,6 +86,7 @@ pub struct Rustunumic<'a, T> {
 impl<T: Float> Rustunumic<'_, T> {
     /// Creat new instance.
     pub fn new() -> Self {
+        println!("Rustunumic::new");
         Self {
             bias: None,
             rate: T::DEFAULT_RATE,
