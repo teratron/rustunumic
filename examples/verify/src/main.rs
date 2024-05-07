@@ -10,8 +10,7 @@ fn main() {
 
     // Returns a new neural network instance.
     let mut rn = Rustunumic::<f64>::new();
-
-    //print!("{:?}", rn);
+    println!("{:#?}", rn);
 
     // Input dataset.
     //let data_input = [0.27, 0.31, 0.52];

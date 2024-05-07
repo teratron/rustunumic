@@ -20,7 +20,6 @@ where
     T: Float,
 {
     pub(super) fn new() -> Self {
-        println!("Bundle::new");
         Self {
             cells: Box::new(Vec::new()),
             number: 0,

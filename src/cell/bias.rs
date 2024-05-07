@@ -45,3 +45,13 @@ mod tests {
         assert_eq!(bias.get_value(), &1.);
     }
 }
+
+// Debugging.
+/*impl<T> Debug for BiasCell<T>
+where
+    T: Debug,
+{
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        f.debug_tuple("BiasCell").field(&self.0).finish()
+    }
+}*/

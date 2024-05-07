@@ -30,6 +30,16 @@ T: Debug,*/
     }
 }
 
+// Debugging.
+/*impl<T> Debug for InputCell<'_, T>
+where
+    T: Debug,
+{
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        f.debug_tuple("InputCell").field(&self.0).finish()
+    }
+}*/
+
 /*#[cfg(test)]
 mod tests {
     use super::*;

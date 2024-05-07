@@ -57,8 +57,8 @@ mod verify;
 /// let mut rn_f32 = Rustunumic::<f32>::new();
 /// let mut rn_f64 = Rustunumic::<f64>::new();
 /// ```
-//#[derive(Debug)]
-pub struct Rustunumic<'a, T> {
+#[derive(Debug)]
+pub struct Rustunumic<'a, T: Float> {
     /// Bias neuron.
     bias: Option<bool>,
 
@@ -86,7 +86,6 @@ pub struct Rustunumic<'a, T> {
 impl<T: Float> Rustunumic<'_, T> {
     /// Creat new instance.
     pub fn new() -> Self {
-        println!("Rustunumic::new");
         Self {
             bias: None,
             rate: T::DEFAULT_RATE,

@@ -67,3 +67,16 @@ where
         self.core.calculate_weight(rate);
     }
 }
+
+// Debugging.
+/*impl<T> Debug for OutputCell<'_, T>
+where
+    T: Debug,
+{
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        f.debug_struct("OutputCell")
+            .field("core", &self.core)
+            .field("target", &self.target)
+            .finish()
+    }
+}*/

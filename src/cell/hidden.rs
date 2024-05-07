@@ -70,3 +70,16 @@ where
         self.core.calculate_weight(rate);
     }
 }
+
+// Debugging.
+/*impl<T> Debug for HiddenCell<T>
+where
+    T: Debug,
+{
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        f.debug_struct("HiddenCell")
+            .field("core", &self.core)
+            .field("outgoing_axons", &self.outgoing_axons)
+            .finish()
+    }
+}*/

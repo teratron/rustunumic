@@ -4,6 +4,8 @@
 
 #![allow(unused)]
 
+use std::fmt::{Debug, Formatter, Result};
+
 use super::{Bundle, Float, HiddenCell, InputCell, Neuron, OutputCell};
 
 //#[derive(Debug)]
@@ -23,7 +25,6 @@ pub(super) struct Network<'a, T> {
 
 impl<T: Float> Network<'_, T> {
     pub(super) fn new() -> Self {
-        println!("Network::new");
         Self {
             cells: Vec::new(),
             input: Bundle::<T, InputCell<T>>::new(),
@@ -41,5 +42,17 @@ impl<'a, T: Float> Default for Network<'a, T> {
             hidden: Bundle::<T, HiddenCell<T>>::default(),
             ..Self::new()
         }
+    }
+}
+
+// Debugging.
+impl<T> Debug for Network<'_, T> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        f.debug_struct("Network")
+            .field("cells", &"cells")
+            .field("input", &"input")
+            .field("output", &"output")
+            .field("hidden", &"hidden")
+            .finish()
     }
 }
