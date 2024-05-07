@@ -50,9 +50,9 @@ impl<T> Debug for Network<'_, T> {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
         f.debug_struct("Network")
             .field("cells", &"cells")
-            .field("input", &"input")
-            .field("output", &"output")
-            .field("hidden", &"hidden")
+            .field("input", &"Bundle<InputCell>")
+            .field("output", &"Bundle<OutputCell>")
+            .field("hidden", &"Bundle<HiddenCell>")
             .finish()
     }
 }
