@@ -22,15 +22,11 @@ mod core;
 ///
 /// ```
 pub(super) trait Nucleus<T> {
-    //fn new(value: &'_ T) -> Self;
     fn get_value(&self) -> &T;
 }
 
 // For types: HiddenCell, OutputCell.
 pub(super) trait Neuron<T>: Nucleus<T> {
-    /*fn news(activation_mode: Activation) -> Box<Self> {
-        Box::new(Self::new(activation_mode))
-    }*/
     fn get_miss(&self) -> &T;
     fn calculate_value(&mut self);
     //fn calculate_miss(&mut self);

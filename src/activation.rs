@@ -4,8 +4,6 @@
 
 use super::Float;
 
-pub(super) const ACTIVATION_DEFAULT: Activation = Activation::Linear;
-
 /// Activation mode
 ///
 /// **Note:**
@@ -33,6 +31,12 @@ pub enum Activation {
     /// Hyperbolic Tangent.
     TanH,
     // TODO: ELU, SeLU, SWiSH, ELiSH
+}
+
+impl Default for Activation {
+    fn default() -> Self {
+        Activation::Linear
+    }
 }
 
 /*trait ActivationTrait<T: Float> {

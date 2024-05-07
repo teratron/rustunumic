@@ -30,6 +30,12 @@ pub enum Loss {
     Avg,
 }
 
+impl Default for Loss {
+    fn default() -> Self {
+        Loss::MSE
+    }
+}
+
 pub(super) fn get_total_loss<T: Float>(misses: Vec<&T>, mode: &Loss) -> T {
     let mut loss = T::ZERO;
     let mut count = T::ZERO;

@@ -4,7 +4,7 @@
 
 #![allow(unused)]
 
-use super::{Bundle, Float, HiddenCell, InputCell, Network, OutputCell, Rustunumic};
+use super::{Bundle, Float, InputCell, Network, OutputCell, Rustunumic};
 
 impl<'a, T: Float> Rustunumic<'a, T> {
     /// Initialization neural network.
@@ -17,7 +17,7 @@ impl<'a, T: Float> Rustunumic<'a, T> {
         self.network.input = Bundle::<T, InputCell<T>>::_new(input);
         self.network.output = Bundle::<T, OutputCell<T>>::_new(target);
 
-        if self.hidden_layers.is_empty() {
+        /*if self.hidden_layers.is_empty() {
             self.network.hidden = Bundle::<T, HiddenCell<T>>::_new(&[]);
         } else {
             self.network.hidden = Bundle::<T, HiddenCell<T>>::_new(
@@ -27,7 +27,7 @@ impl<'a, T: Float> Rustunumic<'a, T> {
                     .map(|&number_neurons| T::ONE)
                     .collect::<Vec<T>>(),
             );
-        }
+        }*/
 
         self.network.cells.clear();
 

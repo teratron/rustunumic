@@ -2,8 +2,6 @@
 //!
 //!
 
-use crate::cell::Nucleus;
-
 use super::{Float, HiddenCell, InputCell, Neuron, OutputCell};
 
 //#[derive(Debug)]
@@ -22,7 +20,11 @@ where
     T: Float,
 {
     pub(super) fn new() -> Self {
-        Self::default()
+        Self {
+            cells: Box::new(Vec::new()),
+            number: 0,
+            number_float: T::ZERO,
+        }
     }
 
     pub(super) fn new_with(data: &[T]) -> Self {

@@ -4,8 +4,6 @@
 
 use crate::{Activation, Float, Loss, Rustunumic};
 
-//use crate::cell::Neuron;
-
 impl<'a, T: Float> Rustunumic<'a, T> {
     /// Set bias.
     pub fn set_bias(&mut self, bias: bool) -> &mut Self {

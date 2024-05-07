@@ -87,23 +87,25 @@ impl<T: Float> Rustunumic<'_, T> {
     /// Creat new instance.
     pub fn new() -> Self {
         Self {
+            bias: None,
+            rate: T::DEFAULT_RATE,
+            activation_mode: Option::from(Activation::default()),
+            loss_mode: Loss::default(),
             network: Network::new(),
-            ..Self::default()
+            is_init: false,
+            is_query: false,
+            //hidden_layers: vec![],
         }
     }
 }
 
 impl<T: Float> Default for Rustunumic<'_, T> {
+    /// Create new instance with default properties.
     fn default() -> Self {
         Self {
-            bias: None,
-            rate: T::DEFAULT_RATE,
-            activation_mode: Option::from(Activation::Linear),
-            loss_mode: Loss::MSE,
-            is_init: false,
-            is_query: false,
-            network: Network::new(),
-            //hidden_layers: vec![],
+            bias: Option::from(true),
+            network: Network::default(),
+            ..Self::new()
         }
     }
 }
