@@ -33,7 +33,7 @@ use rustunumic::Rustunumic;
 
 fn main() {
     // Returns a new neural network instance.
-    let mut rn = Rustunumic::new();
+    let mut rn = Rustunumic::<f32>::new();
 
     // Dataset.
     data_input = [0.27, 0.31];
@@ -49,17 +49,13 @@ fn main() {
 
 ### Properties of Neural Network
 
-#### _name_
-
-Neural network architecture name (required field for a config).
-
 #### _bias_
 
 The neuron bias, false or true (required field for a config).
 
-#### _hidden_layer_
+#### _hidden_layers_
 
-Array of the number of neurons in each hidden layer.
+Array of the number of neurons in each hidden layers.
 
 #### _activation_mode_
 
@@ -123,5 +119,3 @@ _Project at the initial stage._
 See the latest [commits](https://github.com/teratron/rustunumic/commits/master).
 
 ---
-
-![My Skills](https://skillicons.dev/icons?i=python,golang,rust,javascript,git,github)
