@@ -4,6 +4,13 @@
 
 use super::Float;
 
+mod linear;
+mod relu;
+mod sigmoid;
+mod softmax;
+mod swish;
+mod tanh;
+
 /// Activation mode
 ///
 /// **Note:**
@@ -13,6 +20,8 @@ use super::Float;
 /// - `LeakyReLU` is a leaky rectified linear unit activation function.
 /// - `Sigmoid` is a logistic, a.k.a. sigmoid or soft step activation function.
 /// - `TanH` is a hyperbolic tangent activation function.
+/// - `SWiSH` is a SWiSH activation function.
+/// - `SoftMax` is a SoftMax activation function.
 #[repr(u8)]
 #[derive(Debug)]
 pub enum Activation {
@@ -30,7 +39,13 @@ pub enum Activation {
 
     /// Hyperbolic Tangent.
     TanH,
-    // TODO: ELU, SeLU, SWiSH, ELiSH
+
+    /// SWiSH.
+    SWiSH,
+
+    /// SoftMax.
+    SoftMax,
+    // TODO: ELU, SeLU, ELiSH
 }
 
 impl Default for Activation {
@@ -53,28 +68,17 @@ impl<T: Float> ActivationTrait<T> for Linear {
 
 /// Activation function.
 pub(super) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
-    //let ref val: T = *value;
     match mode {
-        Activation::Linear => value,
-        Activation::ReLU => {
-            if value < T::ZERO {
-                T::ZERO
-            } else {
-                value
-            }
-        }
-        Activation::LeakyReLU => {
-            if value < T::ZERO {
-                T::from(0.01) * value
-            } else {
-                value
-            }
-        }
+        Activation::Linear => linear::activation(value, 1., 0.),
+        Activation::ReLU => relu::activation(value, 0.),
+        Activation::LeakyReLU => relu::activation(value, 0.01),
+        Activation::Sigmoid => sigmoid::activation(value, 1., 0.),
         Activation::TanH => {
             let v = (T::from(2.) * value).float_exp();
             (v - T::ONE) / (v + T::ONE)
-        }
-        Activation::Sigmoid => T::from(1.) / ((-value).float_exp() + T::ONE),
+        } // TODO:
+        Activation::SWiSH => T::ONE,   // TODO:
+        Activation::SoftMax => T::ONE, // TODO:
     }
 }
 
@@ -87,23 +91,13 @@ pub(super) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
 /// Derivative activation function.
 pub(super) fn get_derivative<T: Float>(value: T, mode: &Activation) -> T {
     match mode {
-        Activation::Linear => T::ONE,
-        Activation::ReLU => {
-            if value < T::ZERO {
-                T::ZERO
-            } else {
-                T::ONE
-            }
-        }
-        Activation::LeakyReLU => {
-            if value < T::ZERO {
-                T::from(0.01)
-            } else {
-                T::ONE
-            }
-        }
-        Activation::TanH => T::from(1.) - value.float_powi(2),
-        Activation::Sigmoid => T::from(1.) - value,
+        Activation::Linear => linear::derivative(1.),
+        Activation::ReLU => relu::derivative(value, 0.),
+        Activation::LeakyReLU => relu::activation(value, 0.01),
+        Activation::Sigmoid => sigmoid::derivative(value, 1., 0.),
+        Activation::TanH => T::from(1.) - value.float_powi(2), // TODO:
+        Activation::SWiSH => T::ONE,                           // TODO:
+        Activation::SoftMax => T::ONE,                         // TODO:
     }
 }
 

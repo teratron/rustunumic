@@ -2,7 +2,7 @@
 //!
 //!
 
-use std::ops::{Add, AddAssign, Div, DivAssign, Mul, Neg, Sub};
+use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
 use super::loss::LOSS_LIMIT;
 
@@ -21,11 +21,13 @@ where
         //+ From<f64>
         //+ Into<f64>
         + Mul<Output = Self>
+        + MulAssign
         + Div<Output = Self>
         + DivAssign
         + Add<Output = Self>
         + AddAssign
         + Sub<Output = Self>
+        + SubAssign
         + Neg<Output = Self>,
 {
     type FloatType;
@@ -45,6 +47,8 @@ where
     fn float_sqrt(&self) -> Self;
     fn float_exp(&self) -> Self;
     fn float_atan(&self) -> Self;
+    fn float_min(self, other: f64) -> Self;
+    fn float_max(self, other: f64) -> Self;
 }
 
 // f32.
@@ -85,6 +89,14 @@ impl Float for f32 {
     fn float_atan(&self) -> Self {
         self.atan()
     }
+
+    fn float_min(self, other: f64) -> Self {
+        self.min(other as Self::FloatType)
+    }
+
+    fn float_max(self, other: f64) -> Self {
+        self.max(other as Self::FloatType)
+    }
 }
 
 // f64.
@@ -124,5 +136,13 @@ impl Float for f64 {
 
     fn float_atan(&self) -> Self {
         self.atan()
+    }
+
+    fn float_min(self, other: f64) -> Self {
+        self.min(other)
+    }
+
+    fn float_max(self, other: f64) -> Self {
+        self.max(other)
     }
 }
