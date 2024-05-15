@@ -47,6 +47,7 @@ where
     fn float_sqrt(&self) -> Self;
     fn float_exp(&self) -> Self;
     fn float_atan(&self) -> Self;
+    fn float_tanh(&self) -> Self;
     fn float_min(self, other: f64) -> Self;
     fn float_max(self, other: f64) -> Self;
 }
@@ -88,6 +89,10 @@ impl Float for f32 {
 
     fn float_atan(&self) -> Self {
         self.atan()
+    }
+
+    fn float_tanh(&self) -> Self {
+        self.tanh()
     }
 
     fn float_min(self, other: f64) -> Self {
@@ -136,6 +141,10 @@ impl Float for f64 {
 
     fn float_atan(&self) -> Self {
         self.atan()
+    }
+
+    fn float_tanh(&self) -> Self {
+        self.tanh()
     }
 
     fn float_min(self, other: f64) -> Self {

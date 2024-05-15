@@ -54,18 +54,6 @@ impl Default for Activation {
     }
 }
 
-/*trait ActivationTrait<T: Float> {
-    fn activation(&self, value: &T);
-}
-
-struct Linear;
-
-impl<T: Float> ActivationTrait<T> for Linear {
-    fn activation(&self, _value: &T) -> () {
-        return;
-    }
-}*/
-
 /// Activation function.
 pub(super) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
     match mode {
@@ -82,12 +70,6 @@ pub(super) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
     }
 }
 
-/* pub fn get_activation<T: Float>(value: &mut T, mode: &Activation) -> T {
-    let v: &mut T = value;
-    activation(v, mode);
-    v
-} */
-
 /// Derivative activation function.
 pub(super) fn get_derivative<T: Float>(value: T, mode: &Activation) -> T {
     match mode {
@@ -100,6 +82,24 @@ pub(super) fn get_derivative<T: Float>(value: T, mode: &Activation) -> T {
         Activation::SoftMax => T::ONE,                         // TODO:
     }
 }
+
+/*trait ActivationTrait<T: Float> {
+    fn activation(&self, value: &T);
+}
+
+struct Linear;
+
+impl<T: Float> ActivationTrait<T> for Linear {
+    fn activation(&self, _value: &T) -> () {
+        return;
+    }
+}*/
+
+/* pub fn get_activation<T: Float>(value: &mut T, mode: &Activation) -> T {
+    let v: &mut T = value;
+    activation(v, mode);
+    v
+} */
 
 /* pub fn get_derivative<T: Float>(value: &mut T, mode: &Activation) -> T {
     let v: &mut T = value;
