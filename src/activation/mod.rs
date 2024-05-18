@@ -61,11 +61,8 @@ pub(super) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
         Activation::ReLU => relu::activation(value, 0.),
         Activation::LeakyReLU => relu::activation(value, 0.01),
         Activation::Sigmoid => sigmoid::activation(value, 1., 0.),
-        Activation::TanH => {
-            let v = (T::from(2.) * value).float_exp();
-            (v - T::ONE) / (v + T::ONE)
-        } // TODO:
-        Activation::SWiSH => T::ONE,   // TODO:
+        Activation::TanH => tanh::activation(value),
+        Activation::SWiSH => swish::activation(value, 0.),
         Activation::SoftMax => T::ONE, // TODO:
     }
 }
@@ -77,9 +74,9 @@ pub(super) fn get_derivative<T: Float>(value: T, mode: &Activation) -> T {
         Activation::ReLU => relu::derivative(value, 0.),
         Activation::LeakyReLU => relu::activation(value, 0.01),
         Activation::Sigmoid => sigmoid::derivative(value, 1., 0.),
-        Activation::TanH => T::from(1.) - value.float_powi(2), // TODO:
-        Activation::SWiSH => T::ONE,                           // TODO:
-        Activation::SoftMax => T::ONE,                         // TODO:
+        Activation::TanH => tanh::derivative(value),
+        Activation::SWiSH => swish::derivative(value, 0., 0.),
+        Activation::SoftMax => T::ONE, // TODO:
     }
 }
 
