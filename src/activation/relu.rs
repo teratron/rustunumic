@@ -1,4 +1,4 @@
-//! # Rectified Linear Unit
+//! # ReLU
 //!
 //!
 

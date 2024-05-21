@@ -63,7 +63,7 @@ pub(super) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
         Activation::Sigmoid => sigmoid::activation(value, 1., 0.),
         Activation::TanH => tanh::activation(value),
         Activation::SWiSH => swish::activation(value, 0.),
-        Activation::SoftMax => T::ONE, // TODO:
+        Activation::SoftMax => softmax::activation(value),
     }
 }
 
@@ -76,7 +76,7 @@ pub(super) fn get_derivative<T: Float>(value: T, mode: &Activation) -> T {
         Activation::Sigmoid => sigmoid::derivative(value, 1., 0.),
         Activation::TanH => tanh::derivative(value),
         Activation::SWiSH => swish::derivative(value, 0., 0.),
-        Activation::SoftMax => T::ONE, // TODO:
+        Activation::SoftMax => softmax::derivative(value),
     }
 }
 
