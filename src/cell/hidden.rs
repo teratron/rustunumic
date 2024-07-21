@@ -36,7 +36,7 @@ where
         self.miss = T::ZERO;
         self.outgoing_axons
             .iter()
-            .for_each(|a| self.miss += a.calculate_miss());
+            .for_each(|a| self.core.miss += a.calculate_miss());
     }
 }
 
