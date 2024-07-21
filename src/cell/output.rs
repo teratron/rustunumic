@@ -4,7 +4,7 @@
 
 //use std::fmt::Debug;
 
-use std::ops::Deref;
+use std::ops::{Deref, DerefMut};
 
 use crate::Float;
 
@@ -40,7 +40,8 @@ impl<T> Nucleus<T> for OutputCell<'_, T>
 T: Debug,*/
 {
     fn get_value(&self) -> &T {
-        &self.core.value
+        //&self.core.value
+        &self.value
     }
 }
 
@@ -50,7 +51,8 @@ where
     /* + Debug*/
 {
     fn get_miss(&self) -> &T {
-        &self.core.miss
+        //&self.core.miss
+        &self.miss
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -59,7 +61,8 @@ where
 
     fn calculate_value(&mut self) {
         self.core.calculate_value();
-        self.core.miss = *self.target - self.core.value;
+        //self.core.miss = *self.target - self.core.value;
+        self.miss = *self.target - self.value;
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -76,6 +79,12 @@ impl<T> Deref for OutputCell<'_, T> {
 
     fn deref(&self) -> &Self::Target {
         &self.core
+    }
+}
+
+impl<T> DerefMut for OutputCell<'_, T> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.core
     }
 }
 
