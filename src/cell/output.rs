@@ -4,6 +4,8 @@
 
 //use std::fmt::Debug;
 
+use std::ops::Deref;
+
 use crate::Float;
 
 use super::{CoreCell, Neuron, Nucleus};
@@ -44,7 +46,8 @@ T: Debug,*/
 
 impl<T> Neuron<T> for OutputCell<'_, T>
 where
-    T: Float, /* + Debug*/
+    T: Float,
+    /* + Debug*/
 {
     fn get_miss(&self) -> &T {
         &self.core.miss
@@ -65,6 +68,14 @@ where
 
     fn calculate_weight(&mut self, rate: &T) {
         self.core.calculate_weight(rate);
+    }
+}
+
+impl<T> Deref for OutputCell<'_, T> {
+    type Target = CoreCell<T>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.core
     }
 }
 

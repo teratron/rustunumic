@@ -7,7 +7,7 @@ use crate::axon::AxonBundle;
 use crate::Float;
 
 //#[derive(Debug)]
-pub(super) struct CoreCell<T> {
+pub(crate) struct CoreCell<T> {
     /// Neuron value.
     pub(super) value: T,
 
