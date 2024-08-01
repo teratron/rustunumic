@@ -3,8 +3,7 @@
 //!
 
 //use std::fmt::Debug;
-
-use std::ops::{Deref, DerefMut};
+//use std::ops::{Deref, DerefMut};
 
 use crate::axon::AxonBundle;
 use crate::Float;
@@ -32,8 +31,7 @@ where
     }
 
     pub(crate) fn calculate_miss(&mut self) {
-        //self.core.miss = T::ZERO;
-        self.miss = T::ZERO;
+        self.core.miss = T::ZERO;
         self.outgoing_axons
             .iter()
             .for_each(|a| self.core.miss += a.calculate_miss());
@@ -45,8 +43,7 @@ impl<T> Nucleus<T> for HiddenCell<T>
 T: Debug,*/
 {
     fn get_value(&self) -> &T {
-        //&self.core.value
-        &self.value
+        &self.core.value
     }
 }
 
@@ -56,8 +53,7 @@ where
     /* + Debug*/
 {
     fn get_miss(&self) -> &T {
-        //&self.core.miss
-        &self.miss
+        &self.core.miss
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -77,7 +73,7 @@ where
     }
 }
 
-impl<T> Deref for HiddenCell<T> {
+/*impl<T> Deref for HiddenCell<T> {
     type Target = CoreCell<T>;
 
     fn deref(&self) -> &Self::Target {
@@ -89,7 +85,7 @@ impl<T> DerefMut for HiddenCell<T> {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.core
     }
-}
+}*/
 
 // Debugging.
 /*impl<T> Debug for HiddenCell<T>
