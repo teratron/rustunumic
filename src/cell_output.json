@@ -1,0 +1,18 @@
+{
+  "value": 0.1,
+  "miss": 0.02,
+  "activation_mode": "Linear",
+  "incoming_axons": [
+    {
+      "weight": 0.003,
+      "incoming_cell": "Hidden_1",
+      "outgoing_cell": "Output_1_self"
+    },
+    {
+      "weight": 0.003,
+      "incoming_cell": "Hidden_2",
+      "outgoing_cell": "Output_1_self"
+    }
+  ],
+  "target": 0.0004
+}

@@ -1,0 +1,27 @@
+{
+  "network": [
+    {
+      "value": 0.1,
+      "miss": 0.02,
+      "activation_mode": "Linear",
+      "incoming_axons": [
+        {},
+        {}
+      ],
+      "outgoing_axons": [
+        {},
+        {}
+      ]
+    },
+    {
+      "value": 0.1,
+      "miss": 0.02,
+      "activation_mode": "Linear",
+      "incoming_axons": [
+        {},
+        {}
+      ],
+      "target": 0.0004
+    }
+  ]
+}

@@ -31,27 +31,3 @@ pub(super) trait Neuron<T>: Nucleus<T> {
     fn calculate_value(&mut self);
     fn calculate_weight(&mut self, _: &T);
 }
-
-/*pub(super) enum CellKind<T> {
-    Input(T),
-    BackfedInput,
-    NoisyInput,
-
-    Hidden(HiddenCell<T>),
-    ProbabilisticHidden,
-    SpikingHidden,
-    Capsule,
-    Bias,
-
-    Output(OutputCell<T>),
-    MatchInputOutput,
-
-    Recurrent,
-    Memory,
-    GatedMemory,
-
-    Kernel,
-    Convolution, // or Pool
-}
-
-impl<T: Float> CellKind<T> {}*/

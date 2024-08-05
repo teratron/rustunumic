@@ -1,0 +1,5 @@
+{
+  "weight": 0.003,
+  "incoming_cell": "Input_1",
+  "outgoing_cell": "Hidden_1"
+}
