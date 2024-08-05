@@ -17,7 +17,7 @@ pub(super) struct Axon<T> {
     /// Axon weight.
     weight: T,
 
-    /// Incoming cell: InputCell, BiasCell, HiddenCell.
+    /// Incoming cell: HiddenCell, InputCell, BiasCell.
     incoming_cell: Box<dyn Nucleus<T>>,
 
     /// Outgoing cell: HiddenCell, OutputCell.
