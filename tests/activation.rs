@@ -13,7 +13,7 @@ fn test_activation() {
     ];
     for (value, mode, result) in data {
         assert_eq!(
-            get_activation(&value, &mode),
+            get_activation(value, &mode),
             result,
             "{:?} failed test",
             mode
@@ -34,7 +34,7 @@ fn test_derivative() {
     ];
     for (value, mode, result) in data {
         assert_eq!(
-            get_derivative(&value, &mode),
+            get_derivative(value, &mode),
             result,
             "{:?} failed test",
             mode

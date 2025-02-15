@@ -55,7 +55,7 @@ impl Default for Activation {
 }
 
 /// Activation function.
-pub(super) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
+pub fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
     match mode {
         Activation::Linear => linear::activation(value, 1., 0.),
         Activation::ReLU => relu::activation(value, 0.),
@@ -68,7 +68,7 @@ pub(super) fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
 }
 
 /// Derivative activation function.
-pub(super) fn get_derivative<T: Float>(value: T, mode: &Activation) -> T {
+pub fn get_derivative<T: Float>(value: T, mode: &Activation) -> T {
     match mode {
         Activation::Linear => linear::derivative(1.),
         Activation::ReLU => relu::derivative(value, 0.),
