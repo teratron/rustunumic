@@ -17,7 +17,7 @@ fn main() {
     // Returns a new neural network instance.
     let mut rn = Rustunumic::<f32>::new();
 
-    //
+    // Set properties.
     rn.set_hidden_layers(vec![3, 2])
         .set_bias(true)
         .set_rate(0.3)
