@@ -1,10 +1,14 @@
 # Examples
 
 ```rust
-fn set_hidden_layers<T>(params: &[T]) {}
-
 fn main() {
     let mut rn = Rustunumic::<f32>::new();
+
+    // Common parameters
+    rn.set_common_parameters(
+        // learning_rate, momentum, max_epoch, batch_size
+        0.01, 0.9, 1000, 10
+    );
 
     // Hidden layers
     rn.set_hidden_layers(&[
@@ -20,7 +24,7 @@ fn main() {
     // Output layers
     rn.set_output_layer(
         // neurons, activation, loss, bias
-        3, Activation::Sigmoid, Loss::Tanh, false
+        3, Activation::Sigmoid, Loss::Arctan, false
     );
     rn.set_output_layer_activation(Activation::Sigmoid);
     rn.set_output_layer_loss(Loss::Tanh);

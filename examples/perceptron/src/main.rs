@@ -2,7 +2,7 @@
 
 use std::time;
 
-use rustunumic::{Activation, Rustunumic};
+use rustunumic::{Activation, Loss, Rustunumic};
 
 /*struct Perceptron<T> {
     bias: bool,
@@ -23,7 +23,14 @@ fn main() {
         (3, Activation::Sigmoid, true),
         (5, Activation::ReLU, true),
         (3, Activation::Sigmoid, false),
-    ]);
+    ])
+    .set_output_layer(
+        // neurons, activation, loss, bias
+        3,
+        Activation::Sigmoid,
+        Loss::Arctan,
+        false,
+    );
     // .set_bias(true)
     // .set_rate(0.3)
     // .set_activation_mode(Activation::Sigmoid)
