@@ -6,12 +6,12 @@
 | ELU           | Экспоненциальная линейная единица                                        |           |
 | EXP           | Экспоненциальная                                                         |           |
 | GELU          | Линейная единица ошибки Гаусса                                           |           |
-| HARD_SIGMOID  | Жесткий сигмоид                                                          |           |
+| HARD_SIGMOID  | Жесткий sigmoid                                                          |           |
 | LINEAR        | Линейная                                                                 |           |
 | LRELU         | Линейный выпрямитель с "утечкой" (Leaky ReLU)                            |           |
 | RELU          | Усеченное линейное преобразование ReLU                                   |           |
 | SELU          | Масштабированная экспоненциальная линейная функция (Scaled ELU)          |           |
-| SIGMOID       | Сигмоид                                                                  |           |
+| SIGMOID       | Sigmoid                                                                  |           |
 | SOFTMAX       | Softmax                                                                  |           |
 | SOFTPLUS      | Softplus                                                                 |           |
 | SOFTSIGN      | Softsign                                                                 |           |

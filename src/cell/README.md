@@ -1,12 +1,12 @@
 # Cell Kind
 
-##     
+## Input
 
 - Input
 - BackfedInput
 - NoisyInput
 
-##     
+## Hidden
 
 - Hidden
 - ProbabilisticHidden
@@ -14,18 +14,18 @@
 - Capsule
 - Bias
 
-##     
+## Output
 
 - Output
 - MatchInputOutput
 
-##     
+##    
 
 - Recurrent
 - Memory
 - GatedMemory
 
-##     
+##    
 
 - Kernel
 - Convolution or Pool
