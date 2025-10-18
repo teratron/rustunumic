@@ -222,3 +222,4 @@ Temporary Items
 .flaskenv*
 !.env.project
 !.env.vault
+!.env.example
