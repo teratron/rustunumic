@@ -2,9 +2,9 @@
 //!
 //!
 
-use crate::activation::{get_activation, get_derivative, Activation};
-use crate::axon::AxonBundle;
 use crate::Float;
+use crate::activation::{Activation, get_activation, get_derivative};
+use crate::axon::AxonBundle;
 
 //#[derive(Debug)]
 pub(super) struct CoreCell<T> {

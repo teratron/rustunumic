@@ -8,11 +8,11 @@ use super::Float;
 ///
 /// # Arguments
 ///
-/// * `value` - исходные данные.
+/// * `value` - The input value.
 ///
 /// # Returns
 ///
-/// Возвращает взвешенную сумму исходных данных.
+/// The weighted sum of the input data.
 pub(super) fn activation<T: Float>(value: T) -> T {
     // let v = (T::from(2.) * value).float_exp();
     // (v - T::ONE) / (v + T::ONE)
@@ -23,12 +23,13 @@ pub(super) fn activation<T: Float>(value: T) -> T {
 ///
 /// # Arguments
 ///
-/// * `value` - последнее состояние функции активации (результат прямого прохода).
+/// * `value` - The last state of the activation function (output of the forward pass).
 ///
 /// # Returns
 ///
-/// Возвращает производную последнего состояния функции активации.
+/// The derivative of the last state of the activation function.
 pub(super) fn derivative<T: Float>(value: T) -> T {
-    //T::from(1.) - value.float_powi(2)
-    T::ONE - value.float_min(1.).float_max(-1.).float_powi(2)
+    // Derivative of tanh(x) is 1 - tanh(x)^2.
+    // The function takes the input value, so we need to calculate tanh(value) first.
+    T::ONE - activation(value).float_powi(2)
 }

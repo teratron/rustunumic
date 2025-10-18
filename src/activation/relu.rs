@@ -8,12 +8,12 @@ use super::Float;
 ///
 /// # Arguments
 ///
-/// * `value` - исходные данные.
-/// * `leak` - определяет коэффициент "утечки" (пропуска отрицательных значений, _default 0.0_) .
+/// * `value` - The input value.
+/// * `leak` - The leak coefficient (for passing negative values, default 0.0).
 ///
 /// # Returns
 ///
-/// Возвращает взвешенную сумму исходных данных.
+/// The weighted sum of the input data.
 pub(super) fn activation<T: Float>(value: T, leak: f64) -> T {
     if value < T::ZERO {
         value * T::from(leak)
@@ -26,12 +26,12 @@ pub(super) fn activation<T: Float>(value: T, leak: f64) -> T {
 ///
 /// # Arguments
 ///
-/// * `value` - последнее состояние функции активации (результат прямого прохода).
-/// * `leak` - определяет коэффициент "утечки" (пропуска отрицательных значений, _default 0.0_) .
+/// * `value` - The last state of the activation function (output of the forward pass).
+/// * `leak` - The leak coefficient (for passing negative values, default 0.0).
 ///
 /// # Returns
 ///
-/// Возвращает значение коэффициент "утечки" `leak` или `1.0`.
+/// The `leak` coefficient or `1.0`.
 pub(super) fn derivative<T: Float>(value: T, leak: f64) -> T {
     if value < T::ZERO {
         T::from(leak)

@@ -1,51 +1,53 @@
-//! # Activation
+//! # Activation Functions
 //!
-//!
+//! This module provides various activation functions and their derivatives
+//! commonly used in neural networks.
 
 use super::Float;
 
+mod elish;
+mod elu;
 mod linear;
 mod relu;
+mod selu;
 mod sigmoid;
 mod softmax;
 mod swish;
 mod tanh;
 
-/// Activation mode
-///
-/// **Note:**
-///
-/// - `Linear` is a linear/identity activation function.
-/// - `ReLU` is a rectified linear unit activation function.
-/// - `LeakyReLU` is a leaky rectified linear unit activation function.
-/// - `Sigmoid` is a logistic, a.k.a. sigmoid or soft step activation function.
-/// - `TanH` is a hyperbolic tangent activation function.
-/// - `SWiSH` is a SWiSH activation function.
-/// - `SoftMax` is a SoftMax activation function.
+/// Enum representing different activation functions.
 #[repr(u8)]
 #[derive(Debug)]
 pub enum Activation {
+    /// Exponential Linear Unit + Sigmoid.
+    ELiSH,
+
+    /// Exponential Linear Unit.
+    ELU,
+
     /// Linear/identity.
     Linear,
-
-    /// Rectified Linear Unit.
-    ReLU,
 
     /// Leaky Rectified Linear Unit.
     LeakyReLU,
 
+    /// Rectified Linear Unit.
+    ReLU,
+
+    /// Scaled Exponential Linear Unit.
+    SeLU,
+
     /// Logistic, a.k.a. sigmoid or soft step.
     Sigmoid,
 
-    /// Hyperbolic Tangent.
-    TanH,
+    /// SoftMax.
+    SoftMax,
 
     /// SWiSH.
     SWiSH,
 
-    /// SoftMax.
-    SoftMax,
-    // TODO: ELU, SeLU, ELiSH
+    /// Hyperbolic Tangent.
+    TanH,
 }
 
 impl Default for Activation {
@@ -54,91 +56,60 @@ impl Default for Activation {
     }
 }
 
-/// Activation function.
+/// Applies the specified activation function to the input value.
+///
+/// # Arguments
+///
+/// * `value` - The input value.
+/// * `mode` - The activation function to apply.
+///
+/// # Returns
+///
+/// The output of the activation function.
 pub fn get_activation<T: Float>(value: T, mode: &Activation) -> T {
     match mode {
+        Activation::ELiSH => elish::activation(value),
+        Activation::ELU => elu::activation(value, 1.0),
         Activation::Linear => linear::activation(value, 1., 0.),
-        Activation::ReLU => relu::activation(value, 0.),
         Activation::LeakyReLU => relu::activation(value, 0.01),
-        Activation::Sigmoid => sigmoid::activation(value, 1., 0.),
-        Activation::TanH => tanh::activation(value),
-        Activation::SWiSH => swish::activation(value, 0.),
+        Activation::ReLU => relu::activation(value, 0.),
+        Activation::SeLU => selu::activation(
+            value,
+            1.0507009873554804934193349852946,
+            1.6732632423543772848170429916717,
+        ),
+        Activation::Sigmoid => sigmoid::activation(value, 1.),
         Activation::SoftMax => softmax::activation(value),
+        Activation::SWiSH => swish::activation(value, 1.0), // Default beta for Swish is 1.0
+        Activation::TanH => tanh::activation(value),
     }
 }
 
-/// Derivative activation function.
+/// Applies the derivative of the specified activation function to the input value.
+///
+/// # Arguments
+///
+/// * `value` - The input value (or output of the forward pass, depending on the function).
+/// * `mode` - The activation function whose derivative to apply.
+///
+/// # Returns
+///
+/// The derivative of the activation function at the given value.
 pub fn get_derivative<T: Float>(value: T, mode: &Activation) -> T {
     match mode {
+        Activation::ELiSH => elish::derivative(value),
+        Activation::ELU => elu::derivative(value, 1.0),
         Activation::Linear => linear::derivative(1.),
+        Activation::LeakyReLU => relu::derivative(value, 0.01),
         Activation::ReLU => relu::derivative(value, 0.),
-        Activation::LeakyReLU => relu::activation(value, 0.01),
-        Activation::Sigmoid => sigmoid::derivative(value, 1., 0.),
-        Activation::TanH => tanh::derivative(value),
-        Activation::SWiSH => swish::derivative(value, 0., 0.),
+        Activation::SeLU => selu::derivative(
+            value,
+            1.050709873554804934193349852946,
+            1.6732632423543772848170429916717,
+        ),
+        Activation::Sigmoid => sigmoid::derivative(value, 1.),
         Activation::SoftMax => softmax::derivative(value),
+        Activation::SWiSH => swish::derivative(value, 1.0), // Default beta for Swish is 1.0
+        Activation::TanH => tanh::derivative(value),
     }
 }
-
-/*trait ActivationTrait<T: Float> {
-    fn activation(&self, value: &T);
-}
-
-struct Linear;
-
-impl<T: Float> ActivationTrait<T> for Linear {
-    fn activation(&self, _value: &T) -> () {
-        return;
-    }
-}*/
-
-/* pub fn get_activation<T: Float>(value: &mut T, mode: &Activation) -> T {
-    let v: &mut T = value;
-    activation(v, mode);
-    v
-} */
-
-/* pub fn get_derivative<T: Float>(value: &mut T, mode: &Activation) -> T {
-    let v: &mut T = value;
-    derivative(v, mode);
-    v
-} */
-
-/* #[cfg(test)]
-mod test {
-    use super::*;
-
-    #[test]
-    fn test_get_activation() {
-        let mut data: [(f64, Activation, f64); 7] = [
-            (0.1, Activation::Linear, 0.1),
-            (0.1, Activation::ReLU, 0.1),
-            (-0.1, Activation::ReLU, 0.0),
-            (0.1, Activation::LeakyReLU, 0.1),
-            (-0.1, Activation::LeakyReLU, -0.001),
-            (0.1, Activation::Sigmoid, 0.52497918747894),
-            (0.1, Activation::TanH, 0.09966799462495583),
-        ];
-        for (value, mode, result) in data.iter_mut() {
-            get_activation(value, mode);
-            assert_eq!(*value, *result, "{:?} test", *mode);
-        }
-    }
-
-    #[test]
-    fn test_get_derivative() {
-        let mut data: [(f64, Activation, f64); 7] = [
-            (0.1, Activation::Linear, 1.0),
-            (0.1, Activation::ReLU, 1.0),
-            (-0.1, Activation::ReLU, 0.0),
-            (0.1, Activation::LeakyReLU, 1.0),
-            (-0.1, Activation::LeakyReLU, 0.01),
-            (0.1, Activation::Sigmoid, 0.09000000000000001),
-            (0.1, Activation::TanH, 0.99),
-        ];
-        for (value, mode, result) in data.iter_mut() {
-            get_derivative(value, mode);
-            assert_eq!(*value, *result, "{:?} test", *mode);
-        }
-    }
-}*/

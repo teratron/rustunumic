@@ -1,20 +1,14 @@
-# Функции активации и производных активации
+# Activation Functions and their Derivatives
 
-| Идентификатор | Описание                                                                 | Параметры | 
-|---------------|--------------------------------------------------------------------------|-----------|
-| NONE          | Функция активации не используется, значение на входе передается на выход |           |
-| ELU           | Экспоненциальная линейная единица                                        |           |
-| EXP           | Экспоненциальная                                                         |           |
-| GELU          | Линейная единица ошибки Гаусса                                           |           |
-| HARD_SIGMOID  | Жесткий sigmoid                                                          |           |
-| LINEAR        | Линейная                                                                 |           |
-| LRELU         | Линейный выпрямитель с "утечкой" (Leaky ReLU)                            |           |
-| RELU          | Усеченное линейное преобразование ReLU                                   |           |
-| SELU          | Масштабированная экспоненциальная линейная функция (Scaled ELU)          |           |
-| SIGMOID       | Sigmoid                                                                  |           |
-| SOFTMAX       | Softmax                                                                  |           |
-| SOFTPLUS      | Softplus                                                                 |           |
-| SOFTSIGN      | Softsign                                                                 |           |
-| SWISH         | Swish-функция                                                            |           |
-| TANH          | Гиперболический тангенс                                                  |           |
-| TRELU         | Линейный выпрямитель с порогом                                           |           |
+| Identifier    | Description                                                 | Parameters         |
+|---------------|-------------------------------------------------------------|--------------------|
+| ELISH         | Exponential Linear Unit + Sigmoid                           |                    |
+| ELU           | Exponential Linear Unit                                     | `alpha` (default 1.0) |
+| LINEAR        | Linear/identity                                             | `slope` (default 1.0), `offset` (default 0.0) |
+| LEAKY_RELU    | Leaky Rectified Linear Unit                                 | `leak` (default 0.01) |
+| RELU          | Rectified Linear Unit                                       |                    |
+| SELU          | Scaled Exponential Linear Unit                              | `scale` (default 1.0507), `alpha` (default 1.6733) |
+| SIGMOID       | Logistic, a.k.a. sigmoid or soft step                       | `slope` (default 1.0) |
+| SOFTMAX       | Softmax (Note: Current implementation is a placeholder for single values, requires vector for full functionality) |                    |
+| SWISH         | Swish-function                                              | `beta` (default 1.0) |
+| TANH          | Hyperbolic Tangent                                          |                    |

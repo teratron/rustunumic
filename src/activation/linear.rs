@@ -8,13 +8,13 @@ use super::Float;
 ///
 /// # Arguments
 ///
-/// * `value` - исходные данные.
-/// * `slope` - определяет уровень наклона линии _(default 1.0)_.
-/// * `offset` - определяет смещение линии от начала координат _(default 0.0)_.
+/// * `value` - The input value.
+/// * `slope` - The slope of the line (default 1.0).
+/// * `offset` - The offset of the line from the origin (default 0.0).
 ///
 /// # Returns
 ///
-/// Возвращает взвешенную сумму исходных данных.
+/// The weighted sum of the input data.
 pub(super) fn activation<T: Float>(value: T, slope: f64, offset: f64) -> T {
     value * T::from(slope) + T::from(offset)
 }
@@ -23,11 +23,11 @@ pub(super) fn activation<T: Float>(value: T, slope: f64, offset: f64) -> T {
 ///
 /// # Arguments
 ///
-/// * `slope` - определяет уровень наклона линии _(default 1.0)_.
+/// * `slope` - The slope of the line (default 1.0).
 ///
 /// # Returns
 ///
-/// Возвращает значение уровня наклона линии `slope`.
+/// The slope of the line `slope`.
 pub(super) fn derivative<T: Float>(slope: f64) -> T {
     T::from(slope)
 }

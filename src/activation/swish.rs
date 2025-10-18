@@ -4,18 +4,40 @@
 
 use super::Float;
 
-/// SoftMax activation function.
-pub(super) fn activation<T: Float>(value: T, nonlinear: f64) -> T {
-    value / ((-T::from(nonlinear) * value).float_exp() + T::ONE)
+/// Swish activation function.
+/// ```
+/// f(x, &#946;) = x * sigmoid(&#946;x)
+/// ```
+///
+/// # Arguments
+///
+/// * `value` - The input value.
+/// * `beta` - The beta parameter (a.k.a. nonlinear, default 1.0).
+///
+/// # Returns
+///
+/// The output of the Swish function.
+pub(super) fn activation<T: Float>(value: T, beta: f64) -> T {
+    let beta_val = T::from(beta);
+    value / ((-beta_val * value).float_exp() + T::ONE)
 }
 
-/// SoftMax activation function derivative.
-pub(super) fn derivative<T: Float>(value: T, x: f64, nonlinear: f64) -> T {
-    // TODO: check if this is correct
-    if T::from(x) == T::ZERO {
-        T::from(0.5)
-    } else {
-        let v = T::from(nonlinear) * value;
-        v + (value * (T::ONE - v)) / T::from(x)
-    }
+/// Swish activation function derivative.
+/// ```
+/// f'(x, &#946;) = f(x, &#946;) + sigmoid(&#946;x) * (1 - f(x, &#946;))
+/// ```
+///
+/// # Arguments
+///
+/// * `value` - The input value.
+/// * `beta` - The beta parameter (a.k.a. nonlinear, default 1.0).
+///
+/// # Returns
+///
+/// The derivative of the Swish function at the given value.
+pub(super) fn derivative<T: Float>(value: T, beta: f64) -> T {
+    let beta_val = T::from(beta);
+    let sigmoid_beta_x = T::ONE / ((-beta_val * value).float_exp() + T::ONE);
+    let swish_val = value * sigmoid_beta_x;
+    swish_val + sigmoid_beta_x * (T::ONE - swish_val)
 }

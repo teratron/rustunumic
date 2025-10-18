@@ -2,14 +2,14 @@
 //!
 //!
 
-use std::marker::PhantomData;
 use super::{Float, HiddenCell, InputCell, Neuron, OutputCell};
+use std::marker::PhantomData;
 
 //#[derive(Debug)]
 pub(super) struct Bundle<T, S> {
     /// Reference to a slice of neurons.
     pub(super) cells: Box<Vec<S>>,
-    
+
     /// Number neurons.
     pub(super) number: usize,
     pub(super) number_float: T,

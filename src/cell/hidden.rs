@@ -5,8 +5,8 @@
 //use std::fmt::Debug;
 //use std::ops::{Deref, DerefMut};
 
-use crate::axon::AxonBundle;
 use crate::Float;
+use crate::axon::AxonBundle;
 
 use super::{CoreCell, Neuron, Nucleus};
 

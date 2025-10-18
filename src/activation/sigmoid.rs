@@ -8,31 +8,29 @@ use super::Float;
 ///
 /// # Arguments
 ///
-/// * `value` - исходные данные.
-/// * `slope` - определяет уровень наклона линии в диапазоне от 0.0 до 1.0 _(default 1.0)_.
-/// * `offset` - определяет смещение линии от начала координат _(default 0.0)_.
+/// * `value` - The input value.
+/// * `slope` - The slope of the line in the range from 0.0 to 1.0 (default 1.0).
+/// * `offset` - The offset of the line from the origin (default 0.0).
 ///
 /// # Returns
 ///
-/// Возвращает взвешенную сумму исходных данных.
-pub(super) fn activation<T: Float>(value: T, slope: f64, offset: f64) -> T {
-    //T::from(1.) / ((-value).float_exp() + T::ONE)
-    T::from(slope) / ((-value).float_exp() + T::ONE - T::from(offset))
+/// The weighted sum of the input data.
+pub(super) fn activation<T: Float>(value: T, slope: f64) -> T {
+    T::from(slope) / ((-value).float_exp() + T::ONE)
 }
 
 /// Logistic, a.k.a. sigmoid or soft step activation function derivative.
 ///
 /// # Arguments
 ///
-/// * `value` - последнее состояние функции активации (результат прямого прохода).
-/// * `slope` - определяет уровень наклона линии в диапазоне от 0.0 до 1.0 _(default 1.0)_.
-/// * `offset` - определяет смещение линии от начала координат _(default 0.0)_.
+/// * `value` - The last state of the activation function (output of the forward pass).
+/// * `slope` - The slope of the line in the range from 0.0 to 1.0 (default 1.0).
+/// * `offset` - The offset of the line from the origin (default 0.0).
 ///
 /// # Returns
 ///
-/// Возвращает производную последнего состояния функции активации.
-pub(super) fn derivative<T: Float>(value: T, slope: f64, offset: f64) -> T {
-    //T::from(1.) - value
-    let v = (value + T::from(offset)).float_min(slope).float_max(0.);
-    v * (T::ONE - v / T::from(slope))
+/// The derivative of the last state of the activation function.
+pub(super) fn derivative<T: Float>(value: T, slope: f64) -> T {
+    let sigmoid_val = activation(value, slope);
+    sigmoid_val * (T::ONE - sigmoid_val / T::from(slope))
 }
