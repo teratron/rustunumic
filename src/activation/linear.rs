@@ -16,7 +16,7 @@ use super::Float;
 ///
 /// The weighted sum of the input data.
 pub(super) fn activation<T: Float>(value: T, slope: f64, offset: f64) -> T {
-    value * T::from(slope) + T::from(offset)
+    value * T::from_f64(slope) + T::from_f64(offset)
 }
 
 /// Linear/identity activation function derivative.
@@ -29,5 +29,5 @@ pub(super) fn activation<T: Float>(value: T, slope: f64, offset: f64) -> T {
 ///
 /// The slope of the line `slope`.
 pub(super) fn derivative<T: Float>(slope: f64) -> T {
-    T::from(slope)
+    T::from_f64(slope)
 }

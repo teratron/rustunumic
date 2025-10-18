@@ -5,6 +5,7 @@
 use super::Float;
 
 /// Swish activation function.
+///
 /// ```
 /// f(x, &#946;) = x * sigmoid(&#946;x)
 /// ```
@@ -18,11 +19,12 @@ use super::Float;
 ///
 /// The output of the Swish function.
 pub(super) fn activation<T: Float>(value: T, beta: f64) -> T {
-    let beta_val = T::from(beta);
-    value / ((-beta_val * value).float_exp() + T::ONE)
+    let beta_val = T::from_f64(beta);
+    value / ((-beta_val * value).exp() + T::ONE)
 }
 
 /// Swish activation function derivative.
+///
 /// ```
 /// f'(x, &#946;) = f(x, &#946;) + sigmoid(&#946;x) * (1 - f(x, &#946;))
 /// ```
@@ -36,8 +38,8 @@ pub(super) fn activation<T: Float>(value: T, beta: f64) -> T {
 ///
 /// The derivative of the Swish function at the given value.
 pub(super) fn derivative<T: Float>(value: T, beta: f64) -> T {
-    let beta_val = T::from(beta);
-    let sigmoid_beta_x = T::ONE / ((-beta_val * value).float_exp() + T::ONE);
+    let beta_val = T::from_f64(beta);
+    let sigmoid_beta_x = T::ONE / ((-beta_val * value).exp() + T::ONE);
     let swish_val = value * sigmoid_beta_x;
     swish_val + sigmoid_beta_x * (T::ONE - swish_val)
 }

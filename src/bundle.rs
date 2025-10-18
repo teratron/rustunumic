@@ -36,7 +36,7 @@ where
         Self {
             cells: Box::new(Vec::new()),
             number,
-            number_float: T::from(number as f64),
+            number_float: T::from_f64(number as f64),
             _marker: PhantomData,
         }
     }
@@ -78,7 +78,7 @@ impl<'a, T: Float> Bundle<T, InputCell<'a, T>> {
         }
     }
 
-    // Помещает входные данные в сеть.
+    /// Sets the input data for the network.
     pub(super) fn set_inputs(&mut self, data: &'a [T]) {
         data.iter()
             .enumerate()
@@ -95,7 +95,7 @@ impl<'a, T: Float> Bundle<T, OutputCell<'a, T>> {
         }
     }
 
-    // Помещает целевые данные в сеть.
+    /// Sets the target data for the network.
     pub(super) fn set_targets(&mut self, data: &'a [T]) {
         data.iter()
             .enumerate()

@@ -6,7 +6,7 @@
 
 extern crate rand;
 
-use rand::{Rng, thread_rng};
+use rand::{Rng, rng};
 
 use super::{Float, Neuron, Nucleus};
 
@@ -29,9 +29,9 @@ impl<T: Float> Axon<T> {
         incoming_cell: Box<dyn Nucleus<T>>,
         outgoing_cell: Box<dyn Neuron<T>>,
     ) -> Self {
-        let mut rng = thread_rng();
+        let mut rng = rng();
         Self {
-            weight: T::from(rng.gen_range(-0.5..=0.5)),
+            weight: T::from_f64(rng.random_range(-0.5..=0.5)),
             incoming_cell,
             outgoing_cell,
         }

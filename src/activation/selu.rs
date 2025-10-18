@@ -17,9 +17,9 @@ use super::Float;
 /// The output of the SeLU function.
 pub(super) fn activation<T: Float>(value: T, scale: f64, alpha: f64) -> T {
     if value < T::ZERO {
-        T::from(scale) * (T::from(alpha) * (value.float_exp() - T::ONE))
+        T::from_f64(scale) * (T::from_f64(alpha) * (value.exp() - T::ONE))
     } else {
-        T::from(scale) * value
+        T::from_f64(scale) * value
     }
 }
 
@@ -27,7 +27,7 @@ pub(super) fn activation<T: Float>(value: T, scale: f64, alpha: f64) -> T {
 ///
 /// # Arguments
 ///
-/// * `value` - The last state of the activation function (output of the forward pass).
+/// * `value` - The input value.
 /// * `scale` - The scale parameter (default 1.0507).
 /// * `alpha` - The alpha parameter (default 1.6733).
 ///
@@ -37,9 +37,9 @@ pub(super) fn activation<T: Float>(value: T, scale: f64, alpha: f64) -> T {
 pub(super) fn derivative<T: Float>(value: T, scale: f64, alpha: f64) -> T {
     if value < T::ZERO {
         // Derivative for x < 0 is scale * alpha * exp(x)
-        T::from(scale) * T::from(alpha) * value.float_exp()
+        T::from_f64(scale) * T::from_f64(alpha) * value.exp()
     } else {
         // Derivative for x >= 0 is scale
-        T::from(scale)
+        T::from_f64(scale)
     }
 }

@@ -16,20 +16,20 @@ use super::Float;
 pub(super) fn activation<T: Float>(value: T) -> T {
     // let v = (T::from(2.) * value).float_exp();
     // (v - T::ONE) / (v + T::ONE)
-    value.float_tanh()
+    value.tanh()
 }
 
 /// Hyperbolic tangent activation function derivative.
 ///
 /// # Arguments
 ///
-/// * `value` - The last state of the activation function (output of the forward pass).
+/// * `value` - The input value.
 ///
 /// # Returns
 ///
-/// The derivative of the last state of the activation function.
+/// The derivative of the hyperbolic tangent function at the given value.
 pub(super) fn derivative<T: Float>(value: T) -> T {
     // Derivative of tanh(x) is 1 - tanh(x)^2.
     // The function takes the input value, so we need to calculate tanh(value) first.
-    T::ONE - activation(value).float_powi(2)
+    T::ONE - activation(value).powi(2)
 }

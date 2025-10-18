@@ -16,7 +16,7 @@ use super::Float;
 /// The weighted sum of the input data.
 pub(super) fn activation<T: Float>(value: T, leak: f64) -> T {
     if value < T::ZERO {
-        value * T::from(leak)
+        value * T::from_f64(leak)
     } else {
         value
     }
@@ -34,7 +34,7 @@ pub(super) fn activation<T: Float>(value: T, leak: f64) -> T {
 /// The `leak` coefficient or `1.0`.
 pub(super) fn derivative<T: Float>(value: T, leak: f64) -> T {
     if value < T::ZERO {
-        T::from(leak)
+        T::from_f64(leak)
     } else {
         T::ONE
     }

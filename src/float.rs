@@ -1,25 +1,23 @@
 //! # Float
 //!
+//! This module defines a `Float` trait to abstract over `f32` and `f64`,
+//! allowing the library user to choose their desired floating-point precision.
 //!
-
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
 use super::loss::LOSS_LIMIT;
 
-const ZERO: f64 = 0.;
-const ONE: f64 = 1.;
-const TWO: f64 = 2.;
-const DEFAULT_RATE: f64 = 0.3;
-
-/// Float trait
+/// Trait for generic floating-point operations.
+///
+/// This trait provides a common interface for `f32` and `f64`, enabling
+/// type-agnostic numerical computations within the library.
 pub trait Float
 where
     Self: Sized
         + Copy
         + PartialOrd
         + PartialEq
-        //+ From<f64>
-        //+ Into<f64>
+        + Into<f64> // Allow conversion to f64 for interoperability
         + Mul<Output = Self>
         + MulAssign
         + Div<Output = Self>
@@ -30,128 +28,128 @@ where
         + SubAssign
         + Neg<Output = Self>,
 {
-    type FloatType;
-
+    // Associated constants for common float values
     const ZERO: Self;
     const ONE: Self;
     const TWO: Self;
     const DEFAULT_RATE: Self;
     const LOSS_LIMIT: Self;
 
-    fn from(x: f64) -> Self;
-    fn type_name(&self) -> &'static str;
+    /// Converts an `f64` value to `Self`.
+    /// This is used when a literal `f64` needs to be converted to the generic float type.
+    fn from_f64(x: f64) -> Self;
 
-    // Math functions.
-    fn float_abs(&self) -> Self;
-    fn float_powi(&self, n: i32) -> Self;
-    fn float_sqrt(&self) -> Self;
-    fn float_exp(&self) -> Self;
-    fn float_atan(&self) -> Self;
-    fn float_tanh(&self) -> Self;
-    fn float_min(self, other: f64) -> Self;
-    fn float_max(self, other: f64) -> Self;
+    /// Returns the absolute value of `self`.
+    fn abs(self) -> Self;
+    /// Raises `self` to the power of `n`.
+    fn powi(self, n: i32) -> Self;
+    /// Returns the square root of `self`.
+    fn sqrt(self) -> Self;
+    /// Returns `e` to the power of `self`.
+    fn exp(self) -> Self;
+    /// Returns the arctangent of `self`.
+    fn atan(self) -> Self;
+    /// Returns the hyperbolic tangent of `self`.
+    fn tanh(self) -> Self;
+    /// Returns the minimum of `self` and `other`.
+    fn min(self, other: Self) -> Self;
+    /// Returns the maximum of `self` and `other`.
+    fn max(self, other: Self) -> Self;
 }
 
-// f32.
-impl Float for f32 {
-    type FloatType = f32;
+// Global constants for default values, used in implementations.
+// These are defined as f64 to avoid precision loss when casting to f32.
+const ZERO: f64 = 0.0;
+const ONE: f64 = 1.0;
+const TWO: f64 = 2.0;
+const DEFAULT_RATE: f64 = 0.3;
 
+// f32 implementation of the Float trait.
+impl Float for f32 {
     const ZERO: Self = ZERO as Self;
     const ONE: Self = ONE as Self;
     const TWO: Self = TWO as Self;
     const DEFAULT_RATE: Self = DEFAULT_RATE as Self;
     const LOSS_LIMIT: Self = LOSS_LIMIT as Self;
 
-    fn from(x: f64) -> Self {
-        x as Self::FloatType
+    fn from_f64(x: f64) -> Self {
+        x as Self
     }
 
-    fn type_name(&self) -> &'static str {
-        "f32"
-    }
-
-    // Math functions.
-    fn float_abs(&self) -> Self {
+    fn abs(self) -> Self {
         self.abs()
     }
 
-    fn float_powi(&self, n: i32) -> Self {
+    fn powi(self, n: i32) -> Self {
         self.powi(n)
     }
 
-    fn float_sqrt(&self) -> Self {
+    fn sqrt(self) -> Self {
         self.sqrt()
     }
 
-    fn float_exp(&self) -> Self {
+    fn exp(self) -> Self {
         self.exp()
     }
 
-    fn float_atan(&self) -> Self {
+    fn atan(self) -> Self {
         self.atan()
     }
 
-    fn float_tanh(&self) -> Self {
+    fn tanh(self) -> Self {
         self.tanh()
     }
 
-    fn float_min(self, other: f64) -> Self {
-        self.min(other as Self::FloatType)
+    fn min(self, other: Self) -> Self {
+        self.min(other)
     }
 
-    fn float_max(self, other: f64) -> Self {
-        self.max(other as Self::FloatType)
+    fn max(self, other: Self) -> Self {
+        self.max(other)
     }
 }
 
-// f64.
+// f64 implementation of the Float trait.
 impl Float for f64 {
-    type FloatType = f64;
-
     const ZERO: Self = ZERO;
     const ONE: Self = ONE;
     const TWO: Self = TWO;
     const DEFAULT_RATE: Self = DEFAULT_RATE;
     const LOSS_LIMIT: Self = LOSS_LIMIT;
 
-    fn from(x: f64) -> Self {
+    fn from_f64(x: f64) -> Self {
         x
     }
 
-    fn type_name(&self) -> &'static str {
-        "f64"
-    }
-
-    // Math functions.
-    fn float_abs(&self) -> Self {
+    fn abs(self) -> Self {
         self.abs()
     }
 
-    fn float_powi(&self, n: i32) -> Self {
+    fn powi(self, n: i32) -> Self {
         self.powi(n)
     }
 
-    fn float_sqrt(&self) -> Self {
+    fn sqrt(self) -> Self {
         self.sqrt()
     }
 
-    fn float_exp(&self) -> Self {
+    fn exp(self) -> Self {
         self.exp()
     }
 
-    fn float_atan(&self) -> Self {
+    fn atan(self) -> Self {
         self.atan()
     }
 
-    fn float_tanh(&self) -> Self {
+    fn tanh(self) -> Self {
         self.tanh()
     }
 
-    fn float_min(self, other: f64) -> Self {
+    fn min(self, other: Self) -> Self {
         self.min(other)
     }
 
-    fn float_max(self, other: f64) -> Self {
+    fn max(self, other: Self) -> Self {
         self.max(other)
     }
 }

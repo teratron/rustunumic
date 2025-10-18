@@ -18,9 +18,9 @@ use super::Float;
 ///
 /// The output of the ELiSH function.
 pub(super) fn activation<T: Float>(value: T) -> T {
-    let sigmoid_val = T::ONE / (T::ONE + (-value).float_exp());
+    let sigmoid_val = T::ONE / (T::ONE + (-value).exp());
     if value < T::ZERO {
-        (value.float_exp() - T::ONE) * sigmoid_val
+        (value.exp() - T::ONE) * sigmoid_val
     } else {
         value * sigmoid_val
     }
@@ -36,10 +36,10 @@ pub(super) fn activation<T: Float>(value: T) -> T {
 ///
 /// The derivative of the ELiSH function at the given value.
 pub(super) fn derivative<T: Float>(value: T) -> T {
-    let sigmoid_val = T::ONE / (T::ONE + (-value).float_exp());
+    let sigmoid_val = T::ONE / (T::ONE + (-value).exp());
     let sigmoid_deriv = sigmoid_val * (T::ONE - sigmoid_val);
     if value < T::ZERO {
-        let exp_val = value.float_exp();
+        let exp_val = value.exp();
         // d/dx (e^x - 1) * sigmoid(x) = e^x * sigmoid(x) + (e^x - 1) * sigmoid'(x)
         exp_val * sigmoid_val + (exp_val - T::ONE) * sigmoid_deriv
     } else {

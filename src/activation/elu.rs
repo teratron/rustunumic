@@ -16,7 +16,7 @@ use super::Float;
 /// The output of the ELU function.
 pub(super) fn activation<T: Float>(value: T, alpha: f64) -> T {
     if value < T::ZERO {
-        T::from(alpha) * ((value.float_exp()) - T::ONE)
+        T::from_f64(alpha) * ((value.exp()) - T::ONE)
     } else {
         value
     }
@@ -26,7 +26,7 @@ pub(super) fn activation<T: Float>(value: T, alpha: f64) -> T {
 ///
 /// # Arguments
 ///
-/// * `value` - The last state of the activation function (output of the forward pass).
+/// * `value` - The input value.
 /// * `alpha` - The alpha parameter (default 1.0).
 ///
 /// # Returns
@@ -35,7 +35,7 @@ pub(super) fn activation<T: Float>(value: T, alpha: f64) -> T {
 pub(super) fn derivative<T: Float>(value: T, alpha: f64) -> T {
     if value < T::ZERO {
         // Derivative for x < 0 is alpha * exp(x)
-        T::from(alpha) * value.float_exp()
+        T::from_f64(alpha) * value.exp()
     } else {
         // Derivative for x >= 0 is 1
         T::ONE
