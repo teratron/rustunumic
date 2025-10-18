@@ -2,16 +2,19 @@
 //!
 //!
 
+use std::marker::PhantomData;
 use super::{Float, HiddenCell, InputCell, Neuron, OutputCell};
 
 //#[derive(Debug)]
 pub(super) struct Bundle<T, S> {
     /// Reference to a slice of neurons.
     pub(super) cells: Box<Vec<S>>,
-
+    
     /// Number neurons.
     pub(super) number: usize,
     pub(super) number_float: T,
+
+    _marker: PhantomData<T>,
 }
 
 // Common Bundle.
@@ -24,6 +27,7 @@ where
             cells: Box::new(Vec::new()),
             number: 0,
             number_float: T::ZERO,
+            _marker: PhantomData,
         }
     }
 
@@ -33,6 +37,7 @@ where
             cells: Box::new(Vec::new()),
             number,
             number_float: T::from(number as f64),
+            _marker: PhantomData,
         }
     }
 
@@ -114,6 +119,7 @@ impl<T: Float, S> Default for Bundle<T, S> {
             cells: Box::new(Vec::new()),
             number: 0,
             number_float: T::ZERO,
+            _marker: PhantomData,
         }
     }
 }

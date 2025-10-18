@@ -33,6 +33,6 @@ pub(super) fn activation<T: Float>(value: T, slope: f64, offset: f64) -> T {
 /// Возвращает производную последнего состояния функции активации.
 pub(super) fn derivative<T: Float>(value: T, slope: f64, offset: f64) -> T {
     //T::from(1.) - value
-    let mut v = (value + T::from(offset)).float_min(slope).float_max(0.);
+    let v = (value + T::from(offset)).float_min(slope).float_max(0.);
     v * (T::ONE - v / T::from(slope))
 }

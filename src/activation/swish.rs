@@ -15,7 +15,7 @@ pub(super) fn derivative<T: Float>(value: T, x: f64, nonlinear: f64) -> T {
     if T::from(x) == T::ZERO {
         T::from(0.5)
     } else {
-        let mut v = T::from(nonlinear) * value;
+        let v = T::from(nonlinear) * value;
         v + (value * (T::ONE - v)) / T::from(x)
     }
 }

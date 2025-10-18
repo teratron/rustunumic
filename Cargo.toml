@@ -1,10 +1,10 @@
 [package]
 name = "rustunumic"
 version = "0.1.2"
-edition = "2021"
+edition = "2024"
 authors = ["Oleg Alexandrov <alexandrovoleg.ru@gmail.com>"]
 description = "Simple neural network library for Rust"
-rust-version = "1.68"
+rust-version = "1.90"
 readme = "README.md"
 license = "MIT"
 homepage = "https://teratron.github.io/rustunumic"
@@ -46,7 +46,7 @@ members = [
 ]
 
 [dependencies]
-rand = "0.8.5"
+rand = "0.9.2"
 
 [dev-dependencies]
 
@@ -59,7 +59,7 @@ rand = "0.8.5"
 [profile.dev]
 opt-level = 0
 debug = true
-split-debuginfo = "..." # Platform-specific.
+split-debuginfo = "unpacked" # Platform-specific.
 debug-assertions = true
 overflow-checks = true
 lto = false
@@ -71,7 +71,7 @@ rpath = false
 [profile.release]
 opt-level = 3
 debug = false
-split-debuginfo = "..."  # Platform-specific.
+split-debuginfo = "unpacked"  # Platform-specific.
 debug-assertions = false
 overflow-checks = false
 lto = false

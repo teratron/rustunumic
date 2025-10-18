@@ -29,7 +29,6 @@ where
             outgoing_axons: Vec::new(),
         }
     }
-
     pub(crate) fn calculate_miss(&mut self) {
         self.core.miss = T::ZERO;
         self.outgoing_axons

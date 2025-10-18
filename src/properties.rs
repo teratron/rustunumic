@@ -33,7 +33,7 @@ impl<'a, T: Float> Rustunumic<'a, T> {
     }
 
     /// Set hidden layers.
-    pub fn set_hidden_layers(&mut self, layers: &[(usize, Activation, bool)]) -> &mut Self {
+    pub fn set_hidden_layers(&mut self, _layers: &[(usize, Activation, bool)]) -> &mut Self {
         //println!("hidden_layers: {hidden_layers:?}");
         /*let n = hidden_layers.iter().sum::<usize>();
         self.network.hidden.set_number(n);
@@ -47,7 +47,7 @@ impl<'a, T: Float> Rustunumic<'a, T> {
     }
 
     /// Set hidden layers shape.
-    pub fn set_hidden_layers_shape(&mut self, nums: &[usize]) -> &mut Self {
+    pub fn set_hidden_layers_shape(&mut self, _nums: &[usize]) -> &mut Self {
         // let n = hidden_layers.iter().sum::<usize>();
         // self.network.hidden.set_number(n);
         // self.network.hidden.cells = (0..n)
@@ -59,13 +59,13 @@ impl<'a, T: Float> Rustunumic<'a, T> {
     }
 
     /// Set hidden layers activation.
-    pub fn set_hidden_layers_activation(&mut self, activations: &[Activation]) -> &mut Self {
+    pub fn set_hidden_layers_activation(&mut self, _activations: &[Activation]) -> &mut Self {
         //self.network.hidden.cells.iter_mut().for_each(|n| n.set_activation(activation));
         self
     }
 
     /// Set hidden layers bias.
-    pub fn set_hidden_layers_bias(&mut self, bias: &[bool]) -> &mut Self {
+    pub fn set_hidden_layers_bias(&mut self, _bias: &[bool]) -> &mut Self {
         //self.network.hidden.cells.iter_mut().for_each(|n| n.set_bias(bias));
         self
     }
@@ -73,10 +73,10 @@ impl<'a, T: Float> Rustunumic<'a, T> {
     /// Set output layer.
     pub fn set_output_layer(
         &mut self,
-        nums: usize,
-        activation: Activation,
-        loss: Loss,
-        bias: bool,
+        _nums: usize,
+        _activation: Activation,
+        _loss: Loss,
+        _bias: bool,
     ) -> &mut Self {
         //self.network.output.set_number(n);
         //self.network.output.cells = (0..n)
@@ -86,19 +86,19 @@ impl<'a, T: Float> Rustunumic<'a, T> {
     }
 
     /// Set output layer activation.
-    pub fn set_output_layer_activation(&mut self, activation: Activation) -> &mut Self {
+    pub fn set_output_layer_activation(&mut self, _activation: Activation) -> &mut Self {
         //self.network.output.cells.iter_mut().for_each(|n| n.set_activation(activation));
         self
     }
 
     /// Set output layer loss.
-    pub fn set_output_layer_loss(&mut self, loss: Loss) -> &mut Self {
+    pub fn set_output_layer_loss(&mut self, _loss: Loss) -> &mut Self {
         //self.network.output.cells.iter_mut().for_each(|n| n.set_loss(loss));
         self
     }
 
     /// Set output layer bias.
-    pub fn set_output_layer_bias(&mut self, bias: bool) -> &mut Self {
+    pub fn set_output_layer_bias(&mut self, _bias: bool) -> &mut Self {
         //self.network.output.cells.iter_mut().for_each(|n| n.set_bias(bias));
         self
     }
