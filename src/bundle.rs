@@ -11,8 +11,8 @@ pub(super) struct Bundle<T, S> {
     pub(super) cells: Box<Vec<S>>,
 
     /// Number neurons.
-    pub(super) number: usize,
-    pub(super) number_float: T,
+    pub(super) _number: usize,
+    pub(super) _number_float: T,
 
     _marker: PhantomData<T>,
 }
@@ -25,8 +25,8 @@ where
     pub(super) fn new() -> Self {
         Self {
             cells: Box::new(Vec::new()),
-            number: 0,
-            number_float: T::ZERO,
+            _number: 0,
+            _number_float: T::ZERO,
             _marker: PhantomData,
         }
     }
@@ -35,8 +35,8 @@ where
         let number = data.len();
         Self {
             cells: Box::new(Vec::new()),
-            number,
-            number_float: T::from_f64(number as f64),
+            _number: number,
+            _number_float: T::from_f64(number as f64),
             _marker: PhantomData,
         }
     }
@@ -117,8 +117,8 @@ impl<T: Float, S> Default for Bundle<T, S> {
     fn default() -> Self {
         Self {
             cells: Box::new(Vec::new()),
-            number: 0,
-            number_float: T::ZERO,
+            _number: 0,
+            _number_float: T::ZERO,
             _marker: PhantomData,
         }
     }
