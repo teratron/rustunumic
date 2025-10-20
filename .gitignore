@@ -223,3 +223,14 @@ Temporary Items
 !.env.project
 !.env.vault
 !.env.example
+
+### Spec Kit
+.github/prompts/
+.codex/prompts/
+.claude/commands/
+.gemini/commands/
+.cursor/commands/
+.qwen/commands/
+.kilocode/workflows/
+#.specify/scripts/
+#.specify/templates/

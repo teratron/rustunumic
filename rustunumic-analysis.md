@@ -71,9 +71,9 @@ rustunumic/
 ├── tests/                 # Integration tests
 │   ├── activation.rs      # Activation function tests
 │   └── loss.rs            # Loss function tests
-├── examples/              # Example applications
 ├── benches/               # Benchmark tests
 ├── cli/                   # Command-line interface (if applicable)
+├── examples/              # Example applications
 ├── Cargo.toml             # Rust package manifest
 ├── README.md              # Project documentation
 └── LICENSE                # License information
