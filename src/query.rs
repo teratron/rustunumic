@@ -3,6 +3,7 @@
 //!
 
 use super::{Float, Rustunumic};
+use tracing::{debug, error, trace, Level};
 
 impl<'a, T: Float> Rustunumic<'a, T> {
     /// Querying dataset.
@@ -21,13 +22,19 @@ impl<'a, T: Float> Rustunumic<'a, T> {
     /// use rustunumic::Rustunumic;
     /// ```
     pub fn query(&mut self, input: &'a [T]) -> Vec<&T> {
+        trace!("Starting query with {} input values", input.len());
         if !self.is_init {
+            error!("Network not initialized before query");
             panic!("not initialized");
         }
 
         self.network.input.set_inputs(input);
+        trace!("Input values set, starting value calculation");
         self.calculate_values();
+        trace!("Value calculation completed");
         self.is_query = true;
-        self.network.output.get_values()
+        let output = self.network.output.get_values();
+        debug!("Query completed, returning {} output values", output.len());
+        output
     }
 }

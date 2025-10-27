@@ -4,10 +4,11 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "git pull",
+      "label": "Git pull",
       "type": "shell",
       "command": "git pull",
       "windows": {
+        "type": "powershell",
         "command": "git pull"
       },
       "group": "none",

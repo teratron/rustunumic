@@ -4,6 +4,7 @@
 
 use super::loss::get_total_loss;
 use super::{Float, Rustunumic};
+use tracing::{trace};
 
 impl<T: Float> Rustunumic<'_, T> {
     //////////////////////////////////////////////////////////////////////////
@@ -40,9 +41,11 @@ impl<T: Float> Rustunumic<'_, T> {
 
     /// Update weights.
     pub(super) fn calculate_weights(&mut self) {
+        trace!("Updating weights for {} cells", self.network.cells.len());
         self.network
             .cells
             .iter_mut()
             .for_each(|n| n.calculate_weight(&self.rate));
+        trace!("Weight update completed");
     }
 }

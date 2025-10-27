@@ -16,6 +16,8 @@ use rustunumic::{Activation, Loss, Rustunumic};
 fn main() {
     // Returns a new neural network instance.
     let mut rn = Rustunumic::<f32>::new();
+    // Or create with custom logging level:
+    // let mut rn = Rustunumic::<f32>::new_with_log_level(tracing::Level::DEBUG);
 
     // Set properties.
     rn.set_hidden_layers(&[

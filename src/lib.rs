@@ -30,6 +30,8 @@ use crate::cell::{Neuron, Nucleus};
 use crate::float::Float;
 use crate::network::Network;
 
+use tracing::{debug, info, trace, Level};
+
 // Reexported modules.
 pub mod activation;
 pub mod loss;
@@ -84,8 +86,9 @@ pub struct Rustunumic<'a, T: Float> {
 }
 
 impl<T: Float> Rustunumic<'_, T> {
-    /// Creat new instance.
+    /// Create new instance.
     pub fn new() -> Self {
+        Self::init_tracing();
         Self {
             bias: None,
             rate: T::DEFAULT_RATE,
@@ -96,6 +99,19 @@ impl<T: Float> Rustunumic<'_, T> {
             is_query: false,
             //hidden_layers: vec![],
         }
+    }
+
+    /// Initialize tracing subscriber with default level (INFO).
+    fn init_tracing() {
+        Self::init_tracing_with_level(Level::INFO);
+    }
+
+    /// Initialize tracing subscriber with specified level.
+    fn init_tracing_with_level(level: Level) {
+        tracing_subscriber::fmt()
+            .with_max_level(level)
+            .with_target(false)
+            .init();
     }
 }
 
