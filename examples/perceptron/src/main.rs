@@ -19,6 +19,14 @@ fn main() {
     // Or create with custom logging level:
     // let mut rn = Rustunumic::<f32>::new_with_log_level(tracing::Level::DEBUG);
 
+    // Dataset.
+    let dataset = [
+        0.27, -0.31, -0.52, 0.66, 0.81, -0.13, 0.2, 0.49, 0.11, -0.73, 0.28,
+    ];
+    let len_input = 3; // Number of input data.
+    let len_output = 2; // Number of output data.
+    let len_data = dataset.len() - len_output + 1;
+
     // Set properties.
     rn.set_hidden_layers(&[
         // (neurons, activation, bias)
@@ -28,7 +36,7 @@ fn main() {
     ])
     .set_output_layer(
         // neurons, activation, loss, bias
-        3,
+        len_output,
         Activation::Sigmoid,
         Loss::Arctan,
         false,
@@ -38,14 +46,6 @@ fn main() {
     // .set_activation_mode(Activation::Sigmoid)
     // .set_loss_mode(Loss::MSE);
     //println!("{:?} {}", rn, Rustunumic::Sigmoid);
-
-    // Dataset.
-    let dataset = [
-        0.27, -0.31, -0.52, 0.66, 0.81, -0.13, 0.2, 0.49, 0.11, -0.73, 0.28,
-    ];
-    let len_input = 3; // Number of input data.
-    let len_output = 2; // Number of output data.
-    let len_data = dataset.len() - len_output + 1;
 
     // Start time.
     let now = time::Instant::now();
