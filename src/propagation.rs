@@ -4,12 +4,12 @@
 
 use super::loss::get_total_loss;
 use super::{Float, Rustunumic};
-use tracing::{trace};
+use tracing::trace;
 
 impl<T: Float> Rustunumic<'_, T> {
-    //////////////////////////////////////////////////////////////////////////
+    // -----------------------------------------------------------------------
     // Forward propagation.
-    //////////////////////////////////////////////////////////////////////////
+    // -----------------------------------------------------------------------
 
     /// Calculating neuron's value.
     pub(super) fn calculate_values(&mut self) {
@@ -24,9 +24,9 @@ impl<T: Float> Rustunumic<'_, T> {
         get_total_loss(self.network.output.get_misses(), &self.loss_mode)
     }
 
-    //////////////////////////////////////////////////////////////////////////
+    // -----------------------------------------------------------------------
     // Backward propagation.
-    //////////////////////////////////////////////////////////////////////////
+    // -----------------------------------------------------------------------
 
     /// Calculating the error of neuron.
     pub(super) fn calculate_misses(&mut self) -> &mut Self {
